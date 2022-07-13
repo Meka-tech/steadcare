@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/steadcare/static/css/main.c15a7b40.css",
+    "main.js": "/steadcare/static/js/main.018e2cba.js",
+    "index.html": "/steadcare/index.html",
+    "static/media/eyeIcon.svg": "/steadcare/static/media/eyeIcon.76163c86ba6b3c66bfae5fd4402367df.svg",
+    "static/media/eyeClosedIcon.svg": "/steadcare/static/media/eyeClosedIcon.1376c33e1ad03975be50893b5fcba1ee.svg",
+    "main.c15a7b40.css.map": "/steadcare/static/css/main.c15a7b40.css.map",
+    "main.018e2cba.js.map": "/steadcare/static/js/main.018e2cba.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c15a7b40.css",
+    "static/js/main.018e2cba.js"
+  ]
+}
