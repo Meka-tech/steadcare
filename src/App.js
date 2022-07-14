@@ -1,11 +1,19 @@
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { PasswordForm, TextForm } from "./Components/index";
-import { DashboardNavbar } from "./Components/index";
+
+import { Dashboard } from "./Pages/index";
+import ScrollToTop from "./Utilities/ScrollToTop/ScrollToTop";
 
 function App() {
   return (
     <div className="App">
-      <DashboardNavbar />
+      <Router>
+        <ScrollToTop>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+          </Routes>
+        </ScrollToTop>
+      </Router>
     </div>
   );
 }
