@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = ({
+export const Button = ({
   text = "Button",
   bgColor,
   fontSize = "16px",
@@ -42,5 +42,3 @@ const Container = styled.button`
   letter-spacing: 0em;
   text-align: left;
 `;
-
-export default Button;

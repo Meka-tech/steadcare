@@ -1,13 +1,14 @@
 import "./App.css";
-import Button from "./Componets/Button/Button";
-import Form from "./Componets/Form/Form";
+import { PasswordForm, TextForm } from "./Components/index";
 
 function App() {
   return (
     <div className="App">
-      <Form title="First Name" placeholder="First Name" type="text" />
-
-      <Button />
+      <PasswordForm
+        title="First Name"
+        errorMsg="Please enter an email in the valid format e.g example@gmail.com"
+      />
+      <TextForm title="Email" />
     </div>
   );
 }
