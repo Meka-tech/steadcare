@@ -37,7 +37,9 @@ export const DashboardNavbar = ({ active = "Dashboard" }) => {
         {Navs.map((nav, index) => (
           <NavItem key={index} active={active} item={nav[2]}>
             {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
-            <h1>{nav[2]}</h1>
+            <span>
+              <h1>{nav[2]}</h1>
+            </span>
           </NavItem>
         ))}
       </NavItems>
@@ -46,7 +48,10 @@ export const DashboardNavbar = ({ active = "Dashboard" }) => {
           <div>
             <LogOutIcon />
           </div>
-          <h1>Log Out</h1>
+          <span>
+            {" "}
+            <h1>Log Out</h1>
+          </span>
         </NavItem>
       </LogOutDiv>
     </Container>
@@ -55,12 +60,13 @@ export const DashboardNavbar = ({ active = "Dashboard" }) => {
 
 const Container = styled.div`
   padding: 10px 0px;
-  width: 260px;
+  width: 332px;
   height: 100vh;
   max-height: 100vh;
   box-shadow: 3px 1px 1px 0px rgba(0, 0, 255, 0.2);
   background-color: white;
   overflow: hidden;
+  z-index: 10;
 `;
 const LogoSection = styled.div`
   padding-left: 20px;
@@ -88,8 +94,9 @@ const NavItems = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
   padding: 20px;
-  padding-top: 45px;
+  padding-top: 18%;
   height: 65%;
   border-bottom: 1px solid rgba(85, 85, 85, 0.2);
 `;
@@ -98,16 +105,21 @@ const LogOutDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 20px;
-  padding-top: 50px;
+  padding-top: 12%;
 `;
 const NavItem = styled.div`
   display: flex;
   align-items: center;
 
+  width: 100%;
+  justify-content: space-between;
+
   div {
-    margin-right: 25px;
     transform: scale(0.55);
     cursor: pointer;
+  }
+  span {
+    width: 70%;
   }
   h1 {
     font-family: Montserrat;
@@ -118,6 +130,7 @@ const NavItem = styled.div`
     text-align: left;
     margin: 0;
     padding: 0;
+
     color: ${(props) =>
       props.active === props.item ? "rgba(0, 0, 255, 1)" : "black"};
     cursor: pointer;

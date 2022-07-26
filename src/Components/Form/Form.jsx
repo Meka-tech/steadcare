@@ -14,6 +14,7 @@ export const TextForm = ({
   errorMsg,
   width,
   height,
+  editable,
 }) => {
   const inputRef = useRef();
 
@@ -25,6 +26,7 @@ export const TextForm = ({
         height={height}
         placeholder={placeholder}
         ref={inputRef}
+        editable={editable}
       >
         {inputValue}
       </InputField>
@@ -43,6 +45,8 @@ export const PasswordForm = ({
   errorMsg,
   width,
   height,
+  editable,
+  onChange,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const inputRef = useRef();
@@ -66,13 +70,13 @@ export const PasswordForm = ({
           placeholder={placeholder}
           ref={inputRef}
           type={showPassword ? "text" : "password"}
+          editable={editable}
         >
           {inputValue}
         </InputField>
         <Icon style={{ cursor: "pointer" }} onClick={() => TogglePassword()}>
           {showPassword ? <EyeIcon /> : <EyeClosedIcon />}
         </Icon>
-
         <Title>{title}</Title>
       </div>
     </Container>
@@ -108,11 +112,16 @@ const InputField = styled.input`
   width: ${(props) => (props.width ? props.width : "300px")};
   border-radius: 5px;
   outline: none;
-  border: 1px solid rgba(85, 85, 85, 1);
+  border: ${(props) =>
+    props.editable
+      ? "1px solid rgba(85, 85, 85, 0.3)"
+      : "1px solid rgba(85, 85, 85, 1)"};
   line-height: 18px;
   font-weight: 400;
   letter-spacing: 0.03em;
   text-align: left;
+  background-color: ${(props) =>
+    props.editable ? "rgba(196, 196, 196, 0.1)" : "white"};
 
   &::placeholder {
     color: rgba(75, 72, 78, 0.7);
@@ -125,12 +134,13 @@ const InputField = styled.input`
   }
 `;
 const Title = styled.label`
-  color: rgba(85, 85, 85, 1);
+  color: black;
   font-weight: 500;
   font-size: 16px;
   line-height: 19.5px;
   margin-bottom: 8px;
   display: flex;
+  text-transform: capitalize;
   flex-direction: column;
   ${InputField}:focus ~ & {
     color: rgba(0, 0, 255, 0.9);
