@@ -51,6 +51,8 @@ export const SignUp = () => {
       if (password !== confirmPassword) {
         setConfirmPasswordErr("Passwords do not match");
       }
+    } else {
+      setConfirmPasswordErr("");
     }
   }, [password, confirmPassword]);
 
@@ -132,7 +134,7 @@ export const SignUp = () => {
         </ButtonDiv>
         <Span>
           <BoldText>Already have an account?</BoldText>
-          <BlueText> Log in</BlueText>
+          <BlueText style={{ cursor: "pointer" }}> Log in</BlueText>
         </Span>
       </Body>
     </Container>
