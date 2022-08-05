@@ -36,7 +36,7 @@ const Container = styled.button`
   background-color: ${(props) =>
     props.bgColor ? props.bgColor : "rgba(0, 0, 255, 0.9)"};
 
-  font-size: ${(props) => (props.fontSize ? props.fontSize : "16px")};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "12px")};
   font-weight: 600;
   line-height: 20px;
   letter-spacing: 0em;

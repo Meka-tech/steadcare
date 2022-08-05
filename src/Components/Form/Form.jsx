@@ -5,7 +5,6 @@ import { ReactComponent as EyeIcon } from "../../Images/FormIcons/eyeIcon.svg";
 import { ReactComponent as EyeClosedIcon } from "../../Images/FormIcons/eyeClosedIcon.svg";
 
 export const TextForm = ({
-  ref,
   title,
   inputValue,
   placeholder,
@@ -15,9 +14,8 @@ export const TextForm = ({
   width,
   height,
   editable,
+  ...rest
 }) => {
-  const inputRef = useRef();
-
   return (
     <Container>
       <ErrorMsg>{errorMsg}</ErrorMsg>
@@ -25,18 +23,16 @@ export const TextForm = ({
         width={width}
         height={height}
         placeholder={placeholder}
-        ref={inputRef}
         editable={editable}
-      >
-        {inputValue}
-      </InputField>
+        value={inputValue}
+        {...rest}
+      />
       <Title>{title}</Title>
     </Container>
   );
 };
 
 export const PasswordForm = ({
-  ref,
   title,
   inputValue,
   placeholder,
@@ -46,10 +42,9 @@ export const PasswordForm = ({
   width,
   height,
   editable,
-  onChange,
+  ...rest
 }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const inputRef = useRef();
 
   const TogglePassword = () => {
     setShowPassword(!showPassword);
@@ -68,12 +63,11 @@ export const PasswordForm = ({
           width={width}
           height={height}
           placeholder={placeholder}
-          ref={inputRef}
           type={showPassword ? "text" : "password"}
           editable={editable}
-        >
-          {inputValue}
-        </InputField>
+          {...rest}
+          value={inputValue}
+        />
         <Icon style={{ cursor: "pointer" }} onClick={() => TogglePassword()}>
           {showPassword ? <EyeIcon /> : <EyeClosedIcon />}
         </Icon>
@@ -85,11 +79,10 @@ export const PasswordForm = ({
 
 const Container = styled.form`
   top: 0;
-  margin: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   position: relative;
   width: fit-content;
-  height: 100px;
+  height: fit-content;
   display: flex;
   flex-direction: column-reverse;
   justify-content: center;
@@ -105,11 +98,12 @@ const InputField = styled.input`
   overflow-x: scroll;
   margin: 0;
   padding: 0px 10px;
+  padding-right: 30px;
   font-size: 16px;
   color: black;
   line-height: 19.5px;
-  height: ${(props) => (props.height ? props.height : "45px")};
-  width: ${(props) => (props.width ? props.width : "300px")};
+  height: ${(props) => (props.height ? props.height : "35px")};
+  width: ${(props) => (props.width ? props.width : "280px")};
   border-radius: 5px;
   outline: none;
   border: ${(props) =>
@@ -150,19 +144,20 @@ const Title = styled.label`
 const Icon = styled.i`
   position: absolute;
   z-index: 200;
-  bottom: 10px;
+  bottom: 5px;
   right: 10px;
 
   cursor: pointer;
 `;
 
-const ErrorMsg = styled.div`
+const ErrorMsg = styled.h3`
   color: rgba(255, 0, 0, 1);
+  margin: 0;
+  padding: 0;
   font-size: 11px;
   font-weight: 400;
   line-height: 13px;
   letter-spacing: 0.03em;
-  text-align: left;
   padding-top: 5px;
   width: ${(props) => (props.width ? props.width : "300px")};
 `;
