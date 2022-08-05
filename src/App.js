@@ -1,7 +1,8 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import { DoctorProfile } from "./Pages/Auth/Sign-up";
 
-import { Dashboard, SignUp } from "./Pages/index";
+import { Dashboard, UserSignUp } from "./Pages/index";
 import ScrollToTop from "./Utilities/ScrollToTop/ScrollToTop";
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
         <ScrollToTop>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/sign-up" element={<UserSignUp />} />
+            <Route path="/sign-up/doctorProfile" element={<DoctorProfile />} />
           </Routes>
         </ScrollToTop>
       </Router>
