@@ -9,6 +9,7 @@ export const Button = ({
   borderRadius,
   color,
   border,
+  onClick,
 }) => {
   return (
     <Container
@@ -17,6 +18,7 @@ export const Button = ({
       borderRadius={borderRadius}
       color={color}
       border={border}
+      onClick={onClick}
     >
       {text}
     </Container>

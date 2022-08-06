@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { BaseUrl } from "../../../Utilities";
 import {
   Button,
   CheckBox,
@@ -22,27 +23,41 @@ import {
 } from "../style";
 
 export const UserSignUp = () => {
+  const axios = require("axios").default;
   ///Name State
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState(" ");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState("patient");
+
+  const [validEmail, setValidEmail] = useState(false);
+  const [validPhoneNumber, setValidPhoneNumber] = useState(false);
+  const [validName, setValidName] = useState(false);
+  const [validPassword, setValidPassword] = useState(false);
 
   ///REGEX
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const USER_REGEX = /^[a-z ,.'-]+$/i;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const EMAIL_REGEX =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-  ///err
-
+  ///error Messages
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
   const [emailErr, setEmailErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
   const [confirmPasswordErr, setConfirmPasswordErr] = useState("");
 
   //useEffect
+
+  //Password Validations
   useEffect(() => {
     if (password !== "" && confirmPassword !== "") {
       if (password === confirmPassword) {
@@ -54,8 +69,22 @@ export const UserSignUp = () => {
     } else {
       setConfirmPasswordErr("");
     }
-  }, [password, confirmPassword]);
+    if (password !== "") {
+      if (PASSWORD_REGEX.test(password)) {
+        setValidPassword(true);
+        setPasswordErr("");
+      } else {
+        setValidPassword(false);
+        setPasswordErr(
+          "Your password should be atleast 8 characters long with a number"
+        );
+      }
+    } else {
+      setPasswordErr("");
+    }
+  }, [password, confirmPassword, PASSWORD_REGEX]);
 
+  //Email validation
   useEffect(() => {
     if (email !== "") {
       if (EMAIL_REGEX.test(email) === false) {
@@ -64,11 +93,78 @@ export const UserSignUp = () => {
         );
       } else {
         setEmailErr("");
+        setValidEmail(true);
       }
     } else {
       setEmailErr("");
+      setValidEmail(false);
     }
   }, [email, EMAIL_REGEX]);
+
+  //Phone Number Validation
+  // useEffect(() => {
+  //   if (phoneNumber.length === 11) {
+  //     setValidPhoneNumber(true);
+  //   } else {
+  //     setValidPhoneNumber(false);
+  //   }
+  // }, [phoneNumber]);
+
+  //user Name Validation
+  useEffect(() => {
+    // if (firstName !== "") {
+    //   if (USER_REGEX.test(firstName)) {
+    //     setFirstNameError("");
+    //   } else {
+    //     setFirstNameError("first name should be 3 or more characters");
+    //   }
+    // } else {
+    //   setFirstNameError("");
+    // }
+    // if (lastName !== "") {
+    //   if (USER_REGEX.test(lastName)) {
+    //     setLastNameError("");
+    //   } else {
+    //     setLastNameError("Last name should be 3 or more characters");
+    //   }
+    // } else {
+    //   setLastNameError("");
+    // }
+    if (USER_REGEX.test(userName)) {
+      setValidName(true);
+    } else {
+      setValidName(false);
+    }
+    setUserName(firstName + " " + lastName);
+  }, [firstName, lastName, USER_REGEX, userName]);
+  /////API Call Axios
+
+  const handleSubmit = async (e) => {
+    if (
+      validEmail &&
+      password === confirmPassword &&
+      validPassword &&
+      validName
+    ) {
+      const data = `{\n    "name": "${userName}",\n    "email": "${email}" ,\n    "password": "${password}",\n    "confirmPassword": "${confirmPassword}",\n    "role": "${role}"\n}`;
+
+      const config = {
+        method: "post",
+        url: `${BaseUrl}/create-user-account`,
+        headers: {},
+        data: data,
+      };
+      if (password === confirmPassword) {
+        axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    }
+  };
 
   return (
     <Container>
@@ -81,11 +177,13 @@ export const UserSignUp = () => {
             title={"First Name"}
             inputValue={firstName}
             onChange={(e) => setFirstName(e.target.value)}
+            errorMsg={firstNameError}
           />
           <TextForm
             title={"Last Name"}
             inputValue={lastName}
             onChange={(e) => setLastName(e.target.value)}
+            errorMsg={lastNameError}
           />
           <TextForm
             title={"Email "}
@@ -130,7 +228,11 @@ export const UserSignUp = () => {
           </CheckBoxTextSpan>
         </CheckBoxDiv>
         <ButtonDiv>
-          <Button fontSize={"14px"} text="Create Account" />
+          <Button
+            fontSize={"14px"}
+            text="Create Account"
+            onClick={() => handleSubmit()}
+          />
         </ButtonDiv>
         <Span>
           <BoldText>Already have an account?</BoldText>

@@ -3,7 +3,7 @@ import "./App.css";
 import { DoctorProfile } from "./Pages/Auth/Sign-up";
 
 import { Dashboard, UserSignUp } from "./Pages/index";
-import ScrollToTop from "./Utilities/ScrollToTop/ScrollToTop";
+import { ScrollToTop } from "./Utilities";
 
 function App() {
   return (
