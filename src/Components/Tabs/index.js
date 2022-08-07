@@ -11,7 +11,10 @@ export const SwitchTab = ({ labels = [""], OnSelect }) => {
           <Tab key={index}>
             <Text
               active={index === activeTab}
-              onClick={() => setActiveTab(index)}
+              onClick={() => {
+                setActiveTab(index);
+                OnSelect(label);
+              }}
             >
               {label}
             </Text>

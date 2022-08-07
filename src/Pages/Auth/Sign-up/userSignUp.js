@@ -35,11 +35,12 @@ export const UserSignUp = () => {
   const [role, setRole] = useState("patient");
 
   const [validEmail, setValidEmail] = useState(false);
-  const [validPhoneNumber, setValidPhoneNumber] = useState(false);
+  // const [validPhoneNumber, setValidPhoneNumber] = useState(false);
   const [validName, setValidName] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
 
   ///REGEX
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const USER_REGEX = /^[a-z ,.'-]+$/i;
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,6 +50,7 @@ export const UserSignUp = () => {
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
   ///error Messages
+
   const [firstNameError, setFirstNameError] = useState("");
   const [lastNameError, setLastNameError] = useState("");
   const [emailErr, setEmailErr] = useState("");
@@ -171,7 +173,7 @@ export const UserSignUp = () => {
       <Margin></Margin>
       <Body>
         <LogoDiv />
-        <SwitchTab labels={["Patient", "Doctor"]} />
+        <SwitchTab labels={["Patient", "Doctor"]} OnSelect={setRole} />
         <Forms>
           <TextForm
             title={"First Name"}

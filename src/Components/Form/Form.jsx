@@ -63,7 +63,7 @@ export const PasswordForm = ({
           width={width}
           height={height}
           placeholder={placeholder}
-          type={showPassword ? "text" : "password"}
+          type={showPassword ? "text" : "new-password"}
           editable={editable}
           {...rest}
           value={inputValue}
