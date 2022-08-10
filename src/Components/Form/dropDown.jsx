@@ -39,23 +39,20 @@ export const Dropdown = ({
   };
   useOutsideAlerter(dropDownRef);
   return (
-    <Container ref={dropDownRef}>
-      <Title>{title}</Title>
-      <div
-        style={{
-          position: "relative",
-          display: "flex ",
-          flexDirection: "column-reverse"
-        }}
-      >
-        <InputField width={width} height={height}>
-          <Label> {label}</Label>
-        </InputField>
-        <Icon style={{ cursor: "pointer" }} onClick={() => ToggleActive()}>
-          <Select />
-        </Icon>
-      </div>
-      {items ? (
+    <Container ref={dropDownRef} width={width}>
+      <Body>
+        <Title>{title}</Title>
+        <Input>
+          <InputField height={height}>
+            <Label> {label}</Label>
+            <Icon style={{ cursor: "pointer" }} onClick={() => ToggleActive()}>
+              <Select />
+            </Icon>
+          </InputField>
+        </Input>
+      </Body>
+
+      {items && active ? (
         <Menu active={active}>
           {items?.map((item, index) => {
             return (
@@ -74,21 +71,27 @@ const Container = styled.form`
   margin-bottom: 15px;
   position: relative;
   height: fit-content;
+  transition: 0.2s ease-in-out;
+  width: ${(props) => (props.width ? props.width : "100%")};
+`;
+const Body = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: 0.2s ease-in-out;
-  width: 100%;
 `;
-
+const Input = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+`;
 const InputField = styled.div`
   margin: 0;
-  padding: 0px 10px;
   font-size: 16px;
   color: rgba(75, 72, 78, 0.7);
   line-height: 19.5px;
   height: ${(props) => (props.height ? props.height : "45px")};
-  width: ${(props) => (props.width ? props.width : "100%")};
+  width: 100%;
   border-radius: 5px;
   border: 1px solid rgba(85, 85, 85, 0.3);
   line-height: 24.38px;
@@ -98,8 +101,8 @@ const InputField = styled.div`
   background-color: rgba(196, 196, 196, 0.1);
   align-items: center;
   display: flex;
+  justify-content: space-between;
   text-transform: capitalize;
-  z-index: 1;
 `;
 const Title = styled.label`
   color: black;
@@ -110,31 +113,26 @@ const Title = styled.label`
   display: flex;
   flex-direction: column;
 `;
-const Label = styled.div``;
+const Label = styled.div`
+  padding-left: 10px;
+`;
 
 const Icon = styled.i`
-  position: absolute;
-  z-index: 200;
-  bottom: 8px;
-  right: -10px;
   transform: scale(0.8);
-
   cursor: pointer;
+  margin-right: 10px;
 `;
 const Menu = styled.div`
   width: 100%;
-  padding: 0px 10px;
   height: fit-content;
   border: 1px solid rgba(85, 85, 85, 0.7);
-  margin-top: 2px;
-  transform: ${(props) =>
-    props.active ? "translateY(0)" : "translateY(-50px)"};
-  display: ${(props) => (props.active ? "block" : "none")};
+  background-color: white;
   transition: all 0.2s ease-in;
   z-index: 10;
   overflow-y: scroll;
-  overflow-x: hidden;
   max-height: 180px;
+  position: absolute;
+  z-index: 2;
   div {
     margin: 0;
     display: flex;

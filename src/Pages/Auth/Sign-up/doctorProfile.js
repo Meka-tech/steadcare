@@ -4,6 +4,7 @@ import { Dropdown } from "../../../Components/Form/dropDown";
 import {
   Body,
   Container,
+  Forms,
   Headers,
   LogoDiv,
   Margin,
@@ -14,6 +15,7 @@ import styled from "styled-components";
 
 export const DoctorProfile = () => {
   const [tab, setTab] = useState("General");
+  const Specialties = [""];
 
   const setTabFunction = (tab) => {
     setTab(tab);
@@ -22,7 +24,19 @@ export const DoctorProfile = () => {
     return (
       <TabContent>
         <Headers>Profile</Headers>
-        <SubHeader></SubHeader>
+        <SubHeader>
+          All colomuns should be filled with the correct details.
+        </SubHeader>
+        <Forms>
+          <TextForm title={"Doctor’s Reg No"} width={"300px"} />
+          <TextForm title={"License Expiry Date"} width={"300px"} />
+          <Dropdown title={"Specialty"} width={"310px"} items={Specialties} />
+          <TextForm
+            title={"Med School Grad Year"}
+            width={"300px"}
+            placeholder={"mm/dd/yyyy"}
+          />
+        </Forms>
         <Button text={"Next"} fontSize={"14px"} />
       </TabContent>
     );
