@@ -52,6 +52,29 @@ const LogoSection = styled.div`
   }
   margin: 30px 0px;
 `;
+export const TabContent = styled.div`
+  margin-top: 24px;
+`;
+export const SubHeader = styled.p`
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 25px;
+  text-align: left;
+  width: 70%;
+  color: rgba(34, 34, 34, 0.8);
+`;
+
+export const Headers = styled.h2`
+  font-weight: 600;
+  font-size: 22px;
+  color: black;
+  line-height: 34.13px;
+  margin: 0;
+  padding: 0;
+`;
+
 export const Forms = styled.div`
   display: grid;
   grid-template-columns: auto auto;

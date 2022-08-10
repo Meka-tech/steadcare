@@ -10,6 +10,7 @@ export const Dropdown = ({
   width,
   height,
   items,
+  onSelect = () => {}
 }) => {
   const [active, setActive] = useState(false);
   const dropDownRef = useRef(null);
@@ -44,11 +45,11 @@ export const Dropdown = ({
         style={{
           position: "relative",
           display: "flex ",
-          flexDirection: "column-reverse",
+          flexDirection: "column-reverse"
         }}
       >
         <InputField width={width} height={height}>
-          {label}
+          <Label> {label}</Label>
         </InputField>
         <Icon style={{ cursor: "pointer" }} onClick={() => ToggleActive()}>
           <Select />
@@ -58,7 +59,7 @@ export const Dropdown = ({
         <Menu active={active}>
           {items?.map((item, index) => {
             return (
-              <div key={index}>
+              <div key={index} onClick={onSelect}>
                 <h1>{item}</h1>
               </div>
             );
@@ -70,15 +71,14 @@ export const Dropdown = ({
 };
 
 const Container = styled.form`
-  margin: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   position: relative;
-  width: fit-content;
   height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
   transition: 0.2s ease-in-out;
+  width: 100%;
 `;
 
 const InputField = styled.div`
@@ -88,7 +88,7 @@ const InputField = styled.div`
   color: rgba(75, 72, 78, 0.7);
   line-height: 19.5px;
   height: ${(props) => (props.height ? props.height : "45px")};
-  width: ${(props) => (props.width ? props.width : "100px")};
+  width: ${(props) => (props.width ? props.width : "100%")};
   border-radius: 5px;
   border: 1px solid rgba(85, 85, 85, 0.3);
   line-height: 24.38px;
@@ -110,18 +110,20 @@ const Title = styled.label`
   display: flex;
   flex-direction: column;
 `;
+const Label = styled.div``;
 
 const Icon = styled.i`
   position: absolute;
   z-index: 200;
   bottom: 8px;
-  right: 10px;
+  right: -10px;
   transform: scale(0.8);
 
   cursor: pointer;
 `;
 const Menu = styled.div`
   width: 100%;
+  padding: 0px 10px;
   height: fit-content;
   border: 1px solid rgba(85, 85, 85, 0.7);
   margin-top: 2px;
@@ -130,6 +132,9 @@ const Menu = styled.div`
   display: ${(props) => (props.active ? "block" : "none")};
   transition: all 0.2s ease-in;
   z-index: 10;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 180px;
   div {
     margin: 0;
     display: flex;
@@ -138,7 +143,7 @@ const Menu = styled.div`
     cursor: pointer;
     height: 35px;
     h1 {
-      padding-left: 20px;
+      margin-left: 20px;
       font-size: 16px;
       font-weight: 500;
     }

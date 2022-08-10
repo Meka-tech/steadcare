@@ -56,7 +56,7 @@ export const PasswordForm = ({
         style={{
           position: "relative",
           display: "flex ",
-          flexDirection: "column-reverse",
+          flexDirection: "column-reverse"
         }}
       >
         <InputField
@@ -87,6 +87,7 @@ const Container = styled.form`
   flex-direction: column-reverse;
   justify-content: center;
   transition: 0.2s ease-in-out;
+  width: 100%;
 `;
 
 const InputField = styled.input`
@@ -98,12 +99,11 @@ const InputField = styled.input`
   overflow-x: scroll;
   margin: 0;
   padding: 0px 10px;
-  padding-right: 30px;
   font-size: 16px;
   color: black;
   line-height: 19.5px;
-  height: ${(props) => (props.height ? props.height : "35px")};
-  width: ${(props) => (props.width ? props.width : "280px")};
+  height: ${(props) => (props.height ? props.height : "45px")};
+  width: ${(props) => (props.width ? props.width : "100%")};
   border-radius: 5px;
   outline: none;
   border: ${(props) =>
@@ -144,8 +144,8 @@ const Title = styled.label`
 const Icon = styled.i`
   position: absolute;
   z-index: 200;
-  bottom: 5px;
-  right: 10px;
+  bottom: 10px;
+  right: 50px;
 
   cursor: pointer;
 `;

@@ -1,8 +1,7 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { DoctorProfile } from "./Pages/Auth/Sign-up";
 
-import { Dashboard, UserSignUp } from "./Pages/index";
+import { Dashboard, DoctorProfile, UserSignUp } from "./Pages/index";
 import { ScrollToTop } from "./Utilities";
 
 function App() {

@@ -6,7 +6,7 @@ import {
   CheckBox,
   PasswordForm,
   SwitchTab,
-  TextForm,
+  TextForm
 } from "../../../Components";
 import {
   BlueText,
@@ -19,7 +19,7 @@ import {
   GrayText,
   LogoDiv,
   Margin,
-  Span,
+  Span
 } from "../style";
 
 export const UserSignUp = () => {
@@ -33,6 +33,11 @@ export const UserSignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("patient");
+
+  //set Role function
+  const SetRoleFunc = (role) => {
+    setRole(role);
+  };
 
   const [validEmail, setValidEmail] = useState(false);
   // const [validPhoneNumber, setValidPhoneNumber] = useState(false);
@@ -148,13 +153,19 @@ export const UserSignUp = () => {
       validPassword &&
       validName
     ) {
-      const data = `{\n    "name": "${userName}",\n    "email": "${email}" ,\n    "password": "${password}",\n    "confirmPassword": "${confirmPassword}",\n    "role": "${role}"\n}`;
+      const data = {
+        name: `${userName}`,
+        email: `${email}`,
+        password: `${password}`,
+        confirmPassword: `${confirmPassword}`,
+        role: `${role}`
+      };
 
       const config = {
         method: "post",
         url: `${BaseUrl}/create-user-account`,
         headers: {},
-        data: data,
+        data: data
       };
       if (password === confirmPassword) {
         axios(config)
@@ -173,42 +184,48 @@ export const UserSignUp = () => {
       <Margin></Margin>
       <Body>
         <LogoDiv />
-        <SwitchTab labels={["Patient", "Doctor"]} OnSelect={setRole} />
+        <SwitchTab labels={["Patient", "Doctor"]} OnSelect={SetRoleFunc} />
         <Forms>
           <TextForm
             title={"First Name"}
             inputValue={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             errorMsg={firstNameError}
+            width={"290px"}
           />
           <TextForm
             title={"Last Name"}
             inputValue={lastName}
             onChange={(e) => setLastName(e.target.value)}
             errorMsg={lastNameError}
+            width={"290px"}
           />
           <TextForm
             title={"Email "}
             inputValue={email}
             onChange={(e) => setEmail(e.target.value)}
             errorMsg={emailErr}
+            width={"290px"}
           />
           <TextForm
             title={"Phone Number"}
             inputValue={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
+            width={"290px"}
           />
           <PasswordForm
             title={"Password"}
             inputValue={password}
             onChange={(e) => setPassword(e.target.value)}
             errorMsg={passwordErr}
+            width={"290px"}
           />
           <PasswordForm
             title={"Confirm Password"}
             inputValue={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             errorMsg={confirmPasswordErr}
+            width={"290px"}
           />
         </Forms>
         <CheckBoxDiv>

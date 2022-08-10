@@ -4,7 +4,7 @@ import {
   Button,
   DashboardNavbar,
   PasswordForm,
-  TextForm,
+  TextForm
 } from "../../../Components";
 import { SwitchTab } from "../../../Components";
 import { Body, Container } from "../style";
@@ -15,7 +15,7 @@ export const Dashboard = () => {
     <Container>
       <DashboardNavbar />
       <Body>
-        <Link to="/sign-up">
+        <Link to="/sign-up/doctorProfile">
           <Button />
         </Link>
       </Body>
