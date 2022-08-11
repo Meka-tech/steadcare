@@ -24,7 +24,7 @@ export const TextForm = ({
         placeholder={placeholder}
         editable={editable}
         value={inputValue}
-        type="text"
+        type={type ? type : "text"}
         {...rest}
       />
       <Title>{title}</Title>
@@ -50,17 +50,10 @@ export const PasswordForm = ({
     setShowPassword(!showPassword);
   };
   return (
-    <Container>
+    <Container width={width}>
       {errorMsg ? <ErrorMsg width={width}>{errorMsg}</ErrorMsg> : null}
-      <div
-        style={{
-          position: "relative",
-          display: "flex ",
-          flexDirection: "column-reverse"
-        }}
-      >
+      <div style={{ position: "relative" }}>
         <InputField
-          width={width}
           height={height}
           placeholder={placeholder}
           type={showPassword ? "text" : "new-password"}
@@ -71,8 +64,8 @@ export const PasswordForm = ({
         <Icon style={{ cursor: "pointer" }} onClick={() => TogglePassword()}>
           {showPassword ? <EyeIcon /> : <EyeClosedIcon />}
         </Icon>
-        <Title>{title}</Title>
       </div>
+      <Title>{title}</Title>
     </Container>
   );
 };
@@ -96,7 +89,9 @@ const InputField = styled.input`
     font-size: 20px;
     letter-spacing: 0.125em;
   }
-  overflow-x: scroll;
+  &[type="text"] {
+    overflow-x: scroll;
+  }
   margin: 0;
   font-size: 16px;
   color: black;
@@ -149,8 +144,7 @@ const Icon = styled.i`
   position: absolute;
   z-index: 200;
   bottom: 10px;
-  right: 50px;
-
+  right: 10px;
   cursor: pointer;
 `;
 

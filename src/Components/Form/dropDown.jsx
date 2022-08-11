@@ -14,6 +14,7 @@ export const Dropdown = ({
 }) => {
   const [active, setActive] = useState(false);
   const dropDownRef = useRef(null);
+  const [selected, setSelected] = useState("");
 
   const ToggleActive = () => {
     setActive(!active);
@@ -44,7 +45,7 @@ export const Dropdown = ({
         <Title>{title}</Title>
         <Input>
           <InputField height={height}>
-            <Label> {label}</Label>
+            {selected ? <Label> {selected}</Label> : <Label> {label}</Label>}
             <Icon style={{ cursor: "pointer" }} onClick={() => ToggleActive()}>
               <Select />
             </Icon>
@@ -56,7 +57,14 @@ export const Dropdown = ({
         <Menu active={active}>
           {items?.map((item, index) => {
             return (
-              <div key={index} onClick={onSelect}>
+              <div
+                key={index}
+                onClick={() => {
+                  onSelect();
+                  setSelected(item);
+                  setActive(false);
+                }}
+              >
                 <h1>{item}</h1>
               </div>
             );
