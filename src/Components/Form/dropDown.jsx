@@ -60,7 +60,7 @@ export const Dropdown = ({
               <div
                 key={index}
                 onClick={() => {
-                  onSelect();
+                  onSelect(item);
                   setSelected(item);
                   setActive(false);
                 }}

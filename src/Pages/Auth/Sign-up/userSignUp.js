@@ -21,8 +21,10 @@ import {
   Margin,
   Span
 } from "../style";
+import { useNavigate } from "react-router";
 
 export const UserSignUp = () => {
+  const navigate = useNavigate();
   const axios = require("axios").default;
   ///Name State
   const [firstName, setFirstName] = useState("");
@@ -153,28 +155,40 @@ export const UserSignUp = () => {
       validPassword &&
       validName
     ) {
-      const data = {
-        name: `${userName}`,
-        email: `${email}`,
-        password: `${password}`,
-        confirmPassword: `${confirmPassword}`,
-        role: `${role}`
-      };
+      if (role === "doctor") {
+        navigate("/sign-up/doctorProfile", {
+          state: {
+            userName,
+            email,
+            password,
+            phoneNumber,
+            confirmPassword
+          }
+        });
+      } else {
+        const data = {
+          name: `${userName}`,
+          email: `${email}`,
+          password: `${password}`,
+          confirmPassword: `${confirmPassword}`,
+          role: `${role.toLowerCase()}`
+        };
 
-      const config = {
-        method: "post",
-        url: `${BaseUrl}/create-user-account`,
-        headers: {},
-        data: data
-      };
-      if (password === confirmPassword) {
-        axios(config)
-          .then(function (response) {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        const config = {
+          method: "post",
+          url: `${BaseUrl}/create-user-account`,
+          headers: {},
+          data: data
+        };
+        if (password === confirmPassword) {
+          axios(config)
+            .then(function (response) {
+              console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
       }
     }
   };
@@ -250,7 +264,9 @@ export const UserSignUp = () => {
           <Button
             fontSize={"14px"}
             text="Create Account"
-            onClick={() => handleSubmit()}
+            onClick={() => {
+              handleSubmit();
+            }}
           />
         </ButtonDiv>
         <Span>

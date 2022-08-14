@@ -19,12 +19,16 @@ import {
 } from "../style";
 import styled from "styled-components";
 import { formatDate } from "../../../Utilities/globalFunc";
+import { useLocation } from "react-router";
+import axios from "axios";
+import { BaseUrl } from "../../../Utilities";
 
 export const DoctorProfile = () => {
+  let axios = require("axios");
+  const location = useLocation();
+  const { userName, phoneNumber, email, password, confirmPassword } =
+    location.state;
   const [tab, setTab] = useState("General");
-
-  const Specialties = [""];
-
   const setTabFunction = (tab) => {
     setTab(tab);
   };
@@ -34,6 +38,25 @@ export const DoctorProfile = () => {
     const [licenseDate, setlicenseDate] = useState("");
     const [specialty, setSpecialty] = useState("");
     const [gradYear, setGradYear] = useState("");
+    const Specialties = [
+      "Allergist",
+      "Anesthesiologist",
+      "Cardiologist",
+      " Dermatologist",
+      "Endocrinologist",
+      "Gastroeterologist",
+      "Gynecologist",
+      "Nephrologist",
+      "Neurologist",
+      "Radiologist",
+      "Rheumatologist",
+      "Oncologist",
+      "Ophthalmologist",
+      "Otolaryngologist",
+      "Psychiatrist",
+      "Pulmonologist",
+      " Surgeon"
+    ];
 
     return (
       <TabContent>
@@ -54,7 +77,12 @@ export const DoctorProfile = () => {
             inputValue={licenseDate}
             onChange={(e) => setlicenseDate(e.target.value)}
           />
-          <Dropdown title={"Specialty"} width={"310px"} items={Specialties} />
+          <Dropdown
+            title={"Specialty"}
+            width={"310px"}
+            items={Specialties}
+            onSelect={() => setSpecialty()}
+          />
           <TextForm
             title={"Med School Grad Year"}
             width={"300px"}
@@ -78,6 +106,7 @@ export const DoctorProfile = () => {
     function handleChange2(event) {
       setFile2(event.target.files[0]);
     }
+    console.log(file);
 
     return (
       <TabContent>
@@ -129,6 +158,7 @@ export const DoctorProfile = () => {
             title={"Select Bank"}
             label="Choose a Bank"
             items={BankAccounts}
+            onSelect={setUserBank}
           />
           <TextForm
             title={"Account Name"}
@@ -147,6 +177,37 @@ export const DoctorProfile = () => {
     );
   };
 
+  const handleSubmit = () => {
+    const data = {
+      name: `${userName}`,
+      email: `${email}`,
+      password: `${password}`,
+      confirmPassword: `${confirmPassword}`,
+      role: `doctor`,
+      specialty: ``,
+      practicisingLincense: ``,
+      registrationCertificate: ``,
+      bankName: ``,
+      accountName: ``,
+      accountNumber: ``
+    };
+
+    const config = {
+      method: "post",
+      url: `${BaseUrl}/create-user-account`,
+      headers: {},
+      data: data
+    };
+
+    axios(config)
+      .then(function () {
+        setTab("Success");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <Container>
       <Margin></Margin>
@@ -159,6 +220,7 @@ export const DoctorProfile = () => {
         {tab === "General" ? <General /> : null}
         {tab === "Documents" ? <Documents /> : null}
         {tab === "Bank Account" ? <BankAccount /> : null}
+        {/* {tab === "Success" ? <Success /> : null} */}
       </Body>
     </Container>
   );
