@@ -13,21 +13,23 @@ export const TextForm = ({
   errorMsg,
   width,
   height,
-  editable,
   ...rest
 }) => {
+  const [focused, setFocused] = useState(false);
   return (
-    <Container width={width}>
+    <Container width={width} focused={focused}>
+      <Title focused={focused}>{title}</Title>
+      <InputField focused={focused}>
+        <Input
+          placeholder={placeholder}
+          onBlur={() => setFocused(false)}
+          onFocus={() => setFocused(true)}
+          value={inputValue}
+          type={type ? type : "text"}
+          {...rest}
+        />
+      </InputField>
       <ErrorMsg>{errorMsg}</ErrorMsg>
-      <InputField
-        height={height}
-        placeholder={placeholder}
-        editable={editable}
-        value={inputValue}
-        type={type ? type : "text"}
-        {...rest}
-      />
-      <Title>{title}</Title>
     </Container>
   );
 };
@@ -49,24 +51,26 @@ export const PasswordForm = ({
   const TogglePassword = () => {
     setShowPassword(!showPassword);
   };
-
+  const [focused, setFocused] = useState(false);
   return (
     <Container width={width}>
-      {errorMsg ? <ErrorMsg width={width}>{errorMsg}</ErrorMsg> : null}
-      <div style={{ position: "relative" }}>
-        <InputField
+      <Title focused={focused}>{title}</Title>
+      <InputField focused={focused}>
+        <Input
           height={height}
           placeholder={placeholder}
           type={showPassword ? "text" : "password"}
           editable={editable}
+          onBlur={() => setFocused(false)}
+          onFocus={() => setFocused(true)}
           {...rest}
           value={inputValue}
         />
         <Icon style={{ cursor: "pointer" }} onClick={() => TogglePassword()}>
           {showPassword ? <EyeIcon /> : <EyeClosedIcon />}
         </Icon>
-      </div>
-      <Title>{title}</Title>
+      </InputField>
+      {errorMsg ? <ErrorMsg width={width}>{errorMsg}</ErrorMsg> : null}
     </Container>
   );
 };
@@ -75,60 +79,48 @@ const Container = styled.form`
   top: 0;
   margin-bottom: 15px;
   position: relative;
-  width: fit-content;
   height: fit-content;
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: center;
+  flex-direction: column;
   transition: 0.2s ease-in-out;
   width: ${(props) => (props.width ? props.width : "100%")};
 `;
 
-const InputField = styled.input`
+const Input = styled.input`
   &[type="password"] {
     font-family: Verdana;
     font-size: 20px;
     letter-spacing: 0.125em;
   }
-  &[type="text"] {
-    overflow-x: scroll;
-  }
-  margin: 0;
+  margin-left: 10px;
   font-size: 16px;
   color: black;
-  line-height: 19.5px;
-  height: ${(props) => (props.height ? props.height : "45px")};
-  width: 100%;
-  border-radius: 5px;
+  width: 85%;
   outline: none;
-  border: ${(props) =>
-    props.editable
-      ? "1px solid rgba(85, 85, 85, 0.3)"
-      : "1px solid rgba(85, 85, 85, 1)"};
   line-height: 18px;
   font-weight: 400;
   letter-spacing: 0.03em;
-  text-align: left;
-  background-color: ${(props) =>
-    props.editable ? "rgba(196, 196, 196, 0.1)" : "white"};
-
-  &::target-value {
-    padding-left: 10px;
-  }
-
+  border: none;
   &::placeholder {
     color: rgba(75, 72, 78, 0.7);
     padding: 0;
     margin: 0;
     font-size: 16px;
-    padding-left: 10px;
-  }
-  &:focus {
-    border: 1px solid rgba(0, 0, 255, 0.9);
   }
 `;
+
+const InputField = styled.div`
+  height: ${(props) => (props.height ? props.height : "45px")};
+  width: 100%;
+  border-radius: 5px;
+  border: ${(props) =>
+    props.focused
+      ? "1px solid rgba(0, 0, 255, 0.9)"
+      : "1px solid rgba(85, 85, 85, 1)"};
+  display: flex;
+`;
 const Title = styled.label`
-  color: black;
+  color: ${(props) => (props.focused ? "rgba(0, 0, 255, 0.9)" : "black")};
   font-weight: 500;
   font-size: 16px;
   line-height: 19.5px;
@@ -136,17 +128,14 @@ const Title = styled.label`
   display: flex;
   text-transform: capitalize;
   flex-direction: column;
-  ${InputField}:focus ~ & {
-    color: rgba(0, 0, 255, 0.9);
-  }
 `;
 
 const Icon = styled.i`
-  position: absolute;
   z-index: 200;
-  bottom: 10px;
-  right: 10px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
 `;
 
 const ErrorMsg = styled.h3`
