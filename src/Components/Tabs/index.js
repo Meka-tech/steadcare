@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export const SwitchTab = ({ labels = [""], OnSelect }) => {
+export const SwitchTab = ({ labels = [""], OnSelect, selected }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -10,7 +10,7 @@ export const SwitchTab = ({ labels = [""], OnSelect }) => {
         return (
           <Tab key={index}>
             <Text
-              active={index === activeTab}
+              active={selected ? selected === label : index === activeTab}
               onClick={() => {
                 setActiveTab(index);
                 OnSelect(label);
@@ -18,7 +18,7 @@ export const SwitchTab = ({ labels = [""], OnSelect }) => {
             >
               {label}
             </Text>
-            <Bar active={index === activeTab} />
+            <Bar active={selected ? selected === label : index === activeTab} />
           </Tab>
         );
       })}

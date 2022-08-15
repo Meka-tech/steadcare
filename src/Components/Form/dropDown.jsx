@@ -10,11 +10,11 @@ export const Dropdown = ({
   width,
   height,
   items,
-  onSelect = () => {}
+  onSelect = () => {},
+  selectedItem
 }) => {
   const [active, setActive] = useState(false);
   const dropDownRef = useRef(null);
-  const [selected, setSelected] = useState("");
 
   const ToggleActive = () => {
     setActive(!active);
@@ -45,7 +45,11 @@ export const Dropdown = ({
         <Title>{title}</Title>
         <Input>
           <InputField height={height}>
-            {selected ? <Label> {selected}</Label> : <Label> {label}</Label>}
+            {selectedItem ? (
+              <Label> {selectedItem}</Label>
+            ) : (
+              <Label> {label}</Label>
+            )}
             <Icon style={{ cursor: "pointer" }} onClick={() => ToggleActive()}>
               <Select />
             </Icon>
@@ -61,7 +65,6 @@ export const Dropdown = ({
                 key={index}
                 onClick={() => {
                   onSelect(item);
-                  setSelected(item);
                   setActive(false);
                 }}
               >

@@ -49,6 +49,7 @@ export const PasswordForm = ({
   const TogglePassword = () => {
     setShowPassword(!showPassword);
   };
+
   return (
     <Container width={width}>
       {errorMsg ? <ErrorMsg width={width}>{errorMsg}</ErrorMsg> : null}
@@ -56,7 +57,7 @@ export const PasswordForm = ({
         <InputField
           height={height}
           placeholder={placeholder}
-          type={showPassword ? "text" : "new-password"}
+          type={showPassword ? "text" : "password"}
           editable={editable}
           {...rest}
           value={inputValue}

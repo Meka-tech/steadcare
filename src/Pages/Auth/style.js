@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../../Images/Logo.svg";
+import { ReactComponent as DocIllus } from "../../Images/illustrations/docIllustraion.svg";
+import { ReactComponent as Icons } from "../../Images/illustrations/signInIcons.svg";
 
 export const LogoDiv = () => {
   return (
@@ -11,6 +13,22 @@ export const LogoDiv = () => {
     </div>
   );
 };
+
+export const AuthMargin = () => {
+  return (
+    <Margin>
+      <Top>
+        <Icons />
+      </Top>
+      <Center>
+        <DocIllus />
+      </Center>
+      <Bottom>
+        <Icons />
+      </Bottom>
+    </Margin>
+  );
+};
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -20,8 +38,22 @@ export const Container = styled.div`
 
 export const Margin = styled.div`
   height: 100%;
-  width: 600px;
+  width: 500px;
   background-color: rgba(26, 26, 255, 0.4);
+  display: flex;
+  flex-direction: column;
+`;
+const Top = styled.div`
+  transform: scale(0.8);
+  margin: auto;
+`;
+const Center = styled.div`
+  margin: auto;
+  transform: scale(0.8);
+`;
+const Bottom = styled.div`
+  margin: auto;
+  transform: scale(0.8);
 `;
 
 export const Body = styled.div`

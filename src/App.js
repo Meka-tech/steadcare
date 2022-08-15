@@ -1,7 +1,8 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import OtpVerification from "./Pages/Auth/Sign-up/otpVerification";
 
-import { Dashboard, DoctorProfile, UserSignUp } from "./Pages/index";
+import { Dashboard, DoctorProfile, Login, UserSignUp } from "./Pages/index";
 import { ScrollToTop } from "./Utilities";
 
 function App() {
@@ -12,6 +13,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/sign-up" element={<UserSignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/sign-up/otpVerification"
+              element={<OtpVerification />}
+            />
             <Route path="/sign-up/doctorProfile" element={<DoctorProfile />} />
           </Routes>
         </ScrollToTop>

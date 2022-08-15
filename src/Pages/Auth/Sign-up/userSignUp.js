@@ -9,6 +9,7 @@ import {
   TextForm
 } from "../../../Components";
 import {
+  AuthMargin,
   BlueText,
   Body,
   BoldText,
@@ -180,22 +181,26 @@ export const UserSignUp = () => {
           headers: {},
           data: data
         };
-        if (password === confirmPassword) {
-          axios(config)
-            .then(function (response) {
-              console.log(JSON.stringify(response.data));
-            })
-            .catch(function (error) {
-              console.log(error);
+
+        axios(config)
+          .then(function () {
+            navigate("/sign-up/otpVerification", {
+              state: {
+                email,
+                phoneNumber
+              }
             });
-        }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       }
     }
   };
 
   return (
     <Container>
-      <Margin></Margin>
+      <AuthMargin />
       <Body>
         <LogoDiv />
         <SwitchTab labels={["Patient", "Doctor"]} OnSelect={SetRoleFunc} />
@@ -271,7 +276,13 @@ export const UserSignUp = () => {
         </ButtonDiv>
         <Span>
           <BoldText>Already have an account?</BoldText>
-          <BlueText style={{ cursor: "pointer" }}> Log in</BlueText>
+          <BlueText
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/login")}
+          >
+            {" "}
+            Log in
+          </BlueText>
         </Span>
       </Body>
     </Container>

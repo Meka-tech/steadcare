@@ -5,11 +5,11 @@ export const Button = ({
   text = "Button",
   bgColor,
   fontSize = "16px",
-  fontWeight,
   borderRadius,
   color,
   border,
   onClick,
+  width
 }) => {
   return (
     <Container
@@ -19,6 +19,7 @@ export const Button = ({
       color={color}
       border={border}
       onClick={onClick}
+      width={width}
     >
       {text}
     </Container>
@@ -30,7 +31,7 @@ const Container = styled.button`
   border: none;
   cursor: pointer;
   padding: 10px 20px;
-  width: fit-content;
+  width: ${(props) => (props.width ? props.width : "fit-content")};
   border-radius: ${(props) =>
     props.borderRadius ? props.borderRadius : "5px"};
   color: ${(props) => (props.color ? props.color : "white")};
@@ -42,5 +43,4 @@ const Container = styled.button`
   font-weight: 600;
   line-height: 20px;
   letter-spacing: 0em;
-  text-align: left;
 `;
