@@ -12,7 +12,8 @@ export const Button = ({
   border,
   onClick,
   width,
-  isLoading
+  isLoading,
+  ...rest
 }) => {
   return (
     <Container
@@ -23,6 +24,7 @@ export const Button = ({
       border={border}
       onClick={onClick}
       width={width}
+      {...rest}
     >
       {text}
       {isLoading ? <Spinner className="loader-spin" /> : null}
@@ -35,6 +37,7 @@ const Container = styled.button`
   border: none;
   cursor: pointer;
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 10px 20px;
   width: ${(props) => (props.width ? props.width : "fit-content")};

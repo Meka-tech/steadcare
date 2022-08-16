@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   SwitchTab,
@@ -23,6 +23,7 @@ import { useLocation } from "react-router";
 import axios from "axios";
 import { BaseUrl } from "../../../../Utilities";
 import approveBadge from "../../../../Images/approveBadge.png";
+import { useFormik } from "formik";
 
 export const DoctorProfile = () => {
   const location = useLocation();
@@ -32,12 +33,7 @@ export const DoctorProfile = () => {
   const setTabFunction = (tab) => {
     setTab(tab);
   };
-  //General States
-
-  const [doctorsReg, setDoctorsReg] = useState("");
-  const [licenseDate, setlicenseDate] = useState("");
   const [specialty, setSpecialty] = useState("");
-  const [gradYear, setGradYear] = useState("");
   const Specialties = [
     "Allergist",
     "Anesthesiologist",
@@ -58,22 +54,7 @@ export const DoctorProfile = () => {
     " Surgeon"
   ];
 
-  //Documents
-
-  const [practicisingLincense, setPracticisingLincense] = useState();
-  const [registrationCertificate, setRegistrationCertificate] = useState();
-  function handleChange(event) {
-    setPracticisingLincense(event.target.files[0]);
-  }
-
-  function handleChange2(event) {
-    setRegistrationCertificate(event.target.files[0]);
-  }
-
-  //Bank Account
   const [userBank, setUserBank] = useState("");
-  const [accountName, setAccountName] = useState("");
-  const [accountNumber, setAccountNumber] = useState("");
   const BankAccounts = [
     "Access Bank",
     "Access Bank",
@@ -85,8 +66,49 @@ export const DoctorProfile = () => {
     "Access Bank"
   ];
 
-  //upload Media
+  const [formOneCompleted, setFormOneCompleted] = useState(false);
+
+  const [formTwoCompleted, setFormTwoCompleted] = useState(false);
+
+  const PageOneButton = () => {
+    if (values.regNo && values.expDate && values.gradYear && specialty) {
+      setFormOneCompleted(true);
+      setTabFunction("Documents");
+    }
+  };
+
+  ///////////////////////////////
+  //upload Media///////////////////////
+  ////////////////////////////////////
+  const [practicisingLincense, setPracticisingLincense] = useState();
+  const [registrationCertificate, setRegistrationCertificate] = useState();
+
+  //upload files to endpoint and recieve path and key for registration endpoint
+  const [pLFile, setPLFile] = useState();
+  const [rCFile, setRCFile] = useState();
+  const setDocuments = (res) => {
+    setPLFile({
+      path: res[0].path,
+      key: res[0].publicId
+    });
+    setRCFile({
+      path: res[1].path,
+      key: res[1].publicId
+    });
+  };
+
+  function handleUpload(event) {
+    setPracticisingLincense(event.target.files[0]);
+  }
+
+  function handleUpload2(event) {
+    setRegistrationCertificate(event.target.files[0]);
+  }
+
+  const [uploadingMedia, setUploadingMedia] = useState(false);
+
   const MediaUpload = async () => {
+    setUploadingMedia(true);
     const data = new FormData();
     data.append(`file`, practicisingLincense);
     data.append(`file`, registrationCertificate);
@@ -96,14 +118,23 @@ export const DoctorProfile = () => {
       data,
       headers: { "Content-Type": "multipart/form-data" }
     })
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
+      .then(function (res) {
+        const response = res.data.data;
+        setDocuments(response);
+        setUploadingMedia(false);
+        setTab("Bank Account");
       })
       .catch(function (error) {
         console.log(error);
+        setUploadingMedia(false);
       });
   };
-  const handleSubmit = async () => {
+  /////////////////////////////////////
+  /////////////////////////////////////
+
+  ///verify////////////////////////
+  /////////////////////////////////
+  const onhandleSubmit = async () => {
     const data = {
       name: `${name}`,
       email: `${email}`,
@@ -111,12 +142,12 @@ export const DoctorProfile = () => {
       confirmPassword: `${confirmPassword}`,
       role: `doctor`,
       specialty: `${specialty}`,
-      practicisingLincense: ``,
-      registrationCertificate: ``,
+      practicisingLincense: `${pLFile}`,
+      registrationCertificate: `${rCFile}`,
       phone: `${phoneNumber}`,
       bankName: `${userBank}`,
-      accountName: `${accountName}`,
-      accountNumber: `${accountNumber}`
+      accountName: `${values.accountName}`,
+      accountNumber: `${values.accountNumber}}`
     };
 
     const config = {
@@ -134,6 +165,20 @@ export const DoctorProfile = () => {
         console.log(error);
       });
   };
+  /////////////////////
+
+  //formik
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+    initialValues: {
+      regNo: "",
+      expDate: "",
+      gradYear: "",
+      accountName: "",
+      accountNumber: ""
+    },
+    onSubmit: onhandleSubmit
+  });
+
   return (
     <Container>
       <AuthMargin />
@@ -156,14 +201,14 @@ export const DoctorProfile = () => {
               <TextForm
                 title={"Doctor’s Reg No"}
                 width={"300px"}
-                inputValue={doctorsReg}
-                onChange={(e) => setDoctorsReg(e.target.value)}
+                inputValue={values.regNo}
+                onChange={handleChange("regNo")}
               />
               <TextForm
                 title={"License Expiry Date"}
                 width={"300px"}
-                inputValue={licenseDate}
-                onChange={(e) => setlicenseDate(e.target.value)}
+                inputValue={values.expDate}
+                onChange={handleChange("expDate")}
               />
               <Dropdown
                 title={"Specialty"}
@@ -176,14 +221,14 @@ export const DoctorProfile = () => {
                 title={"Med School Grad Year"}
                 width={"300px"}
                 placeholder={"mm/dd/yyyy"}
-                inputValue={formatDate(gradYear)}
-                onChange={(e) => setGradYear(e.target.value)}
+                inputValue={values.gradYear}
+                onChange={handleChange("gradYear")}
               />
             </Forms>
             <Button
               text={"Next"}
               fontSize={"14px"}
-              onClick={() => setTabFunction("Documents")}
+              onClick={() => PageOneButton()}
             />
           </TabContent>
         ) : null}
@@ -198,19 +243,19 @@ export const DoctorProfile = () => {
               <DocumentUpload
                 title={"Upload Current Practising License"}
                 fileName={practicisingLincense?.name}
-                onChange={handleChange}
+                onChange={handleUpload}
               />
               <DocumentUpload
                 title={"Upload Full Registration Certificate"}
                 fileName={registrationCertificate?.name}
-                onChange={handleChange2}
+                onChange={handleUpload2}
               />
             </UploadPictureDiv>
             <Button
               text={"Next"}
               fontSize={"14px"}
+              isLoading={uploadingMedia}
               onClick={() => {
-                setTab("Bank Account");
                 MediaUpload();
               }}
             />
@@ -237,13 +282,13 @@ export const DoctorProfile = () => {
               <TextForm
                 title={"Account Name"}
                 placeholder={"Account Name"}
-                inputValue={accountName}
-                onChange={(e) => setAccountName(e.target.value)}
+                inputValue={values.accountName}
+                onChange={handleChange("accountName")}
               />
               <TextForm
                 title={"Account Number"}
-                inputValue={accountNumber}
-                onChange={(e) => setAccountNumber(e.target.value)}
+                inputValue={values.accountNumber}
+                onChange={handleChange("accountNumber")}
               />
             </BankAccountForms>
             <Button

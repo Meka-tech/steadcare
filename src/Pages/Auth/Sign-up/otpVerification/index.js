@@ -16,16 +16,42 @@ export const OtpVerification = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
+    if (OTP.length === 4) {
+      setIsLoading(true);
+      const data = {
+        email: `${email}`,
+        hash: sessionStorage.getItem("OTPHASH"),
+        code: `${OTP}`
+      };
+
+      const config = {
+        method: "post",
+        url: `${BaseUrl}/user-token-verification`,
+        headers: {},
+        data: data
+      };
+
+      axios(config)
+        .then(function () {
+          setIsLoading(false);
+          navigate("/");
+        })
+        .catch(function (error) {
+          const Error = error;
+          alert(Error.response.data.message);
+          setOTP("");
+          setIsLoading(false);
+        });
+    }
+  };
+
+  const onResendOTP = () => {
     setIsLoading(true);
-    const data = {
-      email: `${email}`,
-      hash: sessionStorage.getItem("OTPHASH"),
-      code: `${OTP}`
-    };
+    const data = { email: `${email}` };
 
     const config = {
       method: "post",
-      url: `${BaseUrl}/user-token-verification`,
+      url: `${BaseUrl}/resend-code`,
       headers: {},
       data: data
     };
@@ -33,10 +59,11 @@ export const OtpVerification = () => {
     axios(config)
       .then(function () {
         setIsLoading(false);
-        navigate("/");
       })
       .catch(function (error) {
-        console.log(error);
+        const Error = error;
+        alert(Error.response.data.message);
+        setOTP("");
         setIsLoading(false);
       });
   };
@@ -63,7 +90,7 @@ export const OtpVerification = () => {
               className={"container"}
             />
           </OtpInput>
-          <Link>Resend code</Link>
+          <Link onClick={() => onResendOTP()}>Resend code</Link>
           <Link>Change phone number</Link>
           <ButtonDiv>
             <Button

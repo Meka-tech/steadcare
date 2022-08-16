@@ -110,7 +110,7 @@ export const Headers = styled.h2`
 export const Forms = styled.div`
   display: grid;
   grid-template-columns: auto auto;
-  margin-top: 35px;
+  margin-top: 25px;
   width: 80%;
 `;
 export const CheckBoxTextSpan = styled.div`

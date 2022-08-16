@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BaseUrl } from "../../../../Utilities";
 import {
@@ -24,6 +24,7 @@ import {
 } from "../../style";
 import { useNavigate } from "react-router";
 import { useFormik } from "formik";
+import { validationSchema } from "./validationSchema";
 
 export const UserSignUp = () => {
   const navigate = useNavigate();
@@ -32,8 +33,8 @@ export const UserSignUp = () => {
   const [name, setName] = useState(" ");
   const [role, setRole] = useState("patient");
   const [isLoading, setIsLoading] = useState(false);
-  const [termsCheckbox, setTermsCheckbox] = useState(false);
-  const [receiveEmails, setReceiveEmails] = useState(false);
+  const [termsCheckbox, setTermsCheckbox] = useState(true);
+  const [receiveEmails, setReceiveEmails] = useState(true);
 
   //set Role function
   const SetRoleFunc = (role) => {
@@ -87,51 +88,7 @@ export const UserSignUp = () => {
     }
   };
 
-  const validate = (values) => {
-    const errors = {};
-
-    if (!values.firstName) {
-      errors.firstName = "Required";
-    } else if (values.firstName.length > 15) {
-      errors.firstName = "Must be 15 characters or less";
-    }
-
-    if (!values.lastName) {
-      errors.lastName = "Required";
-    } else if (values.lastName.length > 20) {
-      errors.lastName = "Must be 20 characters or less";
-    }
-
-    if (!values.email) {
-      errors.email = "Required";
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
-      errors.email = "Invalid email address";
-    }
-    if (!values.password) {
-      errors.password = "Required";
-    } else if (
-      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/.test(values.password)
-    ) {
-      errors.password =
-        "your password should contain atleast 8 charaters, a Capital letter, small letter and number !";
-    }
-    if (!values.confirmPassword) {
-      errors.confirmPassword = "Required";
-    } else if (values.confirmPassword !== values.password) {
-      errors.confirmPassword = "Password does not match";
-    }
-    if (!values.phoneNumber) {
-      errors.phoneNumber = "Required";
-    } else if (values.phoneNumber.length !== 11) {
-      errors.phoneNumber = "invalid phone number";
-    }
-
-    return errors;
-  };
-
-  const { values, handleChange, handleSubmit, errors } = useFormik({
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
@@ -140,10 +97,9 @@ export const UserSignUp = () => {
       confirmPassword: "",
       phoneNumber: ""
     },
-    validate,
+    validationSchema,
     onSubmit: onhandleSubmit
   });
-
   useEffect(() => {
     setName(values.firstName + " " + values.lastName);
   }, [values.firstName, values.lastName]);
@@ -160,47 +116,48 @@ export const UserSignUp = () => {
             inputValue={values.firstName}
             onChange={handleChange("firstName")}
             width={"290px"}
-            errorMsg={errors.firstName}
+            errorMsg={touched.firstName && errors.firstName}
           />
           <TextForm
             title={"Last Name"}
             inputValue={values.lastName}
             onChange={handleChange("lastName")}
             width={"290px"}
-            errorMsg={errors.lastName}
+            errorMsg={touched.lastName && errors.lastName}
           />
           <TextForm
             title={"Email "}
             inputValue={values.email}
             onChange={handleChange("email")}
             width={"290px"}
-            errorMsg={errors.email}
+            errorMsg={touched.email && errors.email}
           />
           <TextForm
             title={"Phone Number"}
             inputValue={values.phoneNumber}
             onChange={handleChange("phoneNumber")}
             width={"290px"}
-            errorMsg={errors.phoneNumber}
+            errorMsg={touched.phoneNumber && errors.phoneNumber}
           />
           <PasswordForm
             title={"Password"}
             inputValue={values.password}
             onChange={handleChange("password")}
             width={"290px"}
-            errorMsg={errors.password}
+            errorMsg={touched.password && errors.password}
           />
           <PasswordForm
             title={"Confirm Password"}
             inputValue={values.confirmPassword}
             onChange={handleChange("confirmPassword")}
             width={"290px"}
-            errorMsg={errors.confirmPassword}
+            errorMsg={touched.confirmPassword && errors.confirmPassword}
           />
         </Forms>
         <CheckBoxDiv>
           <CheckBox
-            onChange={() => {
+            active={!termsCheckbox}
+            toggle={() => {
               setTermsCheckbox(!termsCheckbox);
             }}
           />
@@ -214,7 +171,8 @@ export const UserSignUp = () => {
         </CheckBoxDiv>
         <CheckBoxDiv>
           <CheckBox
-            onChange={() => {
+            active={!receiveEmails}
+            toggle={() => {
               setReceiveEmails(!receiveEmails);
             }}
           />
@@ -226,6 +184,7 @@ export const UserSignUp = () => {
         </CheckBoxDiv>
         <ButtonDiv>
           <Button
+            type="submit"
             fontSize={"14px"}
             text="Create Account"
             isLoading={isLoading}

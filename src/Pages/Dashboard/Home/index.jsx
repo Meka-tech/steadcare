@@ -15,7 +15,7 @@ export const Dashboard = () => {
     <Container>
       <DashboardNavbar />
       <Body>
-        <Link to="/sign-up/doctorProfile">
+        <Link to="/sign-up">
           <Button />
         </Link>
       </Body>

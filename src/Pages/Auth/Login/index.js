@@ -16,14 +16,15 @@ import { Button, CheckBox, PasswordForm, TextForm } from "../../../Components";
 import { BaseUrl } from "../../../Utilities";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useFormik } from "formik";
+import { validationSchema } from "./validationSchema";
 
 export const Login = () => {
   const navigate = useNavigate();
-  const axios = require("axios");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const handleSubmit = async () => {
-    const data = { email: `${email}`, password: `${password}` };
+  const [isLoading, setIsLoading] = useState(false);
+  const OnHandleSubmit = async () => {
+    setIsLoading(true);
+    const data = { email: `${values.email}`, password: `${values.password}` };
 
     const config = {
       method: "post",
@@ -35,11 +36,25 @@ export const Login = () => {
     axios(config)
       .then(function (response) {
         console.log(JSON.stringify(response.data));
+
+        setIsLoading(false);
       })
       .catch(function (error) {
-        console.log(error);
+        const Error = error;
+        setIsLoading(false);
+        alert(Error.response.data.message);
       });
   };
+
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    validationSchema,
+    onSubmit: OnHandleSubmit
+  });
+
   return (
     <Container>
       <AuthMargin />
@@ -54,13 +69,15 @@ export const Login = () => {
           <Forms>
             <TextForm
               title="Email"
-              inputValue={email}
-              onChange={(e) => setEmail(e.target.value)}
+              inputValue={values.email}
+              onChange={handleChange("email")}
+              errorMsg={touched.email && errors.email}
             />
             <PasswordForm
               title={"Password"}
-              inputValue={password}
-              onChange={(e) => setPassword(e.target.value)}
+              inputValue={values.password}
+              onChange={handleChange("password")}
+              errorMsg={touched.password && errors.password}
             />
 
             <CheckBoxDiv>
@@ -72,8 +89,10 @@ export const Login = () => {
             <ButtonDiv>
               <Button
                 text="Login"
-                onClick={() => handleSubmit()}
+                onClick={handleSubmit}
                 width="100%"
+                type="submit"
+                isLoading={isLoading}
               />
             </ButtonDiv>
             <Span>
