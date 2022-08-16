@@ -5,7 +5,7 @@ import {
   TextForm,
   DocumentUpload,
   Dropdown
-} from "../../../Components";
+} from "../../../../Components";
 
 import {
   AuthMargin,
@@ -14,21 +14,19 @@ import {
   Forms,
   Headers,
   LogoDiv,
-  Margin,
   SubHeader,
   TabContent
-} from "../style";
+} from "../../style";
 import styled from "styled-components";
-import { formatDate } from "../../../Utilities/globalFunc";
+import { formatDate } from "../../../../Utilities/globalFunc";
 import { useLocation } from "react-router";
 import axios from "axios";
-import { BaseUrl } from "../../../Utilities";
-import approveBadge from "../../../Images/approveBadge.png";
+import { BaseUrl } from "../../../../Utilities";
+import approveBadge from "../../../../Images/approveBadge.png";
 
 export const DoctorProfile = () => {
-  let axios = require("axios");
   const location = useLocation();
-  const { userName, phoneNumber, email, password, confirmPassword } =
+  const { name, phoneNumber, email, password, confirmPassword } =
     location.state;
   const [tab, setTab] = useState("General");
   const setTabFunction = (tab) => {
@@ -62,14 +60,14 @@ export const DoctorProfile = () => {
 
   //Documents
 
-  const [file, setFile] = useState();
-  const [file2, setFile2] = useState();
+  const [practicisingLincense, setPracticisingLincense] = useState();
+  const [registrationCertificate, setRegistrationCertificate] = useState();
   function handleChange(event) {
-    setFile(event.target.files[0]);
+    setPracticisingLincense(event.target.files[0]);
   }
 
   function handleChange2(event) {
-    setFile2(event.target.files[0]);
+    setRegistrationCertificate(event.target.files[0]);
   }
 
   //Bank Account
@@ -87,19 +85,38 @@ export const DoctorProfile = () => {
     "Access Bank"
   ];
 
-  const handleSubmit = () => {
+  //upload Media
+  const MediaUpload = async () => {
+    const data = new FormData();
+    data.append(`file`, practicisingLincense);
+    data.append(`file`, registrationCertificate);
+    axios({
+      method: "post",
+      url: `${BaseUrl}/media-upload`,
+      data,
+      headers: { "Content-Type": "multipart/form-data" }
+    })
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  const handleSubmit = async () => {
     const data = {
-      name: `${userName}`,
+      name: `${name}`,
       email: `${email}`,
       password: `${password}`,
       confirmPassword: `${confirmPassword}`,
       role: `doctor`,
-      specialty: ``,
+      specialty: `${specialty}`,
       practicisingLincense: ``,
       registrationCertificate: ``,
-      bankName: ``,
-      accountName: ``,
-      accountNumber: ``
+      phone: `${phoneNumber}`,
+      bankName: `${userBank}`,
+      accountName: `${accountName}`,
+      accountNumber: `${accountNumber}`
     };
 
     const config = {
@@ -180,19 +197,22 @@ export const DoctorProfile = () => {
             <UploadPictureDiv>
               <DocumentUpload
                 title={"Upload Current Practising License"}
-                fileName={file?.name}
+                fileName={practicisingLincense?.name}
                 onChange={handleChange}
               />
               <DocumentUpload
                 title={"Upload Full Registration Certificate"}
-                fileName={file2?.name}
+                fileName={registrationCertificate?.name}
                 onChange={handleChange2}
               />
             </UploadPictureDiv>
             <Button
               text={"Next"}
               fontSize={"14px"}
-              onClick={() => setTab("Bank Account")}
+              onClick={() => {
+                setTab("Bank Account");
+                MediaUpload();
+              }}
             />
           </TabContent>
         ) : null}
@@ -226,7 +246,11 @@ export const DoctorProfile = () => {
                 onChange={(e) => setAccountNumber(e.target.value)}
               />
             </BankAccountForms>
-            <Button text={"Verify"} fontSize={"14px"} />
+            <Button
+              text={"Verify"}
+              fontSize={"14px"}
+              onClick={() => handleSubmit()}
+            />
           </TabContent>
         ) : null}
         {tab === "Success" ? (

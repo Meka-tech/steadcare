@@ -1,8 +1,12 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import OtpVerification from "./Pages/Auth/Sign-up/otpVerification";
-
-import { Dashboard, DoctorProfile, Login, UserSignUp } from "./Pages/index";
+import {
+  Dashboard,
+  DoctorProfile,
+  Login,
+  OtpVerification,
+  UserSignUp
+} from "./Pages/index";
 import { ScrollToTop } from "./Utilities";
 
 function App() {

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { ReactComponent as Spinner } from "../../Images/Spinner.svg";
+import "./Button.styles.css";
 
 export const Button = ({
   text = "Button",
@@ -9,7 +11,8 @@ export const Button = ({
   color,
   border,
   onClick,
-  width
+  width,
+  isLoading
 }) => {
   return (
     <Container
@@ -22,6 +25,7 @@ export const Button = ({
       width={width}
     >
       {text}
+      {isLoading ? <Spinner className="loader-spin" /> : null}
     </Container>
   );
 };
@@ -30,6 +34,8 @@ const Container = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
   padding: 10px 20px;
   width: ${(props) => (props.width ? props.width : "fit-content")};
   border-radius: ${(props) =>
@@ -42,5 +48,7 @@ const Container = styled.button`
   font-size: ${(props) => (props.fontSize ? props.fontSize : "12px")};
   font-weight: 600;
   line-height: 20px;
+  display: flex;
   letter-spacing: 0em;
+  transition: all 0.2s ease-in-out;
 `;

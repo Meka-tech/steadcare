@@ -16,7 +16,7 @@ export const DocumentUpload = ({ title, width, onChange, fileName }) => {
         </Field>
         <Button>
           <h3>Browse</h3>
-          <FileInput type={"file"} onChange={onChange} />
+          <FileInput type={"file"} onChange={onChange} accept="image/*" />
         </Button>
       </Body>
     </Container>

@@ -1,0 +1,14 @@
+.container {
+  margin-bottom: 10px;
+}
+.inputStyles {
+  background-color: rgba(224, 224, 224, 1);
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  padding: 25px 15px;
+  margin: 0px 20px;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 50px;
+}
