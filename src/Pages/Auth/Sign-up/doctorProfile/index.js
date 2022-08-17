@@ -74,6 +74,8 @@ export const DoctorProfile = () => {
     if (values.regNo && values.expDate && values.gradYear && specialty) {
       setFormOneCompleted(true);
       setTabFunction("Documents");
+    } else {
+      alert("Please fill all fields");
     }
   };
 
@@ -99,71 +101,87 @@ export const DoctorProfile = () => {
 
   function handleUpload(event) {
     setPracticisingLincense(event.target.files[0]);
+    setFormTwoCompleted(false);
   }
 
   function handleUpload2(event) {
     setRegistrationCertificate(event.target.files[0]);
+    setFormTwoCompleted(false);
   }
 
   const [uploadingMedia, setUploadingMedia] = useState(false);
 
   const MediaUpload = async () => {
-    setUploadingMedia(true);
-    const data = new FormData();
-    data.append(`file`, practicisingLincense);
-    data.append(`file`, registrationCertificate);
-    axios({
-      method: "post",
-      url: `${BaseUrl}/media-upload`,
-      data,
-      headers: { "Content-Type": "multipart/form-data" }
-    })
-      .then(function (res) {
-        const response = res.data.data;
-        setDocuments(response);
-        setUploadingMedia(false);
-        setTab("Bank Account");
+    if (practicisingLincense && registrationCertificate) {
+      setUploadingMedia(true);
+      const data = new FormData();
+      data.append(`file`, practicisingLincense);
+      data.append(`file`, registrationCertificate);
+      axios({
+        method: "post",
+        url: `${BaseUrl}/media-upload`,
+        data,
+        headers: { "Content-Type": "multipart/form-data" }
       })
-      .catch(function (error) {
-        console.log(error);
-        setUploadingMedia(false);
-      });
+        .then(function (res) {
+          const response = res.data.data;
+          setDocuments(response);
+          setUploadingMedia(false);
+          setFormTwoCompleted(true);
+          setTab("Bank Account");
+        })
+        .catch(function () {
+          setUploadingMedia(false);
+        });
+    } else {
+      alert("Please Upload required files");
+    }
   };
   /////////////////////////////////////
   /////////////////////////////////////
 
   ///verify////////////////////////
   /////////////////////////////////
+  const [verifyIsLoading, setVerifyIsLoading] = useState(false);
   const onhandleSubmit = async () => {
-    const data = {
-      name: `${name}`,
-      email: `${email}`,
-      password: `${password}`,
-      confirmPassword: `${confirmPassword}`,
-      role: `doctor`,
-      specialty: `${specialty}`,
-      practicisingLincense: `${pLFile}`,
-      registrationCertificate: `${rCFile}`,
-      phone: `${phoneNumber}`,
-      bankName: `${userBank}`,
-      accountName: `${values.accountName}`,
-      accountNumber: `${values.accountNumber}}`
-    };
+    if (userBank && values.accountName && values.accountNumber) {
+      setVerifyIsLoading(true);
+      const data = {
+        name: `${name}`,
+        email: `${email}`,
+        password: `${password}`,
+        confirmPassword: `${confirmPassword}`,
+        role: `doctor`,
+        specialty: `${specialty}`,
+        practicisingLincense: pLFile,
+        registrationCertificate: rCFile,
+        phone: `${phoneNumber}`,
+        bankName: `${userBank}`,
+        accountName: `${values.accountName}`,
+        accountNumber: `${values.accountNumber}}`,
+        regNum: `${values.regNum}`,
+        licenseExpiryDate: `${values.expDate}`,
+        gradYear: `${values.gradYear}`
+      };
 
-    const config = {
-      method: "post",
-      url: `${BaseUrl}/create-user-account`,
-      headers: {},
-      data: data
-    };
+      const config = {
+        method: "post",
+        url: `${BaseUrl}/create-user-account`,
+        headers: {},
+        data: data
+      };
 
-    axios(config)
-      .then(function () {
-        setTab("Success");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      axios(config)
+        .then(function () {
+          setVerifyIsLoading(false);
+          setTab("Success");
+        })
+        .catch(function () {
+          setVerifyIsLoading(false);
+        });
+    } else {
+      alert("Fill all fields");
+    }
   };
   /////////////////////
 
@@ -185,11 +203,14 @@ export const DoctorProfile = () => {
       <Body>
         <LogoDiv />
         {tab === "Success" ? null : (
-          <SwitchTab
-            labels={["General", "Documents", "Bank Account"]}
-            OnSelect={setTabFunction}
-            selected={tab}
-          />
+          <div style={{ position: "relative" }}>
+            <Block form1={formOneCompleted} form2={formTwoCompleted} />
+            <SwitchTab
+              labels={["General", "Documents", "Bank Account"]}
+              OnSelect={setTabFunction}
+              selected={tab}
+            />
+          </div>
         )}
         {tab === "General" ? (
           <TabContent>
@@ -208,6 +229,7 @@ export const DoctorProfile = () => {
                 title={"License Expiry Date"}
                 width={"300px"}
                 inputValue={values.expDate}
+                placeholder={"dd/mm/yyyy"}
                 onChange={handleChange("expDate")}
               />
               <Dropdown
@@ -220,7 +242,6 @@ export const DoctorProfile = () => {
               <TextForm
                 title={"Med School Grad Year"}
                 width={"300px"}
-                placeholder={"mm/dd/yyyy"}
                 inputValue={values.gradYear}
                 onChange={handleChange("gradYear")}
               />
@@ -295,6 +316,7 @@ export const DoctorProfile = () => {
               text={"Verify"}
               fontSize={"14px"}
               onClick={() => handleSubmit()}
+              isLoading={verifyIsLoading}
             />
           </TabContent>
         ) : null}
@@ -320,7 +342,14 @@ const BankAccountForms = styled.div`
   width: 40%;
   margin-bottom: 20px;
 `;
-
+const Block = styled.div`
+  z-index: 10;
+  position: absolute;
+  height: 100%;
+  width: ${(props) =>
+    props.form2 && props.form1 ? "0%" : props.form1 ? "50%" : "75%"};
+  right: 0;
+`;
 const UploadPictureDiv = styled.div`
   margin: 50px 0px;
   width: 40%;

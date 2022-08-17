@@ -8,16 +8,15 @@ import {
 } from "../../../Components";
 import { SwitchTab } from "../../../Components";
 import { Body, Container } from "../style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Dashboard = () => {
+  const navigate = useNavigate();
   return (
     <Container>
       <DashboardNavbar />
       <Body>
-        <Link to="/sign-up">
-          <Button />
-        </Link>
+        <Button onClick={() => navigate("/sign-up")} />
       </Body>
     </Container>
   );

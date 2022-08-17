@@ -32,7 +32,8 @@ export const OtpVerification = () => {
       };
 
       axios(config)
-        .then(function () {
+        .then(function (res) {
+          console.log(res);
           setIsLoading(false);
           navigate("/");
         })
