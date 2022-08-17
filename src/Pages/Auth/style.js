@@ -57,10 +57,12 @@ const Bottom = styled.div`
 `;
 
 export const Body = styled.div`
-  margin-left: 100px;
   width: 100%;
   max-width: 900px;
   overflow: hidden;
+`;
+export const MarginLeft = styled.div`
+  margin-left: 100px;
 `;
 const LogoSection = styled.div`
   width: 100%;

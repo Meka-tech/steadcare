@@ -20,6 +20,7 @@ import {
   GrayText,
   LogoDiv,
   Margin,
+  MarginLeft,
   Span
 } from "../../style";
 import { useNavigate } from "react-router";
@@ -109,98 +110,100 @@ export const UserSignUp = () => {
       <AuthMargin />
       <Body>
         <LogoDiv />
-        <SwitchTab labels={["Patient", "Doctor"]} OnSelect={SetRoleFunc} />
-        <Forms>
-          <TextForm
-            title={"First Name"}
-            inputValue={values.firstName}
-            onChange={handleChange("firstName")}
-            width={"290px"}
-            errorMsg={touched.firstName && errors.firstName}
-          />
-          <TextForm
-            title={"Last Name"}
-            inputValue={values.lastName}
-            onChange={handleChange("lastName")}
-            width={"290px"}
-            errorMsg={touched.lastName && errors.lastName}
-          />
-          <TextForm
-            title={"Email "}
-            inputValue={values.email}
-            onChange={handleChange("email")}
-            width={"290px"}
-            errorMsg={touched.email && errors.email}
-          />
-          <TextForm
-            title={"Phone Number"}
-            inputValue={values.phoneNumber}
-            onChange={handleChange("phoneNumber")}
-            width={"290px"}
-            errorMsg={touched.phoneNumber && errors.phoneNumber}
-          />
-          <PasswordForm
-            title={"Password"}
-            inputValue={values.password}
-            onChange={handleChange("password")}
-            width={"290px"}
-            errorMsg={touched.password && errors.password}
-          />
-          <PasswordForm
-            title={"Confirm Password"}
-            inputValue={values.confirmPassword}
-            onChange={handleChange("confirmPassword")}
-            width={"290px"}
-            errorMsg={touched.confirmPassword && errors.confirmPassword}
-          />
-        </Forms>
-        <CheckBoxDiv>
-          <CheckBox
-            active={!termsCheckbox}
-            toggle={() => {
-              setTermsCheckbox(!termsCheckbox);
-            }}
-          />
-          <CheckBoxTextSpan>
-            <GrayText>I agree to the </GrayText>
-            <BlueText>Term & Conditions </BlueText>
-            <GrayText>and </GrayText>
-            <BlueText>Privacy Policy</BlueText>
-            <GrayText>.</GrayText>
-          </CheckBoxTextSpan>
-        </CheckBoxDiv>
-        <CheckBoxDiv>
-          <CheckBox
-            active={!receiveEmails}
-            toggle={() => {
-              setReceiveEmails(!receiveEmails);
-            }}
-          />
-          <CheckBoxTextSpan>
-            <GrayText>Yes, I want to receive </GrayText>
-            <BlueText>Steadcare</BlueText>
-            <GrayText>emails.</GrayText>
-          </CheckBoxTextSpan>
-        </CheckBoxDiv>
-        <ButtonDiv>
-          <Button
-            type="submit"
-            fontSize={"14px"}
-            text="Create Account"
-            isLoading={isLoading}
-            onClick={handleSubmit}
-          />
-        </ButtonDiv>
-        <Span>
-          <BoldText>Already have an account?</BoldText>
-          <BlueText
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate("/login")}
-          >
-            {" "}
-            Log in
-          </BlueText>
-        </Span>
+        <MarginLeft>
+          <SwitchTab labels={["Patient", "Doctor"]} OnSelect={SetRoleFunc} />
+          <Forms>
+            <TextForm
+              title={"First Name"}
+              inputValue={values.firstName}
+              onChange={handleChange("firstName")}
+              width={"290px"}
+              errorMsg={touched.firstName && errors.firstName}
+            />
+            <TextForm
+              title={"Last Name"}
+              inputValue={values.lastName}
+              onChange={handleChange("lastName")}
+              width={"290px"}
+              errorMsg={touched.lastName && errors.lastName}
+            />
+            <TextForm
+              title={"Email "}
+              inputValue={values.email}
+              onChange={handleChange("email")}
+              width={"290px"}
+              errorMsg={touched.email && errors.email}
+            />
+            <TextForm
+              title={"Phone Number"}
+              inputValue={values.phoneNumber}
+              onChange={handleChange("phoneNumber")}
+              width={"290px"}
+              errorMsg={touched.phoneNumber && errors.phoneNumber}
+            />
+            <PasswordForm
+              title={"Password"}
+              inputValue={values.password}
+              onChange={handleChange("password")}
+              width={"290px"}
+              errorMsg={touched.password && errors.password}
+            />
+            <PasswordForm
+              title={"Confirm Password"}
+              inputValue={values.confirmPassword}
+              onChange={handleChange("confirmPassword")}
+              width={"290px"}
+              errorMsg={touched.confirmPassword && errors.confirmPassword}
+            />
+          </Forms>
+          <CheckBoxDiv>
+            <CheckBox
+              active={!termsCheckbox}
+              toggle={() => {
+                setTermsCheckbox(!termsCheckbox);
+              }}
+            />
+            <CheckBoxTextSpan>
+              <GrayText>I agree to the </GrayText>
+              <BlueText>Term & Conditions </BlueText>
+              <GrayText>and </GrayText>
+              <BlueText>Privacy Policy</BlueText>
+              <GrayText>.</GrayText>
+            </CheckBoxTextSpan>
+          </CheckBoxDiv>
+          <CheckBoxDiv>
+            <CheckBox
+              active={!receiveEmails}
+              toggle={() => {
+                setReceiveEmails(!receiveEmails);
+              }}
+            />
+            <CheckBoxTextSpan>
+              <GrayText>Yes, I want to receive </GrayText>
+              <BlueText>Steadcare</BlueText>
+              <GrayText>emails.</GrayText>
+            </CheckBoxTextSpan>
+          </CheckBoxDiv>
+          <ButtonDiv>
+            <Button
+              type="submit"
+              fontSize={"14px"}
+              text="Create Account"
+              isLoading={isLoading}
+              onClick={handleSubmit}
+            />
+          </ButtonDiv>
+          <Span>
+            <BoldText>Already have an account?</BoldText>
+            <BlueText
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/login")}
+            >
+              {" "}
+              Log in
+            </BlueText>
+          </Span>
+        </MarginLeft>
       </Body>
     </Container>
   );

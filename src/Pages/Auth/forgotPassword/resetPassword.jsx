@@ -8,6 +8,7 @@ import {
   Container,
   Headers,
   LogoDiv,
+  MarginLeft,
   SubHeader,
   TabContent
 } from "../style";
@@ -57,34 +58,36 @@ export const ResetPassword = () => {
       <AuthMargin />
       <Body>
         <LogoDiv />
-        <TabContent>
-          <Headers>Reset Password</Headers>
-          <SubHeader>
-            Enter the email linked with your account and we’ll send you
-            instructions to reset your password.
-          </SubHeader>
-          <Forms>
-            <TextForm
-              title="Email Address"
-              inputValue={values.email}
-              onChange={handleChange("email")}
-              errorMsg={touched.email && errors.email}
-            />
-            <ButtonDiv>
-              <Button
-                text="Submit"
-                onClick={handleSubmit}
-                isLoading={isLoading}
-                width="100%"
-                type="submit"
+        <MarginLeft>
+          <TabContent>
+            <Headers>Reset Password</Headers>
+            <SubHeader>
+              Enter the email linked with your account and we’ll send you
+              instructions to reset your password.
+            </SubHeader>
+            <Forms>
+              <TextForm
+                title="Email Address"
+                inputValue={values.email}
+                onChange={handleChange("email")}
+                errorMsg={touched.email && errors.email}
               />
-            </ButtonDiv>
-            <Span>
-              Don’t have an account?
-              <h4 onClick={() => navigate("/sign-up")}>Sign Up</h4>
-            </Span>
-          </Forms>
-        </TabContent>
+              <ButtonDiv>
+                <Button
+                  text="Submit"
+                  onClick={handleSubmit}
+                  isLoading={isLoading}
+                  width="100%"
+                  type="submit"
+                />
+              </ButtonDiv>
+              <Span>
+                Don’t have an account?
+                <h4 onClick={() => navigate("/sign-up")}>Sign Up</h4>
+              </Span>
+            </Forms>
+          </TabContent>
+        </MarginLeft>
       </Body>
     </Container>
   );

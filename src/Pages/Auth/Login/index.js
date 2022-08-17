@@ -8,6 +8,7 @@ import {
   GrayText,
   Headers,
   LogoDiv,
+  MarginLeft,
   SubHeader,
   TabContent
 } from "../style";
@@ -60,52 +61,54 @@ export const Login = () => {
       <AuthMargin />
       <Body>
         <LogoDiv />
-        <TabContent>
-          <Headers>Sign in</Headers>
-          <SubHeader>
-            Sign in with your details used in registration for you to book a
-            doctor.
-          </SubHeader>
-          <Forms>
-            <TextForm
-              title="Email"
-              inputValue={values.email}
-              onChange={handleChange("email")}
-              errorMsg={touched.email && errors.email}
-            />
-            <PasswordForm
-              title={"Password"}
-              inputValue={values.password}
-              onChange={handleChange("password")}
-              errorMsg={touched.password && errors.password}
-            />
-
-            <CheckBoxDiv>
-              <CheckBox onChange={() => {}} />
-              <CheckBoxTextSpan>
-                <GrayText>Remember Me</GrayText>
-              </CheckBoxTextSpan>
-            </CheckBoxDiv>
-            <ButtonDiv>
-              <Button
-                text="Login"
-                onClick={handleSubmit}
-                width="100%"
-                type="submit"
-                isLoading={isLoading}
+        <MarginLeft>
+          <TabContent>
+            <Headers>Sign in</Headers>
+            <SubHeader>
+              Sign in with your details used in registration for you to book a
+              doctor.
+            </SubHeader>
+            <Forms>
+              <TextForm
+                title="Email"
+                inputValue={values.email}
+                onChange={handleChange("email")}
+                errorMsg={touched.email && errors.email}
               />
-            </ButtonDiv>
-            <Span>
-              Don’t have an account?
-              <h4 onClick={() => navigate("/sign-up")}>Sign Up</h4>
-            </Span>
-            <Span>
-              <h4 onClick={() => navigate("/reset-password")}>
-                Forgot Password ?
-              </h4>
-            </Span>
-          </Forms>
-        </TabContent>
+              <PasswordForm
+                title={"Password"}
+                inputValue={values.password}
+                onChange={handleChange("password")}
+                errorMsg={touched.password && errors.password}
+              />
+
+              <CheckBoxDiv>
+                <CheckBox onChange={() => {}} />
+                <CheckBoxTextSpan>
+                  <GrayText>Remember Me</GrayText>
+                </CheckBoxTextSpan>
+              </CheckBoxDiv>
+              <ButtonDiv>
+                <Button
+                  text="Login"
+                  onClick={handleSubmit}
+                  width="100%"
+                  type="submit"
+                  isLoading={isLoading}
+                />
+              </ButtonDiv>
+              <Span>
+                Don’t have an account?
+                <h4 onClick={() => navigate("/sign-up")}>Sign Up</h4>
+              </Span>
+              <Span>
+                <h4 onClick={() => navigate("/reset-password")}>
+                  Forgot Password ?
+                </h4>
+              </Span>
+            </Forms>
+          </TabContent>
+        </MarginLeft>
       </Body>
     </Container>
   );

@@ -14,6 +14,7 @@ import {
   Forms,
   Headers,
   LogoDiv,
+  MarginLeft,
   SubHeader,
   TabContent
 } from "../../style";
@@ -202,135 +203,138 @@ export const DoctorProfile = () => {
       <AuthMargin />
       <Body>
         <LogoDiv />
-        {tab === "Success" ? null : (
-          <div style={{ position: "relative" }}>
-            <Block form1={formOneCompleted} form2={formTwoCompleted} />
-            <SwitchTab
-              labels={["General", "Documents", "Bank Account"]}
-              OnSelect={setTabFunction}
-              selected={tab}
-            />
-          </div>
-        )}
-        {tab === "General" ? (
-          <TabContent>
-            <Headers>Profile</Headers>
-            <SubHeader>
-              All colomuns should be filled with the correct details.
-            </SubHeader>
-            <Forms>
-              <TextForm
-                title={"Doctor’s Reg No"}
-                width={"300px"}
-                inputValue={values.regNo}
-                onChange={handleChange("regNo")}
+        <MarginLeft>
+          {tab === "Success" ? null : (
+            <div style={{ position: "relative" }}>
+              <Block form1={formOneCompleted} form2={formTwoCompleted} />
+              <SwitchTab
+                labels={["General", "Documents", "Bank Account"]}
+                OnSelect={setTabFunction}
+                selected={tab}
               />
-              <TextForm
-                title={"License Expiry Date"}
-                width={"300px"}
-                inputValue={values.expDate}
-                placeholder={"dd/mm/yyyy"}
-                onChange={handleChange("expDate")}
+            </div>
+          )}
+          {tab === "General" ? (
+            <TabContent>
+              <Headers>Profile</Headers>
+              <SubHeader>
+                All colomuns should be filled with the correct details.
+              </SubHeader>
+              <Forms>
+                <TextForm
+                  title={"Doctor’s Reg No"}
+                  width={"300px"}
+                  inputValue={values.regNo}
+                  onChange={handleChange("regNo")}
+                />
+                <TextForm
+                  title={"License Expiry Date"}
+                  width={"300px"}
+                  inputValue={values.expDate}
+                  placeholder={"dd/mm/yyyy"}
+                  onChange={handleChange("expDate")}
+                />
+                <Dropdown
+                  title={"Specialty"}
+                  width={"310px"}
+                  items={Specialties}
+                  onSelect={setSpecialty}
+                  selectedItem={specialty}
+                />
+                <TextForm
+                  title={"Med School Grad Year"}
+                  width={"300px"}
+                  inputValue={values.gradYear}
+                  onChange={handleChange("gradYear")}
+                />
+              </Forms>
+              <Button
+                text={"Next"}
+                fontSize={"14px"}
+                onClick={() => PageOneButton()}
               />
-              <Dropdown
-                title={"Specialty"}
-                width={"310px"}
-                items={Specialties}
-                onSelect={setSpecialty}
-                selectedItem={specialty}
+            </TabContent>
+          ) : null}
+          {tab === "Documents" ? (
+            <TabContent>
+              <Headers>Upload Documents</Headers>
+              <SubHeader>
+                All files should have descriptive file names. Only jpeg and pdf
+                are accepted.
+              </SubHeader>
+              <UploadPictureDiv>
+                <DocumentUpload
+                  title={"Upload Current Practising License"}
+                  fileName={practicisingLincense?.name}
+                  onChange={handleUpload}
+                />
+                <DocumentUpload
+                  title={"Upload Full Registration Certificate"}
+                  fileName={registrationCertificate?.name}
+                  onChange={handleUpload2}
+                />
+              </UploadPictureDiv>
+              <Button
+                text={"Next"}
+                fontSize={"14px"}
+                isLoading={uploadingMedia}
+                onClick={() => {
+                  MediaUpload();
+                }}
               />
-              <TextForm
-                title={"Med School Grad Year"}
-                width={"300px"}
-                inputValue={values.gradYear}
-                onChange={handleChange("gradYear")}
+            </TabContent>
+          ) : null}
+          {tab === "Bank Account" ? (
+            <TabContent>
+              <Headers>Bank Details</Headers>
+              <SubHeader>
+                Fill your bank details in order to receive payments for
+                completed sessions from patients.
+              </SubHeader>
+              <WarningMessage>
+                Make sure your bank account name matches the name on your
+                profile.
+              </WarningMessage>
+              <BankAccountForms>
+                <Dropdown
+                  title={"Select Bank"}
+                  label="Choose a Bank"
+                  items={BankAccounts}
+                  onSelect={setUserBank}
+                  selectedItem={userBank}
+                />
+                <TextForm
+                  title={"Account Name"}
+                  placeholder={"Account Name"}
+                  inputValue={values.accountName}
+                  onChange={handleChange("accountName")}
+                />
+                <TextForm
+                  title={"Account Number"}
+                  inputValue={values.accountNumber}
+                  onChange={handleChange("accountNumber")}
+                />
+              </BankAccountForms>
+              <Button
+                text={"Verify"}
+                fontSize={"14px"}
+                onClick={() => handleSubmit()}
+                isLoading={verifyIsLoading}
               />
-            </Forms>
-            <Button
-              text={"Next"}
-              fontSize={"14px"}
-              onClick={() => PageOneButton()}
-            />
-          </TabContent>
-        ) : null}
-        {tab === "Documents" ? (
-          <TabContent>
-            <Headers>Upload Documents</Headers>
-            <SubHeader>
-              All files should have descriptive file names. Only jpeg and pdf
-              are accepted.
-            </SubHeader>
-            <UploadPictureDiv>
-              <DocumentUpload
-                title={"Upload Current Practising License"}
-                fileName={practicisingLincense?.name}
-                onChange={handleUpload}
-              />
-              <DocumentUpload
-                title={"Upload Full Registration Certificate"}
-                fileName={registrationCertificate?.name}
-                onChange={handleUpload2}
-              />
-            </UploadPictureDiv>
-            <Button
-              text={"Next"}
-              fontSize={"14px"}
-              isLoading={uploadingMedia}
-              onClick={() => {
-                MediaUpload();
-              }}
-            />
-          </TabContent>
-        ) : null}
-        {tab === "Bank Account" ? (
-          <TabContent>
-            <Headers>Bank Details</Headers>
-            <SubHeader>
-              Fill your bank details in order to receive payments for completed
-              sessions from patients.
-            </SubHeader>
-            <WarningMessage>
-              Make sure your bank account name matches the name on your profile.
-            </WarningMessage>
-            <BankAccountForms>
-              <Dropdown
-                title={"Select Bank"}
-                label="Choose a Bank"
-                items={BankAccounts}
-                onSelect={setUserBank}
-                selectedItem={userBank}
-              />
-              <TextForm
-                title={"Account Name"}
-                placeholder={"Account Name"}
-                inputValue={values.accountName}
-                onChange={handleChange("accountName")}
-              />
-              <TextForm
-                title={"Account Number"}
-                inputValue={values.accountNumber}
-                onChange={handleChange("accountNumber")}
-              />
-            </BankAccountForms>
-            <Button
-              text={"Verify"}
-              fontSize={"14px"}
-              onClick={() => handleSubmit()}
-              isLoading={verifyIsLoading}
-            />
-          </TabContent>
-        ) : null}
-        {tab === "Success" ? (
-          <TabContent>
-            <ImageContainer>
-              <img src={approveBadge} alt="success" />
-            </ImageContainer>
-            <SuccessText>
-              You’ve submitted your details successfully. We will get back to
-              you within 24hours.
-            </SuccessText>
-          </TabContent>
-        ) : null}
+            </TabContent>
+          ) : null}
+          {tab === "Success" ? (
+            <TabContent>
+              <ImageContainer>
+                <img src={approveBadge} alt="success" />
+              </ImageContainer>
+              <SuccessText>
+                You’ve submitted your details successfully. We will get back to
+                you within 24hours.
+              </SuccessText>
+            </TabContent>
+          ) : null}
+        </MarginLeft>
       </Body>
     </Container>
   );
