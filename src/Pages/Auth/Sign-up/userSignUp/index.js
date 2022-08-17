@@ -43,7 +43,7 @@ export const UserSignUp = () => {
 
   const onhandleSubmit = async () => {
     if (role === "Doctor") {
-      navigate("/sign-up/doctorProfile", {
+      navigate("/sign-up/doctor-profile", {
         state: {
           name,
           email: values.email,
@@ -74,7 +74,7 @@ export const UserSignUp = () => {
         .then(function (res) {
           sessionStorage.setItem("OTPHASH", res.data.data.otpHash);
           setIsLoading(false);
-          navigate("/sign-up/otpVerification", {
+          navigate("/sign-up/otp-verification", {
             state: {
               email: values.email,
               phoneNumber: values.phoneNumber

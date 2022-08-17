@@ -100,7 +100,9 @@ export const Login = () => {
               <h4 onClick={() => navigate("/sign-up")}>Sign Up</h4>
             </Span>
             <Span>
-              <h4>Forgot Password ?</h4>
+              <h4 onClick={() => navigate("/reset-password")}>
+                Forgot Password ?
+              </h4>
             </Span>
           </Forms>
         </TabContent>
