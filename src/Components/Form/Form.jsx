@@ -77,7 +77,7 @@ export const PasswordForm = ({
 
 const Container = styled.form`
   top: 0;
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
   position: relative;
   height: fit-content;
   display: flex;
@@ -89,15 +89,15 @@ const Container = styled.form`
 const Input = styled.input`
   &[type="password"] {
     font-family: Verdana;
-    font-size: 20px;
+    font-size: 2rem;
     letter-spacing: 0.125em;
   }
-  margin-left: 10px;
-  font-size: 16px;
+  margin-left: 1rem;
+  font-size: 1.6rem;
   color: black;
   width: 85%;
   outline: none;
-  line-height: 18px;
+  line-height: 1.8rem;
   font-weight: 400;
   letter-spacing: 0.03em;
   border: none;
@@ -105,14 +105,14 @@ const Input = styled.input`
     color: rgba(75, 72, 78, 0.7);
     padding: 0;
     margin: 0;
-    font-size: 16px;
+    font-size: 1.6rem;
   }
 `;
 
 const InputField = styled.div`
   height: ${(props) => (props.height ? props.height : "45px")};
   width: 100%;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   border: ${(props) =>
     props.focused
       ? "1px solid rgba(0, 0, 255, 0.9)"
@@ -122,9 +122,9 @@ const InputField = styled.div`
 const Title = styled.label`
   color: ${(props) => (props.focused ? "rgba(0, 0, 255, 0.9)" : "black")};
   font-weight: 500;
-  font-size: 16px;
-  line-height: 19.5px;
-  margin-bottom: 8px;
+  font-size: 1.6rem;
+  line-height: 1.95rem;
+  margin-bottom: 0.8rem;
   display: flex;
   text-transform: capitalize;
   flex-direction: column;
@@ -135,17 +135,17 @@ const Icon = styled.i`
   cursor: pointer;
   display: flex;
   align-items: center;
-  margin-left: 5px;
+  margin-left: 0.5rem;
 `;
 
 const ErrorMsg = styled.h3`
   color: rgba(255, 0, 0, 1);
   margin: 0;
   padding: 0;
-  font-size: 11px;
+  font-size: 1.1rem;
   font-weight: 400;
-  line-height: 13px;
+  line-height: 1.3rem;
   letter-spacing: 0.03em;
-  padding-top: 5px;
+  padding-top: 0.5rem;
   width: ${(props) => (props.width ? props.width : "300px")};
 `;

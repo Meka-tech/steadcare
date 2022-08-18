@@ -9,10 +9,10 @@ export const CheckBox = ({ active, toggle }) => {
 };
 
 const Container = styled.div`
-  width: 15px;
-  height: 15px;
-  border-radius: 2px;
-  border: solid 1px rgba(85, 85, 85, 0.8);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.2rem;
+  border: solid 0.1rem rgba(85, 85, 85, 0.8);
   cursor: pointer;
   display: flex;
   justify-content: center;

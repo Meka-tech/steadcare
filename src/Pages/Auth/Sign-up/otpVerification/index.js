@@ -111,32 +111,31 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 25px;
-  margin-left: -100px;
+  margin-top: 2.5rem;
 `;
 
 const Title = styled.h1`
   margin: 0;
   padding: 0;
-  font-size: 24px;
+  font-size: 2.4rem;
   font-weight: 700;
-  line-height: 24px;
+  line-height: 2.4rem;
   text-align: center;
-  margin: 20px 0;
+  margin: 2rem 0;
 `;
 const OtpInput = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 25px 0px;
+  margin: 2.5rem 0;
 `;
 
 const Subtitle = styled.p`
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 2.4rem;
   letter-spacing: 0.04em;
   text-align: center;
   width: 70%;
@@ -145,13 +144,13 @@ const Link = styled.p`
   margin: 0;
   padding: 0;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 2rem;
   color: rgba(0, 0, 255, 1);
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 `;
 const ButtonDiv = styled.div`
-  margin-top: 20px;
+  margin-top: 2rem;
 `;

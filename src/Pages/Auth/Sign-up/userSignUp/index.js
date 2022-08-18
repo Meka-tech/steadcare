@@ -209,5 +209,5 @@ export const UserSignUp = () => {
   );
 };
 const ButtonDiv = styled.div`
-  margin: 10px 0px;
+  margin: 1rem 0;
 `;

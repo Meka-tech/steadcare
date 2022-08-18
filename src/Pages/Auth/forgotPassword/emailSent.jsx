@@ -42,15 +42,15 @@ export const EmailSent = () => {
   );
 };
 const Icon = styled.div`
-  margin: 20px auto;
-  margin-top: 40px;
+  margin: 2rem auto;
+  margin-top: 4rem;
 `;
 export const SubHeader = styled.p`
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
-  line-height: 25px;
+  line-height: 2.5rem;
   text-align: center;
   width: 100%;
   color: rgba(34, 34, 34, 0.8);
@@ -58,9 +58,9 @@ export const SubHeader = styled.p`
 
 export const Headers = styled.h2`
   font-weight: 600;
-  font-size: 22px;
+  font-size: 2.2rem;
   color: black;
-  line-height: 34.13px;
+  line-height: 3.413rem;
   text-align: center;
   margin: 0;
   padding: 0;
@@ -75,17 +75,17 @@ const Forms = styled.div`
 `;
 const ButtonDiv = styled.div`
   width: 100%;
-  margin: 25px 0;
+  margin: 2.5rem 0;
 `;
 const Span = styled.div`
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 1.8rem;
   letter-spacing: 0em;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
   h4 {
@@ -93,8 +93,8 @@ const Span = styled.div`
     padding: 0;
     color: rgba(0, 0, 255, 0.9);
     cursor: pointer;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 500;
-    line-height: 18px;
+    line-height: 1.8rem;
   }
 `;

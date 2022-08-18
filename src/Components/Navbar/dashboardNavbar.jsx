@@ -23,7 +23,7 @@ const Navs = [
   [<CalendarIcon />, <CalendarActiveIcon />, "Appointments"],
   [<HistoryIcon />, <HistoryActiveIcon />, "Medical History"],
   [<PrescriptionIcon />, <PrescriptionActiveIcon />, "Prescriptions"],
-  [<SettingsIcon />, <SettingsActiveIcon />, "Settings"],
+  [<SettingsIcon />, <SettingsActiveIcon />, "Settings"]
 ];
 
 export const DashboardNavbar = ({ active = "Dashboard" }) => {
@@ -59,34 +59,34 @@ export const DashboardNavbar = ({ active = "Dashboard" }) => {
 };
 
 const Container = styled.div`
-  padding: 10px 0px;
-  width: 332px;
+  padding: 1rem 0px;
+  width: 33.2rem;
   height: 100vh;
   max-height: 100vh;
-  box-shadow: 3px 1px 1px 0px rgba(0, 0, 255, 0.2);
+  box-shadow: 0.3rem 0.1rem 0.1rem 0px rgba(0, 0, 255, 0.2);
   background-color: white;
   overflow: hidden;
   z-index: 10;
 `;
 const LogoSection = styled.div`
-  padding-left: 20px;
-  padding-bottom: 5px;
+  padding-left: 2rem;
+  padding-bottom: 0.5rem;
   display: flex;
   align-items: flex-end;
   border-bottom: 1px solid rgba(85, 85, 85, 0.2);
-  height: 7%;
+  height: 5em;
   h1 {
     padding: 0;
     margin: 0;
     font-family: Montserrat;
-    font-size: 15px;
+    font-size: 1.5rem;
     font-weight: 700;
-    line-height: 23px;
+    line-height: 2.3rem;
     letter-spacing: 0.06em;
     text-align: left;
     color: rgba(0, 0, 255, 0.9);
     text-transform: uppercase;
-    margin-left: 3px;
+    margin-left: 0.3rem;
     cursor: pointer;
   }
 `;
@@ -95,8 +95,8 @@ const NavItems = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 20px;
-  padding-top: 18%;
+  padding: 2rem;
+  padding-top: 2.5em;
   height: 65%;
   border-bottom: 1px solid rgba(85, 85, 85, 0.2);
 `;
@@ -104,8 +104,8 @@ const LogOutDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
-  padding-top: 12%;
+  padding: 2rem;
+  padding-top: 3em;
 `;
 const NavItem = styled.div`
   display: flex;
@@ -123,9 +123,9 @@ const NavItem = styled.div`
   }
   h1 {
     font-family: Montserrat;
-    font-size: 13px;
+    font-size: 1.3rem;
     font-weight: 500;
-    line-height: 20px;
+    line-height: 2rem;
     letter-spacing: 0.06em;
     text-align: left;
     margin: 0;

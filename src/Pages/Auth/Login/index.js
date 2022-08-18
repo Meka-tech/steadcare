@@ -116,21 +116,21 @@ export const Login = () => {
 
 const Forms = styled.div`
   width: 50%;
-  margin: 30px 0;
+  margin: 3rem 0;
 `;
 const ButtonDiv = styled.div`
   width: 100%;
-  margin: 25px 0;
+  margin: 2.5rem 0;
 `;
 const Span = styled.div`
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 1.8rem;
   letter-spacing: 0em;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
   h4 {
@@ -138,8 +138,8 @@ const Span = styled.div`
     padding: 0;
     color: rgba(0, 0, 255, 0.9);
     cursor: pointer;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 500;
-    line-height: 18px;
+    line-height: 1.8rem;
   }
 `;

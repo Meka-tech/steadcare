@@ -25,22 +25,22 @@ export const DocumentUpload = ({ title, width, onChange, fileName }) => {
 
 const Container = styled.div`
   width: ${(props) => (props.width ? props.width : "100%")};
-  margin-bottom: 30px;
+  margin-bottom: 3rem;
 `;
 
 const Title = styled.h1`
   margin: 0;
   padding: 0;
   font-weight: 500;
-  font-size: 16px;
-  line-height: 19.5px;
-  margin-bottom: 8px;
+  font-size: 1.6rem;
+  line-height: 1.95rem;
+  margin-bottom: 0.8rem;
 `;
 
 const Body = styled.div`
   width: 100%;
-  height: 45px;
-  border-radius: 8px;
+  height: 4.5rem;
+  border-radius: 0.8rem;
   border: 1px solid rgba(0, 0, 255, 0.7);
   display: flex;
 `;
@@ -50,17 +50,17 @@ const Field = styled.div`
   align-items: center;
   overflow: hidden;
   h2 {
-    margin-left: 10px;
+    margin-left: 1rem;
     color: black;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
   }
   h3 {
     margin: 0;
     padding: 0;
-    margin-left: 10px;
+    margin-left: 1rem;
     color: rgba(85, 85, 85, 1);
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
   }
 `;
@@ -76,9 +76,9 @@ const Button = styled.div`
   h3 {
     margin: 0;
     padding: 0;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 500;
-    line-height: 37px;
+    line-height: 3.7rem;
     letter-spacing: 0em;
     color: rgba(0, 0, 255, 1);
   }

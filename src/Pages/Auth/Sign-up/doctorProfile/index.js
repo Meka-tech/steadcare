@@ -342,9 +342,9 @@ export const DoctorProfile = () => {
 
 //styles
 const BankAccountForms = styled.div`
-  margin-top: 20px;
+  margin-top: 2rem;
   width: 40%;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 `;
 const Block = styled.div`
   z-index: 10;
@@ -355,28 +355,28 @@ const Block = styled.div`
   right: 0;
 `;
 const UploadPictureDiv = styled.div`
-  margin: 50px 0px;
+  margin: 5rem 0;
   width: 40%;
 `;
 const WarningMessage = styled.div`
-  font-size: 12px;
+  font-size: 1.2rem;
   font-weight: 400;
-  line-height: 17px;
+  line-height: 1.7rem;
   color: rgba(255, 30, 30, 1);
-  margin-top: 5px;
+  margin-top: 0.5rem;
 `;
 const ImageContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 70px;
-  margin-bottom: 40px;
+  margin-top: 7rem;
+  margin-bottom: 4rem;
 `;
 const SuccessText = styled.p`
   font-family: Montserrat;
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 500;
-  line-height: 25px;
+  line-height: 2.5rem;
   text-align: center;
 `;

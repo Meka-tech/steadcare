@@ -79,7 +79,7 @@ export const Dropdown = ({
 };
 
 const Container = styled.form`
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
   position: relative;
   height: fit-content;
   transition: 0.2s ease-in-out;
@@ -98,14 +98,14 @@ const Input = styled.div`
 `;
 const InputField = styled.div`
   margin: 0;
-  font-size: 16px;
+  font-size: 1.6rem;
   color: rgba(75, 72, 78, 0.7);
-  line-height: 19.5px;
+  line-height: 1.95rem;
   height: ${(props) => (props.height ? props.height : "45px")};
   width: 100%;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   border: 1px solid rgba(85, 85, 85, 0.3);
-  line-height: 24.38px;
+  line-height: 2.438rem;
   font-weight: 500;
   letter-spacing: 0.03em;
   text-align: left;
@@ -118,20 +118,20 @@ const InputField = styled.div`
 const Title = styled.label`
   color: black;
   font-weight: 500;
-  font-size: 16px;
-  line-height: 19.5px;
-  margin-bottom: 8px;
+  font-size: 1.6rem;
+  line-height: 1.95rem;
+  margin-bottom: 0.8rem;
   display: flex;
   flex-direction: column;
 `;
 const Label = styled.div`
-  padding-left: 10px;
+  padding-left: 1rem;
 `;
 
 const Icon = styled.i`
   transform: scale(0.8);
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 1rem;
 `;
 const Menu = styled.div`
   width: 100%;
@@ -141,7 +141,7 @@ const Menu = styled.div`
   transition: all 0.2s ease-in;
   z-index: 10;
   overflow-y: scroll;
-  max-height: 180px;
+  max-height: 18rem;
   position: absolute;
   z-index: 2;
   div {
@@ -150,10 +150,10 @@ const Menu = styled.div`
     align-items: center;
     width: 100%;
     cursor: pointer;
-    height: 35px;
+    height: 3.5rem;
     h1 {
-      margin-left: 20px;
-      font-size: 16px;
+      margin-left: 2rem;
+      font-size: 1.6rem;
       font-weight: 500;
     }
     &:hover {

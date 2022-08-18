@@ -39,18 +39,18 @@ const Container = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 20px;
+  padding: 1rem 2rem;
   width: ${(props) => (props.width ? props.width : "fit-content")};
   border-radius: ${(props) =>
-    props.borderRadius ? props.borderRadius : "5px"};
+    props.borderRadius ? props.borderRadius : "0.5rem"};
   color: ${(props) => (props.color ? props.color : "white")};
   border: ${(props) => (props.border ? props.border : "none")};
   background-color: ${(props) =>
     props.bgColor ? props.bgColor : "rgba(0, 0, 255, 0.9)"};
 
-  font-size: ${(props) => (props.fontSize ? props.fontSize : "12px")};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "1.2rem")};
   font-weight: 600;
-  line-height: 20px;
+  line-height: 2rem;
   display: flex;
   letter-spacing: 0em;
   transition: all 0.2s ease-in-out;

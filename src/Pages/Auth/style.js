@@ -38,7 +38,7 @@ export const Container = styled.div`
 
 export const Margin = styled.div`
   height: 100%;
-  width: 500px;
+  width: 50rem;
   background-color: rgba(26, 26, 255, 0.4);
   display: flex;
   flex-direction: column;
@@ -58,11 +58,11 @@ const Bottom = styled.div`
 
 export const Body = styled.div`
   width: 100%;
-  max-width: 900px;
+  max-width: 90rem;
   overflow: hidden;
 `;
 export const MarginLeft = styled.div`
-  margin-left: 100px;
+  margin-left: 10rem;
 `;
 const LogoSection = styled.div`
   width: 100%;
@@ -76,7 +76,7 @@ const LogoSection = styled.div`
     font-family: Montserrat;
     font-size: 15px;
     font-weight: 700;
-    line-height: 23px;
+    line-height: 2.3rem;
     letter-spacing: 0.06em;
     text-align: left;
     color: rgba(0, 0, 255, 0.9);
@@ -84,17 +84,17 @@ const LogoSection = styled.div`
     margin-left: 3px;
     cursor: pointer;
   }
-  margin: 30px 0px;
+  margin: 3rem 0;
 `;
 export const TabContent = styled.div`
-  margin-top: 24px;
+  margin-top: 2.4rem;
 `;
 export const SubHeader = styled.p`
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
-  line-height: 25px;
+  line-height: 2.5rem;
   text-align: left;
   width: 70%;
   color: rgba(34, 34, 34, 0.8);
@@ -102,9 +102,9 @@ export const SubHeader = styled.p`
 
 export const Headers = styled.h2`
   font-weight: 600;
-  font-size: 22px;
+  font-size: 2.2rem;
   color: black;
-  line-height: 34.13px;
+  line-height: 3.413rem;
   margin: 0;
   padding: 0;
 `;
@@ -112,32 +112,32 @@ export const Headers = styled.h2`
 export const Forms = styled.div`
   display: grid;
   grid-template-columns: auto auto;
-  margin-top: 25px;
+  margin-top: 2.5rem;
   width: 80%;
 `;
 export const CheckBoxTextSpan = styled.div`
   display: flex;
-  margin-left: 10px;
+  margin-left: 1rem;
 `;
 export const BlueText = styled.h3`
   color: rgba(0, 0, 255, 0.9);
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 600;
-  margin: 0px 5px;
+  margin: 0 0.5rem;
 `;
 export const GrayText = styled.h3`
   color: rgba(85, 85, 85, 1);
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
   margin: 0;
 `;
 export const BoldText = styled.h3`
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 600;
   margin: 0;
 `;
 export const CheckBoxDiv = styled.div`
-  margin: 15px 0px;
+  margin: 1.5rem 0;
   display: flex;
 `;
 export const Span = styled.div`

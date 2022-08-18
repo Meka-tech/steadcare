@@ -38,9 +38,9 @@ const Container = styled.div`
 const ContainerBar = styled.div`
   position: absolute;
   width: 100%;
-  height: 4px;
+  height: 0.4rem;
   background-color: rgba(217, 217, 217, 1);
-  border-radius: 8px;
+  border-radius: 0.8rem;
   bottom: 0;
 `;
 
@@ -50,19 +50,19 @@ const Tab = styled.div`
   justify-content: center;
 `;
 const Text = styled.h1`
-  margin: 10px 50px;
+  margin: 1rem 5rem;
   padding: 0;
   color: ${(props) =>
     props.active ? `rgba(0, 0, 255, 0.9)` : `rgba(85, 85, 85, 0.7)`};
   cursor: pointer;
-  font-size: 17px;
+  font-size: 1.7rem;
   font-weight: 700;
 `;
 const Bar = styled.div`
   width: 100%;
-  height: 4px;
+  height: 0.4rem;
   background-color: ${(props) =>
     props.active ? `rgba(0, 0, 255, 0.9)` : `rgba(217, 217, 217, 1)`};
-  border-radius: 8px;
+  border-radius: 0.8rem;
   z-index: 2;
 `;
