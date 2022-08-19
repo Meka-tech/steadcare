@@ -13,10 +13,9 @@ export const validationSchema = Yup.object().shape({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
       "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     ),
-  confirmPassword: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Passwords must match"
-  ),
+  confirmPassword: Yup.string()
+    .required("Required")
+    .oneOf([Yup.ref("password"), null], "Passwords must match"),
   phoneNumber: Yup.string().matches(
     /^((\\+[1-9]{1,11}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
     "Phone number is not valid"

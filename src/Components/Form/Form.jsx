@@ -110,7 +110,7 @@ const Input = styled.input`
 `;
 
 const InputField = styled.div`
-  height: ${(props) => (props.height ? props.height : "45px")};
+  height: ${(props) => (props.height ? props.height : "40px")};
   width: 100%;
   border-radius: 0.5rem;
   border: ${(props) =>

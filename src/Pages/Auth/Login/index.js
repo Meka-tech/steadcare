@@ -19,10 +19,18 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useFormik } from "formik";
 import { validationSchema } from "./validationSchema";
+import { updateUser } from "../../../features/userDetails/userSlice";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 
 export const Login = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [RememberMe, setRememberMe] = useState(true);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userDetails);
+
+  console.log(user);
+
   const OnHandleSubmit = async () => {
     setIsLoading(true);
     const data = { email: `${values.email}`, password: `${values.password}` };
@@ -36,8 +44,8 @@ export const Login = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
-
+        const { userDetails } = response.data.data.user;
+        dispatch(updateUser({ userDetails }));
         setIsLoading(false);
       })
       .catch(function (error) {
@@ -83,7 +91,12 @@ export const Login = () => {
               />
 
               <CheckBoxDiv>
-                <CheckBox onChange={() => {}} />
+                <CheckBox
+                  active={!RememberMe}
+                  toggle={() => {
+                    setRememberMe(!RememberMe);
+                  }}
+                />
                 <CheckBoxTextSpan>
                   <GrayText>Remember Me</GrayText>
                 </CheckBoxTextSpan>

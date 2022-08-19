@@ -6,10 +6,8 @@ import {
   AuthMargin,
   Body,
   Container,
-  Headers,
   LogoDiv,
   MarginLeft,
-  SubHeader,
   TabContent
 } from "../style";
 import axios from "axios";
@@ -36,14 +34,17 @@ export const ResetPassword = () => {
     };
 
     axios(config)
-      .then(function (response) {
+      .then(function (res) {
+        console.log(res);
         setIsLoading(false);
-        navigate("/reset-password/email-sent");
-        console.log(JSON.stringify(response.data));
+        navigate("/reset-password/email-sent", {
+          state: {
+            email: values.email
+          }
+        });
       })
-      .catch(function (error) {
+      .catch(function () {
         setIsLoading(false);
-        console.log(error);
       });
   };
   const { values, handleSubmit, handleChange, touched, errors } = useFormik({
@@ -92,10 +93,34 @@ export const ResetPassword = () => {
     </Container>
   );
 };
+const SubHeader = styled.p`
+  margin: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 2.5rem;
+  text-align: center;
+  width: 50%;
+  margin-top: 1rem;
+  color: rgba(34, 34, 34, 0.8);
+  margin-left: auto;
+  margin-right: auto;
+`;
 
+const Headers = styled.h2`
+  font-weight: 600;
+  font-size: 2.2rem;
+  color: black;
+  line-height: 3.413rem;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+`;
 const Forms = styled.div`
   width: 50%;
   margin: 3rem 0;
+  margin-left: auto;
+  margin-right: auto;
 `;
 const ButtonDiv = styled.div`
   width: 100%;

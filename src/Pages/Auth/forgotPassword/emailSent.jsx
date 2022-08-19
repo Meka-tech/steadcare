@@ -1,13 +1,31 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { Button, TextForm } from "../../../Components";
 import styled from "styled-components";
 import { AuthMargin, Body, Container, LogoDiv, TabContent } from "../style";
 import { ReactComponent as EmailSentIcon } from "../../../Images/EmailSent.svg";
+import { BaseUrl } from "../../../Utilities";
+import axios from "axios";
 
 export const EmailSent = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { email } = location.state;
 
+  const OnHandleSubmit = () => {
+    const data = { email: email };
+
+    const config = {
+      method: "post",
+      url: `${BaseUrl}/forgot-password`,
+      headers: {},
+      data: data
+    };
+
+    axios(config)
+      .then(function () {})
+      .catch(function () {});
+  };
   return (
     <Container>
       <AuthMargin />
@@ -24,16 +42,13 @@ export const EmailSent = () => {
               <EmailSentIcon />
             </Icon>
             <ButtonDiv>
-              <Button
-                text="Go to Email"
-                onClick={() => {}}
-                width="100%"
-                type="submit"
-              />
+              <a href={`mailto:${email}`}>
+                <Button text="Go to Email" width="100%" type="submit" />
+              </a>
             </ButtonDiv>
             <Span>
               Didn’t receive the link?
-              <h4 onClick={() => {}}>Resend</h4>
+              <h4 onClick={() => OnHandleSubmit()}>Resend</h4>
             </Span>
           </Forms>
         </TabContent>
@@ -45,7 +60,7 @@ const Icon = styled.div`
   margin: 2rem auto;
   margin-top: 4rem;
 `;
-export const SubHeader = styled.p`
+const SubHeader = styled.p`
   margin: 0;
   padding: 0;
   font-size: 1.4rem;
@@ -56,7 +71,7 @@ export const SubHeader = styled.p`
   color: rgba(34, 34, 34, 0.8);
 `;
 
-export const Headers = styled.h2`
+const Headers = styled.h2`
   font-weight: 600;
   font-size: 2.2rem;
   color: black;
