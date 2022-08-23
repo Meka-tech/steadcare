@@ -44,7 +44,9 @@ export const Login = () => {
 
     axios(config)
       .then(function (response) {
-        const { userDetails } = response.data.data.user;
+        const userDetails = response.data.data.user;
+        console.log({ userDetails });
+
         dispatch(updateUser({ userDetails }));
         setIsLoading(false);
       })
