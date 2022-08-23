@@ -6,7 +6,10 @@ import { useLocation, useNavigate } from "react-router";
 import axios from "axios";
 import { BaseUrl } from "../../../../Utilities";
 import OTPInput, { ResendOTP } from "otp-input-react";
+import { useDispatch } from "react-redux/es/exports";
+
 import "./otp.styles.css";
+import { updateUser } from "../../../../features/userDetails/userSlice";
 
 export const OtpVerification = () => {
   const navigate = useNavigate();
@@ -14,6 +17,7 @@ export const OtpVerification = () => {
   const { email, phoneNumber } = location.state;
   const [OTP, setOTP] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmit = async () => {
     if (OTP.length === 4) {
@@ -33,7 +37,8 @@ export const OtpVerification = () => {
 
       axios(config)
         .then(function (res) {
-          console.log(res);
+          const userDetails = res.data.data;
+          dispatch(updateUser({ userDetails }));
           setIsLoading(false);
           navigate("/");
         })

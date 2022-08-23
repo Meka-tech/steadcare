@@ -27,9 +27,7 @@ export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [RememberMe, setRememberMe] = useState(true);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.userDetails);
-
-  console.log(user);
+  // const user = useSelector((state) => state.reducer.userDetails);
 
   const OnHandleSubmit = async () => {
     setIsLoading(true);
@@ -45,8 +43,6 @@ export const Login = () => {
     axios(config)
       .then(function (response) {
         const userDetails = response.data.data.user;
-        console.log({ userDetails });
-
         dispatch(updateUser({ userDetails }));
         setIsLoading(false);
       })
