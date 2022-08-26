@@ -2,7 +2,7 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import {
   CreateNewPassword,
-  Dashboard,
+  PatientDashboard,
   DoctorProfile,
   EmailSent,
   Login,
@@ -24,7 +24,7 @@ function App() {
           <Router>
             <ScrollToTop>
               <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/" element={<PatientDashboard />} />
                 <Route path="/sign-up" element={<UserSignUp />} />
                 <Route
                   path="/sign-up/otp-verification"

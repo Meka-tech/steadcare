@@ -12,6 +12,7 @@ export const Button = ({
   border,
   onClick,
   width,
+  height,
   isLoading,
   ...rest
 }) => {
@@ -24,6 +25,7 @@ export const Button = ({
       border={border}
       onClick={onClick}
       width={width}
+      height={height}
       {...rest}
     >
       {text}

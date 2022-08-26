@@ -74,7 +74,7 @@ const LogoSection = styled.div`
   display: flex;
   align-items: flex-end;
   border-bottom: 1px solid rgba(85, 85, 85, 0.2);
-  height: 5em;
+  height: 3.5rem;
   h1 {
     padding: 0;
     margin: 0;

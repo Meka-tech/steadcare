@@ -8,5 +8,32 @@ export const Container = styled.div`
 `;
 export const Body = styled.div`
   width: 100%;
-  padding: 0px 1rem;
+  height: 100%;
+  background-color: rgba(241, 239, 239, 0.97);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+`;
+
+export const SearchDiv = styled.div`
+  background-color: white;
+  height: 5rem;
+  min-height: 5rem;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  padding-left: 10rem;
+  padding-right: 5rem;
+  justify-content: space-between;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  span {
+    margin-left: 2rem;
+  }
 `;
