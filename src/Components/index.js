@@ -4,3 +4,4 @@ export * from "./Navbar";
 export * from "./Tabs";
 export * from "./CheckBox";
 export * from "./Search";
+export * from "./Credentials";

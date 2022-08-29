@@ -13,13 +13,14 @@ export const TextForm = ({
   errorMsg,
   width,
   height,
+  inactive,
   ...rest
 }) => {
   const [focused, setFocused] = useState(false);
   return (
     <Container width={width} focused={focused}>
       <Title focused={focused}>{title}</Title>
-      <InputField focused={focused}>
+      <InputField focused={focused} inactive={inactive}>
         <Input
           placeholder={placeholder}
           onBlur={() => setFocused(false)}
@@ -28,6 +29,7 @@ export const TextForm = ({
           type={type ? type : "text"}
           {...rest}
         />
+        <Icon style={{ cursor: "pointer" }}>{icon}</Icon>
       </InputField>
       <ErrorMsg>{errorMsg}</ErrorMsg>
     </Container>
@@ -87,6 +89,7 @@ const Container = styled.form`
 `;
 
 const Input = styled.input`
+  background-color: transparent;
   &[type="password"] {
     font-family: Verdana;
     font-size: 2rem;
@@ -116,12 +119,21 @@ const InputField = styled.div`
   border: ${(props) =>
     props.focused
       ? "1px solid rgba(0, 0, 255, 0.9)"
+      : props.inactive
+      ? `1px solid rgba(85, 85, 85, 0.3)`
       : "1px solid rgba(85, 85, 85, 1)"};
   display: flex;
+  background-color: ${(props) =>
+    props.focused && props.inactive
+      ? `rgba(0, 0, 187, 0.1)`
+      : props.inactive
+      ? `rgba(196, 196, 196, 0.1) `
+      : null};
 `;
 const Title = styled.label`
   color: ${(props) => (props.focused ? "rgba(0, 0, 255, 0.9)" : "black")};
   font-weight: 500;
+
   font-size: 1.6rem;
   line-height: 1.95rem;
   margin-bottom: 0.8rem;

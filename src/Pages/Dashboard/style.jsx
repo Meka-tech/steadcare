@@ -21,11 +21,11 @@ export const SearchDiv = styled.div`
   background-color: white;
   height: 5rem;
   min-height: 5rem;
-  width: 90%;
+  width: 95%;
   display: flex;
   align-items: center;
   padding-left: 10rem;
-  padding-right: 5rem;
+  padding-right: 10rem;
   justify-content: space-between;
   div {
     display: flex;

@@ -13,7 +13,7 @@ export const PatientDashboard = () => {
   const navigate = useNavigate();
   return (
     <Container>
-      <DashboardNavbar />
+      <DashboardNavbar role="patient" />
       <Body>
         <TopBar />
         <Banner>

@@ -8,7 +8,10 @@ import {
   Login,
   OtpVerification,
   ResetPassword,
-  UserSignUp
+  UserSignUp,
+  PatientProfile,
+  PatientAppointment,
+  PatientMedicalHistory
 } from "./Pages/index";
 import { ScrollToTop } from "./Utilities";
 // import store from "./app/store";
@@ -25,6 +28,7 @@ function App() {
             <ScrollToTop>
               <Routes>
                 <Route path="/" element={<PatientDashboard />} />
+
                 <Route path="/sign-up" element={<UserSignUp />} />
                 <Route
                   path="/sign-up/otp-verification"
@@ -43,6 +47,17 @@ function App() {
                 <Route
                   path="/reset-password/create-new-password"
                   element={<CreateNewPassword />}
+                />
+                {/* ////Patient dashboard/////////////// */}
+                <Route path="/patient/home" element={<PatientDashboard />} />
+                <Route path="/patient/profile" element={<PatientProfile />} />
+                <Route
+                  path="/patient/appointments"
+                  element={<PatientAppointment />}
+                />
+                <Route
+                  path="/patient/medical-history"
+                  element={<PatientMedicalHistory />}
                 />
               </Routes>
             </ScrollToTop>

@@ -1,8 +1,10 @@
 import styled from "styled-components";
+
 export const Banner = styled.div`
   width: 90%;
   background-color: rgba(0, 0, 255, 0.75);
   height: 16rem;
+  max-width: 100rem;
   border-radius: 1rem;
   margin-top: 4rem;
   display: flex;
@@ -66,7 +68,7 @@ export const Doctors = styled.div`
   grid-template-columns: auto auto auto auto;
   justify-content: space-between;
   overflow: hidden;
-  height: ${(props) => (props.viewAll ? "fit-content" : "19rem")};
+  height: ${(props) => (props.viewAll ? "fit-content" : "20rem")};
 `;
 
 export const BottomNavs = styled.div`

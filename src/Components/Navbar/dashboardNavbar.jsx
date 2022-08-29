@@ -16,17 +16,33 @@ import { ReactComponent as CalendarActiveIcon } from "../../Images/NavbarActiveE
 import { ReactComponent as HistoryActiveIcon } from "../../Images/NavbarActiveElements/historyActiveIcon.svg";
 import { ReactComponent as PrescriptionActiveIcon } from "../../Images/NavbarActiveElements/prescriptionActiveIcon.svg";
 import { ReactComponent as SettingsActiveIcon } from "../../Images/NavbarActiveElements/settingsActiveIcon.svg";
+import { useNavigate } from "react-router";
 
-const Navs = [
-  [<DashboardIcon />, <DashboardActiveIcon />, "Dashboard"],
-  [<ProfileIcon />, <ProfileActiveIcon />, "Profile"],
-  [<CalendarIcon />, <CalendarActiveIcon />, "Appointments"],
-  [<HistoryIcon />, <HistoryActiveIcon />, "Medical History"],
-  [<PrescriptionIcon />, <PrescriptionActiveIcon />, "Prescriptions"],
-  [<SettingsIcon />, <SettingsActiveIcon />, "Settings"]
-];
-
-export const DashboardNavbar = ({ active = "Dashboard" }) => {
+export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
+  const navigate = useNavigate();
+  const Navs = [
+    [<DashboardIcon />, <DashboardActiveIcon />, "Dashboard", `/${role}/home`],
+    [<ProfileIcon />, <ProfileActiveIcon />, "Profile", `/${role}/profile`],
+    [
+      <CalendarIcon />,
+      <CalendarActiveIcon />,
+      "Appointments",
+      `/${role}/appointments`
+    ],
+    [
+      <HistoryIcon />,
+      <HistoryActiveIcon />,
+      "Medical History",
+      `/${role}/medical-history`
+    ],
+    [
+      <PrescriptionIcon />,
+      <PrescriptionActiveIcon />,
+      "Prescriptions",
+      `/${role}/prescriptions`
+    ],
+    [<SettingsIcon />, <SettingsActiveIcon />, "Settings", `/${role}/settings`]
+  ];
   return (
     <Container>
       <LogoSection>
@@ -35,7 +51,12 @@ export const DashboardNavbar = ({ active = "Dashboard" }) => {
       </LogoSection>
       <NavItems>
         {Navs.map((nav, index) => (
-          <NavItem key={index} active={active} item={nav[2]}>
+          <NavItem
+            key={index}
+            active={active}
+            item={nav[2]}
+            onClick={() => navigate(nav[3])}
+          >
             {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
             <span>
               <h1>{nav[2]}</h1>
