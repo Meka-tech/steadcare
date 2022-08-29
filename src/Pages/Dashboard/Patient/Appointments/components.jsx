@@ -81,7 +81,9 @@ export const AppointmentList = ({ data }) => {
                     >
                       ...
                     </ThreeDots>
-                    {activeTab && index === clickedColumn && <Dropdown />}
+                    {activeDropDown && index === clickedColumn && (
+                      <Dropdown appointment={"Upcoming"} />
+                    )}
                   </StatusDiv>
                 </Column>
               );
