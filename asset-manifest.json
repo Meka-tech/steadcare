@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/steadcare/static/css/main.8fcc7057.css",
-    "main.js": "/steadcare/static/js/main.75b3bd2a.js",
+    "main.js": "/steadcare/static/js/main.71088e2b.js",
     "static/media/doctors.svg": "/steadcare/static/media/doctors.933fa63b9b320de8f0f533b58206a411.svg",
     "static/media/BookADoctor.svg": "/steadcare/static/media/BookADoctor.163aea274226ece1cb5cb9b428aaf00e.svg",
     "static/media/docIllustraion.svg": "/steadcare/static/media/docIllustraion.da848bff934e6fb432f2ae5511b45b2b.svg",
@@ -36,10 +36,10 @@
     "static/media/eyeClosedIcon.svg": "/steadcare/static/media/eyeClosedIcon.1376c33e1ad03975be50893b5fcba1ee.svg",
     "static/media/CheckMark.svg": "/steadcare/static/media/CheckMark.c86abb0a09d844ba66f9f97933819810.svg",
     "main.8fcc7057.css.map": "/steadcare/static/css/main.8fcc7057.css.map",
-    "main.75b3bd2a.js.map": "/steadcare/static/js/main.75b3bd2a.js.map"
+    "main.71088e2b.js.map": "/steadcare/static/js/main.71088e2b.js.map"
   },
   "entrypoints": [
     "static/css/main.8fcc7057.css",
-    "static/js/main.75b3bd2a.js"
+    "static/js/main.71088e2b.js"
   ]
 }
