@@ -1,15 +1,45 @@
 {
   "files": {
-    "main.css": "/steadcare/static/css/main.c15a7b40.css",
-    "main.js": "/steadcare/static/js/main.018e2cba.js",
+    "main.css": "/steadcare/static/css/main.8fcc7057.css",
+    "main.js": "/steadcare/static/js/main.625aefdd.js",
+    "static/media/doctors.svg": "/steadcare/static/media/doctors.933fa63b9b320de8f0f533b58206a411.svg",
+    "static/media/BookADoctor.svg": "/steadcare/static/media/BookADoctor.163aea274226ece1cb5cb9b428aaf00e.svg",
+    "static/media/docIllustraion.svg": "/steadcare/static/media/docIllustraion.da848bff934e6fb432f2ae5511b45b2b.svg",
+    "static/media/signInIcons.svg": "/steadcare/static/media/signInIcons.c84c55e835154881f6dd13d4c6ef213c.svg",
+    "static/media/approveBadge.png": "/steadcare/static/media/approveBadge.72ee560c70d6dd5488d6.png",
+    "static/media/Logo.svg": "/steadcare/static/media/Logo.df95153ef5103cc5912dbf9adf85e687.svg",
+    "static/media/EmailSent.svg": "/steadcare/static/media/EmailSent.a4e946585a5a041ccb136e53ed3a6a93.svg",
+    "static/media/calendarIcon.svg": "/steadcare/static/media/calendarIcon.5da54165732d6e477c6a25744a6e48f6.svg",
+    "static/media/settingsIcon.svg": "/steadcare/static/media/settingsIcon.eaa0e016957594312b442576d94c58dd.svg",
+    "static/media/historyActiveIcon.svg": "/steadcare/static/media/historyActiveIcon.98503a6ed9c52cba8b1f3271535c642b.svg",
+    "static/media/NotifyBell.svg": "/steadcare/static/media/NotifyBell.6a063e440b7ae9fd05ccb4bb0d554165.svg",
+    "static/media/historyIcon.svg": "/steadcare/static/media/historyIcon.fc84f176105100864a1b7fae0b124ff7.svg",
+    "static/media/profileIcon.svg": "/steadcare/static/media/profileIcon.52b655d832087765309c6533e79b69b3.svg",
+    "static/media/settingsActiveIcon.svg": "/steadcare/static/media/settingsActiveIcon.b8df89d9a1e03da84b3be5f3a828c1de.svg",
+    "static/media/logOutIcon.svg": "/steadcare/static/media/logOutIcon.0d55bc26629296a3fd0c2477941b8e82.svg",
+    "static/media/formCalendarIcon.svg": "/steadcare/static/media/formCalendarIcon.9aef3029e74057905f8b3bd4d4cae83e.svg",
+    "static/media/profileActiveIcon.svg": "/steadcare/static/media/profileActiveIcon.a9e6b8268c98e3a369610868c549c7c5.svg",
+    "static/media/select.svg": "/steadcare/static/media/select.fd5fcc39d593a9f55500a54fa44fd6a9.svg",
+    "static/media/calendarActiveIcon.svg": "/steadcare/static/media/calendarActiveIcon.5788a5c5cbd2be1cac2e53c395c6deef.svg",
+    "static/media/prescriptionIcon.svg": "/steadcare/static/media/prescriptionIcon.b32ae268162461ae80c7f48a92c4f478.svg",
+    "static/media/Spinner.svg": "/steadcare/static/media/Spinner.0547a140dc7229909d4200809f25601e.svg",
     "index.html": "/steadcare/index.html",
+    "static/media/arrow.svg": "/steadcare/static/media/arrow.8b72fd92c540179f0aa27179c7568ac5.svg",
+    "static/media/RatingStar.svg": "/steadcare/static/media/RatingStar.7d2749e48fb91870a0c5578ccf9cec99.svg",
+    "static/media/prescriptionActiveIcon.svg": "/steadcare/static/media/prescriptionActiveIcon.60a17d7603c321ba62a984b026905c24.svg",
     "static/media/eyeIcon.svg": "/steadcare/static/media/eyeIcon.76163c86ba6b3c66bfae5fd4402367df.svg",
+    "static/media/formEditIcon.svg": "/steadcare/static/media/formEditIcon.dbd4345d7c19373f6a10d6ff78785c5b.svg",
+    "static/media/InviteIcon.svg": "/steadcare/static/media/InviteIcon.39243d395e60e4d2006f7312f8bfacad.svg",
+    "static/media/searchIcon.svg": "/steadcare/static/media/searchIcon.80b4d33cda362d865baa8e36323796ad.svg",
+    "static/media/dashboardIcon.svg": "/steadcare/static/media/dashboardIcon.77fc85559486a89a6d1432a2466ce9c9.svg",
+    "static/media/dashboardActiveIcon.svg": "/steadcare/static/media/dashboardActiveIcon.abe21c1315f3e260faa1c091e1b909dc.svg",
     "static/media/eyeClosedIcon.svg": "/steadcare/static/media/eyeClosedIcon.1376c33e1ad03975be50893b5fcba1ee.svg",
-    "main.c15a7b40.css.map": "/steadcare/static/css/main.c15a7b40.css.map",
-    "main.018e2cba.js.map": "/steadcare/static/js/main.018e2cba.js.map"
+    "static/media/CheckMark.svg": "/steadcare/static/media/CheckMark.c86abb0a09d844ba66f9f97933819810.svg",
+    "main.8fcc7057.css.map": "/steadcare/static/css/main.8fcc7057.css.map",
+    "main.625aefdd.js.map": "/steadcare/static/js/main.625aefdd.js.map"
   },
   "entrypoints": [
-    "static/css/main.c15a7b40.css",
-    "static/js/main.018e2cba.js"
+    "static/css/main.8fcc7057.css",
+    "static/js/main.625aefdd.js"
   ]
 }
