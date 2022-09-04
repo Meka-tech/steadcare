@@ -31,9 +31,9 @@ export const SearchDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
   }
   span {
     margin-left: 2rem;
+    cursor: pointer;
   }
 `;

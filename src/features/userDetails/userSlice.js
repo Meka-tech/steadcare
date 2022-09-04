@@ -6,7 +6,8 @@ export const userSlice = createSlice({
     name: "",
     email: "",
     role: "",
-    phoneNumber: ""
+    phoneNumber: "",
+    token: ""
   },
   reducers: {
     updateUser: (state, action) => {
@@ -15,10 +16,13 @@ export const userSlice = createSlice({
       state.email = userDetails.email;
       state.role = userDetails.role;
       state.phoneNumber = userDetails.phone;
+    },
+    updateToken: (state, action) => {
+      state.token = action.payload;
     }
   }
 });
 
-export const { updateUser } = userSlice.actions;
+export const { updateUser, updateToken } = userSlice.actions;
 
 export default userSlice.reducer;

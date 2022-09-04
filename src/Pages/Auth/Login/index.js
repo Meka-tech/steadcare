@@ -19,7 +19,10 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useFormik } from "formik";
 import { validationSchema } from "./validationSchema";
-import { updateUser } from "../../../features/userDetails/userSlice";
+import {
+  updateToken,
+  updateUser
+} from "../../../features/userDetails/userSlice";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 
 export const Login = () => {
@@ -42,8 +45,11 @@ export const Login = () => {
 
     axios(config)
       .then(function (response) {
+        const Token = response.data.data.token;
         const userDetails = response.data.data.user;
         dispatch(updateUser({ userDetails }));
+        dispatch(updateToken(Token));
+        navigate("/patient/home");
         setIsLoading(false);
       })
       .catch(function (error) {

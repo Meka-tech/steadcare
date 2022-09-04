@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useState } from "react";
 import useClickOutside from "../../../../hooks/useClickOutside";
+import { Spinner } from "../component";
 import {
   AppointmentListContainer,
   Column,
@@ -12,12 +13,13 @@ import {
   StatusDiv,
   Tab,
   TabBody,
+  TabBodyText,
   TabContainer,
   TabHeader,
   ThreeDots
 } from "./style";
 
-export const AppointmentList = ({ data }) => {
+export const AppointmentList = ({ data, loading }) => {
   const [activeTab, setActiveTab] = useState("UA");
   const [activeDropDown, setActiveDropDown] = useState(false);
   const [clickedColumn, setClickedColumn] = useState();
@@ -28,7 +30,7 @@ export const AppointmentList = ({ data }) => {
     return (
       <DropdownContainer active={activeDropDown} ref={dropDownRef}>
         {appointment === "Upcoming" ? (
-          <DropdownItem>Re-Scheduel</DropdownItem>
+          <DropdownItem>Re-schedule</DropdownItem>
         ) : (
           <DropdownItem>Book Doctor</DropdownItem>
         )}
@@ -61,7 +63,8 @@ export const AppointmentList = ({ data }) => {
         <h2>Status</h2>
       </TabHeader>
       <TabBody>
-        {data.map((datum, index) => {
+        {loading && <Spinner />}
+        {data?.map((datum, index) => {
           if (activeTab === "PA") {
             if (datum[3] === "Completed") {
               return (
@@ -115,6 +118,12 @@ export const AppointmentList = ({ data }) => {
             );
           }
         })}
+        {data?.length === 0 &&
+          (activeTab === "PA" ? (
+            <TabBodyText>Previous appointments will appear here.</TabBodyText>
+          ) : (
+            <TabBodyText>Scheduled appointments will appear here.</TabBodyText>
+          ))}
       </TabBody>
     </AppointmentListContainer>
   );

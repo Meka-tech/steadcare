@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Banner = styled.div`
-  width: 90%;
+  width: 100%;
   background-color: rgba(0, 0, 255, 0.75);
   height: 16rem;
   max-width: 100rem;
@@ -18,7 +18,7 @@ export const Banner = styled.div`
     align-items: center;
   }
   span {
-    width: 60%;
+    width: 80%;
   }
   h1 {
     font-size: 1.8rem;
@@ -62,6 +62,7 @@ export const TopDoctors = styled.div`
   }
 `;
 export const Doctors = styled.div`
+  position: relative;
   background-color: rgba(0, 0, 255, 0.03);
   padding: 2rem 3rem;
   display: grid;
@@ -72,9 +73,9 @@ export const Doctors = styled.div`
 `;
 
 export const BottomNavs = styled.div`
-  width: 100%;
+  width: 95%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 4rem 0;
   margin-bottom: 5rem;
 `;

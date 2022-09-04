@@ -13,7 +13,7 @@ export const Title = styled.h1`
   font-weight: 500;
 `;
 
-export const AppointmentListContainer = styled.div`
+export const PrescriptionListContainer = styled.div`
   margin-top: 4rem;
   box-shadow: 0px 3px 2px 0px rgba(0, 0, 255, 0.3);
   width: 100%;
@@ -46,16 +46,15 @@ export const Tab = styled.div`
 export const TabHeader = styled.div`
   background-color: rgba(224, 224, 224, 0.7);
   height: 3.5rem;
-  padding: 0 5rem;
   display: grid;
-  grid-template-columns: 40rem 20rem 15rem 18rem;
+  grid-template-columns: auto auto auto;
   h2 {
     font-size: 1.4rem;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.7);
     margin: auto 0;
     text-transform: uppercase;
-    text-align: left;
+    text-align: center;
   }
 `;
 
@@ -78,7 +77,7 @@ export const Column = styled.div`
   height: 3.5rem;
   padding: 0 2rem;
   display: grid;
-  grid-template-columns: 43rem 20rem 15rem 18rem;
+  grid-template-columns: 43rem 35rem 15rem;
   h4 {
     font-size: 1.6rem;
     font-weight: 500;
@@ -98,31 +97,10 @@ export const DisplayPicture = styled.div`
   background-color: #dadada;
   margin-right: 1rem;
 `;
-export const StatusDiv = styled.div`
+export const DateDiv = styled.div`
   margin: auto 0;
   display: flex;
   position: relative;
-`;
-export const Status = styled.div`
-  margin: auto 0;
-  margin-right: 2.5rem;
-  font-weight: 500;
-  font-size: 1.4rem;
-  width: 9rem;
-  border-radius: 0.5rem;
-  height: 2.5rem;
-  background-color: ${(props) =>
-    props.status === "Pending"
-      ? `rgba(119, 119, 119, 1)`
-      : props.status === "Completed"
-      ? `rgba(27, 191, 0, 1)`
-      : props.status === "Declined"
-      ? `rgba(255, 0, 0, 1)`
-      : null};
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const ThreeDots = styled.div`
@@ -131,6 +109,7 @@ export const ThreeDots = styled.div`
   color: rgba(119, 119, 119, 1);
   cursor: pointer;
   padding-bottom: 1rem;
+  margin-left: 2rem;
 `;
 
 export const DropdownContainer = styled.div`
@@ -139,7 +118,7 @@ export const DropdownContainer = styled.div`
   position: absolute;
   bottom: -7rem;
   right: 0;
-  width: 12rem;
+  width: 15rem;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -159,4 +138,84 @@ export const DropdownItem = styled.div`
     color: rgba(0, 0, 255, 1);
     background: rgba(0, 0, 255, 0.1);
   }
+`;
+
+export const Shade = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1e1e1e11;
+  top: 0;
+  left: 0;
+  z-index: 10;
+`;
+export const ModalContainer = styled.div`
+  height: 28rem;
+  width: 45rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 255, 1);
+  padding: 2rem 0;
+`;
+
+export const ModalDisplayPicture = styled.div`
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  background-color: lightgray;
+`;
+
+export const ModalNameText = styled.h4`
+  margin: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+`;
+export const ModalHeader = styled.h2`
+  margin: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  color: rgba(85, 85, 85, 0.9);
+`;
+
+export const ModalDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin-top: 3rem;
+  height: fit-content;
+  height: 2rem;
+`;
+export const ModalDetail = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+  max-width: fit-content;
+  margin-bottom: 1rem;
+`;
+
+export const ModalDetailHeader = styled.h1`
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  margin: auto 0;
+`;
+
+export const ModalDetailContent = styled.h1`
+  margin: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  margin: auto 0;
+  margin-left: 1rem;
 `;

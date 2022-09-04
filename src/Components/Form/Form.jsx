@@ -14,22 +14,35 @@ export const TextForm = ({
   width,
   height,
   inactive,
+  borderRadius,
+  fontSize,
+  backgroundColor,
+  onClickIcon,
   ...rest
 }) => {
   const [focused, setFocused] = useState(false);
   return (
     <Container width={width} focused={focused}>
       <Title focused={focused}>{title}</Title>
-      <InputField focused={focused} inactive={inactive}>
+      <InputField
+        focused={focused}
+        inactive={inactive}
+        borderRadius={borderRadius}
+        height={height}
+        backgroundColor={backgroundColor}
+      >
         <Input
           placeholder={placeholder}
           onBlur={() => setFocused(false)}
           onFocus={() => setFocused(true)}
           value={inputValue}
           type={type ? type : "text"}
+          fontSize={fontSize}
           {...rest}
         />
-        <Icon style={{ cursor: "pointer" }}>{icon}</Icon>
+        <Icon style={{ cursor: "pointer" }} onClick={() => onClickIcon}>
+          {icon}
+        </Icon>
       </InputField>
       <ErrorMsg>{errorMsg}</ErrorMsg>
     </Container>
@@ -92,11 +105,11 @@ const Input = styled.input`
   background-color: transparent;
   &[type="password"] {
     font-family: Verdana;
-    font-size: 2rem;
+    font-size: ${(props) => (props.fontSize ? props.fontSize : "2rem")};
     letter-spacing: 0.125em;
   }
   margin-left: 1rem;
-  font-size: 1.6rem;
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "2rem")};
   color: black;
   width: 85%;
   outline: none;
@@ -108,14 +121,17 @@ const Input = styled.input`
     color: rgba(75, 72, 78, 0.7);
     padding: 0;
     margin: 0;
-    font-size: 1.6rem;
+    font-size: ${(props) => (props.fontSize ? props.fontSize : "2rem")};
   }
 `;
 
 const InputField = styled.div`
+  background-color: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : "transparent"};
   height: ${(props) => (props.height ? props.height : "40px")};
   width: 100%;
-  border-radius: 0.5rem;
+  border-radius: ${(props) =>
+    props.borderRadius ? props.borderRadius : "0.5rem"};
   border: ${(props) =>
     props.focused
       ? "1px solid rgba(0, 0, 255, 0.9)"
@@ -147,7 +163,8 @@ const Icon = styled.i`
   cursor: pointer;
   display: flex;
   align-items: center;
-  margin-left: 0.5rem;
+  justify-content: center;
+  width: 15%;
 `;
 
 const ErrorMsg = styled.h3`

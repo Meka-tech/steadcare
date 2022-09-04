@@ -40,7 +40,7 @@ export const OtpVerification = () => {
           const userDetails = res.data.data;
           dispatch(updateUser({ userDetails }));
           setIsLoading(false);
-          navigate("/");
+          navigate("/patient/home");
         })
         .catch(function (error) {
           const Error = error;

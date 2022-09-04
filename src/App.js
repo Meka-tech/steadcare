@@ -11,7 +11,10 @@ import {
   UserSignUp,
   PatientProfile,
   PatientAppointment,
-  PatientMedicalHistory
+  PatientMedicalHistory,
+  PatientPrescription,
+  PatientSettings,
+  BookADoctorPage
 } from "./Pages/index";
 import { ScrollToTop } from "./Utilities";
 // import store from "./app/store";
@@ -27,7 +30,7 @@ function App() {
           <Router>
             <ScrollToTop>
               <Routes>
-                <Route path="/" element={<PatientDashboard />} />
+                <Route path="/" element={<UserSignUp />} />
 
                 <Route path="/sign-up" element={<UserSignUp />} />
                 <Route
@@ -50,6 +53,10 @@ function App() {
                 />
                 {/* ////Patient dashboard/////////////// */}
                 <Route path="/patient/home" element={<PatientDashboard />} />
+                <Route
+                  path="/patient/home/book-a-doctor"
+                  element={<BookADoctorPage />}
+                />
                 <Route path="/patient/profile" element={<PatientProfile />} />
                 <Route
                   path="/patient/appointments"
@@ -59,6 +66,11 @@ function App() {
                   path="/patient/medical-history"
                   element={<PatientMedicalHistory />}
                 />
+                <Route
+                  path="/patient/prescriptions"
+                  element={<PatientPrescription />}
+                />
+                <Route path="/patient/settings" element={<PatientSettings />} />
               </Routes>
             </ScrollToTop>
           </Router>

@@ -95,7 +95,7 @@ const LogoSection = styled.div`
   display: flex;
   align-items: flex-end;
   border-bottom: 1px solid rgba(85, 85, 85, 0.2);
-  height: 3.5rem;
+  height: 4rem;
   h1 {
     padding: 0;
     margin: 0;
@@ -118,7 +118,7 @@ const NavItems = styled.div`
   align-items: flex-start;
   padding: 2rem;
   padding-top: 2.5em;
-  height: 65%;
+  height: 70%;
   border-bottom: 1px solid rgba(85, 85, 85, 0.2);
 `;
 const LogOutDiv = styled.div`
@@ -126,7 +126,7 @@ const LogOutDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 2rem;
-  padding-top: 3em;
+  padding-top: 2rem;
 `;
 const NavItem = styled.div`
   display: flex;

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { ReactComponent as RatingStar } from "../../../../Images/RatingStar.svg";
 import { ReactComponent as BookADoctorSvg } from "../../../../Images/illustrations/BookADoctor.svg";
 import { ReactComponent as Arrow } from "../../../../Images/Directionals/arrow.svg";
 import { ReactComponent as SendInviteSvg } from "../../../../Images/InviteIcon.svg";
-
+import useClickOutside from "../../../../hooks/useClickOutside";
+import { TextForm } from "../../../../Components";
+import { ReactComponent as Plane } from "../../../../Images/planeCircle.svg";
+import { useNavigate } from "react-router";
 export const DoctorComponent = ({ displayPic, name, rating, book }) => {
   return (
     <DoctorContainer>
@@ -79,10 +82,15 @@ const Button = styled.div`
 `;
 
 export const BookADoctor = () => {
+  const Navigate = useNavigate();
   return (
     <BookADoctorContainer>
       <h1>Enjoy quality healthcare from the comfort of your home</h1>
-      <Link>
+      <Link
+        onClick={() => {
+          Navigate("/patient/home/book-a-doctor");
+        }}
+      >
         <h3>Book a Doctor</h3>
         <Arrow />
       </Link>
@@ -128,13 +136,17 @@ const Link = styled.div`
   }
 `;
 
-export const SendInvite = () => {
+export const SendInvite = ({ setActive }) => {
   return (
     <SendInviteContainer>
       <SendInviteSvg />
       <h1>Send Invite</h1>
       <h4>Invite family, friends or Doctors to STEADCARE.</h4>
-      <Link2>
+      <Link2
+        onClick={() => {
+          setActive(true);
+        }}
+      >
         <h3>Invite</h3>
         <Arrow />
       </Link2>
@@ -177,4 +189,114 @@ const Link2 = styled.div`
     color: rgba(0, 0, 255, 0.9);
     margin-right: 1rem;
   }
+`;
+
+export const InviteModal = ({ setActive, value = "" }) => {
+  const ModalRef = useRef();
+  useClickOutside(ModalRef, () => setActive(false));
+  return (
+    <Shade>
+      <ModalContainer ref={ModalRef}>
+        <ModalHeader>Invite people to Steadcare</ModalHeader>
+        <ModalDetails>
+          <ModalDetail>
+            <ModalDetailHeader>
+              Insert email address and send invitation
+            </ModalDetailHeader>
+            <TextForm
+              fontSize={"1.2rem"}
+              borderRadius={"2rem"}
+              placeholder={"Enter email address"}
+              height={"3.5em"}
+              icon={<Plane />}
+            />
+          </ModalDetail>
+          <ModalDetail>
+            <ModalDetailHeader>
+              Copy referral link and share with family & friends
+            </ModalDetailHeader>
+            <TextForm
+              backgroundColor={"rgba(0, 0, 255, 0.1)"}
+              fontSize={"1.2rem"}
+              onChange={() => {}}
+              value={`${value}`}
+              borderRadius={"2rem"}
+              height={"3.5em"}
+              icon={
+                <CopyLink
+                  onClick={() => {
+                    navigator.clipboard.writeText(value);
+                  }}
+                >
+                  Copy Link
+                </CopyLink>
+              }
+            />
+          </ModalDetail>
+        </ModalDetails>
+      </ModalContainer>
+    </Shade>
+  );
+};
+
+const Shade = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 90rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.6);
+  top: 0;
+  left: 0;
+  z-index: 10;
+`;
+const ModalContainer = styled.div`
+  height: 30rem;
+  width: 50rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 255, 1);
+  padding: 2rem;
+`;
+
+const ModalHeader = styled.h2`
+  margin: 0;
+  padding: 0;
+  font-size: 1.6rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  color: black;
+`;
+
+const ModalDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 80%;
+  margin-top: 3rem;
+  height: 20rem;
+`;
+const ModalDetail = styled.div``;
+
+const ModalDetailHeader = styled.h1`
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  margin: auto 0;
+  color: rgba(85, 85, 85, 1);
+  text-align: center;
+`;
+
+const CopyLink = styled.div`
+  cursor: pointer;
+  font-size: 1rem;
+  color: rgba(0, 0, 255, 1);
+  font-weight: 600;
+  margin-right: 0.1rem;
+  font-family: Montserrat;
 `;
