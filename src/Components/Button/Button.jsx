@@ -18,7 +18,7 @@ export const Button = ({
 }) => {
   return (
     <Container
-      bgColor={bgColor}
+      backgroundColor={bgColor}
       fontSize={fontSize}
       borderRadius={borderRadius}
       color={color}
@@ -48,7 +48,7 @@ const Container = styled.button`
   color: ${(props) => (props.color ? props.color : "white")};
   border: ${(props) => (props.border ? props.border : "none")};
   background-color: ${(props) =>
-    props.bgColor ? props.bgColor : "rgba(0, 0, 255, 0.9)"};
+    props.backgroundColor ? props.backgroundColor : "rgba(0, 0, 255, 0.9)"};
 
   font-size: ${(props) => (props.fontSize ? props.fontSize : "1.2rem")};
   font-weight: 600;

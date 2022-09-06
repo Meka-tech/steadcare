@@ -27,13 +27,13 @@ export const SearchDiv = styled.div`
   padding-left: 10rem;
   padding-right: 10rem;
   justify-content: space-between;
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
   span {
     margin-left: 2rem;
     cursor: pointer;
   }
+`;
+export const NavItem = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

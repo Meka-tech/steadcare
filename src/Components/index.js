@@ -5,3 +5,4 @@ export * from "./Tabs";
 export * from "./CheckBox";
 export * from "./Search";
 export * from "./Credentials";
+export * from "./ProgressBar";

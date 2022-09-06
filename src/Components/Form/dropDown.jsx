@@ -11,7 +11,8 @@ export const Dropdown = ({
   height,
   items,
   onSelect = () => {},
-  selectedItem
+  selectedItem,
+  bgColor
 }) => {
   const [active, setActive] = useState(false);
   const dropDownRef = useRef(null);
@@ -44,7 +45,7 @@ export const Dropdown = ({
       <Body>
         <Title>{title}</Title>
         <Input>
-          <InputField height={height}>
+          <InputField height={height} bgColor={bgColor}>
             {selectedItem ? (
               <Label> {selectedItem}</Label>
             ) : (
@@ -109,7 +110,8 @@ const InputField = styled.div`
   font-weight: 500;
   letter-spacing: 0.03em;
   text-align: left;
-  background-color: rgba(196, 196, 196, 0.1);
+  background-color: ${(props) =>
+    props.bgColor ? props.bgColor : "rgba(196, 196, 196, 0.1)"};
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -139,7 +141,6 @@ const Menu = styled.div`
   border: 1px solid rgba(85, 85, 85, 0.7);
   background-color: white;
   transition: all 0.2s ease-in;
-  z-index: 10;
   overflow-y: scroll;
   max-height: 18rem;
   position: absolute;

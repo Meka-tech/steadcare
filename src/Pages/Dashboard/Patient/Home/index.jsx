@@ -29,7 +29,7 @@ export const PatientDashboard = () => {
     setLoading(true);
     const config = {
       method: "get",
-      url: `${BaseUrl}/view-all-doctors`,
+      url: `${BaseUrl}/top-doctors`,
       headers: { Authorization: "Bearer " + token }
     };
 
