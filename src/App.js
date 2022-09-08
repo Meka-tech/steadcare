@@ -14,7 +14,8 @@ import {
   PatientMedicalHistory,
   PatientPrescription,
   PatientSettings,
-  BookADoctorPage
+  BookADoctorPage,
+  DoctorDashboard
 } from "./Pages/index";
 import { ScrollToTop } from "./Utilities";
 // import store from "./app/store";
@@ -71,6 +72,8 @@ function App() {
                   element={<PatientPrescription />}
                 />
                 <Route path="/patient/settings" element={<PatientSettings />} />
+                {/*/////////////////////Doctor Dashboard/////////////////////*/}
+                <Route path="/doctor/home" element={<DoctorDashboard />} />
               </Routes>
             </ScrollToTop>
           </Router>

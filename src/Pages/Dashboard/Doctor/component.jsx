@@ -11,7 +11,6 @@ import { useState } from "react";
 import { useRef } from "react";
 import useClickOutside from "../../../hooks/useClickOutside";
 import { ReactComponent as Cancel } from "../../../Images/cancelIcon.svg";
-import { DoctorCardItem, ViewProfile } from "./BookADoctor/component";
 
 export const Initials = () => {
   const user = useSelector((state) => state.reducer.userDetails.name);
@@ -92,7 +91,7 @@ export const SearchResult = () => {
     <>
       {viewProfileActive && (
         <ViewProfileModal>
-          <ViewProfile
+          {/* <ViewProfile
             setActive={setViewProfileActive}
             specialty
             language
@@ -101,7 +100,7 @@ export const SearchResult = () => {
             name
             book
             rating
-          />
+          /> */}
         </ViewProfileModal>
       )}
 
@@ -120,10 +119,10 @@ export const SearchResult = () => {
           </div>
         </SearchResultHeader>
         <SearchResults>
-          <DoctorCardItem setActive={setViewProfileActive} />
+          {/* <DoctorCardItem setActive={setViewProfileActive} />
           <DoctorCardItem />
           <DoctorCardItem />
-          <DoctorCardItem />
+          <DoctorCardItem /> */}
         </SearchResults>
       </SearchResultDiv>
     </>

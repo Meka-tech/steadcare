@@ -1,42 +1,5 @@
 import styled from "styled-components";
 
-export const Banner = styled.div`
-  width: 100%;
-  background-color: rgba(0, 0, 255, 0.75);
-  height: 16rem;
-  max-width: 100rem;
-  border-radius: 1rem;
-  margin-top: 4rem;
-  display: flex;
-  color: white;
-  justify-content: space-between;
-  div {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  span {
-    width: 80%;
-  }
-  h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 0;
-    padding: 0;
-    text-align: left;
-  }
-  h3 {
-    font-size: 1.2rem;
-    font-weight: 500;
-  }
-  h2 {
-    font-size: 1.6rem;
-    font-weight: 600;
-  }
-`;
-
 export const TopDoctors = styled.div`
   margin-top: 3rem;
   width: 100%;

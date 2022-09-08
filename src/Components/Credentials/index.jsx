@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ReactComponent as EditDP } from "../../Images/EditIcon.svg";
 
 export const Credentials = ({ firstName, lastName, email }) => {
   return (
@@ -8,6 +9,9 @@ export const Credentials = ({ firstName, lastName, email }) => {
           {firstName[0]}
           {lastName[0]}
         </h1>
+        <Icon>
+          <EditDP />
+        </Icon>
       </Initials>
       <Text>
         <Name>
@@ -24,7 +28,14 @@ const Container = styled.div`
   margin-left: 4rem;
   align-items: center;
 `;
+const Icon = styled.div`
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  bottom: 1rem;
+`;
 const Initials = styled.div`
+  position: relative;
   color: white;
   text-transform: capitalize;
   border-radius: 50%;

@@ -159,7 +159,7 @@ const Title = styled.label`
 `;
 
 const Icon = styled.i`
-  z-index: 200;
+  z-index: 50;
   cursor: pointer;
   display: flex;
   align-items: center;

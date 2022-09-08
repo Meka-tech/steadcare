@@ -78,8 +78,66 @@ export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
     </Container>
   );
 };
+export const DoctorDashboardNavbar = ({
+  active = "Dashboard",
+  role = "Doctor"
+}) => {
+  const navigate = useNavigate();
+  const Navs = [
+    [<DashboardIcon />, <DashboardActiveIcon />, "Dashboard", `/${role}/home`],
+    [<ProfileIcon />, <ProfileActiveIcon />, "Profile", `/${role}/profile`],
+    [
+      <CalendarIcon />,
+      <CalendarActiveIcon />,
+      "Appointments",
+      `/${role}/appointments`
+    ],
+    [
+      <HistoryIcon />,
+      <HistoryActiveIcon />,
+      "Patient History",
+      `/${role}/patient-history`
+    ],
+    [<SettingsIcon />, <SettingsActiveIcon />, "Settings", `/${role}/settings`]
+  ];
+  return (
+    <Container>
+      <LogoSection>
+        <Logo style={{ cursor: "pointer" }} />
+        <h1> SteadCare</h1>
+      </LogoSection>
+      <NavItems>
+        {Navs.map((nav, index) => (
+          <NavItem
+            key={index}
+            active={active}
+            item={nav[2]}
+            onClick={() => navigate(nav[3])}
+          >
+            {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
+            <span>
+              <h1>{nav[2]}</h1>
+            </span>
+          </NavItem>
+        ))}
+      </NavItems>
+      <LogOutDiv>
+        <NavItem active={active}>
+          <div>
+            <LogOutIcon />
+          </div>
+          <span>
+            {" "}
+            <h1>Log Out</h1>
+          </span>
+        </NavItem>
+      </LogOutDiv>
+    </Container>
+  );
+};
 
 const Container = styled.div`
+  box-sizing: border-box;
   padding: 1rem 0px;
   width: 33.2rem;
   height: 100vh;
@@ -87,9 +145,10 @@ const Container = styled.div`
   box-shadow: 0.3rem 0.1rem 0.1rem 0px rgba(0, 0, 255, 0.2);
   background-color: white;
   overflow: hidden;
-  z-index: 10;
+  z-index: 200;
 `;
 const LogoSection = styled.div`
+  box-sizing: border-box;
   padding-left: 2rem;
   padding-bottom: 0.5rem;
   display: flex;
@@ -112,16 +171,18 @@ const LogoSection = styled.div`
   }
 `;
 const NavItems = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   padding: 2rem;
   padding-top: 2.5em;
-  height: 70%;
+  height: 80%;
   border-bottom: 1px solid rgba(85, 85, 85, 0.2);
 `;
 const LogOutDiv = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -129,6 +190,7 @@ const LogOutDiv = styled.div`
   padding-top: 2rem;
 `;
 const NavItem = styled.div`
+  box-sizing: border-box;
   display: flex;
   align-items: center;
 

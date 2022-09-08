@@ -144,7 +144,10 @@ const Menu = styled.div`
   overflow-y: scroll;
   max-height: 18rem;
   position: absolute;
+  margin-top: 1rem;
   z-index: 2;
+  flex-direction: column;
+  border-radius: 0.5rem;
   div {
     margin: 0;
     display: flex;

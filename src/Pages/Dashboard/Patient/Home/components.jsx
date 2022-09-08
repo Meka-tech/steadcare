@@ -8,6 +8,8 @@ import useClickOutside from "../../../../hooks/useClickOutside";
 import { TextForm } from "../../../../Components";
 import { ReactComponent as Plane } from "../../../../Images/planeCircle.svg";
 import { useNavigate } from "react-router";
+import { useState } from "react";
+import approveBadge from "../../../../Images/approveBadge.png";
 export const DoctorComponent = ({ displayPic, name, rating, book }) => {
   return (
     <DoctorContainer>
@@ -193,47 +195,62 @@ const Link2 = styled.div`
 
 export const InviteModal = ({ setActive, value = "" }) => {
   const ModalRef = useRef();
+  const [linkCopied, setLinkCopied] = useState(false);
   useClickOutside(ModalRef, () => setActive(false));
   return (
     <Shade>
       <ModalContainer ref={ModalRef}>
-        <ModalHeader>Invite people to Steadcare</ModalHeader>
-        <ModalDetails>
-          <ModalDetail>
-            <ModalDetailHeader>
-              Insert email address and send invitation
-            </ModalDetailHeader>
-            <TextForm
-              fontSize={"1.2rem"}
-              borderRadius={"2rem"}
-              placeholder={"Enter email address"}
-              height={"3.5em"}
-              icon={<Plane />}
-            />
-          </ModalDetail>
-          <ModalDetail>
-            <ModalDetailHeader>
-              Copy referral link and share with family & friends
-            </ModalDetailHeader>
-            <TextForm
-              backgroundColor={"rgba(0, 0, 255, 0.1)"}
-              fontSize={"1.2rem"}
-              onChange={() => {}}
-              value={`${value}`}
-              borderRadius={"2rem"}
-              height={"3.5em"}
-              icon={
-                <CopyLink
-                  onClick={() => {
-                    navigator.clipboard.writeText(value);
-                  }}
-                >
-                  Copy Link
-                </CopyLink>
-              }
-            />
-          </ModalDetail>
-        </ModalDetails>
+        {linkCopied ? (
+          <>
+            <LinkCopiedDiv>
+              <ImageContainer>
+                <img src={approveBadge} alt="success" />
+              </ImageContainer>
+              <h1>Link Copied Sucessfully</h1>
+            </LinkCopiedDiv>
+          </>
+        ) : (
+          <>
+            <ModalHeader>Invite people to Steadcare</ModalHeader>
+            <ModalDetails>
+              <ModalDetail>
+                <ModalDetailHeader>
+                  Insert email address and send invitation
+                </ModalDetailHeader>
+                <TextForm
+                  fontSize={"1.2rem"}
+                  borderRadius={"2rem"}
+                  placeholder={"Enter email address"}
+                  height={"3.5em"}
+                  icon={<Plane />}
+                />
+              </ModalDetail>
+              <ModalDetail>
+                <ModalDetailHeader>
+                  Copy referral link and share with family & friends
+                </ModalDetailHeader>
+                <TextForm
+                  backgroundColor={"rgba(0, 0, 255, 0.1)"}
+                  fontSize={"1.2rem"}
+                  onChange={() => {}}
+                  value={`${value}`}
+                  borderRadius={"2rem"}
+                  height={"3.5em"}
+                  icon={
+                    <CopyLink
+                      onClick={() => {
+                        setLinkCopied(true);
+                        navigator.clipboard.writeText(value);
+                      }}
+                    >
+                      Copy Link
+                    </CopyLink>
+                  }
+                />
+              </ModalDetail>
+            </ModalDetails>
+          </>
+        )}
       </ModalContainer>
     </Shade>
   );
@@ -299,4 +316,20 @@ const CopyLink = styled.div`
   font-weight: 600;
   margin-right: 0.1rem;
   font-family: Montserrat;
+`;
+const LinkCopiedDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    font-weight: 500;
+    font-size: 1.6rem;
+  }
+`;
+const ImageContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

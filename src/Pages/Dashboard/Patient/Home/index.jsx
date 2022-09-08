@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import { Button, DashboardNavbar } from "../../../../Components";
-import { Body, Container } from "../../style";
+import { Body, Container, Banner } from "../../style";
 import { useNavigate } from "react-router-dom";
-import { BottomNavs, Doctors, TopDoctors, Banner } from "./style";
+import { BottomNavs, Doctors, TopDoctors } from "./style";
 import { ReactComponent as DoctorSvg } from "../../../../Images/illustrations/doctors.svg";
 import {
   BookADoctor,
@@ -12,10 +12,11 @@ import {
   SendInvite
 } from "./components";
 import { Spinner, TopBar } from "../component";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Capitalize } from "../../../../Utilities/globalFunc";
 import axios from "axios";
 import { BaseUrl } from "../../../../Utilities/API";
+import { updateNumberOfAppointment } from "../../../../features/userAppointments/appointmentSlice";
 
 export const PatientDashboard = () => {
   const [viewAll, setViewAll] = useState(false);
@@ -24,6 +25,10 @@ export const PatientDashboard = () => {
   const token = useSelector((state) => state.reducer.userDetails.token);
   const [doctors, setDoctors] = useState();
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const noOfAppointments = useSelector(
+    (state) => state.reducer.appointments.amount
+  );
 
   const TopDoctorsFunc = async () => {
     setLoading(true);
@@ -43,10 +48,26 @@ export const PatientDashboard = () => {
       });
   };
 
+  const FetchAppointnents = async () => {
+    const config = {
+      method: "get",
+      url: `${BaseUrl}/all-doctors-appointment`,
+      headers: { Authorization: "Bearer " + token }
+    };
+
+    axios(config)
+      .then(function (response) {
+        dispatch(updateNumberOfAppointment(response.data.data.length));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     TopDoctorsFunc();
+    FetchAppointnents();
   }, []);
-
   return (
     <Container>
       <DashboardNavbar role="patient" />
@@ -66,7 +87,7 @@ export const PatientDashboard = () => {
                 Care for your health better with Us. Let’s be your gateway to
                 steady medical care.
               </h3>
-              <h2>Upcoming Sessions : 0</h2>
+              <h2>Upcoming Sessions : {noOfAppointments}</h2>
             </span>
           </div>
           <div>
