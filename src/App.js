@@ -18,7 +18,10 @@ import {
   DoctorDashboard,
   DoctorSignInProfile,
   Home,
-  DoctorAppointment
+  DoctorAppointment,
+  AboutUs,
+  ContactUs,
+  FAQs
 } from "./Pages/index";
 import { ScrollToTop } from "./Utilities";
 // import store from "./app/store";
@@ -35,6 +38,9 @@ function App() {
             <ScrollToTop>
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/about-us" element={<AboutUs />} />
+                <Route path="/contact-us" element={<ContactUs />} />
+                <Route path="/FAQs" element={<FAQs />} />
                 {/* ////Auth////////// */}
                 <Route path="/sign-up" element={<UserSignUp />} />
                 <Route

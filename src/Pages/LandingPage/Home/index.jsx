@@ -1,16 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import { Navbar } from "../../../Components";
+import { Footer, Navbar } from "../../../Components";
 import { Banner } from "../component";
 import { Main } from "../style";
 import { ReactComponent as HomeBanner } from "../../../Images/Banners/home_banner.svg";
-import { BlueborderCard, TransparentBlueborderCard } from "./component";
+import {
+  BlueborderCard,
+  BoxShadowCard,
+  TransparentBlueborderCard
+} from "./component";
 import { ReactComponent as PatientBed } from "../../../Images/CardIcon/patient_bed.svg";
 import { ReactComponent as DoctorVector } from "../../../Images/CardIcon/doctor_vector.svg";
 import { ReactComponent as DoctorCallVector } from "../../../Images/CardIcon/doctor_call_vector.svg";
 import { ReactComponent as HistoryVector } from "../../../Images/CardIcon/history_vector.svg";
 import { ReactComponent as MedicationVector } from "../../../Images/CardIcon/medicationVector.svg";
 import { ReactComponent as WalletVector } from "../../../Images/CardIcon/wallet_vector.svg";
+import { ReactComponent as FindDoctor } from "../../../Images/CardIcon/find_a_doctor.svg";
+import { ReactComponent as ObserveDoctor } from "../../../Images/CardIcon/observe_doctor.svg";
+import { ReactComponent as CheckMark } from "../../../Images/CardIcon/check_mark.svg";
 
 export const Home = () => {
   return (
@@ -82,8 +89,34 @@ export const Home = () => {
           />
         </WeProveCards>
       </WeProv>
-      <LearnHow></LearnHow>
-      <LearnHowCards></LearnHowCards>
+      <LearnHow>
+        <h1>Learn how to book sessions </h1>
+        <h2>
+          Your step-by-step guide on how to book appointments with doctors.
+        </h2>
+      </LearnHow>
+      <LearnHowCards>
+        <BoxShadowCard
+          icon={<FindDoctor height={"5rem"} width={"5rem"} />}
+          title={"Find a Doctor"}
+          desc={
+            "Select from a wide range of top doctors for any health concern."
+          }
+        />
+        <BoxShadowCard
+          icon={<ObserveDoctor height={"5rem"} width={"5rem"} />}
+          title={"Observe Doctor"}
+          desc={
+            "Examine doctors profiles and choose a doctor that best suits you."
+          }
+        />
+        <BoxShadowCard
+          icon={<CheckMark height={"5rem"} width={"5rem"} />}
+          title={"Book a session"}
+          desc={"Schedule a video with your preferred doctor. "}
+        />
+      </LearnHowCards>
+      <Footer />
     </Main>
   );
 };
@@ -152,14 +185,30 @@ const WeProveCards = styled.div`
 `;
 
 const LearnHow = styled.div`
+  text-align: center;
+  padding: 4rem 0;
   h1 {
+    font-weight: 600;
+    font-size: 2.8rem;
+    line-height: 3.5rem;
+    margin-bottom: 3rem;
+    letter-spacing: 7%;
   }
   h2 {
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 3rem;
+    margin: 0 auto;
+    letter-spacing: 7%;
+    margin-bottom: 2rem;
+    width: 30%;
   }
 `;
 
 const LearnHowCards = styled.div`
   display: flex;
+  margin: 0 auto;
   justify-content: space-between;
   width: 90%;
+  margin-bottom: 20rem;
 `;

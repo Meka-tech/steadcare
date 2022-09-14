@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Button } from "../../../Components";
 
 export const BlueborderCard = ({ icon, title, desc }) => {
+  const navigate = useNavigate();
   return (
     <BlueborderCardDiv>
       <BlueborderCardIcon>{icon}</BlueborderCardIcon>
@@ -13,6 +15,7 @@ export const BlueborderCard = ({ icon, title, desc }) => {
         color={"black"}
         fontSize="1.4rem"
         border={" 1px solid rgba(0, 0, 255, 1)"}
+        onClick={() => navigate("/sign-up")}
       />
     </BlueborderCardDiv>
   );
@@ -81,4 +84,46 @@ const TransparentBlueborderCardDesc = styled.h4`
   font-size: 1.4rem;
   width: 80%;
   margin-right: auto;
+`;
+
+export const BoxShadowCard = ({ icon, title, desc }) => {
+  return (
+    <BoxShadowCardDiv>
+      <ImageContainer>{icon}</ImageContainer>
+      <BoxShadowCardTitle>{title}</BoxShadowCardTitle>
+      <BoxShadowCardDesc>{desc}</BoxShadowCardDesc>
+    </BoxShadowCardDiv>
+  );
+};
+
+const BoxShadowCardDiv = styled.div`
+  box-shadow: 0px 4px 4px 0px rgba(13, 121, 210, 0.5);
+  width: 35rem;
+  height: 28rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`;
+
+const ImageContainer = styled.div`
+  margin-bottom: 2rem;
+`;
+
+const BoxShadowCardTitle = styled.h1`
+  font-weight: 600;
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 2rem;
+`;
+
+const BoxShadowCardDesc = styled.h2`
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  font-size: 1.4rem;
+  width: 80%;
 `;

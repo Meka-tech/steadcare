@@ -21,7 +21,7 @@ export const Navbar = ({ active }) => {
         <Link onClick={() => navigate("/")}>
           <h1
             style={{
-              color: active === "Home" ? "rgba(0, 0, 255, 1)" : "black"
+              color: active === "Home" ? "rgba(0, 0, 255, 1)" : null
             }}
           >
             Home
