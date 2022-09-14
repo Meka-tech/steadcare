@@ -20,18 +20,38 @@ import { useNavigate } from "react-router";
 import { useFormik } from "formik";
 import { validationSchema } from "./validationSchema";
 import {
-  updateToken,
-  updateUser
-} from "../../../features/userDetails/userSlice";
+  updatePatient,
+  updatePatientToken
+} from "../../../features/userDetails/patientSlice";
 import { useDispatch, useSelector } from "react-redux/es/exports";
+import {
+  updateDoctor,
+  updateDoctorToken
+} from "../../../features/userDetails/doctorSlice";
 
 export const Login = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [RememberMe, setRememberMe] = useState(true);
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.reducer.userDetails);
+  // const user = useSelector((state) => state.reducer.doctorDetails);
 
+  // console.log(user);
+
+  const Dispatch = (response) => {
+    const Token = response.data.data.token;
+    const userDetails = response.data.data.user;
+    const role = userDetails.role;
+    if (role === "doctor") {
+      dispatch(updateDoctor({ userDetails }));
+      dispatch(updateDoctorToken(Token));
+    } else {
+      dispatch(updatePatient({ userDetails }));
+      dispatch(updatePatientToken(Token));
+    }
+    setIsLoading(false);
+    navigate(`/${role}/home`);
+  };
   const OnHandleSubmit = async () => {
     setIsLoading(true);
     const data = { email: `${values.email}`, password: `${values.password}` };
@@ -45,17 +65,11 @@ export const Login = () => {
 
     axios(config)
       .then(function (response) {
-        const Token = response.data.data.token;
-        const userDetails = response.data.data.user;
-        dispatch(updateUser({ userDetails }));
-        dispatch(updateToken(Token));
-        navigate("/patient/home");
-        setIsLoading(false);
+        Dispatch(response);
       })
       .catch(function (error) {
         const Error = error;
         setIsLoading(false);
-        alert(Error.response.data.message);
       });
   };
 

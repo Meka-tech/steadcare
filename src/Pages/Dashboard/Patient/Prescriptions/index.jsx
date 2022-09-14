@@ -12,7 +12,7 @@ import { BaseUrl } from "../../../../Utilities/API";
 import { useSelector } from "react-redux";
 
 export const PatientPrescription = () => {
-  const token = useSelector((state) => state.reducer.userDetails.token);
+  const token = useSelector((state) => state.reducer.patientDetails.token);
   const [prescription, setPrescription] = useState();
   const [loading, setLoading] = useState(false);
 

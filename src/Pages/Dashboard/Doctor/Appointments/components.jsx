@@ -30,19 +30,21 @@ export const AppointmentList = ({ data, loading }) => {
     return (
       <DropdownContainer active={activeDropDown} ref={dropDownRef}>
         {appointment === "Upcoming" ? (
-          <DropdownItem>Re-schedule</DropdownItem>
-        ) : (
-          <DropdownItem>Book Doctor</DropdownItem>
-        )}
-        {appointment === "Upcoming" ? (
-          <DropdownItem onClick={() => setActiveDropDown(false)}>
-            Cancel
-          </DropdownItem>
-        ) : (
-          <DropdownItem onClick={() => setActiveDropDown(false)}>
-            Clear
-          </DropdownItem>
-        )}
+          <div>
+            <DropdownItem>View form</DropdownItem>
+            <DropdownItem>Request history</DropdownItem>
+            <DropdownItem>Accept</DropdownItem>
+            <DropdownItem>Cancel</DropdownItem>
+          </div>
+        ) : null}
+        {appointment !== "Upcoming" ? (
+          <div>
+            <DropdownItem>Prescribe</DropdownItem>
+            <DropdownItem onClick={() => setActiveDropDown(false)}>
+              Clear
+            </DropdownItem>
+          </div>
+        ) : null}
       </DropdownContainer>
     );
   };

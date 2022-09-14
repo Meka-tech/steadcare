@@ -5,6 +5,7 @@ import "./Button.styles.css";
 
 export const Button = ({
   text = "Button",
+  fontWeight,
   bgColor,
   fontSize = "16px",
   borderRadius,
@@ -26,6 +27,7 @@ export const Button = ({
       onClick={onClick}
       width={width}
       height={height}
+      fontWeight={fontWeight}
       {...rest}
     >
       {text}
@@ -43,6 +45,7 @@ const Container = styled.button`
   align-items: center;
   padding: 1rem 2rem;
   width: ${(props) => (props.width ? props.width : "fit-content")};
+  height: ${(props) => (props.height ? props.height : "fit-content")};
   border-radius: ${(props) =>
     props.borderRadius ? props.borderRadius : "0.5rem"};
   color: ${(props) => (props.color ? props.color : "white")};
@@ -51,8 +54,7 @@ const Container = styled.button`
     props.backgroundColor ? props.backgroundColor : "rgba(0, 0, 255, 0.9)"};
 
   font-size: ${(props) => (props.fontSize ? props.fontSize : "1.2rem")};
-  font-weight: 600;
-  line-height: 2rem;
+  font-weight: ${(props) => (props.fontWeight ? props.fontWeight : "600")};
   display: flex;
   letter-spacing: 0em;
   transition: all 0.2s ease-in-out;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { DashboardNavbar } from "../../../../Components";
+import { DashboardNavbar, DoctorDashboardNavbar } from "../../../../Components";
 import { Body, Container } from "../../style";
 import { useNavigate } from "react-router-dom";
 import { TopBar } from "../component";
@@ -10,7 +10,7 @@ import axios from "axios";
 import { BaseUrl } from "../../../../Utilities/API";
 import { useSelector } from "react-redux";
 
-export const PatientAppointment = () => {
+export const DoctorAppointment = () => {
   const token = useSelector((state) => state.reducer.patientDetails.token);
   const [appointments, setAppointments] = useState();
   const [loading, setLoading] = useState(false);
@@ -49,12 +49,12 @@ export const PatientAppointment = () => {
   ];
   return (
     <Container>
-      <DashboardNavbar active={"Appointments"} role={"patient"} />
+      <DoctorDashboardNavbar active={"Appointments"} role={"doctor"} />
       <Body>
         <TopBar />
         <Main>
           <Title>Appointments</Title>
-          <AppointmentList data={appointments} loading={loading} />
+          <AppointmentList data={MockData} loading={loading} />
         </Main>
       </Body>
     </Container>

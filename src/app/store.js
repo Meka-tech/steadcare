@@ -1,16 +1,18 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import userSlice from "../features/userDetails/userSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import appointmentSlice from "../features/userAppointments/appointmentSlice";
+import patientSlice from "../features/userDetails/patientSlice";
+import doctorSlice from "../features/userDetails/doctorSlice";
 
 const persistConfig = {
   key: "root",
   storage
 };
 const rootReducer = combineReducers({
-  userDetails: userSlice,
+  patientDetails: patientSlice,
+  doctorDetails: doctorSlice,
   appointments: appointmentSlice
 });
 const persistedUserReducer = persistReducer(persistConfig, rootReducer);

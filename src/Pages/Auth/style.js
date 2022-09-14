@@ -2,11 +2,13 @@ import styled from "styled-components";
 import { ReactComponent as Logo } from "../../Images/Logo.svg";
 import { ReactComponent as DocIllus } from "../../Images/illustrations/docIllustraion.svg";
 import { ReactComponent as Icons } from "../../Images/illustrations/signInIcons.svg";
+import { useNavigate } from "react-router";
 
 export const LogoDiv = () => {
+  const navigate = useNavigate();
   return (
     <div>
-      <LogoSection>
+      <LogoSection onClick={() => navigate("/")}>
         <Logo style={{ cursor: "pointer" }} />
         <h1> SteadCare</h1>
       </LogoSection>

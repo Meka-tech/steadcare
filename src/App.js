@@ -15,7 +15,10 @@ import {
   PatientPrescription,
   PatientSettings,
   BookADoctorPage,
-  DoctorDashboard
+  DoctorDashboard,
+  DoctorSignInProfile,
+  Home,
+  DoctorAppointment
 } from "./Pages/index";
 import { ScrollToTop } from "./Utilities";
 // import store from "./app/store";
@@ -31,8 +34,8 @@ function App() {
           <Router>
             <ScrollToTop>
               <Routes>
-                <Route path="/" element={<UserSignUp />} />
-
+                <Route path="/" element={<Home />} />
+                {/* ////Auth////////// */}
                 <Route path="/sign-up" element={<UserSignUp />} />
                 <Route
                   path="/sign-up/otp-verification"
@@ -40,7 +43,7 @@ function App() {
                 />
                 <Route
                   path="/sign-up/doctor-profile"
-                  element={<DoctorProfile />}
+                  element={<DoctorSignInProfile />}
                 />
                 <Route path="/login" element={<Login />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
@@ -74,6 +77,11 @@ function App() {
                 <Route path="/patient/settings" element={<PatientSettings />} />
                 {/*/////////////////////Doctor Dashboard/////////////////////*/}
                 <Route path="/doctor/home" element={<DoctorDashboard />} />
+                <Route path="/doctor/profile" element={<DoctorProfile />} />
+                <Route
+                  path="/doctor/appointments"
+                  element={<DoctorAppointment />}
+                />
               </Routes>
             </ScrollToTop>
           </Router>

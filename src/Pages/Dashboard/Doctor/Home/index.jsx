@@ -10,7 +10,7 @@ import { Capitalize } from "../../../../Utilities/globalFunc";
 import { useSelector } from "react-redux";
 
 export const DoctorDashboard = () => {
-  const user = useSelector((state) => state.reducer.userDetails.name);
+  const user = useSelector((state) => state.reducer.doctorDetails.name);
   const noOfAppointments = useSelector(
     (state) => state.reducer.appointments.amount
   );

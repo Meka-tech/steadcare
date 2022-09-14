@@ -109,7 +109,7 @@ const Input = styled.input`
     letter-spacing: 0.125em;
   }
   margin-left: 1rem;
-  font-size: ${(props) => (props.fontSize ? props.fontSize : "2rem")};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : "1.4rem")};
   color: black;
   width: 85%;
   outline: none;
@@ -121,7 +121,7 @@ const Input = styled.input`
     color: rgba(75, 72, 78, 0.7);
     padding: 0;
     margin: 0;
-    font-size: ${(props) => (props.fontSize ? props.fontSize : "2rem")};
+    font-size: ${(props) => (props.fontSize ? props.fontSize : "1.6rem")};
   }
 `;
 

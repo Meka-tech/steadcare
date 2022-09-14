@@ -80,7 +80,7 @@ export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
 };
 export const DoctorDashboardNavbar = ({
   active = "Dashboard",
-  role = "Doctor"
+  role = "doctor"
 }) => {
   const navigate = useNavigate();
   const Navs = [

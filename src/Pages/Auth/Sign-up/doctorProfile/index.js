@@ -26,7 +26,7 @@ import { BaseUrl } from "../../../../Utilities";
 import approveBadge from "../../../../Images/approveBadge.png";
 import { useFormik } from "formik";
 
-export const DoctorProfile = () => {
+export const DoctorSignInProfile = () => {
   const location = useLocation();
   const { name, phoneNumber, email, password, confirmPassword } =
     location.state;

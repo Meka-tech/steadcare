@@ -14,7 +14,7 @@ import { ReactComponent as Cancel } from "../../../Images/cancelIcon.svg";
 import { DoctorCardItem, ViewProfile } from "./BookADoctor/component";
 
 export const Initials = () => {
-  const user = useSelector((state) => state.reducer.userDetails.name);
+  const user = useSelector((state) => state.reducer.patientDetails.name);
   const firstName = user.split(" ")[0][0];
   const lastName = user.split(" ")[1][0];
   return (
@@ -192,7 +192,7 @@ const SearchResults = styled.div`
 export const Spinner = () => {
   return (
     <SpinnerDiv>
-      <Spin className="loader-spin" />
+      <Spin className="loader-spin-patient" />
     </SpinnerDiv>
   );
 };

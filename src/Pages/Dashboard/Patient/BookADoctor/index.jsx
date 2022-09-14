@@ -42,7 +42,7 @@ import { Capitalize } from "../../../../Utilities/globalFunc";
 import approveBadge from "../../../../Images/approveBadge.png";
 
 export const BookADoctorPage = () => {
-  const token = useSelector((state) => state.reducer.userDetails.token);
+  const token = useSelector((state) => state.reducer.patientDetails.token);
   const [doctors, setDoctors] = useState();
   const [loading, setLoading] = useState(false);
   const [specialty, setSpecialty] = useState("");

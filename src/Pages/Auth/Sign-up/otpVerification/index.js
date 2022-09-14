@@ -9,7 +9,10 @@ import OTPInput, { ResendOTP } from "otp-input-react";
 import { useDispatch } from "react-redux/es/exports";
 
 import "./otp.styles.css";
-import { updateUser } from "../../../../features/userDetails/userSlice";
+import {
+  updatePatient,
+  updatePatientToken
+} from "../../../../features/userDetails";
 
 export const OtpVerification = () => {
   const navigate = useNavigate();
@@ -38,7 +41,9 @@ export const OtpVerification = () => {
       axios(config)
         .then(function (res) {
           const userDetails = res.data.data;
-          dispatch(updateUser({ userDetails }));
+          const Token = userDetails.Token;
+          dispatch(updatePatient({ userDetails }));
+          dispatch(updatePatientToken(Token));
           setIsLoading(false);
           navigate("/patient/home");
         })

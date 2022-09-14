@@ -21,8 +21,8 @@ import { updateNumberOfAppointment } from "../../../../features/userAppointments
 export const PatientDashboard = () => {
   const [viewAll, setViewAll] = useState(false);
   const [sendInvite, setSendInvite] = useState(false);
-  const user = useSelector((state) => state.reducer.userDetails.name);
-  const token = useSelector((state) => state.reducer.userDetails.token);
+  const user = useSelector((state) => state.reducer.patientDetails.name);
+  const token = useSelector((state) => state.reducer.patientDetails.token);
   const [doctors, setDoctors] = useState();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
