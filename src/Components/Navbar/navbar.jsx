@@ -1,10 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../../Images/Logo.svg";
 import { Button } from "../Button/Button";
 
 export const Navbar = ({ active }) => {
+  const loggedIn = useSelector((state) => state.reducer.loggedIn);
   const navigate = useNavigate();
   return (
     <Container>

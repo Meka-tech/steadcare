@@ -243,7 +243,7 @@ const Shade = styled.div`
   margin: auto;
   bottom: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 1000 !important;
 `;
 const NotificationDiv = styled.div`
   width: 40rem;

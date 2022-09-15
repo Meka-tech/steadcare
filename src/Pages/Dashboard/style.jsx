@@ -59,7 +59,7 @@ export const SearchDiv = styled.div`
   min-height: 5rem;
   width: 95%;
   display: flex;
-  position: sticky;
+  position: relative;
   align-items: center;
   padding-left: 10rem;
   padding-right: 10rem;

@@ -21,7 +21,9 @@ import {
   DoctorAppointment,
   AboutUs,
   ContactUs,
-  FAQs
+  FAQs,
+  DoctorSettings,
+  DoctorPatientHistory
 } from "./Pages/index";
 import { ScrollToTop } from "./Utilities";
 // import store from "./app/store";
@@ -87,6 +89,11 @@ function App() {
                 <Route
                   path="/doctor/appointments"
                   element={<DoctorAppointment />}
+                />
+                <Route path="/doctor/settings" element={<DoctorSettings />} />
+                <Route
+                  path="/doctor/patient-history"
+                  element={<DoctorPatientHistory />}
                 />
               </Routes>
             </ScrollToTop>

@@ -46,8 +46,8 @@ export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
   return (
     <Container>
       <LogoSection>
-        <Logo style={{ cursor: "pointer" }} />
-        <h1> SteadCare</h1>
+        <Logo style={{ cursor: "pointer" }} onClick={() => navigate("/")} />
+        <h1 onClick={() => navigate("/")}> SteadCare</h1>
       </LogoSection>
       <NavItems>
         {Navs.map((nav, index) => (
@@ -103,8 +103,8 @@ export const DoctorDashboardNavbar = ({
   return (
     <Container>
       <LogoSection>
-        <Logo style={{ cursor: "pointer" }} />
-        <h1> SteadCare</h1>
+        <Logo style={{ cursor: "pointer" }} onClick={() => navigate("/")} />
+        <h1 onClick={() => navigate("/")}> SteadCare</h1>
       </LogoSection>
       <NavItems>
         {Navs.map((nav, index) => (

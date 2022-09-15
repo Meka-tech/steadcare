@@ -46,8 +46,8 @@ export const Margin = styled.div`
   flex-direction: column;
 `;
 const Top = styled.div`
-  transform: scale(0.8);
   margin: auto;
+  transform: scale(0.8);
 `;
 const Center = styled.div`
   margin: auto;

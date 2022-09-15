@@ -28,6 +28,7 @@ import {
   updateDoctor,
   updateDoctorToken
 } from "../../../features/userDetails/doctorSlice";
+import { updateLoggedIn } from "../../../features/loggedIn/loginSlice";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ export const Login = () => {
       dispatch(updatePatient({ userDetails }));
       dispatch(updatePatientToken(Token));
     }
+    dispatch(updateLoggedIn(true));
     setIsLoading(false);
     navigate(`/${role}/home`);
   };

@@ -7,3 +7,4 @@ export * from "./Search";
 export * from "./Credentials";
 export * from "./ProgressBar";
 export * from "./Footer";
+export * from "./FAQElement";

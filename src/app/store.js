@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import appointmentSlice from "../features/userAppointments/appointmentSlice";
 import patientSlice from "../features/userDetails/patientSlice";
 import doctorSlice from "../features/userDetails/doctorSlice";
+import loginSlice from "../features/loggedIn/loginSlice";
 
 const persistConfig = {
   key: "root",
@@ -13,7 +14,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   patientDetails: patientSlice,
   doctorDetails: doctorSlice,
-  appointments: appointmentSlice
+  appointments: appointmentSlice,
+  loggedIn: loginSlice
 });
 const persistedUserReducer = persistReducer(persistConfig, rootReducer);
 
