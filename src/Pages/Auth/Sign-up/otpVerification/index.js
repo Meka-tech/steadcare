@@ -13,6 +13,10 @@ import {
   updatePatient,
   updatePatientToken
 } from "../../../../features/userDetails";
+import {
+  updateLoggedIn,
+  updateLoggedInRole
+} from "../../../../features/loggedIn/loginSlice";
 
 export const OtpVerification = () => {
   const navigate = useNavigate();
@@ -44,6 +48,8 @@ export const OtpVerification = () => {
           const Token = userDetails.Token;
           dispatch(updatePatient({ userDetails }));
           dispatch(updatePatientToken(Token));
+          dispatch(updateLoggedIn(true));
+          dispatch(updateLoggedInRole("patient"));
           setIsLoading(false);
           navigate("/patient/home");
         })

@@ -28,7 +28,10 @@ import {
   updateDoctor,
   updateDoctorToken
 } from "../../../features/userDetails/doctorSlice";
-import { updateLoggedIn } from "../../../features/loggedIn/loginSlice";
+import {
+  updateLoggedIn,
+  updateLoggedInRole
+} from "../../../features/loggedIn/loginSlice";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -46,9 +49,11 @@ export const Login = () => {
     if (role === "doctor") {
       dispatch(updateDoctor({ userDetails }));
       dispatch(updateDoctorToken(Token));
+      dispatch(updateLoggedInRole("doctor"));
     } else {
       dispatch(updatePatient({ userDetails }));
       dispatch(updatePatientToken(Token));
+      dispatch(updateLoggedInRole("patient"));
     }
     dispatch(updateLoggedIn(true));
     setIsLoading(false);

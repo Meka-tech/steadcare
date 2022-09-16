@@ -3,6 +3,7 @@ import {
   Button,
   CheckBox,
   DashboardNavbar,
+  DoctorDashboardNavbar,
   PasswordForm
 } from "../../../../Components";
 import { Body, Container } from "../../style";
@@ -21,7 +22,7 @@ import {
 export const DoctorSettings = () => {
   return (
     <Container>
-      <DashboardNavbar active={"Settings"} role={"doctor"} />
+      <DoctorDashboardNavbar active={"Settings"} role={"doctor"} />
       <Body>
         <TopBar />
         <Main>

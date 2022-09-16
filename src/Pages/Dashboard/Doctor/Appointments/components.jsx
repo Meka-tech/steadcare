@@ -66,9 +66,36 @@ export const AppointmentList = ({ data, loading }) => {
       </TabHeader>
       <TabBody>
         {loading && <Spinner />}
-        {data?.map((datum, index) => {
-          if (activeTab === "PA") {
-            if (datum[3] === "Completed") {
+        {loading === false &&
+          data?.map((datum, index) => {
+            if (activeTab === "PA") {
+              if (datum[3] === "Completed") {
+                return (
+                  <Column key={index + datum[0]}>
+                    <NameDiv>
+                      <DisplayPicture /> <h4>{datum[0]}</h4>
+                    </NameDiv>
+                    <h4>{datum[1]}</h4>
+                    <h4>{datum[2]}</h4>
+                    <StatusDiv>
+                      <Status status={`${datum[3]}`}>{datum[3]}</Status>
+                      <ThreeDots
+                        onClick={() => {
+                          setActiveDropDown(!activeDropDown);
+                          setClickedColumn(index);
+                        }}
+                      >
+                        ...
+                      </ThreeDots>
+                      {activeDropDown && index === clickedColumn && (
+                        <Dropdown appointment={"Past"} />
+                      )}
+                    </StatusDiv>
+                  </Column>
+                );
+              }
+              return null;
+            } else {
               return (
                 <Column key={index + datum[0]}>
                   <NameDiv>
@@ -87,39 +114,13 @@ export const AppointmentList = ({ data, loading }) => {
                       ...
                     </ThreeDots>
                     {activeDropDown && index === clickedColumn && (
-                      <Dropdown appointment={"Past"} />
+                      <Dropdown appointment={"Upcoming"} />
                     )}
                   </StatusDiv>
                 </Column>
               );
             }
-            return null;
-          } else {
-            return (
-              <Column key={index + datum[0]}>
-                <NameDiv>
-                  <DisplayPicture /> <h4>{datum[0]}</h4>
-                </NameDiv>
-                <h4>{datum[1]}</h4>
-                <h4>{datum[2]}</h4>
-                <StatusDiv>
-                  <Status status={`${datum[3]}`}>{datum[3]}</Status>
-                  <ThreeDots
-                    onClick={() => {
-                      setActiveDropDown(!activeDropDown);
-                      setClickedColumn(index);
-                    }}
-                  >
-                    ...
-                  </ThreeDots>
-                  {activeDropDown && index === clickedColumn && (
-                    <Dropdown appointment={"Upcoming"} />
-                  )}
-                </StatusDiv>
-              </Column>
-            );
-          }
-        })}
+          })}
         {data?.length === 0 &&
           (activeTab === "PA" ? (
             <TabBodyText>Previous appointments will appear here.</TabBodyText>
