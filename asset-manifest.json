@@ -1,8 +1,7 @@
 {
   "files": {
     "main.css": "/steadcare/static/css/main.51f7d833.css",
-    "main.js": "/steadcare/static/js/main.f541eb54.js",
-    "static/media/check_mark.svg": "/steadcare/static/media/check_mark.3ed211eb895a36862a5d2df75e9842dc.svg",
+    "main.js": "/steadcare/static/js/main.598fe5cb.js",
     "static/media/FAQs_banner.svg": "/steadcare/static/media/FAQs_banner.748bf284a242f8ceb7313398a1985588.svg",
     "static/media/contact_us_banner.svg": "/steadcare/static/media/contact_us_banner.d472fcfc3a52ba52e9008e5509b678ac.svg",
     "static/media/home_banner.svg": "/steadcare/static/media/home_banner.4617d55290d3b4c89728a5f8bacf4b15.svg",
@@ -66,10 +65,10 @@
     "static/media/eyeClosedIcon.svg": "/steadcare/static/media/eyeClosedIcon.1376c33e1ad03975be50893b5fcba1ee.svg",
     "static/media/CheckMark.svg": "/steadcare/static/media/CheckMark.c86abb0a09d844ba66f9f97933819810.svg",
     "main.51f7d833.css.map": "/steadcare/static/css/main.51f7d833.css.map",
-    "main.f541eb54.js.map": "/steadcare/static/js/main.f541eb54.js.map"
+    "main.598fe5cb.js.map": "/steadcare/static/js/main.598fe5cb.js.map"
   },
   "entrypoints": [
     "static/css/main.51f7d833.css",
-    "static/js/main.f541eb54.js"
+    "static/js/main.598fe5cb.js"
   ]
 }
