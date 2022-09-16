@@ -17,7 +17,7 @@ import { ReactComponent as MedicationVector } from "../../../Images/CardIcon/med
 import { ReactComponent as WalletVector } from "../../../Images/CardIcon/wallet_vector.svg";
 import { ReactComponent as FindDoctor } from "../../../Images/CardIcon/find_a_doctor.svg";
 import { ReactComponent as ObserveDoctor } from "../../../Images/CardIcon/observe_doctor.svg";
-import { ReactComponent as CheckMark } from "../../../Images/CardIcon/check_mark.svg";
+import CheckMarkImage from "../../../Images/CardIcon/check_mark.png";
 
 export const Home = () => {
   return (
@@ -104,14 +104,14 @@ export const Home = () => {
           }
         />
         <BoxShadowCard
-          icon={<ObserveDoctor height={"5rem"} width={"5rem"} />}
+          icon={<ObserveDoctor height={"6rem"} width={"6rem"} />}
           title={"Observe Doctor"}
           desc={
             "Examine doctors profiles and choose a doctor that best suits you."
           }
         />
         <BoxShadowCard
-          icon={<CheckMark height={"5rem"} width={"5rem"} />}
+          icon={<CheckMark src={CheckMarkImage} />}
           title={"Book a session"}
           desc={"Schedule a video with your preferred doctor. "}
         />
@@ -211,4 +211,9 @@ const LearnHowCards = styled.div`
   justify-content: space-between;
   width: 90%;
   margin-bottom: 20rem;
+`;
+const CheckMark = styled.img`
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
 `;
