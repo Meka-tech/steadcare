@@ -23,7 +23,8 @@ import {
   ContactUs,
   FAQs,
   DoctorSettings,
-  DoctorPatientHistory
+  DoctorPatientHistory,
+  DoctorCreateHistory
 } from "./Pages/index";
 import { ScrollToTop } from "./Utilities";
 // import store from "./app/store";
@@ -94,6 +95,10 @@ function App() {
                 <Route
                   path="/doctor/patient-history"
                   element={<DoctorPatientHistory />}
+                />
+                <Route
+                  path="/doctor/create-history"
+                  element={<DoctorCreateHistory />}
                 />
               </Routes>
             </ScrollToTop>

@@ -24,6 +24,7 @@ import { ReactComponent as AppointmentIcon } from "../../../../Images/CardIcon/a
 export const DoctorDashboard = () => {
   const user = useSelector((state) => state.reducer.doctorDetails.name);
   const [sendInvite, setSendInvite] = useState(false);
+
   const noOfAppointments = useSelector(
     (state) => state.reducer.appointments.amount
   );
@@ -38,6 +39,7 @@ export const DoctorDashboard = () => {
             value={"https://steadcare.com/invite/a09St31D"}
           />
         )}
+
         <TopBar />
         <Banner>
           <div>

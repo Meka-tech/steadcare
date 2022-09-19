@@ -12,6 +12,7 @@ import { useRef } from "react";
 import useClickOutside from "../../../hooks/useClickOutside";
 import { ReactComponent as Cancel } from "../../../Images/cancelIcon.svg";
 import { DoctorCardItem, ViewProfile } from "./BookADoctor/component";
+import { useNavigate } from "react-router";
 
 export const Initials = () => {
   const user = useSelector((state) => state.reducer.patientDetails.name);
@@ -50,6 +51,7 @@ export const TopBar = () => {
   const [showNotif, setShowNotif] = useState(false);
   const [hasUnread, setHasUnread] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
 
   return (
     <>
@@ -74,7 +76,11 @@ export const TopBar = () => {
             />
           )}
 
-          <span>
+          <span
+            onClick={() => {
+              navigate("/patient/profile");
+            }}
+          >
             <Initials />
           </span>
         </NavItem>

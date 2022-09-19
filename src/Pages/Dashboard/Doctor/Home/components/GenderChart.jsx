@@ -11,7 +11,7 @@ export const GenderChart = () => {
     datasets: [
       {
         ///male ,female
-        data: [1, 1],
+        data: [4, 2],
         backgroundColor: ["blue", "rgba(48, 196, 25, 1)"],
         borderWidth: 0
       }
@@ -33,7 +33,7 @@ export const GenderChart = () => {
           />
         </ChartImg>
         <ChartText>
-          <h1>0</h1>
+          <h1>6</h1>
           <h2>Patient(s) this year</h2>
         </ChartText>
       </ChartDiv>
@@ -42,13 +42,13 @@ export const GenderChart = () => {
         <Gender>
           <GenderBall color="blue" />
           <div>
-            <h1>Male</h1> <h1>0</h1>
+            <h1>Male</h1> <h1>4</h1>
           </div>
         </Gender>
         <Gender>
           <GenderBall color="rgba(48, 196, 25, 1)" />
           <div>
-            <h1>female</h1> <h1>0</h1>
+            <h1>female</h1> <h1>2</h1>
           </div>
         </Gender>
       </GendersDiv>

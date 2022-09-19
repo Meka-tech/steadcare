@@ -28,6 +28,7 @@ export const SendInvite = ({ setActive }) => {
 const SendInviteContainer = styled.div`
   padding: 1rem 1.5rem;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   border-radius: 1rem;
@@ -128,15 +129,15 @@ export const InviteModal = ({ setActive, value = "" }) => {
 };
 
 const Shade = styled.div`
-  position: absolute;
-  width: 100%;
+  position: fixed;
+  width: 90%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.6);
   top: 0;
-  left: 0;
+  right: 0;
   z-index: 10;
 `;
 const ModalContainer = styled.div`

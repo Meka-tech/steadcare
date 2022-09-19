@@ -16,9 +16,10 @@ export const Title = styled.h1`
 export const MedicalHistoryContainer = styled.div`
   box-shadow: 0px 3px 2px 0px rgba(0, 0, 255, 0.3);
   width: 100%;
-  min-height: 50rem;
+  min-height: 40rem;
   background-color: white;
   margin-bottom: 10rem;
+  max-height: fit-content;
 `;
 export const Tab = styled.div`
   cursor: pointer;
@@ -54,7 +55,9 @@ export const TabHeader = styled.div`
 export const TabBody = styled.div`
   display: flex;
   flex-direction: column;
-  height: 50rem;
+  height: 30rem;
+  max-height: fit-content;
+  margin-bottom: 2rem;
 `;
 export const TabBodyText = styled.h1`
   font-size: 1.6rem;

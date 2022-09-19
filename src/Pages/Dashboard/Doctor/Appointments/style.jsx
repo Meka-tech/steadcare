@@ -17,8 +17,11 @@ export const AppointmentListContainer = styled.div`
   margin-top: 4rem;
   box-shadow: 0px 3px 2px 0px rgba(0, 0, 255, 0.3);
   width: 100%;
-  min-height: 40rem;
+  min-height: 42rem;
+  max-height: fit-content;
+  position: relative;
   background-color: white;
+  margin-bottom: 4rem;
 `;
 export const TabContainer = styled.div`
   display: flex;
@@ -62,9 +65,9 @@ export const TabBodyContainer = styled.div``;
 export const TabBody = styled.div`
   display: flex;
   flex-direction: column;
-  height: 33rem;
-  overflow-y: auto;
   position: relative;
+  height: fit-content;
+  padding-bottom: 2rem;
 `;
 export const TabBodyText = styled.h1`
   font-size: 1.6rem;

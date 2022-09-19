@@ -1,19 +1,93 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { MdOutlineCancel } from "react-icons/md";
+import useClickOutside from "../../../../../hooks/useClickOutside";
+import ApproveBadge from "../../../../../Images/approveBadge.png";
+import CancelMark from "../../../../../Images/cancel_mark.png";
+import { FormModal } from "../../formModal";
 
 export const AppointmentRequests = ({}) => {
   const [hasAppointment, setHasAppointment] = useState(true);
+  const [requestModal, setRequestModal] = useState(false);
+  const [requestStatus, setRequestStatus] = useState("");
+  const [viewForm, setViewForm] = useState(false);
+  const [focusPatient, setFocusPatient] = useState();
+
+  const MockData = [
+    { name: "Chineye Matu", time: "21 July, 10 am" },
+    { name: "Eke David", time: "21 July, 10 am" },
+    { name: "Okoro Isi", time: "21 July, 10 am" }
+  ];
+
+  const AppointmentItem = ({ name, time, img, action, index }) => {
+    return (
+      <AppointmentItemContainer>
+        <PictureProfile>
+          <DisplayPicture />
+          <NameDiv>
+            <Name>{name}</Name>
+            <Time>{time}</Time>
+          </NameDiv>
+        </PictureProfile>
+        <ViewForm
+          onClick={() => {
+            setViewForm(true);
+            setFocusPatient(index);
+          }}
+        >
+          view form
+        </ViewForm>
+        <Buttons>
+          <AiOutlineCheckCircle
+            color="green"
+            size={20}
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              action("accept");
+              setRequestModal(true);
+              setFocusPatient(index);
+            }}
+          />
+          <MdOutlineCancel
+            color="F60F0F"
+            size={20}
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              action("decline");
+              setRequestModal(true);
+              setFocusPatient(index);
+            }}
+          />
+        </Buttons>
+      </AppointmentItemContainer>
+    );
+  };
+
+  ///////////////////////////////
   return (
     <AppointmentContainer>
+      {requestModal && (
+        <RequestModal setActive={setRequestModal} status={requestStatus} />
+      )}
+      {viewForm && (
+        <FormModal setActive={setViewForm} patient={MockData[focusPatient]} />
+      )}
       <AppointmentDiv>
         {hasAppointment ? (
           <div>
-            <AppointmentItem name="Chineye Matu" time={"21 July, 10 am"} />
-            <AppointmentItem name="Chineye Matu" time={"21 July, 10 am"} />
-            <AppointmentItem name="Chineye Matu" time={"21 July, 10 am"} />
+            {MockData.map((appointment, index) => {
+              return (
+                <AppointmentItem
+                  key={index}
+                  name={appointment.name}
+                  time={appointment.time}
+                  action={setRequestStatus}
+                  index={index}
+                />
+              );
+            })}
           </div>
         ) : (
           <NoAppointmentDiv>
@@ -54,40 +128,13 @@ const NoAppointment = styled.h1`
   font-size: 1.4rem;
 `;
 
-const AppointmentItem = ({ name, time, img }) => {
-  return (
-    <AppointmentItemContainer>
-      <PictureProfile>
-        <DisplayPicture />
-        <NameDiv>
-          <Name>{name}</Name>
-          <Time>{time}</Time>
-        </NameDiv>
-      </PictureProfile>
-      <ViewForm>view form</ViewForm>
-      <Buttons>
-        <AiOutlineCheckCircle
-          color="green"
-          size={20}
-          style={{ cursor: "pointer" }}
-        />
-        <MdOutlineCancel
-          color="F60F0F"
-          size={20}
-          style={{ cursor: "pointer" }}
-        />
-      </Buttons>
-    </AppointmentItemContainer>
-  );
-};
-
 const AppointmentItemContainer = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 22rem 10rem 10rem;
   margin-bottom: 2rem;
+  align-items: center;
+  justify-content: space-evenly;
 `;
 const PictureProfile = styled.div`
   align-items: center;
@@ -135,3 +182,58 @@ const Buttons = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+const RequestModal = ({ setActive, status }) => {
+  const ModalRef = useRef();
+  useClickOutside(ModalRef, () => setActive(false));
+  return (
+    <ModalBackground>
+      <ModalContainer ref={ModalRef}>
+        <ImageContainer
+          src={status === "accept" ? ApproveBadge : CancelMark}
+          width={"100rem"}
+          height={"100rem"}
+        />
+        <Message>
+          {status === "accept" && "Successfully accepted patient appointment."}
+          {status === "decline" && "Patient appointment declined."}
+        </Message>
+      </ModalContainer>
+    </ModalBackground>
+  );
+};
+
+const ModalBackground = styled.div`
+  top: 0;
+  position: fixed;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.6);
+  width: 90%;
+  height: 100%;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ModalContainer = styled.div`
+  height: 20rem;
+  width: 40rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 255, 1);
+  padding: 2rem;
+`;
+
+const Message = styled.h1`
+  margin: 0;
+  padding: 0;
+  width: 80%;
+  font-weight: 500;
+  font-size: 1.6rem;
+  margin-top: 1rem;
+  text-align: center;
+`;
+const ImageContainer = styled.img``;

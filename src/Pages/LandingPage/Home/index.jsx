@@ -17,7 +17,7 @@ import { ReactComponent as MedicationVector } from "../../../Images/CardIcon/med
 import { ReactComponent as WalletVector } from "../../../Images/CardIcon/wallet_vector.svg";
 import { ReactComponent as FindDoctor } from "../../../Images/CardIcon/find_a_doctor.svg";
 import { ReactComponent as ObserveDoctor } from "../../../Images/CardIcon/observe_doctor.svg";
-import CheckMarkImage from "../../../Images/CardIcon/check_mark.png";
+import CheckMarkImage from "../../../Images/approveBadge.png";
 
 export const Home = () => {
   return (

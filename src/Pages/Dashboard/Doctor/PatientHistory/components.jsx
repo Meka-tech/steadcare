@@ -1,6 +1,9 @@
 import { useRef } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import useClickOutside from "../../../../hooks/useClickOutside";
+import { FormModal } from "../formModal";
+import { PrescribeModal } from "../prescribeModal";
 import {
   Column,
   DisplayPicture,
@@ -21,15 +24,34 @@ export const MediacalHistory = ({ data }) => {
   const [activeDropDown, setActiveDropDown] = useState(false);
   const [clickedColumn, setClickedColumn] = useState();
   const dropDownRef = useRef();
+  const [prescribeModal, setPrescribeModal] = useState(false);
+  const [formModal, setFormModal] = useState(false);
   useClickOutside(dropDownRef, () => setActiveDropDown(false));
+  const navigate = useNavigate();
 
   const Dropdown = ({ appointment }) => {
     return (
       <DropdownContainer active={activeDropDown} ref={dropDownRef}>
         <div>
-          <DropdownItem>Prescribe</DropdownItem>
-          <DropdownItem>View form</DropdownItem>
-          <DropdownItem>Create Med History</DropdownItem>
+          <DropdownItem
+            onClick={() => {
+              setPrescribeModal(true);
+              setActiveDropDown(false);
+            }}
+          >
+            Prescribe
+          </DropdownItem>
+          <DropdownItem
+            onClick={() => {
+              setFormModal(true);
+              setActiveDropDown(false);
+            }}
+          >
+            View form
+          </DropdownItem>
+          <DropdownItem onClick={() => navigate("/doctor/create-history")}>
+            Create Med History
+          </DropdownItem>
           <DropdownItem>Clear</DropdownItem>
         </div>
       </DropdownContainer>
@@ -39,6 +61,10 @@ export const MediacalHistory = ({ data }) => {
     <>
       <Title>Patient History</Title>
       <MedicalHistoryContainer>
+        {prescribeModal && <PrescribeModal setActive={setPrescribeModal} />}
+        {formModal && (
+          <FormModal setActive={setFormModal} patient={data[clickedColumn]} />
+        )}
         <TabHeader>
           <h2>Patient</h2>
           <h2>ILLNESS</h2>
