@@ -1,20 +1,81 @@
+import axios from "axios";
+import { useFormik } from "formik";
 import { useRef } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Button, TextForm } from "../../../Components";
 import useClickOutside from "../../../hooks/useClickOutside";
+import { BaseUrl } from "../../../Utilities";
 
-export const PrescribeModal = ({ setActive }) => {
+export const PrescribeModal = ({ setActive, patientId }) => {
+  const token = useSelector((state) => state.reducer.doctorDetails.token);
+
+  const PrescribeApi = async () => {
+    const data = {
+      doctor: `${values.doctor}`,
+      medicine: `${values.medicine}`,
+      dosage: `${values.dosage}`,
+      duration: `${values.duration}`
+    };
+
+    const config = {
+      method: "post",
+      url: `${BaseUrl}/create-prescriptions/62e7ff4123e152264efb292b`,
+      headers: { Authorization: "Bearer " + token },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+    initialValues: {
+      doctor: "",
+      medicine: "",
+      dosage: "",
+      duration: ""
+    },
+    onSubmit: PrescribeApi
+  });
+
   const ModalRef = useRef();
   useClickOutside(ModalRef, () => setActive(false));
   return (
     <ModalBackground>
       <ModalContainer ref={ModalRef}>
         <Header>Prescribe medication</Header>
-        <TextForm title={"Doctor"} />
-        <TextForm title={"Medicine"} />
-        <TextForm title={"Dosage"} />
-        <TextForm title={"Duration"} />
-        <Button text="Submit" fontSize="1.4rem" />
+        <TextForm
+          title={"Doctor"}
+          inputValue={values.doctor}
+          onChange={handleChange("doctor")}
+        />
+        <TextForm
+          title={"Medicine"}
+          inputValue={values.medicine}
+          onChange={handleChange("medicine")}
+        />
+        <TextForm
+          title={"Dosage"}
+          inputValue={values.dosage}
+          onChange={handleChange("dosage")}
+        />
+        <TextForm
+          title={"Duration"}
+          inputValue={values.duration}
+          onChange={handleChange("duration")}
+        />
+        <Button
+          text="Submit"
+          fontSize="1.4rem"
+          onClick={handleSubmit}
+          type="submit"
+        />
       </ModalContainer>
     </ModalBackground>
   );

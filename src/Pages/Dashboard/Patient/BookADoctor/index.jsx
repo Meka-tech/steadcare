@@ -40,6 +40,7 @@ import "react-calendar/dist/Calendar.css";
 import { ComplaintInput, InputComponent } from "./inputComponent";
 import { Capitalize } from "../../../../Utilities/globalFunc";
 import approveBadge from "../../../../Images/approveBadge.png";
+import { useFormik } from "formik";
 
 export const BookADoctorPage = () => {
   const token = useSelector((state) => state.reducer.patientDetails.token);
@@ -51,6 +52,8 @@ export const BookADoctorPage = () => {
   const [doctorName, setDoctorName] = useState("");
   const [progressBarStep, setProgressBarStep] = useState(1);
   const [date, onChangeDate] = useState(new Date());
+  const [selectedTime, setSelectedTime] = useState("8:00");
+  const [doctorId, setDoctorId] = useState(0);
   const Specialties = [
     "Allergist",
     "Anesthesiologist",
@@ -90,9 +93,32 @@ export const BookADoctorPage = () => {
       .catch(function (error) {});
   };
 
+  const FilterDoctors = async () => {
+    const config = {
+      method: "get",
+      url: `${BaseUrl}/filter-doctors?pageNo=1&noOfRequests=1&specialty=${specialty}`,
+      headers: { Authorization: "Bearer " + token }
+    };
+
+    axios(config)
+      .then(function (response) {
+        setDoctors(response.data.data.fetchedDoctors);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     AllDoctorsFunc();
   }, []);
+
+  useEffect(() => {
+    if (specialty !== "") {
+      FilterDoctors();
+    }
+  }, [specialty]);
   useEffect(() => {
     if (doctorIndex !== undefined) {
       setDoctorName(doctors[doctorIndex].name);
@@ -102,6 +128,50 @@ export const BookADoctorPage = () => {
   const MorningTimeSlots = ["08:00", "09:00", "10:00", "11:00"];
   const AfternoonTimeSlots = ["12:00", "1:00", "2:00", "3:00", "4:00"];
 
+  const BookAnAppointment = async () => {
+    const data = {
+      name: `${values.name}`,
+      time: `${date.toDateString() + " " + selectedTime}`,
+      gender: `${values.sex}`,
+      occupation: `${values.occupation}`,
+      religion: `${values.religion}`,
+      address: `${values.address}`,
+      maritalStatus: `${values.maritalStatus}`,
+      tribe: `${values.tribe}`,
+      complaint: `${values.complaint}`
+    };
+    const config = {
+      method: "post",
+      url: `${BaseUrl}/book-doctor-appointment/${doctorId}`,
+      headers: { Authorization: "Bearer " + token },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        setProgressBarStep(4);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+    initialValues: {
+      name: "",
+      age: "",
+      sex: "",
+      occupation: "",
+      religion: "",
+      address: "",
+      maritalStatus: "",
+      tribe: "",
+      complaint: ""
+    },
+    onSubmit: BookAnAppointment
+  });
+
   return (
     <Container>
       <DashboardNavbar role="patient" />
@@ -110,7 +180,7 @@ export const BookADoctorPage = () => {
           <ViewProfile
             setActive={setViewProfileActive}
             specialty={doctors[doctorIndex].specialty}
-            language
+            language={doctors[doctorIndex].language}
             location
             patient
             name={doctors[doctorIndex].name}
@@ -155,11 +225,14 @@ export const BookADoctorPage = () => {
                       key={index}
                       index={index}
                       rating={`${data.averageRating}`}
+                      language={`${data.languages}`}
                       name={`${data.name}`}
                       specialty={`${data.specialty}`}
                       setActive={setViewProfileActive}
                       setIndex={setDoctorIndex}
+                      setDoctorId={setDoctorId}
                       book={Book}
+                      doctorId={data._id}
                     />
                   );
                 })}
@@ -178,7 +251,16 @@ export const BookADoctorPage = () => {
                   <TimeNumber>
                     {MorningTimeSlots.map((time, i) => {
                       return (
-                        <div key={i}>
+                        <div
+                          key={i}
+                          onClick={() => setSelectedTime(time)}
+                          style={{
+                            backgroundColor:
+                              time === selectedTime
+                                ? "rgba(0, 0, 255, 0.5)"
+                                : ""
+                          }}
+                        >
                           <h2>{time} am</h2>
                         </div>
                       );
@@ -190,7 +272,16 @@ export const BookADoctorPage = () => {
                   <TimeNumber>
                     {AfternoonTimeSlots.map((time, i) => {
                       return (
-                        <div key={i}>
+                        <div
+                          key={i}
+                          onClick={() => setSelectedTime(time)}
+                          style={{
+                            backgroundColor:
+                              time === selectedTime
+                                ? "rgba(0, 0, 255, 0.5)"
+                                : ""
+                          }}
+                        >
                           <h2>{time} pm</h2>
                         </div>
                       );
@@ -209,13 +300,46 @@ export const BookADoctorPage = () => {
           {progressBarStep === 3 && (
             <>
               <PatientForm>
-                <InputComponent title="Name" />
-                <InputComponent title="Age" /> <InputComponent title="Sex" />
-                <InputComponent title="Occupation" />
-                <InputComponent title="Religion" />
-                <InputComponent title="Address" />{" "}
-                <InputComponent title="Marital Status" />
-                <InputComponent title="Tribe" />
+                <InputComponent
+                  title="Name"
+                  inputValue={values.name}
+                  onChange={handleChange("name")}
+                />
+                <InputComponent
+                  title="Age"
+                  inputValue={values.age}
+                  onChange={handleChange("age")}
+                />
+                <InputComponent
+                  title="Sex"
+                  inputValue={values.sex}
+                  onChange={handleChange("sex")}
+                />
+                <InputComponent
+                  title="Occupation"
+                  inputValue={values.occupation}
+                  onChange={handleChange("occupation")}
+                />
+                <InputComponent
+                  title="Religion"
+                  inputValue={values.religion}
+                  onChange={handleChange("religion")}
+                />
+                <InputComponent
+                  title="Address"
+                  inputValue={values.address}
+                  onChange={handleChange("address")}
+                />
+                <InputComponent
+                  title="Marital Status"
+                  inputValue={values.maritalStatus}
+                  onChange={handleChange("maritalStatus")}
+                />
+                <InputComponent
+                  title="Tribe"
+                  inputValue={values.tribe}
+                  onChange={handleChange("tribe")}
+                />
                 <ComplaintFormHeader>
                   <div />
                   <h1>COMPLAINT & DURATION</h1> <div />
@@ -224,8 +348,10 @@ export const BookADoctorPage = () => {
                   placeHolder={
                     "Write a short message on what’s wrong with you and how long it has lasted"
                   }
+                  inputValue={values.complaint}
+                  onChange={handleChange("complaint")}
                 />
-                <Button text="Next" onClick={() => setProgressBarStep(4)} />
+                <Button text="Next" onClick={handleSubmit} />
               </PatientForm>
             </>
           )}

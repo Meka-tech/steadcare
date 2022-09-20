@@ -111,12 +111,13 @@ export const Status = styled.div`
   width: 9rem;
   border-radius: 0.5rem;
   height: 2.5rem;
+  text-transform: capitalize;
   background-color: ${(props) =>
-    props.status === "Pending"
+    props.status === "pending"
       ? `rgba(119, 119, 119, 1)`
-      : props.status === "Completed"
+      : props.status === "completed"
       ? `rgba(27, 191, 0, 1)`
-      : props.status === "Declined"
+      : props.status === "declined"
       ? `rgba(255, 0, 0, 1)`
       : null};
   color: white;

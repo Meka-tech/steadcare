@@ -14,7 +14,9 @@ export const DoctorCardItem = ({
   rating,
   setActive,
   setIndex,
-  index
+  index,
+  setDoctorId,
+  doctorId
 }) => {
   return (
     <DoctorCard>
@@ -47,6 +49,7 @@ export const DoctorCardItem = ({
           onClick={() => {
             setActive(true);
             setIndex(index);
+            setDoctorId(doctorId);
           }}
           bgColor={"white"}
           color="rgba(0, 0, 255, 1)"
@@ -59,6 +62,7 @@ export const DoctorCardItem = ({
           fontSize="1.2rem"
           onClick={() => {
             setIndex(index);
+            setDoctorId(doctorId);
             book();
           }}
         />
@@ -224,16 +228,16 @@ const ButtonSection = styled.div`
 `;
 
 const ViewProfileDiv = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 90rem;
+  position: fixed;
+  width: 90%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.6);
   top: 0;
-  left: 0;
-  z-index: 200;
+  right: 0;
+  z-index: 100;
 `;
 
 const ModalContainer = styled.div`

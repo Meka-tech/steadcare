@@ -54,7 +54,11 @@ export const PatientAppointment = () => {
         <TopBar />
         <Main>
           <Title>Appointments</Title>
-          <AppointmentList data={appointments} loading={loading} />
+          <AppointmentList
+            data={appointments}
+            loading={loading}
+            token={token}
+          />
         </Main>
       </Body>
     </Container>

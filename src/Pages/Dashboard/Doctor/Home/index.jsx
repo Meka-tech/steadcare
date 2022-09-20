@@ -7,7 +7,7 @@ import { ReactComponent as DoctorSvg } from "../../../../Images/illustrations/do
 import { TopBar } from "../component";
 
 import { Capitalize } from "../../../../Utilities/globalFunc";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import {
   AppointmentRequests,
@@ -20,15 +20,47 @@ import {
 import { ReactComponent as Naira } from "../../../../Images/CardIcon/naira.svg";
 import { ReactComponent as PatientIcon } from "../../../../Images/CardIcon/patients_pink.svg";
 import { ReactComponent as AppointmentIcon } from "../../../../Images/CardIcon/appointment.svg";
+import axios from "axios";
+import { BaseUrl } from "../../../../Utilities";
 
 export const DoctorDashboard = () => {
   const user = useSelector((state) => state.reducer.doctorDetails.name);
+  const token = useSelector((state) => state.reducer.doctorDetails.token);
+  const dispatch = useDispatch();
   const [sendInvite, setSendInvite] = useState(false);
+  const [patientsCount, setPatientCount] = useState(0);
+  const [appointmentCount, setAppointmentCount] = useState(0);
 
   const noOfAppointments = useSelector(
     (state) => state.reducer.appointments.amount
   );
   const navigate = useNavigate();
+
+  const SetStats = (response) => {
+    setPatientCount(response.data.data.patientsCount);
+    setAppointmentCount(response.data.data.appointmentCount);
+  };
+
+  const FetchStats = async () => {
+    const config = {
+      method: "get",
+      url: `${BaseUrl}/docs-dasboard-statistics`,
+      headers: { Authorization: "Bearer " + token }
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response);
+        SetStats(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    FetchStats();
+  }, []);
   return (
     <Container>
       <DoctorDashboardNavbar />
@@ -49,7 +81,7 @@ export const DoctorDashboard = () => {
                 Care for your health better with Us. Let’s be your gateway to
                 steady medical care.
               </h3>
-              <h2>Upcoming Sessions : {noOfAppointments}</h2>
+              <h2>Upcoming Sessions : {appointmentCount}</h2>
             </span>
           </div>
           <div>
@@ -60,7 +92,7 @@ export const DoctorDashboard = () => {
           <DataCard
             icon={<PatientIcon width={"4rem"} height={"4rem"} />}
             title={"Patient"}
-            number="0"
+            number={patientsCount}
           />
           <DataCard
             icon={<Naira width={"4rem"} height={"4rem"} />}
@@ -71,7 +103,7 @@ export const DoctorDashboard = () => {
           <DataCard
             icon={<AppointmentIcon width={"4rem"} height={"4rem"} />}
             title={"Appointments"}
-            number="0"
+            number={appointmentCount}
           />
         </Cards>
         <AppointmentHeader>

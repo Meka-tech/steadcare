@@ -14,7 +14,7 @@ import { ReactComponent as Cancel } from "../../../Images/cancelIcon.svg";
 import { useNavigate } from "react-router";
 
 export const Initials = () => {
-  const user = useSelector((state) => state.reducer.doctorDetails.name);
+  const user = useSelector((state) => state.reducer.patientDetails.name);
   const firstName = user.split(" ")[0][0];
   const lastName = user.split(" ")[1][0];
   return (
@@ -77,7 +77,7 @@ export const TopBar = () => {
 
           <span
             onClick={() => {
-              navigate("/doctor/profile");
+              navigate("/patient/profile");
             }}
           >
             <Initials />
@@ -197,7 +197,7 @@ const SearchResults = styled.div`
 export const Spinner = () => {
   return (
     <SpinnerDiv>
-      <Spin className="loader-spin-doctor" />
+      <Spin className="loader-spin-patient" />
     </SpinnerDiv>
   );
 };
@@ -211,7 +211,6 @@ const SpinnerDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
 `;
 
 export const Notifications = ({ setActive }) => {
@@ -249,7 +248,7 @@ const Shade = styled.div`
   margin: auto;
   bottom: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 1000 !important;
 `;
 const NotificationDiv = styled.div`
   width: 40rem;

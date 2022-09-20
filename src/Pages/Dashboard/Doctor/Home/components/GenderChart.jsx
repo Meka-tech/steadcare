@@ -3,15 +3,49 @@ import styled from "styled-components";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { AiOutlineDown } from "react-icons/ai";
+import axios from "axios";
+import { BaseUrl } from "../../../../../Utilities";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export const GenderChart = () => {
+  const token = useSelector((state) => state.reducer.doctorDetails.token);
+  const [maleCount, setMaleCount] = useState(0);
+  const [femaleCount, setFemaleCount] = useState(0);
+
+  const SetStats = (response) => {
+    setMaleCount(response.data.data.males);
+    setFemaleCount(response.data.data.females);
+  };
+
+  const GenderStats = async () => {
+    const config = {
+      method: "get",
+      url: `${BaseUrl}/female-male-statistics?year=2022`,
+      headers: { Authorization: "Bearer " + token }
+    };
+
+    axios(config)
+      .then(function (response) {
+        SetStats(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    GenderStats();
+  }, []);
+
   ChartJS.register(ArcElement, Tooltip, Legend);
 
   const data = {
     datasets: [
       {
         ///male ,female
-        data: [4, 2],
+        data: [maleCount, femaleCount],
         backgroundColor: ["blue", "rgba(48, 196, 25, 1)"],
         borderWidth: 0
       }
@@ -33,7 +67,7 @@ export const GenderChart = () => {
           />
         </ChartImg>
         <ChartText>
-          <h1>6</h1>
+          <h1>{maleCount + femaleCount}</h1>
           <h2>Patient(s) this year</h2>
         </ChartText>
       </ChartDiv>
@@ -42,13 +76,13 @@ export const GenderChart = () => {
         <Gender>
           <GenderBall color="blue" />
           <div>
-            <h1>Male</h1> <h1>4</h1>
+            <h1>Male</h1> <h1>{maleCount}</h1>
           </div>
         </Gender>
         <Gender>
           <GenderBall color="rgba(48, 196, 25, 1)" />
           <div>
-            <h1>female</h1> <h1>2</h1>
+            <h1>female</h1> <h1>{femaleCount}</h1>
           </div>
         </Gender>
       </GendersDiv>

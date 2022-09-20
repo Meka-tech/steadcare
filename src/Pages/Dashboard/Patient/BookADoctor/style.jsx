@@ -180,7 +180,6 @@ export const TimeNumber = styled.div`
     border-radius: 0.5rem;
     cursor: pointer;
   }
-
   h2 {
     font-size: 1.6rem;
     font-weight: 600;

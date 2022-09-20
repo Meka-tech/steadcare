@@ -7,6 +7,10 @@ import useClickOutside from "../../../../../hooks/useClickOutside";
 import ApproveBadge from "../../../../../Images/approveBadge.png";
 import CancelMark from "../../../../../Images/cancel_mark.png";
 import { FormModal } from "../../formModal";
+import axios from "axios";
+import { BaseUrl } from "../../../../../Utilities";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export const AppointmentRequests = ({}) => {
   const [hasAppointment, setHasAppointment] = useState(true);
@@ -14,12 +18,52 @@ export const AppointmentRequests = ({}) => {
   const [requestStatus, setRequestStatus] = useState("");
   const [viewForm, setViewForm] = useState(false);
   const [focusPatient, setFocusPatient] = useState();
+  const token = useSelector((state) => state.reducer.doctorDetails.token);
+  const [appointmentData, setAppointmentData] = useState([]);
 
   const MockData = [
     { name: "Chineye Matu", time: "21 July, 10 am" },
     { name: "Eke David", time: "21 July, 10 am" },
     { name: "Okoro Isi", time: "21 July, 10 am" }
   ];
+
+  const FetchAppointment = async () => {
+    const config = {
+      method: "get",
+      url: `${BaseUrl}/get-my-appoinments?pageNo=1&noOfRequests=2`,
+      headers: { Authorization: "Bearer " + token }
+    };
+
+    axios(config)
+      .then(function (response) {
+        setAppointmentData(response.data.data.fetchedData);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    FetchAppointment();
+  }, []);
+
+  const AcceptRejectAppointment = async (status) => {
+    const data = { status: status };
+
+    const config = {
+      method: "patch",
+      url: `${BaseUrl}/approve-reject-appoinments/62fa6468af2c0d41e32e28cc`,
+      headers: { Authorization: "Bearer " + token },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const AppointmentItem = ({ name, time, img, action, index }) => {
     return (
@@ -48,6 +92,7 @@ export const AppointmentRequests = ({}) => {
               action("accept");
               setRequestModal(true);
               setFocusPatient(index);
+              AcceptRejectAppointment("accepted");
             }}
           />
           <MdOutlineCancel
@@ -58,6 +103,7 @@ export const AppointmentRequests = ({}) => {
               action("decline");
               setRequestModal(true);
               setFocusPatient(index);
+              AcceptRejectAppointment("rejected");
             }}
           />
         </Buttons>

@@ -15,22 +15,62 @@ import { useSelector } from "react-redux";
 import { ReactComponent as Edit } from "../../../../Images/FormIcons/formEditIcon.svg";
 import { ReactComponent as Calendar } from "../../../../Images/FormIcons/formCalendarIcon.svg";
 import { Capitalize } from "../../../../Utilities/globalFunc";
+import axios from "axios";
+import { BaseUrl } from "../../../../Utilities";
+import { useFormik } from "formik";
 
 export const PatientProfile = () => {
   const user = useSelector((state) => state.reducer.patientDetails);
   const FirstName = Capitalize(user.name.split(" ")[0]);
   const LastName = Capitalize(user.name.split(" ")[1]);
+  const token = useSelector((state) => state.reducer.patientDetails.token);
 
   const navigate = useNavigate();
 
   const CountryList = [];
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("NGA");
 
   const GenderList = ["Male", "Female"];
   const [gender, setGender] = useState("");
 
   const BloodGroupsList = ["A", "B", "AB", "0"];
   const [bloodGroup, setbloodGroup] = useState("");
+
+  const UpdateProfile = async () => {
+    const data = {
+      dob: `${values.dob}`,
+      gender,
+      country,
+      phone: `${values.phone}`,
+      bloodGroup,
+      email: `${values.email}`
+    };
+
+    const config = {
+      method: "patch",
+      url: `${BaseUrl}/update-profile`,
+      headers: { Authorization: "Bearer " + token },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+    initialValues: {
+      dob: "",
+      phone: "",
+      email: ""
+    },
+    onSubmit: UpdateProfile
+  });
+
   return (
     <Container>
       <DashboardNavbar active={"Profile"} role={"patient"} />
@@ -61,6 +101,8 @@ export const PatientProfile = () => {
               title="Date of Birth"
               icon={<Calendar />}
               placeholder={"dd/mm/yy"}
+              inputValue={values.dob}
+              onChange={handleChange("dob")}
             />
             <Dropdown
               width={"80%"}
@@ -75,6 +117,8 @@ export const PatientProfile = () => {
               width={"80%"}
               title="Phone Number"
               placeholder={`${user.phoneNumber}`}
+              inputValue={values.phone}
+              onChange={handleChange("phone")}
             />
             <TextForm
               width={"80%"}
@@ -82,6 +126,8 @@ export const PatientProfile = () => {
               title="Email Address"
               icon={<Edit />}
               placeholder={`${user.email}`}
+              inputValue={values.email}
+              onChange={handleChange("email")}
             />
           </Forms>
           <DropDowns>
@@ -101,7 +147,7 @@ export const PatientProfile = () => {
             />
           </DropDowns>
           <ButtonDiv>
-            <Button width={"100%"} text="Save Changes" />
+            <Button width={"100%"} text="Save Changes" onClick={handleSubmit} />
           </ButtonDiv>
         </Main>
       </Body>

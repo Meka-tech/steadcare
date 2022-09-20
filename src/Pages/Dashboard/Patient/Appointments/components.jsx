@@ -1,6 +1,8 @@
+import axios from "axios";
 import { useRef } from "react";
 import { useState } from "react";
 import useClickOutside from "../../../../hooks/useClickOutside";
+import { BaseUrl } from "../../../../Utilities";
 import { Spinner } from "../component";
 import {
   AppointmentListContainer,
@@ -19,18 +21,54 @@ import {
   ThreeDots
 } from "./style";
 
-export const AppointmentList = ({ data, loading }) => {
+export const AppointmentList = ({ data, loading, token }) => {
   const [activeTab, setActiveTab] = useState("UA");
   const [activeDropDown, setActiveDropDown] = useState(false);
   const [clickedColumn, setClickedColumn] = useState();
+  const [appointmentId, setAppointmentId] = useState();
   const dropDownRef = useRef();
   useClickOutside(dropDownRef, () => setActiveDropDown(false));
+
+  const RescheduleAppointment = async () => {
+    const data = { time: "2022-09-15T12:59:12.918Z" };
+
+    const config = {
+      method: "patch",
+      url: `${BaseUrl}/rescheduled-doctors-appointment/${appointmentId}`,
+      headers: { Authorization: "Bearer " + token },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {})
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const ClearAppointment = () => {
+    const config = {
+      method: "delete",
+      url: `${BaseUrl}/clear-appointment/${appointmentId}`,
+      headers: { Authorization: "Bearer " + token }
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const Dropdown = ({ appointment }) => {
     return (
       <DropdownContainer active={activeDropDown} ref={dropDownRef}>
         {appointment === "Upcoming" ? (
-          <DropdownItem>Re-schedule</DropdownItem>
+          <DropdownItem onClick={() => RescheduleAppointment()}>
+            Re-schedule
+          </DropdownItem>
         ) : (
           <DropdownItem>Book Doctor</DropdownItem>
         )}
@@ -39,7 +77,12 @@ export const AppointmentList = ({ data, loading }) => {
             Cancel
           </DropdownItem>
         ) : (
-          <DropdownItem onClick={() => setActiveDropDown(false)}>
+          <DropdownItem
+            onClick={() => {
+              setActiveDropDown(false);
+              ClearAppointment();
+            }}
+          >
             Clear
           </DropdownItem>
         )}
@@ -67,20 +110,21 @@ export const AppointmentList = ({ data, loading }) => {
         {loading === false &&
           data?.map((datum, index) => {
             if (activeTab === "PA") {
-              if (datum[3] === "Completed") {
+              if (datum.status === "completed") {
                 return (
-                  <Column key={index + datum[0]}>
+                  <Column key={index + Math.round(2)}>
                     <NameDiv>
-                      <DisplayPicture /> <h4>{datum[0]}</h4>
+                      <DisplayPicture /> <h4>{datum.name}</h4>
                     </NameDiv>
-                    <h4>{datum[1]}</h4>
+                    <h4>{datum.time}</h4>
                     <h4>{datum[2]}</h4>
                     <StatusDiv>
-                      <Status status={`${datum[3]}`}>{datum[3]}</Status>
+                      <Status status={`${datum.status}`}>{datum.status}</Status>
                       <ThreeDots
                         onClick={() => {
                           setActiveDropDown(!activeDropDown);
                           setClickedColumn(index);
+                          setAppointmentId(datum._id);
                         }}
                       >
                         ...
@@ -95,18 +139,19 @@ export const AppointmentList = ({ data, loading }) => {
               return null;
             } else {
               return (
-                <Column key={index + datum[0]}>
+                <Column key={index + Math.round(2)}>
                   <NameDiv>
-                    <DisplayPicture /> <h4>{datum[0]}</h4>
+                    <DisplayPicture /> <h4>{datum.name}</h4>
                   </NameDiv>
-                  <h4>{datum[1]}</h4>
+                  <h4>{datum.time}</h4>
                   <h4>{datum[2]}</h4>
                   <StatusDiv>
-                    <Status status={`${datum[3]}`}>{datum[3]}</Status>
+                    <Status status={`${datum.status}`}>{datum.status}</Status>
                     <ThreeDots
                       onClick={() => {
                         setActiveDropDown(!activeDropDown);
                         setClickedColumn(index);
+                        setAppointmentId(datum._id);
                       }}
                     >
                       ...

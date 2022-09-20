@@ -17,16 +17,20 @@ import { ReactComponent as Edit } from "../../../../Images/FormIcons/formEditIco
 import { ReactComponent as Calendar } from "../../../../Images/FormIcons/formCalendarIcon.svg";
 import { Capitalize } from "../../../../Utilities/globalFunc";
 import { BioInput } from "./component";
+import axios from "axios";
+import { BaseUrl } from "../../../../Utilities";
+import { useFormik } from "formik";
 
 export const DoctorProfile = () => {
   const user = useSelector((state) => state.reducer.doctorDetails);
+  const token = useSelector((state) => state.reducer.doctorDetails.token);
   const FirstName = Capitalize(user.name.split(" ")[0]);
   const LastName = Capitalize(user.name.split(" ")[1]);
 
   const navigate = useNavigate();
 
   const CountryList = [];
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("NGA");
 
   const Languages = ["English", "Igbo", "Hausa", "Yoruba"];
   const [firstLanguage, setfirstLanguage] = useState("");
@@ -54,6 +58,44 @@ export const DoctorProfile = () => {
   ];
   const LocationToggle = ["On", "Off"];
   const [locationOn, toggleLocation] = useState("On");
+  const UpdateProfile = async () => {
+    const data = {
+      dob: `${values.dob}`,
+      country,
+      phone: `${values.phone}`,
+      email: `${values.email}`,
+      specialty,
+      Languages,
+      Location,
+      locationOn
+    };
+
+    const config = {
+      method: "patch",
+      url: `${BaseUrl}/update-profile`,
+      headers: { Authorization: "Bearer " + token },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+    initialValues: {
+      dob: "",
+      phone: "",
+      email: "",
+      bio: ""
+    },
+    onSubmit: UpdateProfile
+  });
+
   return (
     <Container>
       <DoctorDashboardNavbar active={"Profile"} />
@@ -84,6 +126,8 @@ export const DoctorProfile = () => {
               title="Date of Birth"
               icon={<Calendar />}
               placeholder={"dd/mm/yy"}
+              inputValue={values.dob}
+              onChange={handleChange("dob")}
             />
             <Dropdown
               width={"80%"}
@@ -98,6 +142,8 @@ export const DoctorProfile = () => {
               width={"80%"}
               title="Phone Number"
               placeholder={`${user.phoneNumber}`}
+              inputValue={values.phone}
+              onChange={handleChange("phone")}
             />
             <TextForm
               width={"80%"}
@@ -105,6 +151,8 @@ export const DoctorProfile = () => {
               title="Email Address"
               icon={<Edit />}
               placeholder={`${user.email}`}
+              inputValue={values.email}
+              onChange={handleChange("email")}
             />
             <DropDowns>
               <Dropdown
@@ -150,10 +198,12 @@ export const DoctorProfile = () => {
           <BioInput
             title={"Bio"}
             placeholder={"Say something about yourself"}
+            inputValue={values.bio}
+            onChange={handleChange("bio")}
           />
 
           <ButtonDiv>
-            <Button width={"100%"} text="Save Changes" />
+            <Button width={"100%"} text="Save Changes" onClick={handleSubmit} />
           </ButtonDiv>
         </Main>
       </Body>

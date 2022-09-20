@@ -9,6 +9,9 @@ import { ReactComponent as HistoryIcon } from "../../Images/NavbarElements/histo
 import { ReactComponent as PrescriptionIcon } from "../../Images/NavbarElements/prescriptionIcon.svg";
 import { ReactComponent as SettingsIcon } from "../../Images/NavbarElements/settingsIcon.svg";
 import { ReactComponent as LogOutIcon } from "../../Images/NavbarElements/logOutIcon.svg";
+import { ReactComponent as DoctorIcon } from "../../Images/NavbarElements/doctorsIcon.svg";
+import { ReactComponent as PatientIcon } from "../../Images/NavbarElements/patientsIcon.svg";
+import { ReactComponent as DocumentIcon } from "../../Images/NavbarElements/documentsIcon.svg";
 ///import active icons
 import { ReactComponent as DashboardActiveIcon } from "../../Images/NavbarActiveElements/dashboardActiveIcon.svg";
 import { ReactComponent as ProfileActiveIcon } from "../../Images/NavbarActiveElements/profileActiveIcon.svg";
@@ -16,6 +19,10 @@ import { ReactComponent as CalendarActiveIcon } from "../../Images/NavbarActiveE
 import { ReactComponent as HistoryActiveIcon } from "../../Images/NavbarActiveElements/historyActiveIcon.svg";
 import { ReactComponent as PrescriptionActiveIcon } from "../../Images/NavbarActiveElements/prescriptionActiveIcon.svg";
 import { ReactComponent as SettingsActiveIcon } from "../../Images/NavbarActiveElements/settingsActiveIcon.svg";
+import { ReactComponent as DoctorsActiveIcon } from "../../Images/NavbarActiveElements/doctorsActiveIcon.svg";
+import { ReactComponent as PatientsActiveIcon } from "../../Images/NavbarActiveElements/patientActiveIcon.svg";
+import { ReactComponent as DocumentsActiveIcon } from "../../Images/NavbarActiveElements/documentsActiveIcon.svg";
+
 import { useNavigate } from "react-router";
 
 export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
@@ -97,6 +104,59 @@ export const DoctorDashboardNavbar = ({
       <HistoryActiveIcon />,
       "Patient History",
       `/${role}/patient-history`
+    ],
+    [<SettingsIcon />, <SettingsActiveIcon />, "Settings", `/${role}/settings`]
+  ];
+  return (
+    <Container>
+      <LogoSection>
+        <Logo style={{ cursor: "pointer" }} onClick={() => navigate("/")} />
+        <h1 onClick={() => navigate("/")}> SteadCare</h1>
+      </LogoSection>
+      <NavItems>
+        {Navs.map((nav, index) => (
+          <NavItem
+            key={index}
+            active={active}
+            item={nav[2]}
+            onClick={() => navigate(nav[3])}
+          >
+            {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
+            <span>
+              <h1>{nav[2]}</h1>
+            </span>
+          </NavItem>
+        ))}
+      </NavItems>
+      <LogOutDiv>
+        <NavItem active={active}>
+          <div>
+            <LogOutIcon />
+          </div>
+          <span>
+            {" "}
+            <h1>Log Out</h1>
+          </span>
+        </NavItem>
+      </LogOutDiv>
+    </Container>
+  );
+};
+
+export const AdminDashboardNavbar = ({
+  active = "Dashboard",
+  role = "admin"
+}) => {
+  const navigate = useNavigate();
+  const Navs = [
+    [<DashboardIcon />, <DashboardActiveIcon />, "Dashboard", `/${role}/home`],
+    [<DoctorIcon />, <DoctorsActiveIcon />, "Doctors", `/${role}/doctors`],
+    [<PatientIcon />, <PatientsActiveIcon />, "Patients", `/${role}/patients`],
+    [
+      <DocumentIcon />,
+      <DoctorsActiveIcon />,
+      "Documents",
+      `/${role}/documents`
     ],
     [<SettingsIcon />, <SettingsActiveIcon />, "Settings", `/${role}/settings`]
   ];
