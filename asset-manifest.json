@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/steadcare/static/css/main.51f7d833.css",
-    "main.js": "/steadcare/static/js/main.b675445b.js",
+    "main.css": "/steadcare/static/css/main.efa0b852.css",
+    "main.js": "/steadcare/static/js/main.403c9594.js",
     "static/media/FAQs_banner.svg": "/steadcare/static/media/FAQs_banner.748bf284a242f8ceb7313398a1985588.svg",
     "static/media/contact_us_banner.svg": "/steadcare/static/media/contact_us_banner.d472fcfc3a52ba52e9008e5509b678ac.svg",
     "static/media/home_banner.svg": "/steadcare/static/media/home_banner.4617d55290d3b4c89728a5f8bacf4b15.svg",
@@ -25,6 +25,8 @@
     "static/media/appointment.svg": "/steadcare/static/media/appointment.ee5c1a996cb3d00047a4cba5919c99ac.svg",
     "static/media/settingsIcon.svg": "/steadcare/static/media/settingsIcon.eaa0e016957594312b442576d94c58dd.svg",
     "static/media/cash_month.svg": "/steadcare/static/media/cash_month.fbc97bd52507a6218d92e1071c328856.svg",
+    "static/media/doctorsIcon.svg": "/steadcare/static/media/doctorsIcon.7ad6680f684815c7959340921d6e368c.svg",
+    "static/media/doctorsActiveIcon.svg": "/steadcare/static/media/doctorsActiveIcon.8d81bf3f759a8477642b5bcf55dc44c0.svg",
     "static/media/EditIcon.svg": "/steadcare/static/media/EditIcon.be69f1119336e26a8baaa5a316d8c530.svg",
     "static/media/twitterIcon.svg": "/steadcare/static/media/twitterIcon.c113571675f4dc91885f92ba3e616f64.svg",
     "static/media/cash_year.svg": "/steadcare/static/media/cash_year.c0025cf9fade72c772dd4a208296dc82.svg",
@@ -37,14 +39,17 @@
     "static/media/profileIcon.svg": "/steadcare/static/media/profileIcon.52b655d832087765309c6533e79b69b3.svg",
     "static/media/settingsActiveIcon.svg": "/steadcare/static/media/settingsActiveIcon.b8df89d9a1e03da84b3be5f3a828c1de.svg",
     "static/media/NotifyBell_.svg": "/steadcare/static/media/NotifyBell_.a637ea7fadbe902628710b801ab7c6d7.svg",
+    "static/media/patientsIcon.svg": "/steadcare/static/media/patientsIcon.b0fe04ab43bc67a7c374c088cd576471.svg",
     "static/media/logOutIcon.svg": "/steadcare/static/media/logOutIcon.0d55bc26629296a3fd0c2477941b8e82.svg",
     "static/media/patients_pink.svg": "/steadcare/static/media/patients_pink.75e5902169c7048030e30c48d098c9b0.svg",
     "static/media/wallet_vector.svg": "/steadcare/static/media/wallet_vector.3113c694d0dd0489c713e026b4fba1c5.svg",
     "static/media/cancelIcon.svg": "/steadcare/static/media/cancelIcon.cedac8f471716334d657179c26356ee9.svg",
+    "static/media/documentsIcon.svg": "/steadcare/static/media/documentsIcon.6d3e5795107c86e978837608fa261c41.svg",
     "static/media/formCalendarIcon.svg": "/steadcare/static/media/formCalendarIcon.9aef3029e74057905f8b3bd4d4cae83e.svg",
     "static/media/profileActiveIcon.svg": "/steadcare/static/media/profileActiveIcon.a9e6b8268c98e3a369610868c549c7c5.svg",
     "static/media/select.svg": "/steadcare/static/media/select.fd5fcc39d593a9f55500a54fa44fd6a9.svg",
     "static/media/facebookIcon.svg": "/steadcare/static/media/facebookIcon.25fa3650489e4b3c4c2af5104fb8ede8.svg",
+    "static/media/documentsActiveIcon.svg": "/steadcare/static/media/documentsActiveIcon.75d5134925c5e17b3097a7327c29d49b.svg",
     "static/media/calendarActiveIcon.svg": "/steadcare/static/media/calendarActiveIcon.5788a5c5cbd2be1cac2e53c395c6deef.svg",
     "static/media/prescriptionIcon.svg": "/steadcare/static/media/prescriptionIcon.b32ae268162461ae80c7f48a92c4f478.svg",
     "static/media/patient_bed.svg": "/steadcare/static/media/patient_bed.bdac8ab58b23b700fd23ddbd34bc0800.svg",
@@ -55,6 +60,7 @@
     "static/media/prescriptionActiveIcon.svg": "/steadcare/static/media/prescriptionActiveIcon.60a17d7603c321ba62a984b026905c24.svg",
     "static/media/eyeIcon.svg": "/steadcare/static/media/eyeIcon.76163c86ba6b3c66bfae5fd4402367df.svg",
     "static/media/formEditIcon.svg": "/steadcare/static/media/formEditIcon.dbd4345d7c19373f6a10d6ff78785c5b.svg",
+    "static/media/patientActiveIcon.svg": "/steadcare/static/media/patientActiveIcon.e0ac0ad7f34869b00684314c95323725.svg",
     "static/media/InviteIcon.svg": "/steadcare/static/media/InviteIcon.39243d395e60e4d2006f7312f8bfacad.svg",
     "static/media/planeCircle.svg": "/steadcare/static/media/planeCircle.7ae95445f2aa9f4ad8a5aa7c26070a9b.svg",
     "static/media/locationIcon.svg": "/steadcare/static/media/locationIcon.b2ee8a5c3d70700515b0b5c4463de5b7.svg",
@@ -64,11 +70,11 @@
     "static/media/dashboardActiveIcon.svg": "/steadcare/static/media/dashboardActiveIcon.abe21c1315f3e260faa1c091e1b909dc.svg",
     "static/media/eyeClosedIcon.svg": "/steadcare/static/media/eyeClosedIcon.1376c33e1ad03975be50893b5fcba1ee.svg",
     "static/media/CheckMark.svg": "/steadcare/static/media/CheckMark.c86abb0a09d844ba66f9f97933819810.svg",
-    "main.51f7d833.css.map": "/steadcare/static/css/main.51f7d833.css.map",
-    "main.b675445b.js.map": "/steadcare/static/js/main.b675445b.js.map"
+    "main.efa0b852.css.map": "/steadcare/static/css/main.efa0b852.css.map",
+    "main.403c9594.js.map": "/steadcare/static/js/main.403c9594.js.map"
   },
   "entrypoints": [
-    "static/css/main.51f7d833.css",
-    "static/js/main.b675445b.js"
+    "static/css/main.efa0b852.css",
+    "static/js/main.403c9594.js"
   ]
 }
