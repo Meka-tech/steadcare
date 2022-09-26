@@ -76,7 +76,7 @@ const Question = styled.div`
   }
 `;
 const SVG = styled.div`
-  flex: 1;
+  flex: 0.2;
   display: flex;
   margin-left: 500px;
   cursor: pointer;
@@ -97,7 +97,8 @@ const Answer = styled.div`
   align-self: flex-start;
   margin-top: 20px;
   margin-bottom: 10px;
-  width: 80%;
+  height: 3rem;
+  width: 98%;
   transform: ${(props) => (props.open ? null : "translateY(-55px)")};
   opacity: ${(props) => (props.open ? "1" : "0")};
   transition: all 0.15s ease-in-out;
@@ -115,7 +116,7 @@ const Answer = styled.div`
     margin: 0;
     text-align: left;
     width: 100%;
-    line-height: 40px;
+    line-height: 3rem;
     ${mobile({
       lineHeight: "18px",
       width: "380px",

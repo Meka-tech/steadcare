@@ -29,3 +29,9 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(170, 170, 170);
 }
+
+@media screen and (max-width: 500px) {
+  html {
+    font-size: 8px;
+  }
+}

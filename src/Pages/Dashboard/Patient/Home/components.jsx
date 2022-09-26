@@ -10,6 +10,7 @@ import { ReactComponent as Plane } from "../../../../Images/planeCircle.svg";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import approveBadge from "../../../../Images/approveBadge.png";
+import { mobile } from "../../../../Utilities/responsive";
 export const DoctorComponent = ({ displayPic, name, rating, book }) => {
   return (
     <DoctorContainer>
@@ -94,10 +95,10 @@ export const BookADoctor = () => {
         }}
       >
         <h3>Book a Doctor</h3>
-        <Arrow />
+        <Arrow width={"2rem"} height={"2rem"} />
       </Link>
       <Svg>
-        <BookADoctorSvg />
+        <BookADoctorSvg width={"18rem"} height={"12rem"} />
       </Svg>
     </BookADoctorContainer>
   );
@@ -112,17 +113,26 @@ const BookADoctorContainer = styled.div`
   width: 45rem;
   border-radius: 1rem;
   position: relative;
+  ${mobile({
+    maxWidth: "27rem"
+  })}
+
   h1 {
     font-size: 1.8rem;
     font-weight: 600;
     color: black;
     width: 80%;
+    ${mobile({
+      fontSize: "1.6rem"
+    })}
   }
 `;
 const Svg = styled.div`
   position: absolute;
   bottom: 0;
-  right: 2rem;
+  right: 0;
+  display: flex;
+  align-items: flex-end;
 `;
 const Link = styled.div`
   cursor: pointer;
@@ -135,13 +145,16 @@ const Link = styled.div`
     font-weight: 600;
     color: rgba(0, 0, 255, 0.9);
     margin-right: 1rem;
+    ${mobile({
+      fontSize: "1.2rem"
+    })}
   }
 `;
 
 export const SendInvite = ({ setActive }) => {
   return (
     <SendInviteContainer>
-      <SendInviteSvg />
+      <SendInviteSvg width={"3.5rem"} height={"3.5rem"} />
       <h1>Send Invite</h1>
       <h4>Invite family, friends or Doctors to STEADCARE.</h4>
       <Link2
@@ -150,7 +163,7 @@ export const SendInvite = ({ setActive }) => {
         }}
       >
         <h3>Invite</h3>
-        <Arrow />
+        <Arrow width={"2rem"} height={"2rem"} />
       </Link2>
     </SendInviteContainer>
   );
@@ -163,6 +176,9 @@ const SendInviteContainer = styled.div`
   border-radius: 1rem;
   background-color: white;
   border: 0.1rem solid rgba(152, 224, 250, 1);
+  ${mobile({
+    maxWidth: "15rem"
+  })}
   h1 {
     margin: 0;
     padding: 0;

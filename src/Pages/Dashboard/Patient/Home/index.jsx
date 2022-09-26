@@ -63,7 +63,7 @@ export const PatientDashboard = () => {
             </span>
           </div>
           <div>
-            <DoctorSvg />
+            <DoctorSvg width={"27rem"} height={"27rem"} />
           </div>
         </Banner>
         <TopDoctors>

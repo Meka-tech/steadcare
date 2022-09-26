@@ -96,17 +96,6 @@ export const BookADoctorPage = () => {
     );
   };
 
-  // useMemo(() => {
-  //   if (specialty !== "") {
-  //     FilterDoctors();
-  //   }
-  // }, [specialty]);
-  // useEffect(() => {
-  //   if (doctorIndex !== undefined) {
-  //     setDoctorName(doctors[doctorIndex].name);
-  //   }
-  // }, [doctors, doctorIndex]);
-
   const MorningTimeSlots = ["08:00", "09:00", "10:00", "11:00"];
   const AfternoonTimeSlots = ["12:00", "1:00", "2:00", "3:00", "4:00"];
 

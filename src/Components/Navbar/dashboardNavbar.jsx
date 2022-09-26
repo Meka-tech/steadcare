@@ -22,8 +22,9 @@ import { ReactComponent as SettingsActiveIcon } from "../../Images/NavbarActiveE
 import { ReactComponent as DoctorsActiveIcon } from "../../Images/NavbarActiveElements/doctorsActiveIcon.svg";
 import { ReactComponent as PatientsActiveIcon } from "../../Images/NavbarActiveElements/patientActiveIcon.svg";
 import { ReactComponent as DocumentsActiveIcon } from "../../Images/NavbarActiveElements/documentsActiveIcon.svg";
-
+import { ReactComponent as Hamburger } from "../../Images/NavbarActiveElements/hamburger_icon.svg";
 import { useNavigate } from "react-router";
+import { mobile } from "../../Utilities/responsive";
 
 export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
   const navigate = useNavigate();
@@ -53,7 +54,12 @@ export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
   return (
     <Container>
       <LogoSection>
-        <Logo style={{ cursor: "pointer" }} onClick={() => navigate("/")} />
+        <Logo
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/")}
+          height={"3.5rem"}
+          width={"3.5rem"}
+        />
         <h1 onClick={() => navigate("/")}> SteadCare</h1>
       </LogoSection>
       <NavItems>
@@ -82,6 +88,9 @@ export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
           </span>
         </NavItem>
       </LogOutDiv>
+      <HamburgerDiv>
+        <Hamburger height={"3.5rem"} width={"3.5rem"} />
+      </HamburgerDiv>
     </Container>
   );
 };
@@ -110,7 +119,12 @@ export const DoctorDashboardNavbar = ({
   return (
     <Container>
       <LogoSection>
-        <Logo style={{ cursor: "pointer" }} onClick={() => navigate("/")} />
+        <Logo
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/")}
+          height={"3.5rem"}
+          width={"3.5rem"}
+        />
         <h1 onClick={() => navigate("/")}> SteadCare</h1>
       </LogoSection>
       <NavItems>
@@ -139,6 +153,9 @@ export const DoctorDashboardNavbar = ({
           </span>
         </NavItem>
       </LogOutDiv>
+      <HamburgerDiv>
+        <Hamburger height={"3.5rem"} width={"3.5rem"} />
+      </HamburgerDiv>
     </Container>
   );
 };
@@ -163,7 +180,12 @@ export const AdminDashboardNavbar = ({
   return (
     <Container>
       <LogoSection>
-        <Logo style={{ cursor: "pointer" }} onClick={() => navigate("/")} />
+        <Logo
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/")}
+          height={"3.5rem"}
+          width={"3.5rem"}
+        />
         <h1 onClick={() => navigate("/")}> SteadCare</h1>
       </LogoSection>
       <NavItems>
@@ -192,6 +214,9 @@ export const AdminDashboardNavbar = ({
           </span>
         </NavItem>
       </LogOutDiv>
+      <HamburgerDiv>
+        <Hamburger height={"3.5rem"} width={"3.5rem"} />
+      </HamburgerDiv>
     </Container>
   );
 };
@@ -206,6 +231,16 @@ const Container = styled.div`
   background-color: white;
   overflow: hidden;
   z-index: 200;
+  ${mobile({
+    width: "100vw",
+    backgroundColor: "rgba(246, 246, 246, 1)",
+    height: "5rem",
+    display: "flex",
+    maxHeight: "5rem",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "1rem"
+  })}
 `;
 const LogoSection = styled.div`
   box-sizing: border-box;
@@ -215,19 +250,26 @@ const LogoSection = styled.div`
   align-items: flex-end;
   border-bottom: 1px solid rgba(85, 85, 85, 0.2);
   height: 4rem;
+  ${mobile({
+    height: "fit-content",
+    paddingLeft: "0",
+    borderBottom: "none"
+  })}
   h1 {
     padding: 0;
     margin: 0;
     font-family: Montserrat;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    line-height: 2.3rem;
     letter-spacing: 0.06em;
     text-align: left;
     color: rgba(0, 0, 255, 0.9);
     text-transform: uppercase;
     margin-left: 0.3rem;
     cursor: pointer;
+    ${mobile({
+      letterSpacing: "0"
+    })}
   }
 `;
 const NavItems = styled.div`
@@ -240,6 +282,9 @@ const NavItems = styled.div`
   padding-top: 2.5em;
   height: 80%;
   border-bottom: 1px solid rgba(85, 85, 85, 0.2);
+  ${mobile({
+    display: "none"
+  })}
 `;
 const LogOutDiv = styled.div`
   box-sizing: border-box;
@@ -248,6 +293,9 @@ const LogOutDiv = styled.div`
   justify-content: space-between;
   padding: 2rem;
   padding-top: 2rem;
+  ${mobile({
+    display: "none"
+  })}
 `;
 const NavItem = styled.div`
   box-sizing: border-box;
@@ -278,4 +326,13 @@ const NavItem = styled.div`
       props.active === props.item ? "rgba(0, 0, 255, 1)" : "black"};
     cursor: pointer;
   }
+`;
+
+const HamburgerDiv = styled.div`
+  width: fit-content;
+  height: fit-content;
+  display: none;
+  ${mobile({
+    display: "flex"
+  })}
 `;
