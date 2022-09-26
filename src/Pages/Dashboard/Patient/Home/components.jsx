@@ -257,15 +257,14 @@ export const InviteModal = ({ setActive, value = "" }) => {
 };
 
 const Shade = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 90rem;
+  position: fixed;
+  width: 90%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.6);
-  top: 0;
-  left: 0;
+  margin-left: auto;
   z-index: 10;
 `;
 const ModalContainer = styled.div`

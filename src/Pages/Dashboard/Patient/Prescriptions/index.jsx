@@ -10,34 +10,17 @@ import axios from "axios";
 import { useEffect } from "react";
 import { BaseUrl } from "../../../../Utilities/API";
 import { useSelector } from "react-redux";
+import useFetch from "../../../../hooks/useFetch";
 
 export const PatientPrescription = () => {
   const token = useSelector((state) => state.reducer.patientDetails.token);
   const [prescription, setPrescription] = useState();
-  const [loading, setLoading] = useState(false);
 
-  const FetchPrescriptions = async () => {
-    setLoading(true);
-    const config = {
-      method: "get",
-      url: `${BaseUrl}/my-prescriptions`,
-      headers: { Authorization: "Bearer " + token }
-    };
-
-    axios(config)
-      .then(function (response) {
-        setLoading(false);
-        setPrescription(response.data.data);
-      })
-      .catch(function (error) {
-        setLoading(false);
-        console.log(error);
-      });
+  const CallBackFunction = (response) => {
+    setPrescription(response.data.data);
   };
 
-  useEffect(() => {
-    FetchPrescriptions();
-  }, []);
+  const { loading } = useFetch(token, "/my-prescriptions", CallBackFunction);
 
   return (
     <Container>

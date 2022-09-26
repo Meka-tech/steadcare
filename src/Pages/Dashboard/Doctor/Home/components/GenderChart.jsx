@@ -8,6 +8,7 @@ import { BaseUrl } from "../../../../../Utilities";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
+import useFetch from "../../../../../hooks/useFetch";
 
 export const GenderChart = () => {
   const token = useSelector((state) => state.reducer.doctorDetails.token);
@@ -19,26 +20,7 @@ export const GenderChart = () => {
     setFemaleCount(response.data.data.females);
   };
 
-  const GenderStats = async () => {
-    const config = {
-      method: "get",
-      url: `${BaseUrl}/female-male-statistics?year=2022`,
-      headers: { Authorization: "Bearer " + token }
-    };
-
-    axios(config)
-      .then(function (response) {
-        SetStats(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  useEffect(() => {
-    GenderStats();
-  }, []);
-
+  useFetch(token, "/female-male-statistics?year=2022", SetStats);
   ChartJS.register(ArcElement, Tooltip, Legend);
 
   const data = {

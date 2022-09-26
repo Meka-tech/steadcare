@@ -132,16 +132,16 @@ export const AppointmentList = ({ data, loading }) => {
         {loading === false &&
           data?.map((datum, index) => {
             if (activeTab === "PA") {
-              if (datum[3] === "Completed") {
+              if (datum.status === "completed") {
                 return (
-                  <Column key={index + datum[0]}>
+                  <Column key={index + Math.round(2)}>
                     <NameDiv>
-                      <DisplayPicture /> <h4>{datum[0]}</h4>
+                      <DisplayPicture /> <h4>{datum.name}</h4>
                     </NameDiv>
-                    <h4>{datum[1]}</h4>
-                    <h4>{datum[2]}</h4>
+                    <h4>{datum.time}</h4>
+                    <h4>{datum.time}</h4>
                     <StatusDiv>
-                      <Status status={`${datum[3]}`}>{datum[3]}</Status>
+                      <Status status={`${datum.status}`}>{datum.status}</Status>
                       <ThreeDots
                         onClick={() => {
                           setActiveDropDown(!activeDropDown);
@@ -160,14 +160,14 @@ export const AppointmentList = ({ data, loading }) => {
               return null;
             } else {
               return (
-                <Column key={index + datum[0]}>
+                <Column key={index + Math.round(2)}>
                   <NameDiv>
-                    <DisplayPicture /> <h4>{datum[0]}</h4>
+                    <DisplayPicture /> <h4>{datum.name}</h4>
                   </NameDiv>
-                  <h4>{datum[1]}</h4>
-                  <h4>{datum[2]}</h4>
+                  <h4>{datum.time}</h4>
+                  <h4>{datum.time}</h4>
                   <StatusDiv>
-                    <Status status={`${datum[3]}`}>{datum[3]}</Status>
+                    <Status status={`${datum.status}`}>{datum.status}</Status>
                     <ThreeDots
                       onClick={() => {
                         setActiveDropDown(!activeDropDown);

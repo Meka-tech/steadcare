@@ -11,6 +11,7 @@ import axios from "axios";
 import { BaseUrl } from "../../../../../Utilities";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import useFetch from "../../../../../hooks/useFetch";
 
 export const AppointmentRequests = ({}) => {
   const [hasAppointment, setHasAppointment] = useState(true);
@@ -27,25 +28,11 @@ export const AppointmentRequests = ({}) => {
     { name: "Okoro Isi", time: "21 July, 10 am" }
   ];
 
-  const FetchAppointment = async () => {
-    const config = {
-      method: "get",
-      url: `${BaseUrl}/get-my-appoinments?pageNo=1&noOfRequests=2`,
-      headers: { Authorization: "Bearer " + token }
-    };
-
-    axios(config)
-      .then(function (response) {
-        setAppointmentData(response.data.data.fetchedData);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  const SetData = (response) => {
+    setAppointmentData(response.data.data.fetchedData);
   };
-  useEffect(() => {
-    FetchAppointment();
-  }, []);
-
+  useFetch(token, "/get-my-appoinments?pageNo=1&noOfRequests=2", SetData);
+  
   const AcceptRejectAppointment = async (status) => {
     const data = { status: status };
 

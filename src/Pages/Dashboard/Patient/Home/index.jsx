@@ -17,6 +17,7 @@ import { Capitalize } from "../../../../Utilities/globalFunc";
 import axios from "axios";
 import { BaseUrl } from "../../../../Utilities/API";
 import { updateNumberOfAppointment } from "../../../../features/userAppointments/appointmentSlice";
+import useFetch from "../../../../hooks/useFetch";
 
 export const PatientDashboard = () => {
   const [viewAll, setViewAll] = useState(false);
@@ -24,50 +25,21 @@ export const PatientDashboard = () => {
   const user = useSelector((state) => state.reducer.patientDetails.name);
   const token = useSelector((state) => state.reducer.patientDetails.token);
   const [doctors, setDoctors] = useState();
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const noOfAppointments = useSelector(
     (state) => state.reducer.appointments.amount
   );
 
-  const TopDoctorsFunc = async () => {
-    setLoading(true);
-    const config = {
-      method: "get",
-      url: `${BaseUrl}/top-doctors`,
-      headers: { Authorization: "Bearer " + token }
-    };
-
-    axios(config)
-      .then(function (response) {
-        setDoctors(response.data.data);
-        setLoading(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  const SetDoctor = (response) => {
+    setDoctors(response.data.data);
+  };
+  const UpdatAppointmentNo = (response) => {
+    dispatch(updateNumberOfAppointment(response?.data.data.length));
   };
 
-  const FetchAppointnents = async () => {
-    const config = {
-      method: "get",
-      url: `${BaseUrl}/all-doctors-appointment`,
-      headers: { Authorization: "Bearer " + token }
-    };
+  useFetch(token, "/all-doctors-appointment", UpdatAppointmentNo);
 
-    axios(config)
-      .then(function (response) {
-        dispatch(updateNumberOfAppointment(response.data.data.length));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  useEffect(() => {
-    TopDoctorsFunc();
-    FetchAppointnents();
-  }, []);
+  const { loading } = useFetch(token, "/top-doctors", SetDoctor);
   return (
     <Container>
       <DashboardNavbar role="patient" />

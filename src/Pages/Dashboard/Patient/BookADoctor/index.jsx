@@ -41,11 +41,12 @@ import { ComplaintInput, InputComponent } from "./inputComponent";
 import { Capitalize } from "../../../../Utilities/globalFunc";
 import approveBadge from "../../../../Images/approveBadge.png";
 import { useFormik } from "formik";
+import useFetch from "../../../../hooks/useFetch";
+import { useMemo } from "react";
 
 export const BookADoctorPage = () => {
   const token = useSelector((state) => state.reducer.patientDetails.token);
   const [doctors, setDoctors] = useState();
-  const [loading, setLoading] = useState(false);
   const [specialty, setSpecialty] = useState("");
   const [viewProfileActive, setViewProfileActive] = useState(false);
   const [doctorIndex, setDoctorIndex] = useState();
@@ -77,53 +78,34 @@ export const BookADoctorPage = () => {
   const Book = () => {
     setProgressBarStep(2);
   };
-  const AllDoctorsFunc = async () => {
-    setLoading(true);
-    const config = {
-      method: "get",
-      url: `${BaseUrl}/view-all-doctors`,
-      headers: { Authorization: "Bearer " + token }
-    };
-
-    axios(config)
-      .then(function (response) {
-        setDoctors(response.data.data);
-        setLoading(false);
-      })
-      .catch(function (error) {});
+  const SetAllDoctor = (response) => {
+    setDoctors(response.data.data);
   };
 
-  const FilterDoctors = async () => {
-    const config = {
-      method: "get",
-      url: `${BaseUrl}/filter-doctors?pageNo=1&noOfRequests=1&specialty=${specialty}`,
-      headers: { Authorization: "Bearer " + token }
-    };
+  const { loading } = useFetch(token, "/view-all-doctors", SetAllDoctor);
 
-    axios(config)
-      .then(function (response) {
-        setDoctors(response.data.data.fetchedDoctors);
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  const SetFilteredDoctor = (response) => {
+    setDoctors(response.data.data.fetchedDoctors);
   };
 
-  useEffect(() => {
-    AllDoctorsFunc();
-  }, []);
+  const FilterDoctors = () => {
+    useFetch(
+      token,
+      `/filter-doctors?pageNo=1&noOfRequests=1&specialty=${specialty}`,
+      SetFilteredDoctor
+    );
+  };
 
-  useEffect(() => {
-    if (specialty !== "") {
-      FilterDoctors();
-    }
-  }, [specialty]);
-  useEffect(() => {
-    if (doctorIndex !== undefined) {
-      setDoctorName(doctors[doctorIndex].name);
-    }
-  }, [doctors, doctorIndex]);
+  // useMemo(() => {
+  //   if (specialty !== "") {
+  //     FilterDoctors();
+  //   }
+  // }, [specialty]);
+  // useEffect(() => {
+  //   if (doctorIndex !== undefined) {
+  //     setDoctorName(doctors[doctorIndex].name);
+  //   }
+  // }, [doctors, doctorIndex]);
 
   const MorningTimeSlots = ["08:00", "09:00", "10:00", "11:00"];
   const AfternoonTimeSlots = ["12:00", "1:00", "2:00", "3:00", "4:00"];

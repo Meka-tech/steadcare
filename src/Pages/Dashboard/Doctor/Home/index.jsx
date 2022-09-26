@@ -22,18 +22,15 @@ import { ReactComponent as PatientIcon } from "../../../../Images/CardIcon/patie
 import { ReactComponent as AppointmentIcon } from "../../../../Images/CardIcon/appointment.svg";
 import axios from "axios";
 import { BaseUrl } from "../../../../Utilities";
+import useFetch from "../../../../hooks/useFetch";
 
 export const DoctorDashboard = () => {
   const user = useSelector((state) => state.reducer.doctorDetails.name);
   const token = useSelector((state) => state.reducer.doctorDetails.token);
-  const dispatch = useDispatch();
   const [sendInvite, setSendInvite] = useState(false);
   const [patientsCount, setPatientCount] = useState(0);
   const [appointmentCount, setAppointmentCount] = useState(0);
 
-  const noOfAppointments = useSelector(
-    (state) => state.reducer.appointments.amount
-  );
   const navigate = useNavigate();
 
   const SetStats = (response) => {
@@ -41,26 +38,7 @@ export const DoctorDashboard = () => {
     setAppointmentCount(response.data.data.appointmentCount);
   };
 
-  const FetchStats = async () => {
-    const config = {
-      method: "get",
-      url: `${BaseUrl}/docs-dasboard-statistics`,
-      headers: { Authorization: "Bearer " + token }
-    };
-
-    axios(config)
-      .then(function (response) {
-        console.log(response);
-        SetStats(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  useEffect(() => {
-    FetchStats();
-  }, []);
+  useFetch(token, "/docs-dasboard-statistics", SetStats);
   return (
     <Container>
       <DoctorDashboardNavbar />

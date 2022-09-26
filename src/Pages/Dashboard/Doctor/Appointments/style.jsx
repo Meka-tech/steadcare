@@ -115,17 +115,18 @@ export const Status = styled.div`
   border-radius: 0.5rem;
   height: 2.5rem;
   background-color: ${(props) =>
-    props.status === "Pending"
+    props.status === "pending"
       ? `rgba(119, 119, 119, 1)`
-      : props.status === "Completed"
+      : props.status === "completed"
       ? `rgba(27, 191, 0, 1)`
-      : props.status === "Declined"
+      : props.status === "declined"
       ? `rgba(255, 0, 0, 1)`
       : null};
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-transform: capitalize;
 `;
 
 export const ThreeDots = styled.div`

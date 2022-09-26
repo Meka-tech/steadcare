@@ -9,34 +9,18 @@ import { AppointmentList } from "./components";
 import axios from "axios";
 import { BaseUrl } from "../../../../Utilities/API";
 import { useSelector } from "react-redux";
+import useFetch from "../../../../hooks/useFetch";
 
 export const PatientAppointment = () => {
   const token = useSelector((state) => state.reducer.patientDetails.token);
   const [appointments, setAppointments] = useState();
-  const [loading, setLoading] = useState(false);
 
-  const FetchAppointnents = async () => {
-    setLoading(true);
-    const config = {
-      method: "get",
-      url: `${BaseUrl}/all-doctors-appointment`,
-      headers: { Authorization: "Bearer " + token }
-    };
-
-    axios(config)
-      .then(function (response) {
-        setLoading(false);
-        setAppointments(response.data.data);
-      })
-      .catch(function (error) {
-        setLoading(false);
-        console.log(error);
-      });
+  const CallBackFunc = (response) => {
+    setAppointments(response.data.data);
+    console.log(response.data.data);
   };
 
-  useEffect(() => {
-    FetchAppointnents();
-  }, []);
+  const { loading } = useFetch(token, "/all-doctors-appointment", CallBackFunc);
 
   const MockData = [
     ["Chineye Matu", "16-06-2022", "10:00am", "Completed"],
