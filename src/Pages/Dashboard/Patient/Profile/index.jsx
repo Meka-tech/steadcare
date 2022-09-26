@@ -99,7 +99,7 @@ export const PatientProfile = () => {
               width={"80%"}
               inactive={true}
               title="Date of Birth"
-              icon={<Calendar />}
+              icon={<Calendar width={"2rem"} height={"2rem"} />}
               placeholder={"dd/mm/yy"}
               inputValue={values.dob}
               onChange={handleChange("dob")}
@@ -124,7 +124,7 @@ export const PatientProfile = () => {
               width={"80%"}
               inactive={true}
               title="Email Address"
-              icon={<Edit />}
+              icon={<Edit width={"2rem"} height={"2rem"} />}
               placeholder={`${user.email}`}
               inputValue={values.email}
               onChange={handleChange("email")}

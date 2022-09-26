@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { ReactComponent as Select } from "../../Images/Directionals/select.svg";
+import { mobile } from "../../Utilities/responsive";
 
 export const Dropdown = ({
   ref,
@@ -52,7 +53,7 @@ export const Dropdown = ({
               <Label> {label}</Label>
             )}
             <Icon style={{ cursor: "pointer" }} onClick={() => ToggleActive()}>
-              <Select />
+              <Select width={"2rem"} height={"2rem"} />
             </Icon>
           </InputField>
         </Input>
@@ -102,7 +103,7 @@ const InputField = styled.div`
   font-size: 1.6rem;
   color: rgba(75, 72, 78, 0.7);
   line-height: 1.95rem;
-  height: ${(props) => (props.height ? props.height : "45px")};
+  height: ${(props) => (props.height ? props.height : "4.5rem")};
   width: 100%;
   border-radius: 0.5rem;
   border: 1px solid rgba(85, 85, 85, 0.3);
@@ -116,6 +117,8 @@ const InputField = styled.div`
   display: flex;
   justify-content: space-between;
   text-transform: capitalize;
+  box-sizing: border-box;
+  ${mobile({ fontSize: "1.4rem" })}
 `;
 const Title = styled.label`
   color: black;
@@ -159,6 +162,7 @@ const Menu = styled.div`
       margin-left: 2rem;
       font-size: 1.6rem;
       font-weight: 500;
+      ${mobile({ fontSize: "1.4rem" })}
     }
     &:hover {
       background-color: rgba(0, 0, 255, 0.1);

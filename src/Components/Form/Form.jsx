@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { ReactComponent as EyeIcon } from "../../Images/FormIcons/eyeIcon.svg";
 import { ReactComponent as EyeClosedIcon } from "../../Images/FormIcons/eyeClosedIcon.svg";
+import { mobile } from "../../Utilities/responsive";
 
 export const TextForm = ({
   title,
@@ -82,7 +83,11 @@ export const PasswordForm = ({
           value={inputValue}
         />
         <Icon style={{ cursor: "pointer" }} onClick={() => TogglePassword()}>
-          {showPassword ? <EyeIcon /> : <EyeClosedIcon />}
+          {showPassword ? (
+            <EyeIcon width={"2rem"} height={"2rem"} />
+          ) : (
+            <EyeClosedIcon width={"2rem"} height={"2rem"} />
+          )}
         </Icon>
       </InputField>
       {errorMsg ? <ErrorMsg width={width}>{errorMsg}</ErrorMsg> : null}
@@ -122,13 +127,15 @@ const Input = styled.input`
     padding: 0;
     margin: 0;
     font-size: ${(props) => (props.fontSize ? props.fontSize : "1.6rem")};
+    ${mobile({ fontSize: "1.4rem" })}
   }
+  ${mobile({ fontSize: "1.4rem" })}
 `;
 
 const InputField = styled.div`
   background-color: ${(props) =>
     props.backgroundColor ? props.backgroundColor : "transparent"};
-  height: ${(props) => (props.height ? props.height : "40px")};
+  height: ${(props) => (props.height ? props.height : "4rem")};
   width: 100%;
   border-radius: ${(props) =>
     props.borderRadius ? props.borderRadius : "0.5rem"};

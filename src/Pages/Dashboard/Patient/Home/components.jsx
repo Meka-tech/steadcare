@@ -114,7 +114,7 @@ const BookADoctorContainer = styled.div`
   border-radius: 1rem;
   position: relative;
   ${mobile({
-    maxWidth: "27rem"
+    maxWidth: "25rem"
   })}
 
   h1 {
@@ -177,7 +177,7 @@ const SendInviteContainer = styled.div`
   background-color: white;
   border: 0.1rem solid rgba(152, 224, 250, 1);
   ${mobile({
-    maxWidth: "15rem"
+    maxWidth: "13rem"
   })}
   h1 {
     margin: 0;

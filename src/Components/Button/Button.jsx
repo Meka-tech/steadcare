@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactComponent as Spinner } from "../../Images/Spinner.svg";
+import { mobile } from "../../Utilities/responsive";
 import "./Button.styles.css";
 
 export const Button = ({
   text = "Button",
   fontWeight,
   bgColor,
-  fontSize = "16px",
+  fontSize = "1.6rem",
   borderRadius,
   color,
   border,

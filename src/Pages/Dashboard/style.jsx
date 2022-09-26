@@ -77,22 +77,24 @@ export const Banner = styled.div`
 `;
 
 export const SearchDiv = styled.div`
-  background-color: white;
+  box-sizing: border-box;
+  background-color: #ffffff;
   height: 5rem;
   min-height: 5rem;
-  width: 95%;
+  width: 100%;
   display: flex;
   position: relative;
   align-items: center;
-  padding-left: 10rem;
-  padding-right: 10rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
   justify-content: space-between;
   span {
     margin-left: 2rem;
     cursor: pointer;
   }
   ${mobile({
-    marginTop: "2rem"
+    marginTop: "2rem",
+    justifyContent: "center"
   })}
 `;
 export const NavItem = styled.div`

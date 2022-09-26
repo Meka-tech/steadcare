@@ -20,13 +20,13 @@ export const AuthMargin = () => {
   return (
     <Margin>
       <Top>
-        <Icons />
+        <Icons width={"35rem"} height={"15rem"} />
       </Top>
       <Center>
-        <DocIllus />
+        <DocIllus width={"35rem"} height={"30rem"} />
       </Center>
       <Bottom>
-        <Icons />
+        <Icons width={"35rem"} height={"15rem"} />
       </Bottom>
     </Margin>
   );
@@ -47,15 +47,12 @@ export const Margin = styled.div`
 `;
 const Top = styled.div`
   margin: auto;
-  transform: scale(0.8);
 `;
 const Center = styled.div`
   margin: auto;
-  transform: scale(0.8);
 `;
 const Bottom = styled.div`
   margin: auto;
-  transform: scale(0.8);
 `;
 
 export const Body = styled.div`

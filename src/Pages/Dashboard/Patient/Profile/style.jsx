@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../../../../Utilities/responsive";
 
 export const Main = styled.div`
   margin: 4rem auto;
@@ -6,6 +7,9 @@ export const Main = styled.div`
   width: 90%;
   background-color: white;
   border-radius: 1rem;
+  ${mobile({
+    margin: "2rem auto"
+  })}
 `;
 
 export const Forms = styled.div`
@@ -13,6 +17,10 @@ export const Forms = styled.div`
   grid-template-columns: auto auto;
   margin-left: 4rem;
   margin-top: 2rem;
+  ${mobile({
+    marginLeft: "0",
+    gridTemplateColumns: "55% 55%"
+  })}
 `;
 export const DropDowns = styled.div`
   display: grid;
@@ -20,6 +28,11 @@ export const DropDowns = styled.div`
   width: 42%;
   margin-left: 4rem;
   margin-top: 1rem;
+  ${mobile({
+    width: "100%",
+    marginLeft: "0",
+    gridTemplateColumns: "55% 55%"
+  })}
 `;
 export const ButtonDiv = styled.div`
   width: 20%;
@@ -28,4 +41,8 @@ export const ButtonDiv = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 4rem;
+  ${mobile({
+    width: "50%",
+    marginTop: "4rem"
+  })}
 `;

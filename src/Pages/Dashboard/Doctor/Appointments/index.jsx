@@ -12,12 +12,11 @@ import { useSelector } from "react-redux";
 import useFetch from "../../../../hooks/useFetch";
 
 export const DoctorAppointment = () => {
-  const token = useSelector((state) => state.reducer.patientDetails.token);
+  const token = useSelector((state) => state.reducer.doctorDetails.token);
   const [appointments, setAppointments] = useState();
 
   const CallBackFunc = (response) => {
     setAppointments(response.data.data);
-    console.log(response.data.data);
   };
 
   const { loading } = useFetch(token, "/all-doctors-appointment", CallBackFunc);
