@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  AdminDashboardNavbar,
   Button,
   CheckBox,
   DashboardNavbar,
@@ -21,7 +22,7 @@ import {
 export const AdminSettings = () => {
   return (
     <Container>
-      <DashboardNavbar active={"Settings"} role={"patient"} />
+      <AdminDashboardNavbar active={"Settings"} role={"admin"} />
       <Body>
         <TopBar />
         <Main>

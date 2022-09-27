@@ -86,44 +86,45 @@ const Title = styled.label`
   color: ${(props) => (props.focused ? "rgba(0, 0, 255, 0.9)" : "black")};
   font-weight: 500;
   text-align: left;
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   text-transform: uppercase;
-  margin-right: 5rem;
+  margin-right: 1rem;
 `;
 
-export const ComplaintInput = ({ placeHolder, value, ...rest }) => {
+export const MultiInput = ({ title, value, row = 6, ...rest }) => {
   const [focused, setFocused] = useState(false);
   return (
-    <ComplaintInputDiv focused={focused}>
-      <ComplaintInputField
-        placeholder={placeHolder}
+    <MultiInputDiv focused={focused}>
+      <Title>{title}</Title>
+      <MultiInputField
+        rows={row}
         value={value}
         {...rest}
         onBlur={() => setFocused(false)}
         onFocus={() => setFocused(true)}
-        rows="6"
       />
-    </ComplaintInputDiv>
+    </MultiInputDiv>
   );
 };
 
-const ComplaintInputDiv = styled.div`
+const MultiInputDiv = styled.div`
   width: 100%;
-  height: 20rem;
+  height: fit-content;
   border-radius: 0.5rem;
-  border: ${(props) =>
-    props.focused ? "1px solid rgba(0, 0, 255, 0.9)" : "1px solid #000000"};
-  padding: 2rem;
+  padding: 2rem 0;
   box-sizing: border-box;
-  margin-bottom: 5rem;
+  margin-bottom: 1rem;
 `;
-const ComplaintInputField = styled.textarea`
+const MultiInputField = styled.textarea`
   font-family: Montserrat;
   width: 100%;
   text-align: start;
-  border: none;
+  border: 1px solid black;
   outline: none;
   font-size: 1.4rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  line-height: 2rem;
   &::placeholder {
     color: rgba(85, 85, 85, 1);
     padding: 0;

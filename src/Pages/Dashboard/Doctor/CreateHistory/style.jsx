@@ -18,5 +18,23 @@ export const CreateHistoryDiv = styled.div`
   min-height: 40rem;
   background-color: white;
   box-sizing: border-box;
-  padding: 1rem 2rem;
+  padding: 4rem;
+  margin-bottom: 5rem;
+`;
+
+export const CreateHistoryTitle = styled.h1`
+  color: blue;
+  font-weight: 500;
+  font-size: 2rem;
+  text-align: center;
+  padding: 4rem 0;
+`;
+export const FooterLink = styled.h1`
+  color: blue;
+  font-weight: 500;
+  font-size: 1.6rem;
+  margin-left: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 8rem;
+  cursor: pointer;
 `;

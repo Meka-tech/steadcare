@@ -9,7 +9,7 @@ export const LogoDiv = () => {
   return (
     <div>
       <LogoSection onClick={() => navigate("/")}>
-        <Logo style={{ cursor: "pointer" }} />
+        <Logo style={{ cursor: "pointer" }} width={"4rem"} height={"4rem"} />
         <h1> SteadCare</h1>
       </LogoSection>
     </div>
@@ -73,14 +73,13 @@ const LogoSection = styled.div`
     padding: 0;
     margin: 0;
     font-family: Montserrat;
-    font-size: 15px;
+    font-size: 1.5rem;
     font-weight: 700;
-    line-height: 2.3rem;
     letter-spacing: 0.06em;
     text-align: left;
     color: rgba(0, 0, 255, 0.9);
     text-transform: uppercase;
-    margin-left: 3px;
+    margin-left: 0.3rem;
     cursor: pointer;
   }
   margin: 3rem 0;

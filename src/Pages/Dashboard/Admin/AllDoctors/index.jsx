@@ -12,13 +12,12 @@ import { ReactComponent as CancelledAppointmentIcon } from "../../../../Images/C
 import { ReactComponent as TotalVisitorsIcon } from "../../../../Images/CardIcon/total_visitors.svg";
 import { Cards } from "./style";
 import { DataCard } from "./components/DataCard";
-import { AllAppointment } from "./components/AllAppointment";
-import { MonthlyVisitor } from "./components/MonthlyVisitor";
+import { AllAppointment, DoctorList } from "./components/DoctorList";
 
-export const AdminDashboard = () => {
+export const AdminDoctors = () => {
   return (
     <Container>
-      <AdminDashboardNavbar role="admin" />
+      <AdminDashboardNavbar role="admin" active="Doctors" />
       <Body>
         <TopBar />
         <Cards>
@@ -38,24 +37,8 @@ export const AdminDashboard = () => {
             number="0"
             money={true}
           />
-          <DataCard
-            icon={<TotalAppointmentIcon width={"4rem"} height={"4rem"} />}
-            title={"Total Appointments"}
-            number={"0"}
-          />
-          <DataCard
-            icon={<CancelledAppointmentIcon width={"4rem"} height={"4rem"} />}
-            title={"Cancelled Appointments"}
-            number="0"
-          />
-          <DataCard
-            icon={<TotalVisitorsIcon width={"4rem"} height={"4rem"} />}
-            title={"Total Visitors"}
-            number={"0"}
-          />
         </Cards>
-        <AllAppointment />
-        <MonthlyVisitor />
+        <DoctorList />
       </Body>
     </Container>
   );

@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import { DoctorDashboardNavbar } from "../../../../Components";
 import { Body, Container } from "../../style";
 import { useNavigate } from "react-router-dom";
-import { TopBar } from "../component";
+
 import { Main, Title } from "./style";
 import { CreateMedicalHistoryForm } from "./components";
+import { TopBar } from "../component";
 
 export const DoctorCreateHistory = () => {
   return (
