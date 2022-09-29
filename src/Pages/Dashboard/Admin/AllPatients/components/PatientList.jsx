@@ -2,31 +2,17 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { FormModal } from "../../formModal";
-import {
-  ConfirmModal,
-  DoctorDocuments,
-  RegistrationModal,
-  YesNoModal
-} from "./Modal";
+import { ConfirmModal, RegistrationModal, YesNoModal } from "./Modal";
 
-export const DoctorList = () => {
+export const PatientList = () => {
   const [formActive, setFormActive] = useState(false);
-  const [DocumentActive, setDocumentActive] = useState(false);
   return (
     <Container>
       {formActive && (
-        <RegistrationModal
-          setActive={setFormActive}
-          patient={""}
-          setActive2={setDocumentActive}
-        />
-      )}
-      {DocumentActive && (
-        <DoctorDocuments images={""} setActive={setDocumentActive} />
+        <RegistrationModal setActive={setFormActive} patient={""} />
       )}
       <Nav>
-        <Title>Doctors List</Title>
-        <NavLink>view disabled doctors</NavLink>
+        <Title>All Patients</Title>
       </Nav>
       <Body>
         <Header>
@@ -38,7 +24,7 @@ export const DoctorList = () => {
           <h1 style={{ cursor: "pointer" }} onClick={() => setFormActive(true)}>
             Dr Oge Amadi
           </h1>
-          <h1>Pending</h1>
+          <h1>Active</h1>
           <Actions name={"Oge Amadi"} />
         </Column>
         {/* <Empty>
@@ -53,6 +39,7 @@ const Container = styled.div`
   width: 90%;
   margin: 0 auto;
   margin-bottom: 5rem;
+  margin-top: 5rem;
 `;
 const Title = styled.h1`
   font-weight: 500;
@@ -66,14 +53,6 @@ const Nav = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 2rem;
-`;
-const NavLink = styled.h1`
-  font-weight: 500;
-  margin: 0;
-  padding: 0;
-  font-size: 1.6rem;
-  color: blue;
-  cursor: pointer;
 `;
 const Body = styled.div`
   width: 100%;
@@ -159,22 +138,22 @@ const Actions = ({ name }) => {
       )}
       <ActionDiv>
         <Button
-          color="rgba(27, 191, 0, 1)"
-          onClick={() => {
-            setActive(true);
-            setChoice("Approve");
-          }}
-        >
-          Approve
-        </Button>
-        <Button
+          color="rgba(119, 119, 119, 1)"
           onClick={() => {
             setActive(true);
             setChoice("Disable");
           }}
-          color="red"
         >
           Disable
+        </Button>
+        <Button
+          onClick={() => {
+            setActive(true);
+            setChoice("Delete");
+          }}
+          color="red"
+        >
+          Delete
         </Button>
         <Button
           color="blue"

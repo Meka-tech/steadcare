@@ -22,7 +22,7 @@ export const DoctorPatientHistory = () => {
     <Container>
       <DoctorDashboardNavbar active={"Patient History"} role={"doctor"} />
       <Body>
-        <TopBar />
+        <TopBar role={"doctor"} />
         <Main>
           <MediacalHistory data={MockData} />
         </Main>

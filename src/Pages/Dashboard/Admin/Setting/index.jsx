@@ -24,7 +24,7 @@ export const AdminSettings = () => {
     <Container>
       <AdminDashboardNavbar active={"Settings"} role={"admin"} />
       <Body>
-        <TopBar />
+        <TopBar role="admin" />
         <Main>
           <Title>Settings</Title>
           <WhiteDiv>

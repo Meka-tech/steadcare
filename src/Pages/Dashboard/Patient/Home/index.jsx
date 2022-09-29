@@ -50,7 +50,7 @@ export const PatientDashboard = () => {
             value={"https://steadcare.com/invite/a09St31D"}
           />
         )}
-        <TopBar />
+        <TopBar role={"patient"} />
         <Banner>
           <div>
             <span>

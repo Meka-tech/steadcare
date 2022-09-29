@@ -26,7 +26,7 @@ export const PatientPrescription = () => {
     <Container>
       <DashboardNavbar active={"Prescriptions"} role={"patient"} />
       <Body>
-        <TopBar />
+        <TopBar role={"patient"} />
         <Main>
           <Title>Prescriptions</Title>
           <PrescriptionList data={prescription} loading={loading} />

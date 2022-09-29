@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { useRef } from "react";
 import styled from "styled-components";
 import { Button } from "../../../../../Components";
@@ -75,7 +74,7 @@ const YesNoButtons = styled.div`
   justify-content: space-between;
 `;
 
-export const RegistrationModal = ({ setActive, patient, setActive2 }) => {
+export const RegistrationModal = ({ setActive, patient }) => {
   const ModalRef = useRef();
   useClickOutside(ModalRef, () => setActive(false));
   return (
@@ -112,14 +111,7 @@ export const RegistrationModal = ({ setActive, patient, setActive2 }) => {
             <h2>Chinenye Matu</h2>
           </div>
         </FormGrid>
-        <Button
-          text="View Documents"
-          fontSize="1.4rem"
-          onClick={() => {
-            setActive2(true);
-            setActive(false);
-          }}
-        />
+        <Button text="View Documents" fontSize="1.4rem" />
       </FormContainer>
     </Shade>
   );
@@ -208,72 +200,3 @@ const ActionMessage = styled.h1`
   text-align: center;
 `;
 const ImageContainer = styled.img``;
-
-export const DoctorDocuments = ({ setActive, images }) => {
-  const ModalRef = useRef();
-  useClickOutside(ModalRef, () => setActive(false));
-  const [tab, setTab] = useState(1);
-  return (
-    <Shade>
-      <DocumentContainer ref={ModalRef}>
-        <Header>Documents</Header>
-        <DocumentTitle>
-          {" "}
-          {tab === 1 ? "Practising License" : "Regristration certificate"}
-        </DocumentTitle>
-        <DocumentImageContainer />
-        <TabContainer>
-          <TapCircle active={tab === 1} onClick={() => setTab(1)} />
-          <TapCircle active={tab === 2} onClick={() => setTab(2)} />
-        </TabContainer>
-      </DocumentContainer>
-    </Shade>
-  );
-};
-
-const DocumentContainer = styled.div`
-  width: 50rem;
-  height: 50rem;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  box-sizing: border-box;
-  padding: 1rem;
-`;
-const Header = styled.h1`
-  margin: 0;
-  padding: 0;
-  font-weight: 500;
-  margin-top: 3rem;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-`;
-
-const DocumentTitle = styled.h2`
-  margin: 0;
-  padding: 0;
-  font-weight: 500;
-  font-size: 1.4rem;
-  margin-bottom: 2rem;
-  color: rgba(85, 85, 85, 1);
-`;
-const DocumentImageContainer = styled.img`
-  width: 70%;
-  height: 65%;
-  border: 0.06rem solid rgba(0, 0, 255, 0.6);
-`;
-const TabContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 20%;
-  margin-top: 2rem;
-`;
-const TapCircle = styled.div`
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  cursor: pointer;
-  background-color: ${(props) =>
-    props.active ? "blue" : "rgba(217, 217, 217, 1)"};
-`;

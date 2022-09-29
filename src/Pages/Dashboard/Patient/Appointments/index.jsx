@@ -35,7 +35,7 @@ export const PatientAppointment = () => {
     <Container>
       <DashboardNavbar active={"Appointments"} role={"patient"} />
       <Body>
-        <TopBar />
+        <TopBar role={"patient"} />
         <Main>
           <Title>Appointments</Title>
           <AppointmentList

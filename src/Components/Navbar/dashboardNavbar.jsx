@@ -171,7 +171,7 @@ export const AdminDashboardNavbar = ({
     [<PatientIcon />, <PatientsActiveIcon />, "Patients", `/${role}/patients`],
     [
       <DocumentIcon />,
-      <DoctorsActiveIcon />,
+      <DocumentsActiveIcon />,
       "Documents",
       `/${role}/documents`
     ],

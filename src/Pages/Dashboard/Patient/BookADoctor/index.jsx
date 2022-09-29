@@ -159,7 +159,7 @@ export const BookADoctorPage = () => {
             rating={doctors[doctorIndex].averageRating}
           />
         )}
-        <TopBar />
+        <TopBar role={"patient"} />
         <Main>
           <ProgressDiv>
             <ProgressBar steps={[0, 0, 0, 0]} step={progressBarStep} />

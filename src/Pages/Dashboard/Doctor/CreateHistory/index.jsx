@@ -13,7 +13,7 @@ export const DoctorCreateHistory = () => {
     <Container>
       <DoctorDashboardNavbar active={"Patient History"} role={"doctor"} />
       <Body>
-        <TopBar />
+        <TopBar role={"doctor"} />
         <Main>
           <Title>Create Medical History</Title>
           <CreateMedicalHistoryForm />

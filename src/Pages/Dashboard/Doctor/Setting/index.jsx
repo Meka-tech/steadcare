@@ -85,7 +85,7 @@ export const DoctorSettings = () => {
     <Container>
       <DoctorDashboardNavbar active={"Settings"} role={"doctor"} />
       <Body>
-        <TopBar />
+        <TopBar role={"doctor"} />
         <Main>
           <Title>Settings</Title>
           <WhiteDiv>

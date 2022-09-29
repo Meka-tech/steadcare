@@ -100,7 +100,7 @@ export const DoctorProfile = () => {
     <Container>
       <DoctorDashboardNavbar active={"Profile"} />
       <Body>
-        <TopBar />
+        <TopBar role={"doctor"} />
         <Main>
           <Credentials
             firstName={FirstName}

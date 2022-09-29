@@ -50,7 +50,7 @@ export const DoctorDashboard = () => {
           />
         )}
 
-        <TopBar />
+        <TopBar role={"doctor"} />
         <Banner>
           <div>
             <span>

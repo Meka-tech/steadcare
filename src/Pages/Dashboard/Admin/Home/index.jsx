@@ -20,7 +20,7 @@ export const AdminDashboard = () => {
     <Container>
       <AdminDashboardNavbar role="admin" />
       <Body>
-        <TopBar />
+        <TopBar role="admin" />
         <Cards>
           <DataCard
             icon={<TotalDoctorIcon width={"4rem"} height={"4rem"} />}

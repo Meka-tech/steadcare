@@ -28,7 +28,9 @@ import {
   AdminDashboard,
   AdminSettings,
   AdminDocotors,
-  AdminDoctors
+  AdminDoctors,
+  AdminPatients,
+  AdminDocuments
 } from "./Pages/index";
 import { ScrollToTop } from "./Utilities";
 // import store from "./app/store";
@@ -105,10 +107,12 @@ function App() {
                   element={<DoctorCreateHistory />}
                 />
                 {/* /////////////////////////////////////////////////////////
-                ////////////////////////////////////////// */}
+                //////////////////////////admin  //////////////// */}
                 <Route path="/admin/home" element={<AdminDashboard />} />
                 <Route path="/admin/settings" element={<AdminSettings />} />
                 <Route path="/admin/doctors" element={<AdminDoctors />} />
+                <Route path="/admin/patients" element={<AdminPatients />} />
+                <Route path="/admin/documents" element={<AdminDocuments />} />
               </Routes>
             </ScrollToTop>
           </Router>

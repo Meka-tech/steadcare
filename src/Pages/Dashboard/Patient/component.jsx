@@ -47,7 +47,7 @@ const InitialsContainer = styled.div`
   }
 `;
 
-export const TopBar = () => {
+export const TopBar = ({ role }) => {
   const [showNotif, setShowNotif] = useState(false);
   const [hasUnread, setHasUnread] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -78,7 +78,7 @@ export const TopBar = () => {
 
           <span
             onClick={() => {
-              navigate("/patient/profile");
+              navigate(`/${role}/profile`);
             }}
           >
             <Initials />
