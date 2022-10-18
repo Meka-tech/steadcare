@@ -80,6 +80,7 @@ export const BookADoctorPage = () => {
   };
   const SetAllDoctor = (response) => {
     setDoctors(response.data.data);
+    console.log(response);
   };
 
   const { loading } = useFetch(token, "/view-all-doctors", SetAllDoctor);

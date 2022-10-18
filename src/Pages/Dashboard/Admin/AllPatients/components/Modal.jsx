@@ -84,7 +84,7 @@ export const RegistrationModal = ({ setActive, patient }) => {
         <FormGrid>
           <div>
             <h1>Name :</h1>
-            <h2>{patient.name}</h2>
+            <h2>{patient?.name}</h2>
           </div>
           <div>
             <h1>Date of birth :</h1>
@@ -165,14 +165,14 @@ const FormHeader = styled.h1`
   margin-bottom: 2rem;
 `;
 
-export const ConfirmModal = ({ setActive, choice }) => {
+export const ConfirmModal = ({ setActive, choice, name }) => {
   const ModalRef = useRef();
   useClickOutside(ModalRef, () => setActive(false));
   return (
     <Shade>
       <ActionModalContainer ref={ModalRef}>
         <ImageContainer src={ApproveBadge} width={"100rem"} height={"100rem"} />
-        <ActionMessage>{`Successfully ${choice.toLowerCase()}d Dr Oge Amadi`}</ActionMessage>
+        <ActionMessage>{`Successfully ${choice.toLowerCase()}d ${name}`}</ActionMessage>
       </ActionModalContainer>
     </Shade>
   );

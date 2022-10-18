@@ -12,7 +12,7 @@ export const FormModal = ({ setActive, patient }) => {
         <FormGrid>
           <div>
             <h1>Name :</h1>
-            <h2>{patient.name}</h2>
+            <h2>{patient?.name}</h2>
           </div>
           <div>
             <h1>Date of birth :</h1>
@@ -28,15 +28,19 @@ export const FormModal = ({ setActive, patient }) => {
           </div>
           <div>
             <h1>Email address :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{patient?.email}</h2>
           </div>
           <div>
             <h1>Languages :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>
+              {patient?.languages.map((lan) => {
+                return lan;
+              })}
+            </h2>
           </div>
           <div>
             <h1>Specialty :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{patient?.specialty}</h2>
           </div>
         </FormGrid>
       </FormContainer>

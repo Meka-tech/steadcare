@@ -1,7 +1,7 @@
 import React from "react";
 
 import { AdminDashboardNavbar } from "../../../../Components";
-import { TopBar } from "../../Patient/component";
+import { TopBar } from "../component";
 import { Body, Container } from "../../style";
 import { ReactComponent as DisabledDoctorIcon } from "../../../../Images/CardIcon/disabled_doctor.svg";
 import { ReactComponent as PendingDoctorIcon } from "../../../../Images/CardIcon/pending_doctor.svg";
@@ -9,8 +9,23 @@ import { ReactComponent as TotalDoctorIcon } from "../../../../Images/CardIcon/t
 import { Cards } from "./style";
 import { DataCard } from "./components/DataCard";
 import { DoctorList } from "./components/DoctorList";
+import { useSelector } from "react-redux";
+import useFetch from "../../../../hooks/useFetch";
+import { useState } from "react";
 
 export const AdminDoctors = () => {
+  const token = useSelector((state) => state.reducer.adminDetails.token);
+  const [disabledDoctor, setDisabledDoctor] = useState(0);
+  const [doctor, setDoctor] = useState(0);
+  const [pendingDoctor, setPendingDoctor] = useState(0);
+
+  const setDoctorStats = (response) => {
+    setDisabledDoctor(response.data.data.disabledDoctorCount);
+    setDoctor(response.data.data.doctorCount);
+    setPendingDoctor(response.data.data.pendingDoctorsCount);
+  };
+
+  useFetch(token, "/admin/doctors-dashboard", setDoctorStats);
   return (
     <Container>
       <AdminDashboardNavbar role="admin" active="Doctors" />
@@ -20,17 +35,17 @@ export const AdminDoctors = () => {
           <DataCard
             icon={<TotalDoctorIcon width={"4rem"} height={"4rem"} />}
             title={"Total Doctors"}
-            number={"0"}
+            number={doctor}
           />
           <DataCard
             icon={<DisabledDoctorIcon width={"4rem"} height={"4rem"} />}
             title={"Disabled Doctors"}
-            number={"0"}
+            number={disabledDoctor}
           />
           <DataCard
             icon={<PendingDoctorIcon width={"4rem"} height={"4rem"} />}
             title={"Pending Doctors"}
-            number="0"
+            number={pendingDoctor}
           />
         </Cards>
         <DoctorList />

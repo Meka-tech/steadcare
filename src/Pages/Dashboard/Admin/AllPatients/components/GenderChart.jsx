@@ -5,18 +5,19 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { AiOutlineDown } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import useFetch from "../../../../../hooks/useFetch";
 
 export const GenderChart = () => {
-  const token = useSelector((state) => state.reducer.doctorDetails.token);
-  const [maleCount, setMaleCount] = useState(120);
-  const [femaleCount, setFemaleCount] = useState(30);
+  const token = useSelector((state) => state.reducer.adminDetails.token);
+  const [maleCount, setMaleCount] = useState(0);
+  const [femaleCount, setFemaleCount] = useState(0);
 
-  // const SetStats = (response) => {
-  //   setMaleCount(response.data.data.males);
-  //   setFemaleCount(response.data.data.females);
-  // };
+  const SetStats = (response) => {
+    setMaleCount(response.data.data.totalMales);
+    setFemaleCount(response.data.data.totalFemales);
+  };
 
-  // useFetch(token, "/female-male-statistics?year=2022", SetStats);
+  useFetch(token, "/admin/fetch-gendr-stats", SetStats);
   ChartJS.register(ArcElement, Tooltip, Legend);
 
   const data = {

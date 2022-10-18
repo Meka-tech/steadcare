@@ -105,6 +105,30 @@ export const UserSignUp = () => {
     setName(values.firstName + " " + values.lastName);
   }, [values.firstName, values.lastName]);
 
+  // const data = {
+  //   name: "Admin",
+  //   email: "admin@email.com",
+  //   phone: "00000000001",
+  //   password: "Admin123",
+  //   confirmPassword: "Admin123",
+  //   role: "admin"
+  // };
+
+  // const config = {
+  //   method: "post",
+  //   url: `${BaseUrl}/create-user-account`,
+  //   headers: {},
+  //   data: data
+  // };
+
+  // axios(config)
+  //   .then(function (response) {
+  //     console.log(response.data);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+
   return (
     <Container>
       <AuthMargin />

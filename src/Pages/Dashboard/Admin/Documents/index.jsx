@@ -1,7 +1,7 @@
 import React from "react";
 
 import { AdminDashboardNavbar } from "../../../../Components";
-import { TopBar } from "../../Patient/component";
+import { TopBar } from "../component";
 import { Body, Container } from "../../style";
 import { DocumentList } from "./components/DocumentList";
 

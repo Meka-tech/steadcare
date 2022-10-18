@@ -1,11 +1,24 @@
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import useFetch from "../../../../../hooks/useFetch";
+import { BaseUrl } from "../../../../../Utilities";
 import { FormModal } from "../../formModal";
 import { ConfirmModal, RegistrationModal, YesNoModal } from "./Modal";
 
 export const PatientList = () => {
+  const token = useSelector((state) => state.reducer.adminDetails.token);
   const [formActive, setFormActive] = useState(false);
+
+  const [allPatients, setAllPatients] = useState([]);
+
+  const setPatients = (response) => {
+    setAllPatients(response.data.data.fetchedData);
+  };
+  useFetch(token, "/admin/fetch-all-patients", setPatients);
   return (
     <Container>
       {formActive && (
@@ -20,16 +33,24 @@ export const PatientList = () => {
           <h1>Status</h1>
           <h1>Action</h1>
         </Header>
-        <Column>
-          <h1 style={{ cursor: "pointer" }} onClick={() => setFormActive(true)}>
-            Dr Oge Amadi
-          </h1>
-          <h1>Active</h1>
-          <Actions name={"Oge Amadi"} />
-        </Column>
-        {/* <Empty>
-          <h1>Doctors list will appear here when they register.</h1>
-        </Empty> */}
+        {allPatients.map((col, index) => (
+          <Column key={index}>
+            <h1
+              style={{ cursor: "pointer" }}
+              onClick={() => setFormActive(true)}
+            >
+              {col.name}
+            </h1>
+            <h1>Active</h1>
+            <Actions name={col.name} id={col._id} />
+          </Column>
+        ))}
+
+        {allPatients === 0 && (
+          <Empty>
+            <h1>Doctors list will appear here when they register.</h1>
+          </Empty>
+        )}
       </Body>
     </Container>
   );
@@ -110,16 +131,40 @@ const Empty = styled.div`
   }
 `;
 
-const Actions = ({ name }) => {
+const Actions = ({ name, id }) => {
+  const token = useSelector((state) => state.reducer.adminDetails.token);
   const [active, setActive] = useState(false);
   const [choice, setChoice] = useState("");
-
   const [formActive, setFormActive] = useState(false);
   const [confirmModalActive, setConfirmModalActive] = useState(false);
 
-  const Action = (choice) => {
+  const Action = () => {
     setConfirmModalActive(true);
     setActive(false);
+    if (choice === "Delete") {
+      DeletePatient();
+    }
+  };
+  const [clickedPatient, setClickedPatient] = useState();
+
+  const GetPatient = (response) => {
+    setClickedPatient(response.data.data);
+  };
+
+  useFetch(token, `/admin/view-a-patient/${id}`, GetPatient);
+
+  const DeletePatient = () => {
+    const config = {
+      method: "delete",
+      url: `${BaseUrl}/admin/delete-a-patient/${id}`,
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    };
+
+    axios(config)
+      .then(function () {})
+      .catch(function () {});
   };
 
   return (
@@ -131,10 +176,16 @@ const Actions = ({ name }) => {
           action={Action}
         />
       )}
-      {formActive && <FormModal setActive={setFormActive} patient={""} />}
+      {formActive && (
+        <FormModal setActive={setFormActive} patient={clickedPatient} />
+      )}
 
       {confirmModalActive && (
-        <ConfirmModal setActive={setConfirmModalActive} choice={choice} />
+        <ConfirmModal
+          setActive={setConfirmModalActive}
+          choice={choice}
+          name={name}
+        />
       )}
       <ActionDiv>
         <Button

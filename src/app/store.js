@@ -6,6 +6,7 @@ import appointmentSlice from "../features/userAppointments/appointmentSlice";
 import patientSlice from "../features/userDetails/patientSlice";
 import doctorSlice from "../features/userDetails/doctorSlice";
 import loginSlice from "../features/loggedIn/loginSlice";
+import adminSlice from "../features/userDetails/adminSlice";
 
 const persistConfig = {
   key: "root",
@@ -14,6 +15,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   patientDetails: patientSlice,
   doctorDetails: doctorSlice,
+  adminDetails: adminSlice,
   appointments: appointmentSlice,
   loggedIn: loginSlice
 });

@@ -32,6 +32,10 @@ import {
   updateLoggedIn,
   updateLoggedInRole
 } from "../../../features/loggedIn/loginSlice";
+import {
+  updateAdmin,
+  updateAdminToken
+} from "../../../features/userDetails/adminSlice";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -50,10 +54,14 @@ export const Login = () => {
       dispatch(updateDoctor({ userDetails }));
       dispatch(updateDoctorToken(Token));
       dispatch(updateLoggedInRole("doctor"));
-    } else {
+    } else if (role === "patient") {
       dispatch(updatePatient({ userDetails }));
       dispatch(updatePatientToken(Token));
       dispatch(updateLoggedInRole("patient"));
+    } else {
+      dispatch(updateAdmin({ userDetails }));
+      dispatch(updateAdminToken(Token));
+      dispatch(updateLoggedInRole("admin"));
     }
     dispatch(updateLoggedIn(true));
     setIsLoading(false);

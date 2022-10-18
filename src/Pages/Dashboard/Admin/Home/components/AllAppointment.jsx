@@ -1,7 +1,17 @@
 import React from "react";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import useFetch from "../../../../../hooks/useFetch";
 
 export const AllAppointment = () => {
+  const token = useSelector((state) => state.reducer.adminDetails.token);
+  const [appointmentArray, setAppointmentArray] = useState([]);
+  const SetAppointments = (response) => {
+    console.log(response.data.data);
+    setAppointmentArray(response.data.data);
+  };
+  useFetch(token, "/admin/dashboard-appoinments", SetAppointments);
   return (
     <Container>
       <Title>All Appointments</Title>
@@ -13,18 +23,22 @@ export const AllAppointment = () => {
           <h1>REF</h1>
           <h1>STATUS</h1>
         </Header>
-        <Column>
-          <h1>Dr Oge Amadi</h1>
-          <h1>Luther Ope</h1>
-          <h1>Sept 18, 10:00</h1>
-          <h1>9230T3F</h1>
-          <Status status={"ongoing"}>
-            <div>Ongoing</div>
-          </Status>
-        </Column>
-        {/* <Empty>
-          <h1>Appointments will appear here when booked.</h1>
-  </Empty>*/}
+        {appointmentArray.map((col, index) => (
+          <Column key={index}>
+            <h1>{col.name}</h1>
+            <h1>Luther Ope</h1>
+            <h1>Sept 18, 10:00</h1>
+            <h1>9230T3F</h1>
+            <Status status={`${col.status}`}>
+              <div>{col.status}</div>
+            </Status>
+          </Column>
+        ))}
+        {appointmentArray.length === 0 && (
+          <Empty>
+            <h1>Appointments will appear here when booked.</h1>
+          </Empty>
+        )}
       </Body>
     </Container>
   );

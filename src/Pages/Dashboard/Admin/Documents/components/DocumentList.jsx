@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Spinner } from "../../component";
 import {
   DocumentListContainer,
@@ -8,9 +9,9 @@ import {
   TabContainer
 } from "../style";
 import { Column } from "./Column";
-import { DeleteModal } from "./Modal";
 
 export const DocumentList = ({ data, loading = false }) => {
+  const token = useSelector((state) => state.reducer.adminDetails.token);
   const [activeTab, setActiveTab] = useState("DD");
 
   return (

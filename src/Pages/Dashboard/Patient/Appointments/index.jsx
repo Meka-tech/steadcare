@@ -17,7 +17,6 @@ export const PatientAppointment = () => {
 
   const CallBackFunc = (response) => {
     setAppointments(response.data.data);
-    console.log(response.data.data);
   };
 
   const { loading } = useFetch(token, "/all-doctors-appointment", CallBackFunc);

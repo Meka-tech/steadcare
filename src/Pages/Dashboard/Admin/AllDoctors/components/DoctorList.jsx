@@ -1,6 +1,10 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import useFetch from "../../../../../hooks/useFetch";
+import { BaseUrl } from "../../../../../Utilities";
 import { FormModal } from "../../formModal";
 import {
   ConfirmModal,
@@ -10,8 +14,18 @@ import {
 } from "./Modal";
 
 export const DoctorList = () => {
+  const token = useSelector((state) => state.reducer.adminDetails.token);
+
   const [formActive, setFormActive] = useState(false);
+
   const [DocumentActive, setDocumentActive] = useState(false);
+
+  const [doctorList, setDoctorList] = useState([]);
+
+  const GetDoctorList = (response) => {
+    setDoctorList(response.data.data.fetchedData);
+  };
+  useFetch(token, "/admin/list-of-dotors", GetDoctorList);
   return (
     <Container>
       {formActive && (
@@ -34,16 +48,24 @@ export const DoctorList = () => {
           <h1>Status</h1>
           <h1>Action</h1>
         </Header>
-        <Column>
-          <h1 style={{ cursor: "pointer" }} onClick={() => setFormActive(true)}>
-            Dr Oge Amadi
-          </h1>
-          <h1>Pending</h1>
-          <Actions name={"Oge Amadi"} />
-        </Column>
-        {/* <Empty>
-          <h1>Doctors list will appear here when they register.</h1>
-        </Empty> */}
+        {doctorList?.map((doctor, index) => (
+          <Column key={index}>
+            <h1
+              style={{ cursor: "pointer" }}
+              onClick={() => setFormActive(true)}
+            >
+              Dr {doctor.name}
+            </h1>
+            <h1>{doctor.status}</h1>
+            <Actions name={doctor.name} id={doctor._id} />
+          </Column>
+        ))}
+
+        {doctorList === 0 && (
+          <Empty>
+            <h1>Doctors list will appear here when they register.</h1>
+          </Empty>
+        )}
       </Body>
     </Container>
   );
@@ -131,38 +153,72 @@ const Empty = styled.div`
   }
 `;
 
-const Actions = ({ name }) => {
+const Actions = ({ name, id }) => {
   const [active, setActive] = useState(false);
   const [choice, setChoice] = useState("");
 
   const [formActive, setFormActive] = useState(false);
   const [confirmModalActive, setConfirmModalActive] = useState(false);
 
-  const Action = (choice) => {
+  const Action = () => {
     setConfirmModalActive(true);
     setActive(false);
+    VerifyOrDecline();
+  };
+
+  const token = useSelector((state) => state.reducer.adminDetails.token);
+
+  const [DoctorDetails, setDoctorDetails] = useState();
+
+  const setDoctor = (response) => {
+    setDoctorDetails(response.data.data);
+  };
+
+  useFetch(token, `/admin/view-a-doctor/${id}`, setDoctor);
+
+  const VerifyOrDecline = () => {
+    const data = { status: choice };
+
+    const config = {
+      method: "patch",
+      url: `${BaseUrl}/admin/update-doctors-status/${id}`,
+      headers: {
+        Authorization: "Bearer " + token
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function () {})
+      .catch(function () {});
   };
 
   return (
     <>
       {active && (
         <YesNoModal
-          text={`Are you sure you want to ${choice} Doctor ${name}?`}
+          text={`Are you sure you want Doctor ${name} to be ${choice} ?`}
           setActive={setActive}
           action={Action}
         />
       )}
-      {formActive && <FormModal setActive={setFormActive} patient={""} />}
+      {formActive && (
+        <FormModal setActive={setFormActive} patient={DoctorDetails} />
+      )}
 
       {confirmModalActive && (
-        <ConfirmModal setActive={setConfirmModalActive} choice={choice} />
+        <ConfirmModal
+          setActive={setConfirmModalActive}
+          choice={choice}
+          name={name}
+        />
       )}
       <ActionDiv>
         <Button
           color="rgba(27, 191, 0, 1)"
           onClick={() => {
             setActive(true);
-            setChoice("Approve");
+            setChoice("enabled");
           }}
         >
           Approve
@@ -170,7 +226,7 @@ const Actions = ({ name }) => {
         <Button
           onClick={() => {
             setActive(true);
-            setChoice("Disable");
+            setChoice("disabled");
           }}
           color="red"
         >

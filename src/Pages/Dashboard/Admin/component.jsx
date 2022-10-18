@@ -14,7 +14,7 @@ import { ReactComponent as Cancel } from "../../../Images/cancelIcon.svg";
 import { useNavigate } from "react-router";
 
 export const Initials = () => {
-  const user = useSelector((state) => state.reducer.patientDetails.name);
+  const user = "Admin Dashboard";
   const firstName = user.split(" ")[0][0];
   const lastName = user.split(" ")[1][0];
   return (
@@ -77,7 +77,7 @@ export const TopBar = () => {
 
           <span
             onClick={() => {
-              navigate("/patient/profile");
+              navigate("/admin/profile");
             }}
           >
             <Initials />

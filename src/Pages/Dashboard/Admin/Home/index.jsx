@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { AdminDashboardNavbar } from "../../../../Components";
-import { TopBar } from "../../Patient/component";
+import { TopBar } from "../component";
 import { Body, Container } from "../../style";
 import { ReactComponent as Naira } from "../../../../Images/CardIcon/naira.svg";
 import { ReactComponent as PatientIcon } from "../../../../Images/CardIcon/patients_pink.svg";
@@ -14,8 +14,27 @@ import { Cards } from "./style";
 import { DataCard } from "./components/DataCard";
 import { AllAppointment } from "./components/AllAppointment";
 import { MonthlyVisitor } from "./components/MonthlyVisitor";
+import { useSelector } from "react-redux";
+import useFetch from "../../../../hooks/useFetch";
 
 export const AdminDashboard = () => {
+  const token = useSelector((state) => state.reducer.adminDetails.token);
+  const [totalDoctor, setTotalDoctors] = useState(0);
+  const [totalPatients, setTotalPatients] = useState(0);
+  const [totalEarnings, setTotalEarnings] = useState(0);
+  const [totalAppointments, setTotalAppointments] = useState(0);
+  const [cancelledAppointment, setCancelledAppointments] = useState(0);
+  const [totalVisitors, setTotalVisitors] = useState(0);
+
+  const SetStats = (response) => {
+    setTotalDoctors(response.data.data.doctorCount);
+    setTotalPatients(response.data.data.patientCount);
+    setTotalAppointments(response.data.data.totalAppointments);
+    setCancelledAppointments(response.data.data.totalCanceledAppointments);
+    setTotalVisitors(response.data.data.totalVisitors);
+  };
+
+  useFetch(token, "/admin/dashboard-statistics", SetStats);
   return (
     <Container>
       <AdminDashboardNavbar role="admin" />
@@ -25,33 +44,33 @@ export const AdminDashboard = () => {
           <DataCard
             icon={<TotalDoctorIcon width={"4rem"} height={"4rem"} />}
             title={"Total Doctors"}
-            number={"0"}
+            number={totalDoctor}
           />
           <DataCard
             icon={<PatientIcon width={"4rem"} height={"4rem"} />}
             title={"Total Patients"}
-            number={"0"}
+            number={totalPatients}
           />
           <DataCard
             icon={<Naira width={"4rem"} height={"4rem"} />}
             title={"Total Earnings"}
-            number="0"
+            number={totalEarnings}
             money={true}
           />
           <DataCard
             icon={<TotalAppointmentIcon width={"4rem"} height={"4rem"} />}
             title={"Total Appointments"}
-            number={"0"}
+            number={totalAppointments}
           />
           <DataCard
             icon={<CancelledAppointmentIcon width={"4rem"} height={"4rem"} />}
             title={"Cancelled Appointments"}
-            number="0"
+            number={cancelledAppointment}
           />
           <DataCard
             icon={<TotalVisitorsIcon width={"4rem"} height={"4rem"} />}
             title={"Total Visitors"}
-            number={"0"}
+            number={totalVisitors}
           />
         </Cards>
         <AllAppointment />
