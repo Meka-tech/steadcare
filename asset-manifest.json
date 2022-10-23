@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/steadcare/static/css/main.4a947cdc.css",
-    "main.js": "/steadcare/static/js/main.a806daff.js",
-    "static/media/FAQs_banner.svg": "/steadcare/static/media/FAQs_banner.748bf284a242f8ceb7313398a1985588.svg",
-    "static/media/contact_us_banner.svg": "/steadcare/static/media/contact_us_banner.d472fcfc3a52ba52e9008e5509b678ac.svg",
-    "static/media/home_banner.svg": "/steadcare/static/media/home_banner.4617d55290d3b4c89728a5f8bacf4b15.svg",
-    "static/media/about_us_banner.svg": "/steadcare/static/media/about_us_banner.517838f6cddc8d476ead9062fd684757.svg",
+    "main.js": "/steadcare/static/js/main.bbb68d38.js",
+    "static/media/FAQs_banner.png": "/steadcare/static/media/FAQs_banner.8b36433fc3e1b7841d96.png",
+    "static/media/about_us.png": "/steadcare/static/media/about_us.ec42eee280b5f9ced72f.png",
+    "static/media/home_banner.jpg": "/steadcare/static/media/home_banner.5f64bf79a8397dc42017.jpg",
+    "static/media/contact_us_banner.jpg": "/steadcare/static/media/contact_us_banner.5cb2cb047f7f67a8994b.jpg",
     "static/media/phone_steth.png": "/steadcare/static/media/phone_steth.670da9d5ef13891bd55b.png",
     "static/media/doctors.svg": "/steadcare/static/media/doctors.933fa63b9b320de8f0f533b58206a411.svg",
     "static/media/BookADoctor.svg": "/steadcare/static/media/BookADoctor.163aea274226ece1cb5cb9b428aaf00e.svg",
@@ -81,10 +81,10 @@
     "static/media/hamburgerIcon.svg": "/steadcare/static/media/hamburgerIcon.d96b060dac5fe3e77e2d01138e9d3410.svg",
     "static/media/hamburger_icon.svg": "/steadcare/static/media/hamburger_icon.d96b060dac5fe3e77e2d01138e9d3410.svg",
     "main.4a947cdc.css.map": "/steadcare/static/css/main.4a947cdc.css.map",
-    "main.a806daff.js.map": "/steadcare/static/js/main.a806daff.js.map"
+    "main.bbb68d38.js.map": "/steadcare/static/js/main.bbb68d38.js.map"
   },
   "entrypoints": [
     "static/css/main.4a947cdc.css",
-    "static/js/main.a806daff.js"
+    "static/js/main.bbb68d38.js"
   ]
 }
