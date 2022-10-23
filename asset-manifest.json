@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/steadcare/static/css/main.5093d421.css",
-    "main.js": "/steadcare/static/js/main.61c410e0.js",
+    "main.css": "/steadcare/static/css/main.4a947cdc.css",
+    "main.js": "/steadcare/static/js/main.a806daff.js",
     "static/media/FAQs_banner.svg": "/steadcare/static/media/FAQs_banner.748bf284a242f8ceb7313398a1985588.svg",
     "static/media/contact_us_banner.svg": "/steadcare/static/media/contact_us_banner.d472fcfc3a52ba52e9008e5509b678ac.svg",
     "static/media/home_banner.svg": "/steadcare/static/media/home_banner.4617d55290d3b4c89728a5f8bacf4b15.svg",
@@ -78,12 +78,13 @@
     "static/media/dashboardActiveIcon.svg": "/steadcare/static/media/dashboardActiveIcon.abe21c1315f3e260faa1c091e1b909dc.svg",
     "static/media/eyeClosedIcon.svg": "/steadcare/static/media/eyeClosedIcon.1376c33e1ad03975be50893b5fcba1ee.svg",
     "static/media/CheckMark.svg": "/steadcare/static/media/CheckMark.c86abb0a09d844ba66f9f97933819810.svg",
+    "static/media/hamburgerIcon.svg": "/steadcare/static/media/hamburgerIcon.d96b060dac5fe3e77e2d01138e9d3410.svg",
     "static/media/hamburger_icon.svg": "/steadcare/static/media/hamburger_icon.d96b060dac5fe3e77e2d01138e9d3410.svg",
-    "main.5093d421.css.map": "/steadcare/static/css/main.5093d421.css.map",
-    "main.61c410e0.js.map": "/steadcare/static/js/main.61c410e0.js.map"
+    "main.4a947cdc.css.map": "/steadcare/static/css/main.4a947cdc.css.map",
+    "main.a806daff.js.map": "/steadcare/static/js/main.a806daff.js.map"
   },
   "entrypoints": [
-    "static/css/main.5093d421.css",
-    "static/js/main.61c410e0.js"
+    "static/css/main.4a947cdc.css",
+    "static/js/main.a806daff.js"
   ]
 }
