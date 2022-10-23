@@ -36,6 +36,7 @@ import {
   updateAdmin,
   updateAdminToken
 } from "../../../features/userDetails/adminSlice";
+import { mobile } from "../../../Utilities/responsive";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -163,6 +164,9 @@ export const Login = () => {
 const Forms = styled.div`
   width: 50%;
   margin: 3rem 0;
+  ${mobile({
+    width: "100%"
+  })}
 `;
 const ButtonDiv = styled.div`
   width: 100%;
@@ -179,6 +183,11 @@ const Span = styled.div`
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
+  ${mobile({
+    textAlign: "left",
+    display: "block",
+    width: "100%"
+  })}
   h4 {
     margin: 0;
     padding: 0;
@@ -187,5 +196,8 @@ const Span = styled.div`
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 1.8rem;
+    ${mobile({
+      display: "inline"
+    })}
   }
 `;

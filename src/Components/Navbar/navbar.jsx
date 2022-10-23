@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../../Images/Logo.svg";
+import { ReactComponent as HamburgerIcon } from "../../Images/NavbarElements/hamburgerIcon.svg";
+import { mobile } from "../../Utilities/responsive";
 import { Button } from "../Button/Button";
 
 export const Navbar = ({ active }) => {
@@ -69,6 +71,9 @@ export const Navbar = ({ active }) => {
           height={"2.5rem"}
         />
       </ButtonSection>
+      <HamburgerDiv>
+        <HamburgerIcon />
+      </HamburgerDiv>
     </Container>
   );
 };
@@ -81,6 +86,12 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
+  background-color: white;
+  ${mobile({
+    backgroundColor: "rgba(246, 246, 246, 1)",
+    height: "5rem",
+    padding: "0 1rem"
+  })}
 `;
 
 const LogoSection = styled.div`
@@ -107,6 +118,9 @@ const LinkSection = styled.div`
   display: flex;
   justify-content: space-between;
   width: 30rem;
+  ${mobile({
+    display: "none"
+  })}
 `;
 const Link = styled.div`
   cursor: pointer;
@@ -127,4 +141,14 @@ const ButtonSection = styled.div`
   box-sizing: border-box;
   align-items: center;
   padding: 0 2rem;
+  ${mobile({
+    display: "none"
+  })}
+`;
+
+const HamburgerDiv = styled.div`
+  display: none;
+  ${mobile({
+    display: "block"
+  })}
 `;

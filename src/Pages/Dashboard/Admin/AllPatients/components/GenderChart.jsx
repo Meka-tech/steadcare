@@ -30,6 +30,15 @@ export const GenderChart = () => {
       }
     ]
   };
+  const CalPercent = () => {
+    const totalCount = maleCount + femaleCount;
+    const percent = (maleCount / totalCount) * 100;
+    if (totalCount > 0) {
+      return percent;
+    } else {
+      return 0;
+    }
+  };
   return (
     <Container>
       <HeaderDiv>
@@ -45,7 +54,7 @@ export const GenderChart = () => {
           />
         </ChartImg>
         <ChartText>
-          <h1>{(maleCount / (maleCount + femaleCount)) * 100}%</h1>
+          <h1>{CalPercent()}%</h1>
         </ChartText>
       </ChartDiv>
 

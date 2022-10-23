@@ -14,6 +14,7 @@ import axios from "axios";
 import { BaseUrl } from "../../../Utilities";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { mobile } from "../../../Utilities/responsive";
 
 export const ResetPassword = () => {
   const navigate = useNavigate();
@@ -35,7 +36,6 @@ export const ResetPassword = () => {
 
     axios(config)
       .then(function (res) {
-        console.log(res);
         setIsLoading(false);
         navigate("/reset-password/email-sent", {
           state: {
@@ -84,7 +84,7 @@ export const ResetPassword = () => {
               </ButtonDiv>
               <Span>
                 Don’t have an account?
-                <h4 onClick={() => navigate("/sign-up")}>Sign Up</h4>
+                <h4 onClick={() => navigate("/sign-up")}> Sign Up</h4>
               </Span>
             </Forms>
           </TabContent>
@@ -105,6 +105,10 @@ const SubHeader = styled.p`
   color: rgba(34, 34, 34, 0.8);
   margin-left: auto;
   margin-right: auto;
+  ${mobile({
+    width: "80%",
+    textAlign: "left"
+  })}
 `;
 
 const Headers = styled.h2`
@@ -115,12 +119,20 @@ const Headers = styled.h2`
   text-align: center;
   margin: 0;
   padding: 0;
+  ${mobile({
+    margin: "auto",
+    width: "80%",
+    textAlign: "left"
+  })}
 `;
 const Forms = styled.div`
   width: 50%;
   margin: 3rem 0;
   margin-left: auto;
   margin-right: auto;
+  ${mobile({
+    width: "80%"
+  })}
 `;
 const ButtonDiv = styled.div`
   width: 100%;
@@ -137,6 +149,10 @@ const Span = styled.div`
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
+  ${mobile({
+    textAlign: "left",
+    display: "block"
+  })}
   h4 {
     margin: 0;
     padding: 0;
@@ -145,5 +161,8 @@ const Span = styled.div`
     font-size: 1.4rem;
     font-weight: 500;
     line-height: 1.8rem;
+    ${mobile({
+      display: "inline"
+    })}
   }
 `;

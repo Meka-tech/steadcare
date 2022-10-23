@@ -6,6 +6,8 @@ import { AuthMargin, Body, Container, LogoDiv, TabContent } from "../style";
 import { ReactComponent as EmailSentIcon } from "../../../Images/EmailSent.svg";
 import { BaseUrl } from "../../../Utilities";
 import axios from "axios";
+import { mobile } from "../../../Utilities/responsive";
+import { isMobile } from "react-device-detect";
 
 export const EmailSent = () => {
   const navigate = useNavigate();
@@ -39,7 +41,10 @@ export const EmailSent = () => {
               password.
             </SubHeader>
             <Icon>
-              <EmailSentIcon />
+              <EmailSentIcon
+                width={isMobile ? "15rem" : ""}
+                height={isMobile ? "15rem" : ""}
+              />
             </Icon>
             <ButtonDiv>
               <a href={`mailto:${email}`}>
@@ -59,6 +64,7 @@ export const EmailSent = () => {
 const Icon = styled.div`
   margin: 2rem auto;
   margin-top: 4rem;
+  ${mobile({ margin: "2rem auto" })}
 `;
 const SubHeader = styled.p`
   margin: 0;
@@ -87,6 +93,7 @@ const Forms = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-right: auto;
+  ${mobile({ width: "80%" })}
 `;
 const ButtonDiv = styled.div`
   width: 100%;

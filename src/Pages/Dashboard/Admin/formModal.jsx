@@ -2,7 +2,7 @@ import { useRef } from "react";
 import styled from "styled-components";
 import useClickOutside from "../../../hooks/useClickOutside";
 
-export const FormModal = ({ setActive, patient }) => {
+export const FormModal = ({ setActive, patient, func }) => {
   const ModalRef = useRef();
   useClickOutside(ModalRef, () => setActive(false));
   return (
@@ -24,24 +24,29 @@ export const FormModal = ({ setActive, patient }) => {
           </div>
           <div>
             <h1>Phone Number :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{patient?.phone}</h2>
           </div>
           <div>
             <h1>Email address :</h1>
             <h2>{patient?.email}</h2>
           </div>
-          <div>
-            <h1>Languages :</h1>
-            <h2>
-              {patient?.languages.map((lan) => {
-                return lan;
-              })}
-            </h2>
-          </div>
-          <div>
-            <h1>Specialty :</h1>
-            <h2>{patient?.specialty}</h2>
-          </div>
+
+          {patient.languages && (
+            <div>
+              <h1>Languages :</h1>
+              <h2>
+                {patient?.languages?.map((lan) => {
+                  return lan;
+                })}
+              </h2>{" "}
+            </div>
+          )}
+          {patient.specialty && (
+            <div>
+              <h1>Specialty :</h1>
+              <h2>{patient?.specialty}</h2>
+            </div>
+          )}
         </FormGrid>
       </FormContainer>
     </ModalBackground>
@@ -96,6 +101,7 @@ const FormGrid = styled.div`
     padding: 0;
     font-size: 1.2rem;
     align-items: flex-start;
+    text-transform: capitalize;
   }
 `;
 

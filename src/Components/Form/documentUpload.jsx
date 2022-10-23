@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { truncateStrng } from "../../Utilities/globalFunc";
+import { mobile } from "../../Utilities/responsive";
 
 export const DocumentUpload = ({ title, width, onChange, fileName }) => {
   return (
@@ -26,6 +27,7 @@ export const DocumentUpload = ({ title, width, onChange, fileName }) => {
 const Container = styled.div`
   width: ${(props) => (props.width ? props.width : "100%")};
   margin-bottom: 3rem;
+  ${mobile({ width: "100%" })}
 `;
 
 const Title = styled.h1`

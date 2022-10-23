@@ -25,6 +25,8 @@ import axios from "axios";
 import { BaseUrl } from "../../../../Utilities";
 import approveBadge from "../../../../Images/approveBadge.png";
 import { useFormik } from "formik";
+import { mobile } from "../../../../Utilities/responsive";
+import { isMobile } from "react-device-detect";
 
 export const DoctorSignInProfile = () => {
   const location = useLocation();
@@ -326,7 +328,11 @@ export const DoctorSignInProfile = () => {
           {tab === "Success" ? (
             <TabContent>
               <ImageContainer>
-                <img src={approveBadge} alt="success" />
+                <img
+                  src={approveBadge}
+                  alt="success"
+                  width={isMobile ? "100rem" : ""}
+                />
               </ImageContainer>
               <SuccessText>
                 You’ve submitted your details successfully. We will get back to
@@ -345,6 +351,7 @@ const BankAccountForms = styled.div`
   margin-top: 2rem;
   width: 40%;
   margin-bottom: 2rem;
+  ${mobile({ width: "80%" })}
 `;
 const Block = styled.div`
   z-index: 10;
@@ -357,6 +364,7 @@ const Block = styled.div`
 const UploadPictureDiv = styled.div`
   margin: 5rem 0;
   width: 40%;
+  ${mobile({ width: "80%" })}
 `;
 const WarningMessage = styled.div`
   font-size: 1.2rem;
@@ -372,6 +380,7 @@ const ImageContainer = styled.div`
   align-items: center;
   margin-top: 7rem;
   margin-bottom: 4rem;
+  ${mobile({ margin: "2rem 0" })}
 `;
 const SuccessText = styled.p`
   font-family: Montserrat;
@@ -379,4 +388,5 @@ const SuccessText = styled.p`
   font-weight: 500;
   line-height: 2.5rem;
   text-align: center;
+  ${mobile({ fontSize: "1.4rem" })}
 `;

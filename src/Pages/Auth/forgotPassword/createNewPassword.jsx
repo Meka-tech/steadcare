@@ -7,6 +7,7 @@ import axios from "axios";
 import { BaseUrl } from "../../../Utilities";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { mobile } from "../../../Utilities/responsive";
 
 export const CreateNewPassword = () => {
   const navigate = useNavigate();
@@ -110,6 +111,9 @@ const SubHeader = styled.p`
   text-align: center;
   width: 100%;
   color: rgba(34, 34, 34, 0.8);
+  ${mobile({
+    textAlign: "left"
+  })}
 `;
 
 const Headers = styled.h2`
@@ -120,6 +124,9 @@ const Headers = styled.h2`
   text-align: center;
   margin: 0;
   padding: 0;
+  ${mobile({
+    textAlign: "left"
+  })}
 `;
 
 const Forms = styled.div`
@@ -130,6 +137,9 @@ const Forms = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-right: auto;
+  ${mobile({
+    width: "95%"
+  })}
 `;
 
 const ButtonDiv = styled.div`

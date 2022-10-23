@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import useFetch from "../../../../../hooks/useFetch";
 import { BaseUrl } from "../../../../../Utilities";
+import { Spinner } from "../../component";
 import { FormModal } from "../../formModal";
 import { ConfirmModal, RegistrationModal, YesNoModal } from "./Modal";
 
@@ -18,7 +19,8 @@ export const PatientList = () => {
   const setPatients = (response) => {
     setAllPatients(response.data.data.fetchedData);
   };
-  useFetch(token, "/admin/fetch-all-patients", setPatients);
+  const { loading } = useFetch(token, "/admin/fetch-all-patients", setPatients);
+
   return (
     <Container>
       {formActive && (
@@ -46,9 +48,14 @@ export const PatientList = () => {
           </Column>
         ))}
 
-        {allPatients === 0 && (
+        {allPatients.length === 0 && (
           <Empty>
-            <h1>Doctors list will appear here when they register.</h1>
+            <h1>Patient list will appear here when they register.</h1>
+          </Empty>
+        )}
+        {loading && (
+          <Empty>
+            <Spinner />
           </Empty>
         )}
       </Body>
@@ -132,11 +139,11 @@ const Empty = styled.div`
 `;
 
 const Actions = ({ name, id }) => {
-  const token = useSelector((state) => state.reducer.adminDetails.token);
   const [active, setActive] = useState(false);
   const [choice, setChoice] = useState("");
   const [formActive, setFormActive] = useState(false);
   const [confirmModalActive, setConfirmModalActive] = useState(false);
+  const [clickedID, setClickedId] = useState();
 
   const Action = () => {
     setConfirmModalActive(true);
@@ -145,18 +152,40 @@ const Actions = ({ name, id }) => {
       DeletePatient();
     }
   };
+
+  const token = useSelector((state) => state.reducer.adminDetails.token);
+
   const [clickedPatient, setClickedPatient] = useState();
 
   const GetPatient = (response) => {
     setClickedPatient(response.data.data);
   };
+  const ViewForm = async () => {
+    setClickedId(id);
+    if (clickedID !== undefined) {
+      const config = {
+        method: "get",
+        url: `${BaseUrl}/admin/view-a-patient/${clickedID}`,
+        headers: { Authorization: "Bearer " + token }
+      };
 
-  useFetch(token, `/admin/view-a-patient/${id}`, GetPatient);
+      axios(config)
+        .then(function (response) {
+          GetPatient(response);
+          if (clickedPatient !== undefined) {
+            setFormActive(true);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
 
   const DeletePatient = () => {
     const config = {
       method: "delete",
-      url: `${BaseUrl}/admin/delete-a-patient/${id}`,
+      url: `${BaseUrl}/admin/delete-a-patient/${clickedID}`,
       headers: {
         Authorization: "Bearer " + token
       }
@@ -193,6 +222,7 @@ const Actions = ({ name, id }) => {
           onClick={() => {
             setActive(true);
             setChoice("Disable");
+            setClickedId(id);
           }}
         >
           Disable
@@ -201,17 +231,13 @@ const Actions = ({ name, id }) => {
           onClick={() => {
             setActive(true);
             setChoice("Delete");
+            setClickedId(id);
           }}
           color="red"
         >
           Delete
         </Button>
-        <Button
-          color="blue"
-          onClick={() => {
-            setFormActive(true);
-          }}
-        >
+        <Button color="blue" onClick={() => ViewForm()}>
           View
         </Button>
       </ActionDiv>

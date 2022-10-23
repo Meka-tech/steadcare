@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { mobile } from "../../Utilities/responsive";
 
 export const SwitchTab = ({ labels = [""], OnSelect, selected }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -18,7 +19,10 @@ export const SwitchTab = ({ labels = [""], OnSelect, selected }) => {
             >
               {label}
             </Text>
-            <Bar active={selected ? selected === label : index === activeTab} />
+            <Bar
+              active={selected ? selected === label : index === activeTab}
+              length={labels.length}
+            />
           </Tab>
         );
       })}
@@ -34,6 +38,11 @@ const Container = styled.div`
   justify-content: space-around;
   position: relative;
   transition: all 0.2s ease-in-out;
+  ${mobile({
+    width: "90%",
+    maxWidth: "100%",
+    margin: "auto"
+  })}
 `;
 const ContainerBar = styled.div`
   position: absolute;
@@ -42,12 +51,18 @@ const ContainerBar = styled.div`
   background-color: rgba(217, 217, 217, 1);
   border-radius: 0.8rem;
   bottom: 0;
+  ${mobile({
+    width: "fitContent"
+  })}
 `;
 
 const Tab = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  ${mobile({
+    width: "100%"
+  })}
 `;
 const Text = styled.h1`
   margin: 1rem 5rem;
@@ -57,9 +72,13 @@ const Text = styled.h1`
   cursor: pointer;
   font-size: 1.7rem;
   font-weight: 700;
+  ${mobile({
+    margin: "0.5rem auto",
+    fontSize: "1.4rem"
+  })}
 `;
 const Bar = styled.div`
-  width: 100%;
+  width: ${(props) => `(100/${props.length})%`};
   height: 0.4rem;
   background-color: ${(props) =>
     props.active ? `rgba(0, 0, 255, 0.9)` : `rgba(217, 217, 217, 1)`};

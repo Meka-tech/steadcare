@@ -12,3 +12,10 @@
   font-weight: 700;
   line-height: 5rem;
 }
+@media screen and (max-width: 480px) {
+  .inputStyles {
+    padding: 2rem 1rem;
+    margin: 0 1rem;
+    line-height: 2rem;
+  }
+}

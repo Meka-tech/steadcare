@@ -17,6 +17,7 @@ import {
   updateLoggedIn,
   updateLoggedInRole
 } from "../../../../features/loggedIn/loginSlice";
+import { mobile } from "../../../../Utilities/responsive";
 
 export const OtpVerification = () => {
   const navigate = useNavigate();
@@ -128,6 +129,9 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 2.5rem;
+  ${mobile({
+    marginTop: "1rem"
+  })}
 `;
 
 const Title = styled.h1`
@@ -138,12 +142,19 @@ const Title = styled.h1`
   line-height: 2.4rem;
   text-align: center;
   margin: 2rem 0;
+  ${mobile({
+    marginTop: "1rem"
+  })}
 `;
 const OtpInput = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 2.5rem 0;
+
+  ${mobile({
+    width: "80%"
+  })};
 `;
 
 const Subtitle = styled.p`
@@ -155,6 +166,10 @@ const Subtitle = styled.p`
   letter-spacing: 0.04em;
   text-align: center;
   width: 70%;
+  ${mobile({
+    width: "85%",
+    fontSize: "1.4rem"
+  })}
 `;
 const Link = styled.p`
   margin: 0;

@@ -104,6 +104,10 @@ const Container = styled.form`
   flex-direction: column;
   transition: 0.2s ease-in-out;
   width: ${(props) => (props.width ? props.width : "100%")};
+  ${mobile({
+    width: "100%",
+    marginBottom: "2rem"
+  })}
 `;
 
 const Input = styled.input`

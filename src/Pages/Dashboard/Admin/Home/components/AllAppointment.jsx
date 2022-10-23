@@ -12,6 +12,7 @@ export const AllAppointment = () => {
     setAppointmentArray(response.data.data);
   };
   useFetch(token, "/admin/dashboard-appoinments", SetAppointments);
+  console.log(appointmentArray);
   return (
     <Container>
       <Title>All Appointments</Title>

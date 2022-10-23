@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import useFetch from "../../../../../hooks/useFetch";
 import { BaseUrl } from "../../../../../Utilities";
+import { Spinner } from "../../component";
 import { FormModal } from "../../formModal";
 import {
   ConfirmModal,
@@ -25,7 +26,7 @@ export const DoctorList = () => {
   const GetDoctorList = (response) => {
     setDoctorList(response.data.data.fetchedData);
   };
-  useFetch(token, "/admin/list-of-dotors", GetDoctorList);
+  const { loading } = useFetch(token, "/admin/list-of-dotors", GetDoctorList);
   return (
     <Container>
       {formActive && (
@@ -40,7 +41,7 @@ export const DoctorList = () => {
       )}
       <Nav>
         <Title>Doctors List</Title>
-        <NavLink>view disabled doctors</NavLink>
+        {/* <NavLink>view disabled doctors</NavLink> */}
       </Nav>
       <Body>
         <Header>
@@ -64,6 +65,12 @@ export const DoctorList = () => {
         {doctorList === 0 && (
           <Empty>
             <h1>Doctors list will appear here when they register.</h1>
+          </Empty>
+        )}
+
+        {loading && (
+          <Empty>
+            <Spinner />
           </Empty>
         )}
       </Body>

@@ -197,7 +197,7 @@ const SearchResults = styled.div`
 export const Spinner = () => {
   return (
     <SpinnerDiv>
-      <Spin className="loader-spin-patient" />
+      <Spin className="loader-spin-admin" />
     </SpinnerDiv>
   );
 };
