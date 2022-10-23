@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Footer, Navbar } from "../../../Components";
 import { Banner } from "../component";
 import { Main } from "../style";
-import { ReactComponent as HomeBanner } from "../../../Images/Banners/home_banner.svg";
 import {
   BlueborderCard,
   BoxShadowCard,
@@ -17,6 +16,7 @@ import { ReactComponent as MedicationVector } from "../../../Images/CardIcon/med
 import { ReactComponent as WalletVector } from "../../../Images/CardIcon/wallet_vector.svg";
 import { ReactComponent as FindDoctor } from "../../../Images/CardIcon/find_a_doctor.svg";
 import { ReactComponent as ObserveDoctor } from "../../../Images/CardIcon/observe_doctor.svg";
+import HomeBanner from "../../../Images/Banners/home_banner.jpg";
 import CheckMarkImage from "../../../Images/approveBadge.png";
 
 export const Home = () => {
@@ -29,7 +29,7 @@ export const Home = () => {
         desc={
           "Access steady and quality care from the best Doctors. With Steadycare you’re in safe hands.  "
         }
-        img={<HomeBanner width={"100%"} height={"100%"} />}
+        img={HomeBanner}
       />
       <WhoCanDiv>
         <h1>Who can use Steadcare?</h1>

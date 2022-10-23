@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Footer, Navbar } from "../../../Components";
 import { Banner } from "../component";
 import { Main } from "../style";
-import { ReactComponent as ContactBanner } from "../../../Images/Banners/contact_us_banner.svg";
+import ContactBanner from "../../../Images/Banners/contact_us_banner.jpg";
 import { BlueborderCard, EmailInput } from "./component";
 import { ReactComponent as NewsLetterSvg } from "../../../Images/news_letter_icons.svg";
 import { useNavigate } from "react-router";
@@ -16,7 +16,7 @@ export const ContactUs = () => {
       <Banner
         title={"CONTACT US"}
         desc={"Let’s hear from you!  "}
-        img={<ContactBanner width={"100%"} height={"100%"} />}
+        img={ContactBanner}
       />
       <Cards>
         <BlueborderCard

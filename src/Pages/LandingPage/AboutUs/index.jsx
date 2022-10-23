@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Footer, Navbar } from "../../../Components";
 import { Banner } from "../component";
 import { Main } from "../style";
-import { ReactComponent as AboutBanner } from "../../../Images/Banners/about_us_banner.svg";
+import AboutBanner from "../../../Images/Banners/about_us.png";
 import PhoneSteth from "../../../Images/phone_steth.png";
 import Quality from "../../../Images/high_quality.jpg";
 import Barriers from "../../../Images/barriers.jpg";
@@ -12,16 +12,16 @@ export const AboutUs = () => {
   return (
     <Main>
       <Navbar active={"AboutUs"} />
-      <Banner img={<AboutBanner width={"100%"} height={"100%"} />} />
+      <Banner img={AboutBanner} />
       <TopDiv>
         <TopText>
           <h1>
             Steadcare is a digital healthcare platform, providing remote medical
             services to clients. Patients use our platform to book Doctors
-            online take better care of their (and their family’s) health. On the
-            other hand Doctors and practitioners use Steadcare as a bridge to
-            connect with patients. We continuously work hard to ehance
-            Patient-Doctor engagement and deliver better health outcomes.
+            online and take better care of their health. On the other hand
+            Doctors and practitioners use Steadcare as a bridge to connect with
+            patients. We continuously work hard to enhance Patient-Doctor
+            engagement and deliver better health outcomes.
           </h1>
           <h1>
             Founded in 2022, our mission is to improve the health of people
@@ -58,7 +58,7 @@ export const AboutUs = () => {
           <WhyTextDiv>
             <h1>
               We remove barriers to make heath
-              {<h1 style={{ color: "blue" }}>care</h1>} convinent
+              {<h1 style={{ color: "blue" }}>care</h1>} convenient
             </h1>
             <h2>
               We believe we can make a difference in the world of telemedicine

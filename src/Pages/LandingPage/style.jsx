@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../../Utilities/responsive";
 
 export const Main = styled.div`
   height: fit-content;
@@ -15,7 +16,12 @@ export const BannerDiv = styled.div`
   padding: 0 4rem;
   display: flex;
   justify-content: center;
+  background-image: url(${(props) => props.img});
   flex-direction: column;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  ${mobile({ height: "20rem", padding: "0 1rem" })}
 `;
 export const BannerImage = styled.div`
   position: absolute;
@@ -34,6 +40,12 @@ export const Title = styled.h1`
   width: 40%;
   line-height: 5rem;
   margin-bottom: 1rem;
+  ${mobile({
+    fontSize: "1.5rem",
+    width: "50%",
+    marginBottom: "1rem",
+    lineHeight: "2rem"
+  })}
 `;
 export const Desc = styled.h2`
   position: relative;
@@ -44,4 +56,10 @@ export const Desc = styled.h2`
   line-height: 3rem;
   letter-spacing: 5%;
   margin-bottom: 4rem;
+  ${mobile({
+    fontSize: "1.2rem",
+    width: "50%",
+    marginBottom: "2rem",
+    lineHeight: "2rem"
+  })}
 `;

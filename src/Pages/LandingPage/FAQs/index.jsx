@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { FAQElement, Footer, Navbar } from "../../../Components";
 import { Banner } from "../component";
 import { Main } from "../style";
-import { ReactComponent as FAQBanner } from "../../../Images/Banners/FAQs_banner.svg";
+import FAQBanner from "../../../Images/Banners/FAQs_banner.png";
 
 export const FAQs = () => {
   return (
     <Main>
       <Navbar active={""} />
-      <Banner img={<FAQBanner width={"100%"} height={"100%"} />} />
+      <Banner img={FAQBanner} />
       <Body>
         <FAQElement
           question={"How can i create an account with steadcare"}
@@ -44,7 +44,7 @@ export const FAQs = () => {
         <FAQElement
           question={"How do i make payment?"}
           answer={
-            "Paying for a doctor is secured and made online using paystack. Payments has to made before booking a doctor as validates your appointment."
+            "Paying for a doctor is secured and made online using paystack. Payments has to made before booking a doctor as it validates your appointment."
           }
         />
         <FAQElement
@@ -62,7 +62,7 @@ export const FAQs = () => {
         <FAQElement
           question={"Is my medical information safe with steadcare?"}
           answer={
-            "Yes, your medical informationn ad history is confidential and safe with us."
+            "Yes, your medical information and history is confidential and safe with us."
           }
         />
       </Body>
