@@ -21,17 +21,9 @@ export const BannerDiv = styled.div`
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 100% 100%;
-  ${mobile({ height: "20rem", padding: "0 1rem" })}
+  ${mobile({ height: "25rem", padding: "0 1rem" })}
 `;
-export const BannerImage = styled.div`
-  position: absolute;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+
 export const Title = styled.h1`
   position: relative;
   font-weight: 600;

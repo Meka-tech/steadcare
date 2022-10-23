@@ -176,8 +176,7 @@ const Actions = ({ name, id }) => {
             setFormActive(true);
           }
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch(function () {
         });
     }
   };
