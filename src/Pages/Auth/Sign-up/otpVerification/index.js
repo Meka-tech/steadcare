@@ -33,7 +33,7 @@ export const OtpVerification = () => {
       const data = {
         email: `${email}`,
         hash: sessionStorage.getItem("OTPHASH"),
-        code: `${OTP}`
+        code: OTP
       };
 
       const config = {
