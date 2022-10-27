@@ -26,7 +26,7 @@ import { BaseUrl } from "../../../../Utilities";
 import approveBadge from "../../../../Images/approveBadge.png";
 import { useFormik } from "formik";
 import { mobile } from "../../../../Utilities/responsive";
-import { isMobile } from "react-device-detect";
+import { useIsMobile } from "../../../../hooks/useIsMobile";
 
 export const DoctorSignInProfile = () => {
   const location = useLocation();
@@ -200,6 +200,8 @@ export const DoctorSignInProfile = () => {
     onSubmit: onhandleSubmit
   });
 
+  const IsMobile = useIsMobile();
+
   return (
     <Container>
       <AuthMargin />
@@ -331,7 +333,7 @@ export const DoctorSignInProfile = () => {
                 <img
                   src={approveBadge}
                   alt="success"
-                  width={isMobile ? "100rem" : ""}
+                  width={IsMobile ? "100rem" : ""}
                 />
               </ImageContainer>
               <SuccessText>

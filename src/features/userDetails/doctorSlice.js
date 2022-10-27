@@ -21,10 +21,19 @@ export const doctorSlice = createSlice({
     },
     updateDoctorToken: (state, action) => {
       state.token = action.payload;
+    },
+    LogOutDoctor: (state) => {
+      state.name = "";
+      state.email = "";
+      state.role = "";
+      state.phoneNumber = "";
+      state.specialty = "";
+      state.token = "";
     }
   }
 });
 
-export const { updateDoctor, updateDoctorToken } = doctorSlice.actions;
+export const { updateDoctor, updateDoctorToken, LogOutDoctor } =
+  doctorSlice.actions;
 
 export default doctorSlice.reducer;

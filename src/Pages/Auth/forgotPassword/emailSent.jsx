@@ -7,9 +7,10 @@ import { ReactComponent as EmailSentIcon } from "../../../Images/EmailSent.svg";
 import { BaseUrl } from "../../../Utilities";
 import axios from "axios";
 import { mobile } from "../../../Utilities/responsive";
-import { isMobile } from "react-device-detect";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 export const EmailSent = () => {
+  const IsMobile = useIsMobile()
   const navigate = useNavigate();
   const location = useLocation();
   const { email } = location.state;
@@ -42,8 +43,8 @@ export const EmailSent = () => {
             </SubHeader>
             <Icon>
               <EmailSentIcon
-                width={isMobile ? "15rem" : ""}
-                height={isMobile ? "15rem" : ""}
+                width={IsMobile ? "15rem" : ""}
+                height={IsMobile ? "15rem" : ""}
               />
             </Icon>
             <ButtonDiv>

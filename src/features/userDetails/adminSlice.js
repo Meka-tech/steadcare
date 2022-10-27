@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { LogOut } from "../../Utilities/globalFunc";
 
 export const adminSlice = createSlice({
   name: "admin",
@@ -21,10 +22,19 @@ export const adminSlice = createSlice({
     },
     updateAdminToken: (state, action) => {
       state.token = action.payload;
+    },
+    LogOutAdmin: (state) => {
+      state.name = "";
+      state.email = "";
+      state.role = "";
+      state.phoneNumber = "";
+      state.specialty = "";
+      state.token = "";
     }
   }
 });
 
-export const { updateAdmin, updateAdminToken } = adminSlice.actions;
+export const { updateAdmin, updateAdminToken, LogOutAdmin } =
+  adminSlice.actions;
 
 export default adminSlice.reducer;

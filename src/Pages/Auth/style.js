@@ -4,9 +4,9 @@ import { ReactComponent as DocIllus } from "../../Images/illustrations/docIllust
 import { ReactComponent as Icons } from "../../Images/illustrations/signInIcons.svg";
 import { useNavigate } from "react-router";
 import { mobile } from "../../Utilities/responsive";
-import { isMobile } from "react-device-detect";
-import { useEffect } from "react";
+// import { isMobile } from "react-device-detect";
 import { Navbar } from "../../Components/Navbar/navbar";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 export const LogoDiv = () => {
   const navigate = useNavigate();
@@ -19,6 +19,7 @@ export const LogoDiv = () => {
 };
 
 export const AuthMargin = () => {
+  const isMobile = useIsMobile();
   return (
     <div>
       <NavBarCase>

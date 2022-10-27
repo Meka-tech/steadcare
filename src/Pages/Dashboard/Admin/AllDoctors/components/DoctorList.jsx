@@ -167,6 +167,24 @@ const Actions = ({ name, id }) => {
   const [formActive, setFormActive] = useState(false);
   const [confirmModalActive, setConfirmModalActive] = useState(false);
 
+  const VerifyOrDecline = () => {
+    const data = { status: choice };
+
+    const config = {
+      method: "patch",
+      url: `${BaseUrl}/admin/update-doctors-status/${id}`,
+      headers: {
+        Authorization: "Bearer " + token
+      },
+      data: data
+    };
+
+    axios(config)
+      .then(function (res) {
+        console.log(res);
+      })
+      .catch(function () {});
+  };
   const Action = () => {
     setConfirmModalActive(true);
     setActive(false);
@@ -182,23 +200,6 @@ const Actions = ({ name, id }) => {
   };
 
   useFetch(token, `/admin/view-a-doctor/${id}`, setDoctor);
-
-  const VerifyOrDecline = () => {
-    const data = { status: choice };
-
-    const config = {
-      method: "patch",
-      url: `${BaseUrl}/admin/update-doctors-status/${id}`,
-      headers: {
-        Authorization: "Bearer " + token
-      },
-      data: data
-    };
-
-    axios(config)
-      .then(function () {})
-      .catch(function () {});
-  };
 
   return (
     <>

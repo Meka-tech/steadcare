@@ -32,7 +32,7 @@ export const AppointmentRequests = ({}) => {
     setAppointmentData(response.data.data.fetchedData);
   };
   useFetch(token, "/get-my-appoinments?pageNo=1&noOfRequests=2", SetData);
-  
+
   const AcceptRejectAppointment = async (status) => {
     const data = { status: status };
 
@@ -105,12 +105,15 @@ export const AppointmentRequests = ({}) => {
         <RequestModal setActive={setRequestModal} status={requestStatus} />
       )}
       {viewForm && (
-        <FormModal setActive={setViewForm} patient={MockData[focusPatient]} />
+        <FormModal
+          setActive={setViewForm}
+          patient={appointmentData[focusPatient]}
+        />
       )}
       <AppointmentDiv>
         {hasAppointment ? (
           <div>
-            {MockData.map((appointment, index) => {
+            {appointmentData.map((appointment, index) => {
               return (
                 <AppointmentItem
                   key={index}

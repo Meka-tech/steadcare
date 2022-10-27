@@ -25,8 +25,17 @@ import { ReactComponent as DocumentsActiveIcon } from "../../Images/NavbarActive
 import { ReactComponent as Hamburger } from "../../Images/NavbarActiveElements/hamburger_icon.svg";
 import { useNavigate } from "react-router";
 import { mobile } from "../../Utilities/responsive";
+import { useDispatch } from "react-redux";
+import { logOutPatient } from "../../features/userDetails/patientSlice";
+import {
+  updateLoggedIn,
+  updateLoggedInRole
+} from "../../features/loggedIn/loginSlice";
+import { LogOutDoctor } from "../../features/userDetails/doctorSlice";
+import { LogOutAdmin } from "../../features/userDetails/adminSlice";
 
 export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const Navs = [
     [<DashboardIcon />, <DashboardActiveIcon />, "Dashboard", `/${role}/home`],
@@ -78,7 +87,15 @@ export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
         ))}
       </NavItems>
       <LogOutDiv>
-        <NavItem active={active}>
+        <NavItem
+          active={active}
+          onClick={() => {
+            dispatch(logOutPatient());
+            dispatch(updateLoggedIn(false));
+            dispatch(updateLoggedInRole(""));
+            navigate("/");
+          }}
+        >
           <div>
             <LogOutIcon />
           </div>
@@ -99,6 +116,7 @@ export const DoctorDashboardNavbar = ({
   role = "doctor"
 }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const Navs = [
     [<DashboardIcon />, <DashboardActiveIcon />, "Dashboard", `/${role}/home`],
     [<ProfileIcon />, <ProfileActiveIcon />, "Profile", `/${role}/profile`],
@@ -143,7 +161,15 @@ export const DoctorDashboardNavbar = ({
         ))}
       </NavItems>
       <LogOutDiv>
-        <NavItem active={active}>
+        <NavItem
+          active={active}
+          onClick={() => {
+            dispatch(LogOutDoctor());
+            dispatch(updateLoggedIn(false));
+            dispatch(updateLoggedInRole(""));
+            navigate("/");
+          }}
+        >
           <div>
             <LogOutIcon />
           </div>
@@ -177,6 +203,7 @@ export const AdminDashboardNavbar = ({
     ],
     [<SettingsIcon />, <SettingsActiveIcon />, "Settings", `/${role}/settings`]
   ];
+  const dispatch = useDispatch();
   return (
     <Container>
       <LogoSection>
@@ -204,7 +231,15 @@ export const AdminDashboardNavbar = ({
         ))}
       </NavItems>
       <LogOutDiv>
-        <NavItem active={active}>
+        <NavItem
+          active={active}
+          onClick={() => {
+            dispatch(LogOutAdmin());
+            dispatch(updateLoggedIn(false));
+            dispatch(updateLoggedInRole(""));
+            navigate("/");
+          }}
+        >
           <div>
             <LogOutIcon />
           </div>

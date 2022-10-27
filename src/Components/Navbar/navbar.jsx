@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -6,9 +7,13 @@ import { ReactComponent as Logo } from "../../Images/Logo.svg";
 import { ReactComponent as HamburgerIcon } from "../../Images/NavbarElements/hamburgerIcon.svg";
 import { mobile } from "../../Utilities/responsive";
 import { Button } from "../Button/Button";
+import jwt_decode from "jwt-decode";
+import { useState } from "react";
 
 export const Navbar = ({ active }) => {
-  const loggedIn = useSelector((state) => state.reducer.loggedIn);
+  const [token, setToken] = useState("");
+  const { loggedIn, role } = useSelector((state) => state.reducer.loggedIn);
+
   const navigate = useNavigate();
   return (
     <Container>
@@ -51,25 +56,41 @@ export const Navbar = ({ active }) => {
         </Link>
       </LinkSection>
       <ButtonSection>
-        <Button
-          text="Login"
-          width={"35%"}
-          bgColor={"white"}
-          color="black"
-          border={" 1px solid rgba(0, 0, 255, 1)"}
-          fontSize="1.6rem"
-          fontWeight={"500"}
-          height={"2.5rem"}
-          onClick={() => navigate("/login")}
-        />
-        <Button
-          text="sign up"
-          width={"40%"}
-          fontSize="1.6rem"
-          fontWeight={"500"}
-          onClick={() => navigate("/sign-up")}
-          height={"2.5rem"}
-        />
+        {loggedIn ? (
+          <Button
+            text="Dashboard"
+            width={"40%"}
+            bgColor={"white"}
+            border={" 1px solid rgba(0, 0, 255, 1)"}
+            fontSize="1.6rem"
+            fontWeight={"500"}
+            onClick={() => navigate(`/${role}/home`)}
+            height={"4rem"}
+            color="black"
+          />
+        ) : (
+          <>
+            <Button
+              text="Login"
+              width={"35%"}
+              bgColor={"white"}
+              color="black"
+              border={" 1px solid rgba(0, 0, 255, 1)"}
+              fontSize="1.6rem"
+              fontWeight={"500"}
+              height={"2.5rem"}
+              onClick={() => navigate("/login")}
+            />
+            <Button
+              text="sign up"
+              width={"40%"}
+              fontSize="1.6rem"
+              fontWeight={"500"}
+              onClick={() => navigate("/sign-up")}
+              height={"2.5rem"}
+            />
+          </>
+        )}
       </ButtonSection>
       <HamburgerDiv>
         <HamburgerIcon />

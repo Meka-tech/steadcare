@@ -85,6 +85,8 @@ export const BookADoctorPage = () => {
 
   const { loading } = useFetch(token, "/view-all-doctors", SetAllDoctor);
 
+  console.log(token);
+
   const SetFilteredDoctor = (response) => {
     setDoctors(response.data.data.fetchedDoctors);
   };

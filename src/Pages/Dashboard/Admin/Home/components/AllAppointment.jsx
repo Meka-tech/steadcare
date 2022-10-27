@@ -8,11 +8,9 @@ export const AllAppointment = () => {
   const token = useSelector((state) => state.reducer.adminDetails.token);
   const [appointmentArray, setAppointmentArray] = useState([]);
   const SetAppointments = (response) => {
-    console.log(response.data.data);
     setAppointmentArray(response.data.data);
   };
   useFetch(token, "/admin/dashboard-appoinments", SetAppointments);
-  console.log(appointmentArray);
   return (
     <Container>
       <Title>All Appointments</Title>

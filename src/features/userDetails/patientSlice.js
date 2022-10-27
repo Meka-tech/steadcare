@@ -19,10 +19,19 @@ export const patientSlice = createSlice({
     },
     updatePatientToken: (state, action) => {
       state.token = action.payload;
+    },
+    logOutPatient: (state) => {
+      state.name = "";
+      state.email = "";
+      state.role = "";
+      state.phoneNumber = "";
+      state.specialty = "";
+      state.token = "";
     }
   }
 });
 
-export const { updatePatient, updatePatientToken } = patientSlice.actions;
+export const { updatePatient, updatePatientToken, logOutPatient } =
+  patientSlice.actions;
 
 export default patientSlice.reducer;

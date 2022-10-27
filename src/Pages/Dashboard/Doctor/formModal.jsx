@@ -18,11 +18,11 @@ export const FormModal = ({ setActive, patient }) => {
           </div>
           <div>
             <h1>Age :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{patient.age}</h2>
           </div>
           <div>
             <h1>Sex :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{patient.gender}</h2>
           </div>
           <div>
             <h1>Occupation :</h1>

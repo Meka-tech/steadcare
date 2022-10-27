@@ -19,13 +19,14 @@ export const AdminDoctors = () => {
   const [doctor, setDoctor] = useState(0);
   const [pendingDoctor, setPendingDoctor] = useState(0);
 
-  const setDoctorStats = (response) => {
+  const SetDoctorStats = (response) => {
     setDisabledDoctor(response.data.data.disabledDoctorCount);
     setDoctor(response.data.data.doctorCount);
     setPendingDoctor(response.data.data.pendingDoctorsCount);
+    useFetch(token, "/admin/doctors-dashboard", SetDoctorStats);
   };
+  useFetch(token, "/admin/doctors-dashboard", SetDoctorStats);
 
-  useFetch(token, "/admin/doctors-dashboard", setDoctorStats);
   return (
     <Container>
       <AdminDashboardNavbar role="admin" active="Doctors" />
