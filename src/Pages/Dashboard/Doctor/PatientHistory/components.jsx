@@ -97,7 +97,7 @@ export const MediacalHistory = ({ data }) => {
               </Column>
             );
           })}
-          {!data && (
+          {data?.length === 0 && (
             <TabBodyText>
               Patients history will appear here after sessions
             </TabBodyText>

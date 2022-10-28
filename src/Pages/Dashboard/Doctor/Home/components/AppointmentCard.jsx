@@ -22,23 +22,18 @@ export const AppointmentRequests = ({}) => {
   const token = useSelector((state) => state.reducer.doctorDetails.token);
   const [appointmentData, setAppointmentData] = useState([]);
 
-  const MockData = [
-    { name: "Chineye Matu", time: "21 July, 10 am" },
-    { name: "Eke David", time: "21 July, 10 am" },
-    { name: "Okoro Isi", time: "21 July, 10 am" }
-  ];
-
   const SetData = (response) => {
     setAppointmentData(response.data.data.fetchedData);
+    console.log(response.data.data.fetchedData);
   };
-  useFetch(token, "/get-my-appoinments?pageNo=1&noOfRequests=2", SetData);
+  useFetch(token, "/get-my-appoinments?pageNo=1&noOfRequests=3", SetData);
 
-  const AcceptRejectAppointment = async (status) => {
-    const data = { status: status };
+  const AcceptRejectAppointment = async (status, ID) => {
+    const data = { status };
 
     const config = {
       method: "patch",
-      url: `${BaseUrl}/approve-reject-appoinments/62fa6468af2c0d41e32e28cc`,
+      url: `${BaseUrl}/approve-reject-appoinments/${ID}`,
       headers: { Authorization: "Bearer " + token },
       data: data
     };
@@ -52,7 +47,7 @@ export const AppointmentRequests = ({}) => {
       });
   };
 
-  const AppointmentItem = ({ name, time, img, action, index }) => {
+  const AppointmentItem = ({ name, time, img, action, index, id }) => {
     return (
       <AppointmentItemContainer>
         <PictureProfile>
@@ -79,7 +74,7 @@ export const AppointmentRequests = ({}) => {
               action("accept");
               setRequestModal(true);
               setFocusPatient(index);
-              AcceptRejectAppointment("accepted");
+              AcceptRejectAppointment("accepted", id);
             }}
           />
           <MdOutlineCancel
@@ -90,7 +85,7 @@ export const AppointmentRequests = ({}) => {
               action("decline");
               setRequestModal(true);
               setFocusPatient(index);
-              AcceptRejectAppointment("rejected");
+              AcceptRejectAppointment("rejected", id);
             }}
           />
         </Buttons>
@@ -121,6 +116,7 @@ export const AppointmentRequests = ({}) => {
                   time={appointment.time}
                   action={setRequestStatus}
                   index={index}
+                  id={appointment._id}
                 />
               );
             })}

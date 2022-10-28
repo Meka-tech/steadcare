@@ -26,27 +26,27 @@ export const FormModal = ({ setActive, patient }) => {
           </div>
           <div>
             <h1>Occupation :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{patient.occupation}</h2>
           </div>
           <div>
             <h1>Religion :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{patient.religion}</h2>
           </div>
           <div>
             <h1>Address :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{patient.address}</h2>
           </div>
           <div>
             <h1>Marital Status :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{patient.maritalStatus}</h2>
           </div>
           <div>
             <h1>Tribe :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{patient.tribe}</h2>
           </div>
           <div>
             <h1>Complaint & Duration :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{patient.complaint}</h2>
           </div>
         </FormGrid>
       </FormContainer>

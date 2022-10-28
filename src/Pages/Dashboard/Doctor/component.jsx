@@ -208,10 +208,10 @@ const SpinnerDiv = styled.div`
   transform: scale(0.45);
   position: absolute;
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  
 `;
 
 export const Notifications = ({ setActive }) => {

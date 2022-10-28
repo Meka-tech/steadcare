@@ -23,7 +23,6 @@ export const AdminDoctors = () => {
     setDisabledDoctor(response.data.data.disabledDoctorCount);
     setDoctor(response.data.data.doctorCount);
     setPendingDoctor(response.data.data.pendingDoctorsCount);
-    useFetch(token, "/admin/doctors-dashboard", SetDoctorStats);
   };
   useFetch(token, "/admin/doctors-dashboard", SetDoctorStats);
 

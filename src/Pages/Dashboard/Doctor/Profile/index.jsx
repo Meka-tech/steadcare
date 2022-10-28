@@ -10,7 +10,7 @@ import {
 } from "../../../../Components";
 import { Body, Container } from "../../style";
 import { useNavigate } from "react-router-dom";
-import { TopBar } from "../component";
+import { Spinner, TopBar } from "../component";
 import { BioFormHeader, ButtonDiv, DropDowns, Forms, Main } from "./style";
 import { useSelector } from "react-redux";
 import { ReactComponent as Edit } from "../../../../Images/FormIcons/formEditIcon.svg";
@@ -20,14 +20,37 @@ import { BioInput } from "./component";
 import axios from "axios";
 import { BaseUrl } from "../../../../Utilities";
 import { useFormik } from "formik";
+import useFetch from "../../../../hooks/useFetch";
+import { useEffect } from "react";
 
 export const DoctorProfile = () => {
   const user = useSelector((state) => state.reducer.doctorDetails);
   const token = useSelector((state) => state.reducer.doctorDetails.token);
-  const FirstName = Capitalize(user.name.split(" ")[0]);
-  const LastName = Capitalize(user.name.split(" ")[1]);
 
-  const navigate = useNavigate();
+  const [userData, setUserData] = useState({
+    name: user.name,
+    country: "",
+    gender: "",
+    bloodGroup: "",
+    dob: "",
+    email: "",
+    phone: "",
+    languages: []
+  });
+
+  const GetUserData = (res) => {
+    setUserData(res.data.data);
+  };
+
+  const { loading: userLoading } = useFetch(token, "/my-profile", GetUserData);
+
+  console.log(userData);
+
+  const FirstName = Capitalize(userData.name.split(" ")[0]);
+  const LastName = Capitalize(userData.name.split(" ")[1]);
+
+  const [firstName, setFirstName] = useState(FirstName);
+  const [lastName, setLastName] = useState(LastName);
 
   const CountryList = [];
   const [country, setCountry] = useState("NGA");
@@ -56,43 +79,89 @@ export const DoctorProfile = () => {
     "Pulmonologist",
     " Surgeon"
   ];
+
   const LocationToggle = ["On", "Off"];
-  const [locationOn, toggleLocation] = useState("On");
+  const [locationOn, toggleLocation] = useState();
+
+  const [dob, setDob] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [bio, setBio] = useState("");
+
+  useEffect(() => {
+    setfirstLanguage(userData.languages[0]);
+    setOtherLanguage(userData.languages[1]);
+    toggleLocation(userData.locationIsOn);
+    setBio(userData.bio);
+    setCountry(userData.country);
+    setDob(userData.dob);
+    setPhone(userData.phone);
+    setEmail(userData.email);
+    setSpecialty(userData.specialty);
+  }, [userData]);
+
+  const [loading, setLoading] = useState(false);
+
   const UpdateProfile = async () => {
-    const data = {
-      dob: `${values.dob}`,
-      country,
-      phone: `${values.phone}`,
-      email: `${values.email}`,
-      specialty,
-      Languages,
-      Location,
-      locationOn
-    };
+    setLoading(true);
+    const PayloadData = {};
+    if (FirstName + " " + LastName !== firstName + " " + lastName) {
+      PayloadData.name = firstName + " " + lastName;
+    }
+    if (dob !== userData.dob) {
+      PayloadData.dob = dob;
+    }
+    if (country !== userData.country) {
+      PayloadData.country = country;
+    }
+    if (userData.phone !== phone) {
+      PayloadData.phone = phone;
+    }
+    if (userData.email !== email) {
+      PayloadData.email = email;
+    }
+    if (userData.languages[0] !== firstLanguage) {
+      PayloadData.languages[0] = firstLanguage;
+    }
+    if (userData.languages[1] !== otherLanguage) {
+      PayloadData.languages[1] = otherLanguage;
+    }
+    if (userData.specialty !== specialty) {
+      PayloadData.specialty = specialty;
+    }
+    if (userData.locationIsOn !== locationOn) {
+      if (locationOn === "On") {
+        PayloadData.locationIsOn = true;
+      } else {
+        PayloadData.locationIsOn = false;
+      }
+    }
+    if (userData.bio !== bio) {
+      PayloadData.bio = bio;
+    }
+
+    console.log(PayloadData, "Payload");
 
     const config = {
       method: "patch",
       url: `${BaseUrl}/update-profile`,
       headers: { Authorization: "Bearer " + token },
-      data: data
+      data: PayloadData
     };
 
     axios(config)
       .then(function (response) {
         console.log(response.data);
+        setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
+        setLoading(false);
       });
   };
 
   const { values, handleChange, handleSubmit, errors, touched } = useFormik({
-    initialValues: {
-      dob: "",
-      phone: "",
-      email: "",
-      bio: ""
-    },
+    initialValues: {},
     onSubmit: UpdateProfile
   });
 
@@ -102,109 +171,124 @@ export const DoctorProfile = () => {
       <Body>
         <TopBar role={"doctor"} />
         <Main>
-          <Credentials
-            firstName={FirstName}
-            lastName={LastName}
-            email={user.specialty}
-          />
-          <Forms>
-            <TextForm
-              width={"80%"}
-              title="First Name"
-              inactive={true}
-              placeholder={`${FirstName}`}
-            />
-            <TextForm
-              inactive={true}
-              width={"80%"}
-              title="Last Name"
-              placeholder={`${LastName}`}
-            />
-            <TextForm
-              width={"80%"}
-              inactive={true}
-              title="Date of Birth"
-              icon={<Calendar />}
-              placeholder={"dd/mm/yy"}
-              inputValue={values.dob}
-              onChange={handleChange("dob")}
-            />
-            <Dropdown
-              width={"80%"}
-              title="Country"
-              label={"Nigeria"}
-              selectedItem={country}
-              items={CountryList}
-              onSelect={setCountry}
-            />
-            <TextForm
-              inactive={true}
-              width={"80%"}
-              title="Phone Number"
-              placeholder={`${user.phoneNumber}`}
-              inputValue={values.phone}
-              onChange={handleChange("phone")}
-            />
-            <TextForm
-              width={"80%"}
-              inactive={true}
-              title="Email Address"
-              icon={<Edit />}
-              placeholder={`${user.email}`}
-              inputValue={values.email}
-              onChange={handleChange("email")}
-            />
-            <DropDowns>
-              <Dropdown
-                title={"Languages"}
-                width={"80%"}
-                items={Languages}
-                selectedItem={firstLanguage}
-                onSelect={setfirstLanguage}
+          {userLoading ? (
+            <Spinner />
+          ) : (
+            <>
+              <Credentials
+                firstName={FirstName}
+                lastName={LastName}
+                email={userData.specialty}
               />
-              <Dropdown
-                title={"Other"}
-                width={"80%"}
-                items={Languages}
-                selectedItem={otherLanguage}
-                onSelect={setOtherLanguage}
+              <Forms>
+                <TextForm
+                  width={"80%"}
+                  title="First Name"
+                  inactive={true}
+                  placeholder={`${FirstName}`}
+                  inputValue={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+                <TextForm
+                  inactive={true}
+                  width={"80%"}
+                  title="Last Name"
+                  placeholder={`${LastName}`}
+                  inputValue={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+                <TextForm
+                  width={"80%"}
+                  inactive={true}
+                  title="Date of Birth"
+                  icon={<Calendar />}
+                  placeholder={"dd/mm/yy"}
+                  inputValue={dob}
+                  onChange={(e) => setDob(e.target.value)}
+                />
+                <Dropdown
+                  width={"80%"}
+                  title="Country"
+                  label={"Nigeria"}
+                  selectedItem={country}
+                  items={CountryList}
+                  onSelect={setCountry}
+                />
+                <TextForm
+                  inactive={true}
+                  width={"80%"}
+                  title="Phone Number"
+                  placeholder={`${userData.phone}`}
+                  inputValue={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+                <TextForm
+                  width={"80%"}
+                  inactive={true}
+                  title="Email Address"
+                  icon={<Edit />}
+                  placeholder={`${userData.email}`}
+                  inputValue={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <DropDowns>
+                  <Dropdown
+                    title={"Languages"}
+                    width={"80%"}
+                    items={Languages}
+                    selectedItem={firstLanguage}
+                    onSelect={setfirstLanguage}
+                  />
+                  <Dropdown
+                    title={"Other"}
+                    width={"80%"}
+                    items={Languages}
+                    selectedItem={otherLanguage}
+                    onSelect={setOtherLanguage}
+                  />
+                </DropDowns>
+                <Dropdown
+                  title={"Specialty"}
+                  width={"80%"}
+                  items={Specialties}
+                  selectedItem={specialty}
+                  onSelect={setSpecialty}
+                  label={userData.specialty}
+                />
+                <Dropdown
+                  width={"80%"}
+                  title="Location"
+                  label={"Lagos"}
+                  selectedItem={country}
+                  items={CountryList}
+                  onSelect={setCountry}
+                />
+                <Dropdown
+                  width={"80%"}
+                  title="Location"
+                  label={"On"}
+                  selectedItem={locationOn ? "On" : "Off"}
+                  items={LocationToggle}
+                  onSelect={toggleLocation}
+                />
+              </Forms>
+              <BioInput
+                title={"Bio"}
+                placeholder={"Say something about yourself"}
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
               />
-            </DropDowns>
-            <Dropdown
-              title={"Specialty"}
-              width={"80%"}
-              items={Specialties}
-              selectedItem={specialty}
-              onSelect={setSpecialty}
-              label={user.specialty}
-            />
-            <Dropdown
-              width={"80%"}
-              title="Location"
-              label={"Lagos"}
-              selectedItem={country}
-              items={CountryList}
-              onSelect={setCountry}
-            />
-            <Dropdown
-              width={"80%"}
-              title="Location"
-              label={"On"}
-              selectedItem={locationOn}
-              items={LocationToggle}
-              onSelect={toggleLocation}
-            />
-          </Forms>
-          <BioInput
-            title={"Bio"}
-            placeholder={"Say something about yourself"}
-            inputValue={values.bio}
-            onChange={handleChange("bio")}
-          />
 
-          <ButtonDiv>
-            <Button width={"100%"} text="Save Changes" onClick={handleSubmit} />
-          </ButtonDiv>
+              <ButtonDiv>
+                <Button
+                  width={"100%"}
+                  text="Save Changes"
+                  onClick={handleSubmit}
+                  isLoading={loading}
+                />
+              </ButtonDiv>
+            </>
+          )}
         </Main>
       </Body>
     </Container>
