@@ -8,7 +8,10 @@ import PhoneSteth from "../../../Images/phone_steth.png";
 import Quality from "../../../Images/high_quality.jpg";
 import Barriers from "../../../Images/barriers.jpg";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { mobile } from "../../../Utilities/responsive";
+import { useNavigate } from "react-router";
 export const AboutUs = () => {
+  const navigate = useNavigate();
   return (
     <Main>
       <Navbar active={"AboutUs"} />
@@ -40,7 +43,8 @@ export const AboutUs = () => {
         <RightEnd>
           <WhyTextDiv>
             <h1>
-              We practise high quality {<h1 style={{ color: "blue" }}>care</h1>}
+              We practise high quality{" "}
+              {<span style={{ color: "blue" }}>care</span>}
             </h1>
             <h2>
               Every single doctor registered with steadcare are licensed and
@@ -48,7 +52,7 @@ export const AboutUs = () => {
               complemented by the eagerness to deliver outstanding care to all
               our patients.
             </h2>
-            <div>
+            <div onClick={() => navigate("/sign-up")}>
               <h2>Book Doctor</h2>
               <AiOutlineArrowRight color="blue" size={15} />
             </div>
@@ -58,7 +62,7 @@ export const AboutUs = () => {
           <WhyTextDiv>
             <h1>
               We remove barriers to make heath
-              {<h1 style={{ color: "blue" }}>care</h1>} convenient
+              {<span style={{ color: "blue" }}>care</span>} convenient
             </h1>
             <h2>
               We believe we can make a difference in the world of telemedicine
@@ -86,15 +90,28 @@ const TopDiv = styled.div`
   box-sizing: border-box;
   height: 58rem;
   margin-bottom: 10rem;
+  ${mobile({
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "4rem 2.5rem",
+    height: "fit-content"
+  })}
 `;
 const TopText = styled.div`
   width: 45%;
+  ${mobile({
+    width: "100%",
+    marginBottom: "4rem"
+  })}
   h1 {
     margin: 0;
     padding: 0;
     font-weight: 500;
     font-size: 1.6rem;
     line-height: 4rem;
+    ${mobile({
+      lineHeight: "3.5rem"
+    })}
   }
 `;
 const TopImage = styled.img`
@@ -102,12 +119,19 @@ const TopImage = styled.img`
   border-radius: 1rem;
   width: 45rem;
   object-fit: contain;
+  ${mobile({
+    height: "80%"
+  })}
 `;
 const WhyChooseTitle = styled.h1`
   text-align: center;
   font-size: 3rem;
   font-weight: 600;
   margin-bottom: 5rem;
+  ${mobile({
+    fontSize: "2.5rem",
+    marginBottom: "3rem"
+  })}
 `;
 const WhyChoose = styled.div`
   padding: 8rem 5rem;
@@ -117,20 +141,36 @@ const WhyChoose = styled.div`
   align-items: center;
   width: 100%;
   justify-content: space-between;
+  ${mobile({
+    display: "flex",
+    flexDirection: "column",
+    padding: "2rem 0rem",
+    height: "fit-content",
+    gridRowGap: "5rem"
+  })}
 `;
 const LeftEnd = styled.div`
   align-items: flex-start;
   display: flex;
   width: 100%;
+  ${mobile({
+    justifyContent: "center"
+  })};
 `;
 const RightEnd = styled.div`
   display: flex;
   align-items: flex-end;
   width: 100%;
+  ${mobile({
+    justifyContent: "center"
+  })};
 `;
 const WhyTextDiv = styled.div`
   display: flex;
   flex-direction: column;
+  ${mobile({
+    textAlign: "center"
+  })};
   h1 {
     margin: 0;
     padding: 0;
@@ -148,6 +188,11 @@ const WhyTextDiv = styled.div`
     font-size: 1.7rem;
     width: 60%;
     line-height: 4rem;
+    ${mobile({
+      width: "90%",
+      margin: "0 auto",
+      lineHeight: "3.5rem"
+    })};
   }
   div {
     margin-top: 2rem;
@@ -156,6 +201,10 @@ const WhyTextDiv = styled.div`
     color: blue;
     align-items: center;
     width: 20rem;
+    ${mobile({
+      width: "15rem",
+      margin: "2rem auto"
+    })};
   }
 `;
 const WhyImageDiv = styled.img`

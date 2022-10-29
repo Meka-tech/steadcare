@@ -4,6 +4,7 @@ import { FAQElement, Footer, Navbar } from "../../../Components";
 import { Banner } from "../component";
 import { Main } from "../style";
 import FAQBanner from "../../../Images/Banners/FAQs_banner.png";
+import { mobile } from "../../../Utilities/responsive";
 
 export const FAQs = () => {
   return (
@@ -74,4 +75,7 @@ export const FAQs = () => {
 const Body = styled.div`
   padding: 2rem 5rem;
   padding-bottom: 20rem;
+  ${mobile({
+    padding: "8rem 2rem"
+  })}
 `;

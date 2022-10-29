@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Button } from "../../../Components";
+import { mobile } from "../../../Utilities/responsive";
 
 export const BlueborderCard = ({ icon, title, desc }) => {
   const navigate = useNavigate();
@@ -31,9 +32,18 @@ const BlueborderCardDiv = styled.div`
   padding: 4rem 0;
   border: 1px solid rgba(0, 0, 255, 1);
   border-radius: 5px;
+  ${mobile({
+    padding: "2rem 0",
+    marginBottom: "4rem",
+    height: "30rem",
+    width: "30rem"
+  })}
 `;
 const BlueborderCardIcon = styled.div`
   margin-bottom: 2rem;
+  ${mobile({
+    marginBottom: "1rem"
+  })}
 `;
 const BlueborderCardTitle = styled.h3`
   margin: 0;
@@ -49,6 +59,9 @@ const BlueborderCardDesc = styled.h4`
   font-size: 1.6rem;
   width: 68%;
   margin-bottom: 4rem;
+  ${mobile({
+    width: "75%"
+  })}
 `;
 export const TransparentBlueborderCard = ({ icon, desc }) => {
   return (
@@ -71,10 +84,19 @@ const TransparentBlueborderCardDiv = styled.div`
   border-radius: 1rem;
   align-items: center;
   padding-left: 3rem;
+  ${mobile({
+    padding: "2rem 0",
+    height: "16rem",
+    paddingLeft: "1.5rem",
+    maxWidth: "22rem"
+  })}
 `;
 const TransparentBlueborderCardIcon = styled.div`
   margin-bottom: 1rem;
   margin-right: auto;
+  ${mobile({
+    marginBottom: "0.5rem"
+  })}
 `;
 
 const TransparentBlueborderCardDesc = styled.h4`
@@ -84,6 +106,10 @@ const TransparentBlueborderCardDesc = styled.h4`
   font-size: 1.4rem;
   width: 80%;
   margin-right: auto;
+  ${mobile({
+    width: "90%",
+    fontSize: "1.2rem"
+  })}
 `;
 
 export const BoxShadowCard = ({ icon, title, desc }) => {
@@ -106,10 +132,18 @@ const BoxShadowCardDiv = styled.div`
   align-items: center;
   justify-content: center;
   text-align: center;
+  ${mobile({
+    marginBottom: "3rem",
+    height: "24rem",
+    width: "30rem"
+  })}
 `;
 
 const ImageContainer = styled.div`
   margin-bottom: 2rem;
+  ${mobile({
+    marginBottom: "1rem"
+  })}
 `;
 
 const BoxShadowCardTitle = styled.h1`
@@ -118,6 +152,9 @@ const BoxShadowCardTitle = styled.h1`
   margin: 0;
   padding: 0;
   margin-bottom: 2rem;
+  ${mobile({
+    marginBottom: "1rem"
+  })}
 `;
 
 const BoxShadowCardDesc = styled.h2`

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { Button } from "../../../Components";
+import { mobile } from "../../../Utilities/responsive";
 
 export const BlueborderCard = ({ link, title, desc }) => {
   return (
@@ -25,13 +26,25 @@ const BlueborderCardDiv = styled.div`
   border: 1px solid rgba(0, 0, 255, 1);
   border-radius: 5px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  ${mobile({
+    marginBottom: "2.5rem",
+    width: "25rem",
+    height: "25rem",
+    padding: "2rem 0"
+  })}
 `;
 const BlueborderCardLink = styled.div`
   margin-bottom: 2rem;
+  ${mobile({
+    marginBottom: "1.5rem"
+  })}
   h1 {
     font-weight: 500;
     font-size: 2rem;
     color: rgba(0, 0, 255, 1);
+    ${mobile({
+      fontSize: "1.6rem"
+    })}
   }
 `;
 const BlueborderCardTitle = styled.h3`
@@ -40,6 +53,9 @@ const BlueborderCardTitle = styled.h3`
   font-weight: 500;
   font-size: 1.6rem;
   margin-bottom: 2rem;
+  ${mobile({
+    fontSize: "1.4rem"
+  })}
 `;
 const BlueborderCardDesc = styled.h4`
   text-align: center;
@@ -48,6 +64,9 @@ const BlueborderCardDesc = styled.h4`
   font-weight: 500;
   font-size: 1.4rem;
   width: 80%;
+  ${mobile({
+    fontSize: "1.3rem"
+  })}
 `;
 
 export const EmailInput = ({ ...rest }) => {
@@ -67,6 +86,10 @@ export const EmailInput = ({ ...rest }) => {
 
 const EmailInputDiv = styled.div`
   display: flex;
+  z-index: 10;
+  ${mobile({
+    justifyContent: "center"
+  })}
 `;
 const Input = styled.input`
   margin-right: 2rem;
@@ -77,4 +100,7 @@ const Input = styled.input`
   &::placeholder {
     color: rgba(85, 85, 85, 1);
   }
+  ${mobile({
+    width: "30rem"
+  })}
 `;

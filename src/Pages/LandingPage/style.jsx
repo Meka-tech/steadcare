@@ -35,7 +35,7 @@ export const Title = styled.h1`
   ${mobile({
     fontSize: "1.5rem",
     width: "50%",
-    marginBottom: "1rem",
+    marginBottom: "0.5rem",
     lineHeight: "2rem"
   })}
 `;
@@ -51,7 +51,7 @@ export const Desc = styled.h2`
   ${mobile({
     fontSize: "1.2rem",
     width: "50%",
-    marginBottom: "2rem",
+    marginBottom: "1rem",
     lineHeight: "2rem"
   })}
 `;

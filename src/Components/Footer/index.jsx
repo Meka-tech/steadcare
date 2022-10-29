@@ -5,6 +5,7 @@ import { ReactComponent as Logo } from "../../Images/Logo.svg";
 import { ReactComponent as FBIcon } from "../../Images/SocialMediaIcons/LightMode/facebookIcon.svg";
 import { ReactComponent as TwitterIcon } from "../../Images/SocialMediaIcons/LightMode/twitterIcon.svg";
 import { ReactComponent as InstagramIcon } from "../../Images/SocialMediaIcons/LightMode/instagramIcon.svg";
+import { mobile } from "../../Utilities/responsive";
 
 export const Footer = () => {
   const navigate = useNavigate();
@@ -39,23 +40,27 @@ export const Footer = () => {
         </SocialMediaIcons>
       </TextDiv>
       <Link>
-        <LinkHeaderDiv>
-          <h1>Quick Links</h1>
-          <h1>Help</h1>
-          <h1>Transparency</h1>
-        </LinkHeaderDiv>
-        <Links>
-          <h2 onClick={() => navigate("/login")}>Login</h2>
-          <h2 onClick={() => navigate("/about-us")}>About Us</h2>
-          <h2 onClick={() => navigate("/terms-and-conditions")}>
+        <LinkColumn>
+          <LinkHeader>Quick Links</LinkHeader>
+          <Links onClick={() => navigate("/login")}>Login</Links>
+          <Links onClick={() => navigate("/sign-up")}>Sign Up</Links>
+          <Links onClick={() => navigate("/sign-up")}>Book Doctor</Links>
+        </LinkColumn>
+        <LinkColumn>
+          <LinkHeader>Help</LinkHeader>
+          <Links onClick={() => navigate("/about-us")}>About Us</Links>
+          <Links onClick={() => navigate("/contact-us")}>Contact Us</Links>
+          <Links onClick={() => navigate("/FAQs")}>FAQs</Links>
+        </LinkColumn>
+        <LinkColumn>
+          <LinkHeader>Transparency</LinkHeader>
+          <Links onClick={() => navigate("/terms-and-conditions")}>
             Terms and Conditions
-          </h2>
-          <h2 onClick={() => navigate("/sign-up")}>Sign Up</h2>
-          <h2 onClick={() => navigate("/contact-us")}>Contact Us</h2>
-          <h2 onClick={() => navigate("/privacy-policy")}>Privacy Policy</h2>
-          <h2>Book Doctor</h2>
-          <h2 onClick={() => navigate("/FAQs")}>FAQs</h2>
-        </Links>
+          </Links>
+          <Links onClick={() => navigate("/privacy-policy")}>
+            Privacy Policy
+          </Links>
+        </LinkColumn>
       </Link>
       <Reserved>
         <h1>© 2022 STEADCARE. All rights reserved</h1>
@@ -74,10 +79,19 @@ const Container = styled.div`
   box-sizing: border-box;
   padding: 0 8rem;
   padding-top: 10rem;
+  ${mobile({
+    flexDirection: "column",
+    height: "fit-content",
+    padding: "8rem 4rem"
+  })}
 `;
 
 const TextDiv = styled.div`
   width: 40rem;
+  ${mobile({
+    width: "50rem",
+    marginBottom: "5rem"
+  })}
 `;
 const LogoSection = styled.div`
   width: 20rem;
@@ -86,6 +100,10 @@ const LogoSection = styled.div`
   align-items: flex-end;
   margin-bottom: 2rem;
   height: 2rem;
+  ${mobile({
+    marginBottom: "1rem"
+  })}
+
   h1 {
     padding: 0;
     margin: 0;
@@ -107,43 +125,46 @@ const Text = styled.h1`
   font-size: 1.4rem;
   line-height: 2.4rem;
   margin-bottom: 2rem;
+  ${mobile({
+    marginBottom: "2rem"
+  })}
 `;
 const SocialMediaIcons = styled.div`
   width: 40%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${mobile({
+    width: "30%"
+  })}
 `;
 const Link = styled.div`
   width: 70rem;
-`;
-
-const LinkHeaderDiv = styled.div`
   display: grid;
   grid-template-columns: 20rem 20rem 20rem;
-  margin-bottom: 4rem;
-  height: 2rem;
 
-  h1 {
-    margin: 0;
-    padding: 0;
-    font-weight: 600;
-    font-size: 1.8rem;
-  }
+  ${mobile({
+    width: "100%",
+    gridTemplateColumns: "20rem 20rem",
+    gridRowGap: "3rem"
+  })}
 `;
-const Links = styled.div`
-  display: grid;
-  grid-template-columns: 20rem 20rem 20rem;
-  grid-row-gap: 2rem;
-
-  h2 {
-    text-align: left;
-    margin: 0;
-    padding: 0;
-    font-weight: 500;
-    font-size: 1.6rem;
-    cursor: pointer;
-  }
+const LinkColumn = styled.div``;
+const LinkHeader = styled.h1`
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+`;
+const Links = styled.h2`
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 1.6rem;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
 `;
 
 const Reserved = styled.div`

@@ -27,7 +27,6 @@ import {
   DoctorCreateHistory,
   AdminDashboard,
   AdminSettings,
-  AdminDocotors,
   AdminDoctors,
   AdminPatients,
   AdminDocuments

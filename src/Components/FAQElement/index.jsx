@@ -3,9 +3,11 @@ import styled from "styled-components";
 import { AiOutlineDown } from "react-icons/ai";
 
 import { mobile, tab } from "../../Utilities/responsive";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 export const FAQElement = ({ question, answer }) => {
   const [open, setOpen] = useState(false);
+  const IsMobile = useIsMobile();
 
   const OnClick = () => {
     setOpen(!open);
@@ -16,7 +18,7 @@ export const FAQElement = ({ question, answer }) => {
         <h1> {question}</h1>
         <SVG open={open} onClick={() => OnClick()}>
           <AiOutlineDown
-            size={20}
+            size={IsMobile ? 15 : 20}
             style={{
               transform: open ? "rotate(180deg)" : null,
               transition: "all 0.25s ease-in-out",
@@ -64,14 +66,14 @@ const Question = styled.div`
       lineHeight: "19.5px",
       width: "600px",
       alignItems: "center",
-      fontSize: "18px"
+      fontSize: "1.6rem"
     })}
     ${mobile({
       flex: "1",
       lineHeight: "19.5px",
-      width: "380px",
+      width: "3.8rem",
       alignItems: "center",
-      fontSize: "16px"
+      fontSize: "1.4rem"
     })}
   }
 `;
@@ -89,7 +91,7 @@ const SVG = styled.div`
   })}
   ${mobile({
     marginLeft: "0px",
-    width: "20px",
+    width: "2rem",
     flex: "0.1"
   })}
 `;
@@ -106,8 +108,9 @@ const Answer = styled.div`
     marginLeft: "auto",
     marginRight: "auto",
     width: "100%",
-    marginTop: "10px",
-    marginBottom: "40px"
+    marginTop: "0rem",
+    height: "4rem",
+    marginBottom: "4rem"
   })}
   h1 {
     font-weight: 500;
@@ -118,10 +121,10 @@ const Answer = styled.div`
     width: 100%;
     line-height: 3rem;
     ${mobile({
-      lineHeight: "18px",
+      lineHeight: "1.8rem",
       width: "380px",
       alignItems: "center",
-      fontSize: "14px"
+      fontSize: "1.3rem"
     })}
   }
 `;

@@ -18,6 +18,7 @@ import { ReactComponent as FindDoctor } from "../../../Images/CardIcon/find_a_do
 import { ReactComponent as ObserveDoctor } from "../../../Images/CardIcon/observe_doctor.svg";
 import HomeBanner from "../../../Images/Banners/home_banner.jpg";
 import CheckMarkImage from "../../../Images/approveBadge.png";
+import { mobile } from "../../../Utilities/responsive";
 
 export const Home = () => {
   return (
@@ -128,6 +129,7 @@ const WhoCanDiv = styled.div`
   text-align: center;
   padding: 4rem 0;
   text-align: center;
+
   h1 {
     font-weight: 600;
     font-size: 2.5rem;
@@ -140,6 +142,7 @@ const WhoCanDiv = styled.div`
     width: 40%;
     margin: 0 auto;
     margin-bottom: 8rem;
+    ${mobile({ width: "70%" })}
   }
 `;
 const WhoCanDiv2 = styled.div`
@@ -148,6 +151,7 @@ const WhoCanDiv2 = styled.div`
   width: 60%;
   margin: 0 auto;
   margin-bottom: 5rem;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const WeProv = styled.div`
@@ -158,6 +162,7 @@ const WeProv = styled.div`
   padding: 6rem 4rem;
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column", padding: "3rem 2rem" })}
 `;
 const WeProvText = styled.div`
   flex: 1;
@@ -167,6 +172,11 @@ const WeProvText = styled.div`
     line-height: 5rem;
     width: 80%;
     margin-bottom: 5rem;
+    ${mobile({
+      fontSize: "2.5rem",
+      lineHeight: "3.5rem",
+      marginBottom: "2rem"
+    })}
   }
   h2 {
     font-weight: 500;
@@ -174,6 +184,9 @@ const WeProvText = styled.div`
     line-height: 3rem;
     width: 80%;
     letter-spacing: 6%;
+    ${mobile({
+      marginBottom: "4rem"
+    })}
   }
 `;
 
@@ -182,6 +195,11 @@ const WeProveCards = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   grid-row-gap: 2rem;
+  ${mobile({
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-between"
+  })}
 `;
 
 const LearnHow = styled.div`
@@ -193,6 +211,9 @@ const LearnHow = styled.div`
     line-height: 3.5rem;
     margin-bottom: 3rem;
     letter-spacing: 7%;
+    ${mobile({
+      marginBottom: "1rem"
+    })}
   }
   h2 {
     font-weight: 500;
@@ -202,6 +223,9 @@ const LearnHow = styled.div`
     letter-spacing: 7%;
     margin-bottom: 2rem;
     width: 30%;
+    ${mobile({
+      width: "80%"
+    })}
   }
 `;
 
@@ -211,6 +235,12 @@ const LearnHowCards = styled.div`
   justify-content: space-between;
   width: 90%;
   margin-bottom: 20rem;
+  ${mobile({
+    flexDirection: "column",
+    alignItems: "center",
+    marginBottom: "10rem",
+    width: "100%"
+  })}
 `;
 const CheckMark = styled.img`
   width: 6rem;

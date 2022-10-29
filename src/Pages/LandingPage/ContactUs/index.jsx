@@ -7,9 +7,12 @@ import ContactBanner from "../../../Images/Banners/contact_us_banner.jpg";
 import { BlueborderCard, EmailInput } from "./component";
 import { ReactComponent as NewsLetterSvg } from "../../../Images/news_letter_icons.svg";
 import { useNavigate } from "react-router";
+import { mobile } from "../../../Utilities/responsive";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 export const ContactUs = () => {
   const navigate = useNavigate();
+  const IsMobile = useIsMobile();
   return (
     <Main>
       <Navbar active={"ContactUs"} />
@@ -39,9 +42,13 @@ export const ContactUs = () => {
         <h2>Never miss out on latest news, discounts or special offers.</h2>
         <EmailInput />
         <NewsLetterSvg
-          style={{ position: "absolute", right: "0", top: "4rem" }}
-          height="18rem"
-          width={"30rem"}
+          style={{
+            position: "absolute",
+            right: "0",
+            top: "4rem"
+          }}
+          height={IsMobile ? "15rem" : "18rem"}
+          width={IsMobile ? "20rem" : "30rem"}
         />
       </NewsLetter>
       <FAQdiv>
@@ -49,12 +56,12 @@ export const ContactUs = () => {
         <h2>
           Visit our{" "}
           {
-            <h2
+            <span
               style={{ cursor: "pointer", color: "blue" }}
               onClick={() => navigate("/FAQs")}
             >
               FAQs
-            </h2>
+            </span>
           }{" "}
           page for answers
         </h2>
@@ -71,6 +78,12 @@ const Cards = styled.div`
   padding: 8rem 0;
   box-sizing: border-box;
   margin: 0 auto;
+  ${mobile({
+    flexDirection: "column",
+    width: "100%",
+    alignItems: "center",
+    padding: "4rem 0"
+  })}
 `;
 
 const NewsLetter = styled.div`
@@ -79,12 +92,20 @@ const NewsLetter = styled.div`
   padding: 4rem 0;
   padding-left: 10rem;
   text-align: left;
+  ${mobile({
+    textAlign: "center",
+    padding: "4rem 0"
+  })}
   h1 {
     margin: 0;
     padding: 0;
     font-size: 2.5rem;
     font-weight: 500;
     margin-bottom: 2rem;
+    ${mobile({
+      fontSize: "2rem",
+      marginBottom: "1rem"
+    })}
   }
   h2 {
     margin: 0;
@@ -94,10 +115,17 @@ const NewsLetter = styled.div`
     margin-bottom: 4rem;
     width: 35%;
     line-height: 2rem;
+    ${mobile({
+      fontSize: "1.4rem",
+      width: "100%"
+    })}
   }
 `;
 const FAQdiv = styled.div`
   padding: 8rem 10rem;
+  ${mobile({
+    padding: "8rem 5rem"
+  })}
   h1 {
     margin: 0;
     padding: 0;
@@ -106,6 +134,9 @@ const FAQdiv = styled.div`
     line-height: 3.5rem;
     width: 20%;
     margin-bottom: 2rem;
+    ${mobile({
+      width: "100%"
+    })}
   }
   h2 {
     margin: 0;
