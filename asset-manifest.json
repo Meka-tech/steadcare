@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/steadcare/static/css/main.4a947cdc.css",
-    "main.js": "/steadcare/static/js/main.f702c613.js",
+    "main.js": "/steadcare/static/js/main.b8c4752c.js",
     "static/media/FAQs_banner.png": "/steadcare/static/media/FAQs_banner.8b36433fc3e1b7841d96.png",
     "static/media/about_us.png": "/steadcare/static/media/about_us.ec42eee280b5f9ced72f.png",
     "static/media/home_banner.jpg": "/steadcare/static/media/home_banner.5f64bf79a8397dc42017.jpg",
@@ -81,10 +81,10 @@
     "static/media/hamburgerIcon.svg": "/steadcare/static/media/hamburgerIcon.d96b060dac5fe3e77e2d01138e9d3410.svg",
     "static/media/hamburger_icon.svg": "/steadcare/static/media/hamburger_icon.d96b060dac5fe3e77e2d01138e9d3410.svg",
     "main.4a947cdc.css.map": "/steadcare/static/css/main.4a947cdc.css.map",
-    "main.f702c613.js.map": "/steadcare/static/js/main.f702c613.js.map"
+    "main.b8c4752c.js.map": "/steadcare/static/js/main.b8c4752c.js.map"
   },
   "entrypoints": [
     "static/css/main.4a947cdc.css",
-    "static/js/main.f702c613.js"
+    "static/js/main.b8c4752c.js"
   ]
 }
