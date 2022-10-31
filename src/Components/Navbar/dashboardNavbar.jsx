@@ -642,8 +642,8 @@ const MobileLogOutDiv = styled.div`
 const Notif = styled.div`
   box-sizing: border-box;
   padding: 2rem;
-  height: 4rem;
-  margin: 2rem 0;
+  height: 3rem;
+  margin: 1rem 0;
   display: flex;
   align-items: center;
   justify-content: flex-end;

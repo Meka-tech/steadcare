@@ -24,6 +24,7 @@ import useFetch from "../../../../hooks/useFetch";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import moment from "moment";
 
 export const DoctorProfile = () => {
   const user = useSelector((state) => state.reducer.doctorDetails);
@@ -50,9 +51,6 @@ export const DoctorProfile = () => {
 
   const FirstName = Capitalize(userData.name.split(" ")[0]);
   const LastName = Capitalize(userData.name.split(" ")[1]);
-
-  const [firstName, setFirstName] = useState(FirstName);
-  const [lastName, setLastName] = useState(LastName);
 
   const CountryList = [];
   const [country, setCountry] = useState("NGA");
@@ -107,9 +105,6 @@ export const DoctorProfile = () => {
   const UpdateProfile = async () => {
     setLoading(true);
     const PayloadData = {};
-    if (FirstName + " " + LastName !== firstName + " " + lastName) {
-      PayloadData.name = firstName + " " + lastName;
-    }
     if (dob !== userData.dob) {
       PayloadData.dob = dob;
     }
@@ -188,24 +183,22 @@ export const DoctorProfile = () => {
                   title="First Name"
                   inactive={true}
                   placeholder={`${FirstName}`}
-                  inputValue={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  editable={false}
                 />
                 <TextForm
                   inactive={true}
                   width={"80%"}
                   title="Last Name"
                   placeholder={`${LastName}`}
-                  inputValue={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  editable={false}
                 />
                 <TextForm
                   width={"80%"}
                   inactive={true}
                   title="Date of Birth"
                   icon={<Calendar />}
-                  placeholder={"dd/mm/yy"}
-                  inputValue={dob}
+                  placeholder={"yy/mm/dd"}
+                  inputValue={moment().format(dob).split("T")[0]}
                   onChange={(e) => setDob(e.target.value)}
                 />
                 <Dropdown

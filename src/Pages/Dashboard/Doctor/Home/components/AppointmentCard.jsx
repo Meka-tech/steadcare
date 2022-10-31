@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import useFetch from "../../../../../hooks/useFetch";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import moment from "moment";
 
 export const AppointmentRequests = ({}) => {
   const [hasAppointment, setHasAppointment] = useState(true);
@@ -52,13 +53,16 @@ export const AppointmentRequests = ({}) => {
   };
 
   const AppointmentItem = ({ name, time, img, action, index, id }) => {
+    const m = moment(time);
     return (
       <AppointmentItemContainer>
         <PictureProfile>
           <DisplayPicture />
           <NameDiv>
             <Name>{name}</Name>
-            <Time>{time}</Time>
+            <Time>
+              {m.format("LL")} ,{m.format("h:mma")}
+            </Time>
           </NameDiv>
         </PictureProfile>
         <ViewForm

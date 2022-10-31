@@ -23,6 +23,8 @@ import {
   ThreeDots
 } from "./style";
 import { PrescribeModal } from "../prescribeModal";
+import moment from "moment";
+import { Capitalize } from "../../../../Utilities/globalFunc";
 
 export const AppointmentList = ({ data, loading }) => {
   const [activeTab, setActiveTab] = useState("UA");
@@ -130,7 +132,9 @@ export const AppointmentList = ({ data, loading }) => {
       <TabBody>
         {loading && <Spinner />}
         {loading === false &&
+          data !== undefined &&
           data?.map((datum, index) => {
+            const m = moment(datum.time);
             if (activeTab === "PA") {
               if (datum.status === "completed") {
                 return (
@@ -138,8 +142,8 @@ export const AppointmentList = ({ data, loading }) => {
                     <NameDiv>
                       <DisplayPicture /> <h4>{datum.name}</h4>
                     </NameDiv>
-                    <h4>{datum.time}</h4>
-                    <h4>{datum.time}</h4>
+                    <h4>{m.format("L")} </h4>
+                    <h4>{m.format("h:mma")}</h4>
                     <StatusDiv>
                       <Status status={`${datum.status}`}>{datum.status}</Status>
                       <ThreeDots
@@ -164,8 +168,8 @@ export const AppointmentList = ({ data, loading }) => {
                   <NameDiv>
                     <DisplayPicture /> <h4>{datum.name}</h4>
                   </NameDiv>
-                  <h4>{datum.time}</h4>
-                  <h4>{datum.time}</h4>
+                  <h4>{m.format("L")} </h4>
+                  <h4>{m.format("h:mma")}</h4>
                   <StatusDiv>
                     <Status status={`${datum.status}`}>{datum.status}</Status>
                     <ThreeDots
@@ -203,7 +207,7 @@ const AcceptCancelModal = ({ setActive, status, data }) => {
       <ModalContainer ref={ModalRef}>
         <Message>
           Are you sure you want to {status === "accept" ? "accept" : "cancel"}{" "}
-          an appointment request from {data[0]}?
+          an appointment request from {Capitalize(data.name)} ?
         </Message>
         <ModalButton>
           <Button
@@ -218,6 +222,7 @@ const AcceptCancelModal = ({ setActive, status, data }) => {
             text="No"
             fontSize="1.4rem"
             height={"2.5rem"}
+            onClick={() => setActive(false)}
           />
         </ModalButton>
       </ModalContainer>

@@ -20,6 +20,7 @@ import {
   TabHeader,
   ThreeDots
 } from "./style";
+import moment from "moment";
 
 export const AppointmentList = ({ data, loading, token }) => {
   const [activeTab, setActiveTab] = useState("UA");
@@ -89,6 +90,7 @@ export const AppointmentList = ({ data, loading, token }) => {
       </DropdownContainer>
     );
   };
+
   return (
     <AppointmentListContainer>
       <TabContainer>
@@ -109,6 +111,7 @@ export const AppointmentList = ({ data, loading, token }) => {
         {loading && <Spinner />}
         {loading === false &&
           data?.map((datum, index) => {
+            const m = moment(datum.time);
             if (activeTab === "PA") {
               if (datum.status === "completed") {
                 return (
@@ -116,8 +119,8 @@ export const AppointmentList = ({ data, loading, token }) => {
                     <NameDiv>
                       <DisplayPicture /> <h4>{datum.name}</h4>
                     </NameDiv>
-                    <h4>{datum.time}</h4>
-                    <h4>{datum[2]}</h4>
+                    <h4>{m.format("L")}</h4>
+                    <h4>{m.format("h:mma")}</h4>
                     <StatusDiv>
                       <Status status={`${datum.status}`}>{datum.status}</Status>
                       <ThreeDots
@@ -138,13 +141,14 @@ export const AppointmentList = ({ data, loading, token }) => {
               }
               return null;
             } else {
+              const m = moment(datum.time);
               return (
                 <Column key={index + Math.round(2)}>
                   <NameDiv>
                     <DisplayPicture /> <h4>{datum.name}</h4>
                   </NameDiv>
-                  <h4>{datum.time}</h4>
-                  <h4>{datum[2]}</h4>
+                  <h4>{m.format("L")}</h4>
+                  <h4>{m.format("h:mma")}</h4>
                   <StatusDiv>
                     <Status status={`${datum.status}`}>{datum.status}</Status>
                     <ThreeDots

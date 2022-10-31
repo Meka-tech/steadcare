@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { TopBar } from "../component";
 import { Main, Title } from "./style";
 import { AppointmentList } from "./components";
-import axios from "axios";
-import { BaseUrl } from "../../../../Utilities/API";
 import { useSelector } from "react-redux";
 import useFetch from "../../../../hooks/useFetch";
 
@@ -16,12 +14,15 @@ export const DoctorAppointment = () => {
   const [appointments, setAppointments] = useState();
 
   const CallBackFunc = (response) => {
-    setAppointments(response.data.data);
-    console.log(response);
+    setAppointments(response.data.data.fetchedData);
   };
 
-  const { loading } = useFetch(token, "/all-doctors-appointment", CallBackFunc);
-
+  const { loading } = useFetch(
+    token,
+    "/get-my-appoinments?pageNo=1&noOfRequests=2",
+    CallBackFunc
+  );
+  console.log(appointments);
   const MockData = [
     ["Chineye Matu", "16-06-2022", "10:00am", "Completed"],
     ["Luther Ope", "18-06-2022", "10:00am", "Pending"],

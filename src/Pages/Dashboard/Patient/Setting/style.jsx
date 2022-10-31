@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../../../../Utilities/responsive";
 
 export const Main = styled.div`
   width: 90%;
@@ -20,11 +21,13 @@ export const WhiteDiv = styled.div`
   margin-bottom: 5rem;
   box-shadow: 0px 3px 2px 0px rgba(0, 0, 255, 0.3);
   padding: 2rem 2rem;
+  ${mobile({ height: "fit-content" })}
 `;
 
 export const ChangePasswords = styled.div`
   padding-right: 2rem;
   margin-left: 5rem;
+  ${mobile({ marginLeft: "2rem" })}
   h1 {
     font-size: 2.2rem;
     font-weight: 600;
@@ -35,6 +38,7 @@ export const ChangePasswords = styled.div`
       font-size: 1.6rem;
       font-weight: 400;
     }
+
     display: flex;
     justify-content: space-between;
   }
@@ -42,6 +46,7 @@ export const ChangePasswords = styled.div`
 export const PasswordField = styled.div`
   width: 60rem;
   position: relative;
+  ${mobile({ width: "40rem" })}
 `;
 
 export const ButtonField = styled.div`

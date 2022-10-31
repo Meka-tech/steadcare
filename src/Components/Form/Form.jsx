@@ -133,7 +133,6 @@ const Input = styled.input`
     font-size: ${(props) => (props.fontSize ? props.fontSize : "1.6rem")};
     ${mobile({ fontSize: "1.4rem" })}
   }
-  ${mobile({ fontSize: "1.4rem" })}
 `;
 
 const InputField = styled.div`
@@ -176,6 +175,8 @@ const Icon = styled.i`
   align-items: center;
   justify-content: center;
   width: 15%;
+
+  ${mobile({ width: "10%" })}
 `;
 
 const ErrorMsg = styled.h3`
