@@ -18,6 +18,8 @@ import {
   updateLoggedInRole
 } from "../../../../features/loggedIn/loginSlice";
 import { mobile } from "../../../../Utilities/responsive";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const OtpVerification = () => {
   const navigate = useNavigate();
@@ -45,6 +47,7 @@ export const OtpVerification = () => {
 
       axios(config)
         .then(function (res) {
+          toast.success(res.data.message);
           const userDetails = res.data.data;
           const Token = userDetails.Token;
           dispatch(updatePatient({ userDetails }));
@@ -55,8 +58,7 @@ export const OtpVerification = () => {
           navigate("/patient/home");
         })
         .catch(function (error) {
-          const Error = error;
-          alert(Error.response.data.message);
+          toast.error(error.response.data.message);
           setOTP("");
           setIsLoading(false);
         });
@@ -116,6 +118,7 @@ export const OtpVerification = () => {
               onClick={() => handleSubmit()}
               isLoading={isLoading}
             />
+            <ToastContainer />
           </ButtonDiv>
         </Content>
       </Body>

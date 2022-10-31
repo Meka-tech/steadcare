@@ -15,6 +15,8 @@ import { BaseUrl } from "../../../Utilities";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { mobile } from "../../../Utilities/responsive";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ResetPassword = () => {
   const navigate = useNavigate();
@@ -36,6 +38,7 @@ export const ResetPassword = () => {
 
     axios(config)
       .then(function (res) {
+        toast.success(res.data.message);
         setIsLoading(false);
         navigate("/reset-password/email-sent", {
           state: {
@@ -43,7 +46,8 @@ export const ResetPassword = () => {
           }
         });
       })
-      .catch(function () {
+      .catch(function (err) {
+        toast.error(err.response.data.message);
         setIsLoading(false);
       });
   };
@@ -81,6 +85,7 @@ export const ResetPassword = () => {
                   width="100%"
                   type="submit"
                 />
+                <ToastContainer />
               </ButtonDiv>
               <Span>
                 Don’t have an account?

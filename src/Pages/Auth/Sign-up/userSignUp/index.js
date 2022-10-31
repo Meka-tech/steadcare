@@ -19,13 +19,14 @@ import {
   Forms,
   GrayText,
   LogoDiv,
-  Margin,
   MarginLeft,
   Span
 } from "../../style";
 import { useNavigate } from "react-router";
 import { useFormik } from "formik";
 import { validationSchema } from "./validationSchema";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const UserSignUp = () => {
   const navigate = useNavigate();
@@ -73,6 +74,7 @@ export const UserSignUp = () => {
 
       axios(config)
         .then(function (res) {
+          toast.success(res.data.message);
           sessionStorage.setItem("OTPHASH", res.data.data.otpHash);
           setIsLoading(false);
           navigate("/sign-up/otp-verification", {
@@ -83,7 +85,7 @@ export const UserSignUp = () => {
           });
         })
         .catch(function (error) {
-          console.log(error);
+          toast.error(error.response.data.message);
           setIsLoading(false);
         });
     }
@@ -104,30 +106,6 @@ export const UserSignUp = () => {
   useEffect(() => {
     setName(values.firstName + " " + values.lastName);
   }, [values.firstName, values.lastName]);
-
-  // const data = {
-  //   name: "Admin",
-  //   email: "admin@email.com",
-  //   phone: "00000000001",
-  //   password: "Admin123",
-  //   confirmPassword: "Admin123",
-  //   role: "admin"
-  // };
-
-  // const config = {
-  //   method: "post",
-  //   url: `${BaseUrl}/create-user-account`,
-  //   headers: {},
-  //   data: data
-  // };
-
-  // axios(config)
-  //   .then(function (response) {
-  //     console.log(response.data);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
 
   return (
     <Container>
@@ -216,6 +194,7 @@ export const UserSignUp = () => {
               isLoading={isLoading}
               onClick={handleSubmit}
             />
+            <ToastContainer />
           </ButtonDiv>
           <Span>
             <BoldText>Already have an account?</BoldText>

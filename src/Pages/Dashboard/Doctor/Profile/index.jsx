@@ -22,6 +22,8 @@ import { BaseUrl } from "../../../../Utilities";
 import { useFormik } from "formik";
 import useFetch from "../../../../hooks/useFetch";
 import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const DoctorProfile = () => {
   const user = useSelector((state) => state.reducer.doctorDetails);
@@ -151,11 +153,11 @@ export const DoctorProfile = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        toast.success(response.data.message);
         setLoading(false);
       })
       .catch(function (error) {
-        console.log(error);
+        toast.error(error.response.data.message);
         setLoading(false);
       });
   };
@@ -286,6 +288,7 @@ export const DoctorProfile = () => {
                   onClick={handleSubmit}
                   isLoading={loading}
                 />
+                <ToastContainer />
               </ButtonDiv>
             </>
           )}

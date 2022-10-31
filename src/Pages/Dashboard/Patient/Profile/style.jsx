@@ -19,7 +19,8 @@ export const Forms = styled.div`
   margin-top: 2rem;
   ${mobile({
     marginLeft: "0",
-    gridTemplateColumns: "55% 55%"
+    display: "flex",
+    flexDirection: "column"
   })}
 `;
 export const DropDowns = styled.div`
@@ -31,7 +32,8 @@ export const DropDowns = styled.div`
   ${mobile({
     width: "100%",
     marginLeft: "0",
-    gridTemplateColumns: "55% 55%"
+    gridTemplateColumns: "47% 47%",
+    gridColumnGap: "3rem"
   })}
 `;
 export const ButtonDiv = styled.div`

@@ -37,20 +37,20 @@ import {
   updateAdminToken
 } from "../../../features/userDetails/adminSlice";
 import { mobile } from "../../../Utilities/responsive";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Login = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [RememberMe, setRememberMe] = useState(true);
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.reducer.doctorDetails);
-
-  // console.log(user);
 
   const Dispatch = (response) => {
     const Token = response.data.data.token;
     const userDetails = response.data.data.user;
     const role = userDetails.role;
+    toast.success(response.data.message);
     if (role === "doctor") {
       dispatch(updateDoctor({ userDetails }));
       dispatch(updateDoctorToken(Token));
@@ -66,7 +66,7 @@ export const Login = () => {
     }
     dispatch(updateLoggedIn(true));
     setIsLoading(false);
-    navigate(`/${role}/home`);
+    setTimeout(() => navigate(`/${role}/home`), 2000);
   };
   const OnHandleSubmit = async () => {
     setIsLoading(true);
@@ -84,8 +84,8 @@ export const Login = () => {
         Dispatch(response);
       })
       .catch(function (error) {
-        const Error = error;
         setIsLoading(false);
+        toast.success(error.data.message);
       });
   };
 
@@ -143,6 +143,7 @@ export const Login = () => {
                   type="submit"
                   isLoading={isLoading}
                 />
+                <ToastContainer />
               </ButtonDiv>
               <Span>
                 Don’t have an account?

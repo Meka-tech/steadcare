@@ -12,6 +12,8 @@ import { BaseUrl } from "../../../../../Utilities";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import useFetch from "../../../../../hooks/useFetch";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const AppointmentRequests = ({}) => {
   const [hasAppointment, setHasAppointment] = useState(true);
@@ -41,8 +43,10 @@ export const AppointmentRequests = ({}) => {
     axios(config)
       .then(function (response) {
         console.log(response.data);
+        toast.success(response.data.message);
       })
       .catch(function (error) {
+        toast.error(error.response.data.message);
         console.log(error);
       });
   };
@@ -88,6 +92,7 @@ export const AppointmentRequests = ({}) => {
               AcceptRejectAppointment("rejected", id);
             }}
           />
+          <ToastContainer />
         </Buttons>
       </AppointmentItemContainer>
     );

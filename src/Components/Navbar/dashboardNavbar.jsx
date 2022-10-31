@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../../Images/Logo.svg";
 //import icons
@@ -25,7 +25,7 @@ import { ReactComponent as DocumentsActiveIcon } from "../../Images/NavbarActive
 import { ReactComponent as Hamburger } from "../../Images/NavbarActiveElements/hamburger_icon.svg";
 import { useNavigate } from "react-router";
 import { mobile } from "../../Utilities/responsive";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOutPatient } from "../../features/userDetails/patientSlice";
 import {
   updateLoggedIn,
@@ -33,10 +33,23 @@ import {
 } from "../../features/loggedIn/loginSlice";
 import { LogOutDoctor } from "../../features/userDetails/doctorSlice";
 import { LogOutAdmin } from "../../features/userDetails/adminSlice";
+import { IoClose } from "react-icons/io5";
+
+import { Initials } from "./initials";
+import { ReactComponent as UnReadNotification } from "../../Images/NotifyBell.svg";
+import { ReactComponent as Notification } from "../../Images/NotifyBell_.svg";
+import useClickOutside from "../../hooks/useClickOutside";
 
 export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.reducer.patientDetails.name);
+  const firstName = user.split(" ")[0][0];
+  const lastName = user.split(" ")[1][0];
+  const [hasUnread, setHasUnread] = useState(false);
+  const [activeNav, setActiveNav] = useState(false);
+  const NavRef = useRef();
+  useClickOutside(NavRef, () => setActiveNav(false));
   const Navs = [
     [<DashboardIcon />, <DashboardActiveIcon />, "Dashboard", `/${role}/home`],
     [<ProfileIcon />, <ProfileActiveIcon />, "Profile", `/${role}/profile`],
@@ -60,63 +73,135 @@ export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
     ],
     [<SettingsIcon />, <SettingsActiveIcon />, "Settings", `/${role}/settings`]
   ];
+
   return (
-    <Container>
-      <LogoSection>
-        <Logo
-          style={{ cursor: "pointer" }}
-          onClick={() => navigate("/")}
-          height={"3.5rem"}
-          width={"3.5rem"}
-        />
-        <h1 onClick={() => navigate("/")}> SteadCare</h1>
-      </LogoSection>
-      <NavItems>
-        {Navs.map((nav, index) => (
+    <>
+      <Container>
+        <LogoSection>
+          <Logo
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/")}
+            height={"3.5rem"}
+            width={"3.5rem"}
+          />
+          <h1 onClick={() => navigate("/")}> SteadCare</h1>
+        </LogoSection>
+        <NavItems>
+          {Navs.map((nav, index) => (
+            <NavItem
+              key={index}
+              active={active}
+              item={nav[2]}
+              onClick={() => navigate(nav[3])}
+            >
+              {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
+              <span>
+                <h1>{nav[2]}</h1>
+              </span>
+            </NavItem>
+          ))}
+        </NavItems>
+        <LogOutDiv>
           <NavItem
-            key={index}
             active={active}
-            item={nav[2]}
-            onClick={() => navigate(nav[3])}
+            onClick={() => {
+              dispatch(logOutPatient());
+              dispatch(updateLoggedIn(false));
+              dispatch(updateLoggedInRole(""));
+              navigate("/");
+            }}
           >
-            {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
+            <div>
+              <LogOutIcon />
+            </div>
             <span>
-              <h1>{nav[2]}</h1>
+              {" "}
+              <h1>Log Out</h1>
             </span>
           </NavItem>
-        ))}
-      </NavItems>
-      <LogOutDiv>
-        <NavItem
-          active={active}
-          onClick={() => {
-            dispatch(logOutPatient());
-            dispatch(updateLoggedIn(false));
-            dispatch(updateLoggedInRole(""));
-            navigate("/");
-          }}
-        >
-          <div>
-            <LogOutIcon />
-          </div>
-          <span>
-            {" "}
-            <h1>Log Out</h1>
-          </span>
-        </NavItem>
-      </LogOutDiv>
-      <HamburgerDiv>
-        <Hamburger height={"3.5rem"} width={"3.5rem"} />
-      </HamburgerDiv>
-    </Container>
+        </LogOutDiv>
+        <HamburgerDiv>
+          {activeNav ? (
+            <IoClose
+              size={25}
+              color={"blue"}
+              onClick={() => {
+                setActiveNav(false);
+              }}
+            />
+          ) : (
+            <Hamburger
+              height={"3.5rem"}
+              width={"3.5rem"}
+              onClick={() => setActiveNav(true)}
+            />
+          )}
+        </HamburgerDiv>
+      </Container>
+      <MobileBarDiv active={activeNav}>
+        <MobileBar ref={NavRef}>
+          <Notif>
+            {hasUnread === true ? (
+              <UnReadNotification width={"3rem"} />
+            ) : (
+              <Notification width={"3rem"} />
+            )}
+            <Initials firstName={firstName} lastName={lastName} />
+          </Notif>
+          <MobileNavItems>
+            {Navs.map((nav, index) => (
+              <NavItem
+                key={index}
+                active={active}
+                item={nav[2]}
+                onClick={() => navigate(nav[3])}
+              >
+                {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
+                <span>
+                  <h1>{nav[2]}</h1>
+                </span>
+              </NavItem>
+            ))}
+          </MobileNavItems>
+          <MobileLogOutDiv>
+            <NavItem
+              active={active}
+              onClick={() => {
+                dispatch(logOutPatient());
+                dispatch(updateLoggedIn(false));
+                dispatch(updateLoggedInRole(""));
+                navigate("/");
+              }}
+            >
+              <div>
+                <LogOutIcon />
+              </div>
+              <span>
+                {" "}
+                <h1>Log Out</h1>
+              </span>
+            </NavItem>
+          </MobileLogOutDiv>
+        </MobileBar>
+      </MobileBarDiv>
+    </>
   );
 };
+
 export const DoctorDashboardNavbar = ({
   active = "Dashboard",
   role = "doctor"
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.reducer.doctorDetails.name);
+  const firstName = user.split(" ")[0][0];
+  const lastName = user.split(" ")[1][0];
+
+  const [hasUnread, setHasUnread] = useState(false);
+  const [activeNav, setActiveNav] = useState(false);
+  const NavRef = useRef();
+  useClickOutside(NavRef, () => setActiveNav(false));
   const Navs = [
     [<DashboardIcon />, <DashboardActiveIcon />, "Dashboard", `/${role}/home`],
     [<ProfileIcon />, <ProfileActiveIcon />, "Profile", `/${role}/profile`],
@@ -135,54 +220,116 @@ export const DoctorDashboardNavbar = ({
     [<SettingsIcon />, <SettingsActiveIcon />, "Settings", `/${role}/settings`]
   ];
   return (
-    <Container>
-      <LogoSection>
-        <Logo
-          style={{ cursor: "pointer" }}
-          onClick={() => navigate("/")}
-          height={"3.5rem"}
-          width={"3.5rem"}
-        />
-        <h1 onClick={() => navigate("/")}> SteadCare</h1>
-      </LogoSection>
-      <NavItems>
-        {Navs.map((nav, index) => (
+    <>
+      <Container>
+        <LogoSection>
+          <Logo
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/")}
+            height={"3.5rem"}
+            width={"3.5rem"}
+          />
+          <h1 onClick={() => navigate("/")}> SteadCare</h1>
+        </LogoSection>
+        <NavItems>
+          {Navs.map((nav, index) => (
+            <NavItem
+              key={index}
+              active={active}
+              item={nav[2]}
+              onClick={() => navigate(nav[3])}
+            >
+              {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
+              <span>
+                <h1>{nav[2]}</h1>
+              </span>
+            </NavItem>
+          ))}
+        </NavItems>
+        <LogOutDiv>
           <NavItem
-            key={index}
             active={active}
-            item={nav[2]}
-            onClick={() => navigate(nav[3])}
+            onClick={() => {
+              dispatch(LogOutDoctor());
+              dispatch(updateLoggedIn(false));
+              dispatch(updateLoggedInRole(""));
+              navigate("/");
+            }}
           >
-            {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
+            <div>
+              <LogOutIcon />
+            </div>
             <span>
-              <h1>{nav[2]}</h1>
+              {" "}
+              <h1>Log Out</h1>
             </span>
           </NavItem>
-        ))}
-      </NavItems>
-      <LogOutDiv>
-        <NavItem
-          active={active}
-          onClick={() => {
-            dispatch(LogOutDoctor());
-            dispatch(updateLoggedIn(false));
-            dispatch(updateLoggedInRole(""));
-            navigate("/");
-          }}
-        >
-          <div>
-            <LogOutIcon />
-          </div>
-          <span>
-            {" "}
-            <h1>Log Out</h1>
-          </span>
-        </NavItem>
-      </LogOutDiv>
-      <HamburgerDiv>
-        <Hamburger height={"3.5rem"} width={"3.5rem"} />
-      </HamburgerDiv>
-    </Container>
+        </LogOutDiv>
+        <HamburgerDiv>
+          {activeNav ? (
+            <IoClose
+              size={25}
+              color={"blue"}
+              onClick={() => {
+                setActiveNav(false);
+              }}
+            />
+          ) : (
+            <Hamburger
+              height={"3.5rem"}
+              width={"3.5rem"}
+              onClick={() => setActiveNav(true)}
+            />
+          )}
+        </HamburgerDiv>
+      </Container>
+      <MobileBarDiv active={activeNav}>
+        <MobileBar ref={NavRef}>
+          <Notif>
+            {hasUnread === true ? (
+              <UnReadNotification width={"3rem"} />
+            ) : (
+              <Notification width={"3rem"} />
+            )}
+            <Initials firstName={firstName} lastName={lastName} />
+          </Notif>
+          <MobileNavItems>
+            {Navs.map((nav, index) => (
+              <NavItem
+                key={index}
+                active={active}
+                item={nav[2]}
+                onClick={() => navigate(nav[3])}
+              >
+                {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
+                <span>
+                  <h1>{nav[2]}</h1>
+                </span>
+              </NavItem>
+            ))}
+          </MobileNavItems>
+          <MobileLogOutDiv>
+            <NavItem
+              active={active}
+              onClick={() => {
+                dispatch(LogOutDoctor());
+                dispatch(updateLoggedIn(false));
+                dispatch(updateLoggedInRole(""));
+                navigate("/");
+              }}
+            >
+              <div>
+                <LogOutIcon />
+              </div>
+              <span>
+                {" "}
+                <h1>Log Out</h1>
+              </span>
+            </NavItem>
+          </MobileLogOutDiv>
+        </MobileBar>
+      </MobileBarDiv>
+    </>
   );
 };
 
@@ -190,7 +337,14 @@ export const AdminDashboardNavbar = ({
   active = "Dashboard",
   role = "admin"
 }) => {
+  const user = useSelector((state) => state.reducer.adminDetails.name);
+  const firstName = user.split(" ")[0][0];
+  const lastName = user.split(" ")[1][0];
+  const [hasUnread, setHasUnread] = useState(false);
+  const [activeNav, setActiveNav] = useState(false);
   const navigate = useNavigate();
+  const NavRef = useRef();
+  useClickOutside(NavRef, () => setActiveNav(false));
   const Navs = [
     [<DashboardIcon />, <DashboardActiveIcon />, "Dashboard", `/${role}/home`],
     [<DoctorIcon />, <DoctorsActiveIcon />, "Doctors", `/${role}/doctors`],
@@ -205,54 +359,116 @@ export const AdminDashboardNavbar = ({
   ];
   const dispatch = useDispatch();
   return (
-    <Container>
-      <LogoSection>
-        <Logo
-          style={{ cursor: "pointer" }}
-          onClick={() => navigate("/")}
-          height={"3.5rem"}
-          width={"3.5rem"}
-        />
-        <h1 onClick={() => navigate("/")}> SteadCare</h1>
-      </LogoSection>
-      <NavItems>
-        {Navs.map((nav, index) => (
+    <>
+      <Container>
+        <LogoSection>
+          <Logo
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/")}
+            height={"3.5rem"}
+            width={"3.5rem"}
+          />
+          <h1 onClick={() => navigate("/")}> SteadCare</h1>
+        </LogoSection>
+        <NavItems>
+          {Navs.map((nav, index) => (
+            <NavItem
+              key={index}
+              active={active}
+              item={nav[2]}
+              onClick={() => navigate(nav[3])}
+            >
+              {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
+              <span>
+                <h1>{nav[2]}</h1>
+              </span>
+            </NavItem>
+          ))}
+        </NavItems>
+        <LogOutDiv>
           <NavItem
-            key={index}
             active={active}
-            item={nav[2]}
-            onClick={() => navigate(nav[3])}
+            onClick={() => {
+              dispatch(LogOutAdmin());
+              dispatch(updateLoggedIn(false));
+              dispatch(updateLoggedInRole(""));
+              navigate("/");
+            }}
           >
-            {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
+            <div>
+              <LogOutIcon />
+            </div>
             <span>
-              <h1>{nav[2]}</h1>
+              {" "}
+              <h1>Log Out</h1>
             </span>
           </NavItem>
-        ))}
-      </NavItems>
-      <LogOutDiv>
-        <NavItem
-          active={active}
-          onClick={() => {
-            dispatch(LogOutAdmin());
-            dispatch(updateLoggedIn(false));
-            dispatch(updateLoggedInRole(""));
-            navigate("/");
-          }}
-        >
-          <div>
-            <LogOutIcon />
-          </div>
-          <span>
-            {" "}
-            <h1>Log Out</h1>
-          </span>
-        </NavItem>
-      </LogOutDiv>
-      <HamburgerDiv>
-        <Hamburger height={"3.5rem"} width={"3.5rem"} />
-      </HamburgerDiv>
-    </Container>
+        </LogOutDiv>
+        <HamburgerDiv>
+          {activeNav ? (
+            <IoClose
+              size={25}
+              color={"blue"}
+              onClick={() => {
+                setActiveNav(false);
+              }}
+            />
+          ) : (
+            <Hamburger
+              height={"3.5rem"}
+              width={"3.5rem"}
+              onClick={() => setActiveNav(true)}
+            />
+          )}
+        </HamburgerDiv>
+      </Container>
+      <MobileBarDiv active={activeNav}>
+        <MobileBar ref={NavRef}>
+          <Notif>
+            {hasUnread === true ? (
+              <UnReadNotification width={"3rem"} />
+            ) : (
+              <Notification width={"3rem"} />
+            )}
+            <Initials firstName={firstName} lastName={lastName} />
+          </Notif>
+          <MobileNavItems>
+            {Navs.map((nav, index) => (
+              <NavItem
+                key={index}
+                active={active}
+                item={nav[2]}
+                onClick={() => navigate(nav[3])}
+              >
+                {active === nav[2] ? <div>{nav[1]}</div> : <div>{nav[0]}</div>}
+                <span>
+                  <h1>{nav[2]}</h1>
+                </span>
+              </NavItem>
+            ))}
+          </MobileNavItems>
+          <MobileLogOutDiv>
+            <NavItem
+              active={active}
+              onClick={() => {
+                dispatch(LogOutAdmin());
+                dispatch(updateLoggedIn(false));
+                dispatch(updateLoggedInRole(""));
+                navigate("/");
+              }}
+            >
+              <div>
+                <LogOutIcon />
+              </div>
+              <span>
+                {" "}
+                <h1>Log Out</h1>
+              </span>
+            </NavItem>
+          </MobileLogOutDiv>
+        </MobileBar>
+      </MobileBarDiv>
+    </>
   );
 };
 
@@ -360,6 +576,9 @@ const NavItem = styled.div`
     color: ${(props) =>
       props.active === props.item ? "rgba(0, 0, 255, 1)" : "black"};
     cursor: pointer;
+    ${mobile({
+      fontSize: "1.6rem"
+    })}
   }
 `;
 
@@ -370,4 +589,69 @@ const HamburgerDiv = styled.div`
   ${mobile({
     display: "flex"
   })}
+`;
+
+const MobileBarDiv = styled.div`
+  display: none;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff42;
+  z-index: 12;
+  position: absolute;
+  transform: ${(props) =>
+    props.active ? "translateX(0)" : "translateX(-100%)"};
+  transition: all 0.35s ease-in-out;
+  ${mobile({
+    display: "flex"
+  })};
+`;
+const MobileBar = styled.div`
+  background-color: #ffffff;
+  z-index: 40;
+  width: 55%;
+  height: 100%;
+  z-index: 15;
+`;
+
+const MobileNavItems = styled.div`
+  display: none;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2rem;
+  height: 70%;
+  border-bottom: 1px solid rgba(85, 85, 85, 0.2);
+  ${mobile({
+    display: "flex"
+  })}
+`;
+
+const MobileLogOutDiv = styled.div`
+  box-sizing: border-box;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  padding-top: 20%;
+  margin: auto 0;
+  ${mobile({
+    display: "flex"
+  })}
+`;
+const Notif = styled.div`
+  box-sizing: border-box;
+  padding: 2rem;
+  height: 4rem;
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+const CloseBarDiv = styled.div`
+  z-index: 40;
+  width: 45%;
+  height: 100%;
+  z-index: 15;
+  bac
 `;

@@ -20,6 +20,8 @@ import { BaseUrl } from "../../../../Utilities";
 import { useFormik } from "formik";
 import useFetch from "../../../../hooks/useFetch";
 import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const PatientProfile = () => {
   const User = useSelector((state) => state.reducer.patientDetails);
@@ -95,7 +97,6 @@ export const PatientProfile = () => {
     if (userData.bloodGroup !== bloodGroup) {
       PayloadData.bloodGroup = bloodGroup;
     }
-    console.log(PayloadData, "Payload");
 
     const config = {
       method: "patch",
@@ -106,11 +107,11 @@ export const PatientProfile = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        toast.success(response.data.message);
         setLoading(false);
       })
       .catch(function (error) {
-        console.log(error);
+        toast.error(error.response.data.message);
         setLoading(false);
       });
   };
@@ -210,6 +211,7 @@ export const PatientProfile = () => {
                   onClick={handleSubmit}
                   isLoading={loading}
                 />
+                <ToastContainer />
               </ButtonDiv>
             </>
           )}

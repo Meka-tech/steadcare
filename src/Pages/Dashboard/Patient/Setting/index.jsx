@@ -23,6 +23,8 @@ import {
   WhiteDiv
 } from "./style";
 import * as Yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const PatientSettings = () => {
   const [loading, setLoading] = useState(false);
@@ -45,11 +47,12 @@ export const PatientSettings = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response);
+        toast.success(response.data.message);
         setLoading(false);
       })
       .catch(function (error) {
-        console.log(error);
+        toast.error(error.response.data.message);
+
         setLoading(false);
       });
   };
@@ -128,6 +131,7 @@ export const PatientSettings = () => {
                   onClick={handleSubmit}
                   isLoading={loading}
                 />
+                <ToastContainer />
               </ButtonField>
             </ChangePasswords>
             <Notification>

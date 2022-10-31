@@ -42,7 +42,8 @@ import { Capitalize } from "../../../../Utilities/globalFunc";
 import approveBadge from "../../../../Images/approveBadge.png";
 import { useFormik } from "formik";
 import useFetch from "../../../../hooks/useFetch";
-import { useMemo } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const BookADoctorPage = () => {
   const token = useSelector((state) => state.reducer.patientDetails.token);
@@ -85,8 +86,6 @@ export const BookADoctorPage = () => {
 
   const { loading } = useFetch(token, "/view-all-doctors", SetAllDoctor);
 
-  console.log(token);
-
   const SetFilteredDoctor = (response) => {
     setDoctors(response.data.data.fetchedDoctors);
   };
@@ -123,11 +122,11 @@ export const BookADoctorPage = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        toast.success(response.data.message);
         setProgressBarStep(4);
       })
       .catch(function (error) {
-        console.log(error);
+        toast.error(error.response.data.message);
       });
   };
 
@@ -326,6 +325,7 @@ export const BookADoctorPage = () => {
                   onChange={handleChange("complaint")}
                 />
                 <Button text="Next" onClick={handleSubmit} />
+                <ToastContainer />
               </PatientForm>
             </>
           )}

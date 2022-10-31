@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import approveBadge from "../../../../Images/approveBadge.png";
 import { mobile } from "../../../../Utilities/responsive";
+import { useIsMobile } from "../../../../hooks/useIsMobile";
 export const DoctorComponent = ({ displayPic, name, rating, book }) => {
   return (
     <DoctorContainer>
@@ -213,6 +214,7 @@ export const InviteModal = ({ setActive, value = "" }) => {
   const ModalRef = useRef();
   const [linkCopied, setLinkCopied] = useState(false);
   useClickOutside(ModalRef, () => setActive(false));
+  const IsMobile = useIsMobile();
   return (
     <Shade>
       <ModalContainer ref={ModalRef}>
@@ -234,7 +236,7 @@ export const InviteModal = ({ setActive, value = "" }) => {
                   Insert email address and send invitation
                 </ModalDetailHeader>
                 <TextForm
-                  fontSize={"1.2rem"}
+                  fontSize={IsMobile ? "1rem" : "1.2rem"}
                   borderRadius={"2rem"}
                   placeholder={"Enter email address"}
                   height={"3.5em"}
@@ -247,7 +249,7 @@ export const InviteModal = ({ setActive, value = "" }) => {
                 </ModalDetailHeader>
                 <TextForm
                   backgroundColor={"rgba(0, 0, 255, 0.1)"}
-                  fontSize={"1.2rem"}
+                  fontSize={IsMobile ? "1rem" : "1.2rem"}
                   onChange={() => {}}
                   value={`${value}`}
                   borderRadius={"2rem"}
@@ -282,6 +284,9 @@ const Shade = styled.div`
   background: rgba(255, 255, 255, 0.6);
   margin-left: auto;
   z-index: 10;
+  ${mobile({
+    width: "100%"
+  })}
 `;
 const ModalContainer = styled.div`
   height: 30rem;
@@ -293,6 +298,9 @@ const ModalContainer = styled.div`
   background-color: white;
   border: 1px solid rgba(0, 0, 255, 1);
   padding: 2rem;
+  ${mobile({
+    width: "40rem"
+  })}
 `;
 
 const ModalHeader = styled.h2`
@@ -331,6 +339,9 @@ const CopyLink = styled.div`
   font-weight: 600;
   margin-right: 0.1rem;
   font-family: Montserrat;
+  ${mobile({
+    fontSize: "0.8rem"
+  })}
 `;
 const LinkCopiedDiv = styled.div`
   display: flex;

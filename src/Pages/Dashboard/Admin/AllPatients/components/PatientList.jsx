@@ -9,6 +9,8 @@ import { BaseUrl } from "../../../../../Utilities";
 import { Spinner } from "../../component";
 import { FormModal } from "../../formModal";
 import { ConfirmModal, RegistrationModal, YesNoModal } from "./Modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const PatientList = () => {
   const token = useSelector((state) => state.reducer.adminDetails.token);
@@ -176,8 +178,7 @@ const Actions = ({ name, id }) => {
             setFormActive(true);
           }
         })
-        .catch(function () {
-        });
+        .catch(function () {});
     }
   };
 
@@ -191,15 +192,19 @@ const Actions = ({ name, id }) => {
     };
 
     axios(config)
-      .then(function () {})
-      .catch(function () {});
+      .then(function (res) {
+        toast.success(res.data.message);
+      })
+      .catch(function (err) {
+        toast.error(err.response.data.message);
+      });
   };
 
   return (
     <>
       {active && (
         <YesNoModal
-          text={`Are you sure you want to ${choice} Doctor ${name}?`}
+          text={`Are you sure you want to ${choice} ${name}?`}
           setActive={setActive}
           action={Action}
         />
@@ -239,6 +244,7 @@ const Actions = ({ name, id }) => {
         <Button color="blue" onClick={() => ViewForm()}>
           View
         </Button>
+        <ToastContainer />
       </ActionDiv>
     </>
   );

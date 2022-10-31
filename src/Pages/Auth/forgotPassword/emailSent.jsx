@@ -8,9 +8,11 @@ import { BaseUrl } from "../../../Utilities";
 import axios from "axios";
 import { mobile } from "../../../Utilities/responsive";
 import { useIsMobile } from "../../../hooks/useIsMobile";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const EmailSent = () => {
-  const IsMobile = useIsMobile()
+  const IsMobile = useIsMobile();
   const navigate = useNavigate();
   const location = useLocation();
   const { email } = location.state;
@@ -26,8 +28,13 @@ export const EmailSent = () => {
     };
 
     axios(config)
-      .then(function () {})
-      .catch(function () {});
+      .then(function (res) {
+        console.log(res);
+        toast.success(res.data.message);
+      })
+      .catch(function (err) {
+        toast.error(err.response.data.message);
+      });
   };
   return (
     <Container>
@@ -43,14 +50,15 @@ export const EmailSent = () => {
             </SubHeader>
             <Icon>
               <EmailSentIcon
-                width={IsMobile ? "15rem" : ""}
-                height={IsMobile ? "15rem" : ""}
+                width={IsMobile ? "15rem" : "20rem"}
+                height={IsMobile ? "15rem" : "20rem"}
               />
             </Icon>
             <ButtonDiv>
               <a href={`mailto:${email}`}>
                 <Button text="Go to Email" width="100%" type="submit" />
               </a>
+              <ToastContainer />
             </ButtonDiv>
             <Span>
               Didn’t receive the link?
@@ -63,8 +71,8 @@ export const EmailSent = () => {
   );
 };
 const Icon = styled.div`
-  margin: 2rem auto;
-  margin-top: 4rem;
+  margin: 1rem auto;
+  margin-top: 2rem;
   ${mobile({ margin: "2rem auto" })}
 `;
 const SubHeader = styled.p`

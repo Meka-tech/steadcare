@@ -13,6 +13,8 @@ import {
   RegistrationModal,
   YesNoModal
 } from "./Modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const DoctorList = () => {
   const token = useSelector((state) => state.reducer.adminDetails.token);
@@ -27,6 +29,7 @@ export const DoctorList = () => {
     setDoctorList(response.data.data.fetchedData);
   };
   const { loading } = useFetch(token, "/admin/list-of-dotors", GetDoctorList);
+
   return (
     <Container>
       {formActive && (
@@ -181,9 +184,11 @@ const Actions = ({ name, id }) => {
 
     axios(config)
       .then(function (res) {
-        console.log(res);
+        toast.success(res.data.message);
       })
-      .catch(function () {});
+      .catch(function (err) {
+        toast.error(err.data.messag);
+      });
   };
   const Action = () => {
     setConfirmModalActive(true);
@@ -248,6 +253,7 @@ const Actions = ({ name, id }) => {
         >
           View
         </Button>
+        <ToastContainer />
       </ActionDiv>
     </>
   );

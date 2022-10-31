@@ -11,7 +11,7 @@ import jwt_decode from "jwt-decode";
 import { useState } from "react";
 import { useRef } from "react";
 import useClickOutside from "../../hooks/useClickOutside";
-import { AiOutlineClose } from "react-icons/ai";
+import { IoClose } from "react-icons/io5";
 
 export const Navbar = () => {
   const [token, setToken] = useState("");
@@ -102,7 +102,7 @@ export const Navbar = () => {
         </ButtonSection>
         <HamburgerDiv>
           {active ? (
-            <AiOutlineClose
+            <IoClose
               size={25}
               color={"blue"}
               onClick={() => {
@@ -256,7 +256,7 @@ const HamburgerDiv = styled.div`
 
 const MobileNav = styled.div`
   width: 100%;
-  height: 20rem;
+  height: 22rem;
   display: none;
   z-index: 10;
   position: absolute;
@@ -267,7 +267,7 @@ const MobileNav = styled.div`
   padding-top: 2rem;
   box-sizing: border-box;
   transform: ${(props) =>
-    props.active ? "translateY(0)" : "translateY(-20rem)"};
+    props.active ? "translateY(0)" : "translateY(-22rem)"};
   ${mobile({
     display: "flex"
   })};

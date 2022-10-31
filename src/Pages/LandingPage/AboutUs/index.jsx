@@ -169,7 +169,8 @@ const WhyTextDiv = styled.div`
   display: flex;
   flex-direction: column;
   ${mobile({
-    textAlign: "center"
+    textAlign: "center",
+    width: "90%"
   })};
   h1 {
     margin: 0;
