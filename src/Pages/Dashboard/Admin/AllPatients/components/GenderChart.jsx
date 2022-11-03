@@ -34,7 +34,7 @@ export const GenderChart = () => {
     const totalCount = maleCount + femaleCount;
     const percent = (maleCount / totalCount) * 100;
     if (totalCount > 0) {
-      return percent;
+      return percent.toFixed(0);
     } else {
       return 0;
     }

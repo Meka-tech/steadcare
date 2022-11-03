@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "../../Images/Logo.svg";
@@ -12,15 +12,57 @@ import { useState } from "react";
 import { useRef } from "react";
 import useClickOutside from "../../hooks/useClickOutside";
 import { IoClose } from "react-icons/io5";
+import { LogOutDoctor } from "../../features/userDetails/doctorSlice";
+import {
+  updateLoggedIn,
+  updateLoggedInRole
+} from "../../features/loggedIn/loginSlice";
 
 export const Navbar = () => {
-  const [token, setToken] = useState("");
+  const dispatch = useDispatch();
   const [active, setActive] = useState(false);
   const { loggedIn, role } = useSelector((state) => state.reducer.loggedIn);
   const ContainerRef = useRef();
 
   useClickOutside(ContainerRef, () => setActive(false));
 
+  ///log out user when token expire
+  const isTokenExpired = (token) => {
+    const expiry = JSON.parse(atob(token.split(".")[1])).exp;
+    return Math.floor(new Date().getTime() / 1000) >= expiry;
+  };
+
+  const { token: DoctorToken } = useSelector(
+    (state) => state.reducer.doctorDetails
+  );
+  const { token: PatientToken } = useSelector(
+    (state) => state.reducer.patientDetails
+  );
+  const { token: AdminToken } = useSelector(
+    (state) => state.reducer.adminDetails
+  );
+
+  if (DoctorToken) {
+    if (isTokenExpired(DoctorToken)) {
+      dispatch(LogOutDoctor());
+      dispatch(updateLoggedIn(false));
+      dispatch(updateLoggedInRole(""));
+    }
+  }
+  if (PatientToken) {
+    if (isTokenExpired(PatientToken)) {
+      dispatch(LogOutDoctor());
+      dispatch(updateLoggedIn(false));
+      dispatch(updateLoggedInRole(""));
+    }
+  }
+  if (AdminToken) {
+    if (isTokenExpired(AdminToken)) {
+      dispatch(LogOutDoctor());
+      dispatch(updateLoggedIn(false));
+      dispatch(updateLoggedInRole(""));
+    }
+  }
   const navigate = useNavigate();
   return (
     <Fragment>

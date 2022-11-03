@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import styled from "styled-components";
 import useClickOutside from "../../../hooks/useClickOutside";
+import moment from "moment";
 
 export const FormModal = ({ setActive, patient, func }) => {
   const ModalRef = useRef();
@@ -16,11 +17,11 @@ export const FormModal = ({ setActive, patient, func }) => {
           </div>
           <div>
             <h1>Date of birth :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{moment(patient?.dob).format("L")}</h2>
           </div>
           <div>
             <h1>Country :</h1>
-            <h2>Chinenye Matu</h2>
+            <h2>{patient?.country}</h2>
           </div>
           <div>
             <h1>Phone Number :</h1>

@@ -44,6 +44,7 @@ import { useFormik } from "formik";
 import useFetch from "../../../../hooks/useFetch";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import moment from "moment";
 
 export const BookADoctorPage = () => {
   const token = useSelector((state) => state.reducer.patientDetails.token);
@@ -57,6 +58,7 @@ export const BookADoctorPage = () => {
   const [selectedTime, setSelectedTime] = useState("8:00");
   const [doctorId, setDoctorId] = useState(0);
   const Specialties = [
+    "All",
     "Allergist",
     "Anesthesiologist",
     "Cardiologist",
@@ -73,7 +75,7 @@ export const BookADoctorPage = () => {
     "Otolaryngologist",
     "Psychiatrist",
     "Pulmonologist",
-    " Surgeon"
+    "Surgeon"
   ];
 
   const Book = () => {
@@ -81,30 +83,56 @@ export const BookADoctorPage = () => {
   };
   const SetAllDoctor = (response) => {
     setDoctors(response.data.data);
-    console.log(response);
   };
 
   const { loading } = useFetch(token, "/view-all-doctors", SetAllDoctor);
 
-  const SetFilteredDoctor = (response) => {
-    setDoctors(response.data.data.fetchedDoctors);
-  };
+  useEffect(() => {
+    if (specialty !== "All" && specialty.length > 1) {
+      const FilterDoctors = () => {
+        const config = {
+          method: "get",
+          url: `${BaseUrl}/filter-doctors?pageNo=1&noOfRequests=1&specialty=${specialty.toLowerCase()}`,
+          headers: { Authorization: "Bearer " + token }
+        };
 
-  const FilterDoctors = () => {
-    useFetch(
-      token,
-      `/filter-doctors?pageNo=1&noOfRequests=1&specialty=${specialty}`,
-      SetFilteredDoctor
-    );
-  };
+        axios(config)
+          .then(function (response) {
+            setDoctors(response.data.fetchedDoctors);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      };
+      FilterDoctors();
+    }
+    if (specialty === "All") {
+      const AllDoctors = () => {
+        const config = {
+          method: "get",
+          url: `${BaseUrl}/view-all-doctors`,
+          headers: { Authorization: "Bearer " + token }
+        };
 
-  const MorningTimeSlots = ["08:00", "09:00", "10:00", "11:00"];
-  const AfternoonTimeSlots = ["12:00", "1:00", "2:00", "3:00", "4:00"];
+        axios(config)
+          .then(function (response) {
+            setDoctors(response.data.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      };
+      AllDoctors();
+    }
+  }, [specialty, token]);
+
+  const MorningTimeSlots = ["8:00", "9:00", "10:00", "11:00"];
+  const AfternoonTimeSlots = ["12:00", "13:00", "14:00", "15:00", "16:00"];
 
   const BookAnAppointment = async () => {
     const data = {
       name: `${values.name}`,
-      time: `${date.toDateString() + " " + selectedTime}`,
+      time: `${moment(date.toDateString() + " " + selectedTime)._d}`,
       gender: `${values.sex}`,
       occupation: `${values.occupation}`,
       religion: `${values.religion}`,
@@ -154,7 +182,7 @@ export const BookADoctorPage = () => {
             setActive={setViewProfileActive}
             specialty={doctors[doctorIndex].specialty}
             language={doctors[doctorIndex].language}
-            location
+            location={doctors[doctorIndex].location}
             patient
             name={doctors[doctorIndex].name}
             book={Book}
@@ -195,6 +223,8 @@ export const BookADoctorPage = () => {
                 {doctors?.map((data, index) => {
                   return (
                     <DoctorCardItem
+                      location={`${data.location}`}
+                      bio={`${data.bio}`}
                       key={index}
                       index={index}
                       rating={`${data.averageRating}`}

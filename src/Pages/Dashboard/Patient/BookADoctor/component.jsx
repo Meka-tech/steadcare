@@ -16,7 +16,8 @@ export const DoctorCardItem = ({
   setIndex,
   index,
   setDoctorId,
-  doctorId
+  doctorId,
+  bio
 }) => {
   return (
     <DoctorCard>
@@ -36,14 +37,11 @@ export const DoctorCardItem = ({
       <MiddleSection>
         <div>
           <LocationIcon />
-          <h2>Lagos,Nigeria</h2>
+          <h2>{location}</h2>
         </div>
         <h1>N 5,000</h1>
       </MiddleSection>
-      <TextSection>
-        I’m a consultant with 27 years experience who is also pationate about my
-        patients.
-      </TextSection>
+      <TextSection>{bio}</TextSection>
       <ButtonSection>
         <Button
           onClick={() => {

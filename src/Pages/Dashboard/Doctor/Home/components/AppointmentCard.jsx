@@ -15,9 +15,10 @@ import useFetch from "../../../../../hooks/useFetch";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
+import { Spinner } from "../../component";
 
 export const AppointmentRequests = ({}) => {
-  const [hasAppointment, setHasAppointment] = useState(true);
+  const [hasAppointment, setHasAppointment] = useState(false);
   const [requestModal, setRequestModal] = useState(false);
   const [requestStatus, setRequestStatus] = useState("");
   const [viewForm, setViewForm] = useState(false);
@@ -25,11 +26,16 @@ export const AppointmentRequests = ({}) => {
   const token = useSelector((state) => state.reducer.doctorDetails.token);
   const [appointmentData, setAppointmentData] = useState([]);
 
-  const SetData = (response) => {
+  const SetData = async (response) => {
     setAppointmentData(response.data.data.fetchedData);
-    console.log(response.data.data.fetchedData);
   };
   useFetch(token, "/get-my-appoinments?pageNo=1&noOfRequests=3", SetData);
+
+  useEffect(() => {
+    if (appointmentData.length > 0) {
+      setHasAppointment(true);
+    }
+  }, [appointmentData]);
 
   const AcceptRejectAppointment = async (status, ID) => {
     const data = { status };
@@ -43,12 +49,10 @@ export const AppointmentRequests = ({}) => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
         toast.success(response.data.message);
       })
       .catch(function (error) {
         toast.error(error.response.data.message);
-        console.log(error);
       });
   };
 
