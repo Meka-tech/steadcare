@@ -28,6 +28,7 @@ const Main = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${mobile({ width: "90%" })}
 `;
 
 const Filters = styled.div`

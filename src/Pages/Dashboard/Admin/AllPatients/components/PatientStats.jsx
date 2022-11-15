@@ -15,6 +15,7 @@ import {
 import { Line } from "react-chartjs-2";
 import { ChartHeader } from "./ChartHeader";
 import { mobile } from "../../../../../Utilities/responsive";
+import { useIsMobile } from "../../../../../hooks/useIsMobile";
 
 ChartJS.register(
   CategoryScale,
@@ -69,6 +70,7 @@ export const PatientStats = () => {
     ]
   };
 
+  const IsMobile = useIsMobile();
   return (
     <Container>
       <DivTitle>Patient Statistics</DivTitle>
@@ -76,7 +78,7 @@ export const PatientStats = () => {
         <Main>
           <Chart>
             <ChartHeader setFilter={SetFilter} filter={filter} />
-            <Line options={options} data={data} />
+            <Line options={options} data={data} height={IsMobile ? 200 : ""} />
           </Chart>
           <GenderChart />
         </Main>
@@ -128,5 +130,5 @@ const Chart = styled.div`
   background-color: white;
   max-width: 80rem;
   box-sizing: border-box;
-  ${mobile({ width: "60%" })}
+  ${mobile({ width: "75%" })}
 `;
