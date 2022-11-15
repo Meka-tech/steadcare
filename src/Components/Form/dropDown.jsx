@@ -86,7 +86,7 @@ const Container = styled.form`
   height: fit-content;
   transition: 0.2s ease-in-out;
   width: ${(props) => (props.width ? props.width : "100%")};
-  ${mobile({ width: "100%" })}
+  ${mobile({ width: "100%" })};
 `;
 const Body = styled.div`
   position: relative;

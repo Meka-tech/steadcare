@@ -85,7 +85,8 @@ export const Login = () => {
       })
       .catch(function (error) {
         setIsLoading(false);
-        toast.success(error.data.message);
+        console.log(error);
+        toast.error(error.data.message);
       });
   };
 

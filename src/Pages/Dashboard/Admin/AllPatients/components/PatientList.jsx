@@ -11,6 +11,7 @@ import { FormModal } from "../../formModal";
 import { ConfirmModal, RegistrationModal, YesNoModal } from "./Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { mobile } from "../../../../../Utilities/responsive";
 
 export const PatientList = () => {
   const token = useSelector((state) => state.reducer.adminDetails.token);
@@ -70,6 +71,7 @@ const Container = styled.div`
   margin: 0 auto;
   margin-bottom: 5rem;
   margin-top: 5rem;
+  ${mobile({ marginBottom: "10rem", width: "95%" })}
 `;
 const Title = styled.h1`
   font-weight: 500;
@@ -101,10 +103,15 @@ const Header = styled.div`
   border-bottom: 1px solid rgba(85, 85, 85, 1);
   grid-template-columns: 30rem 22rem 40rem;
   align-items: center;
+  ${mobile({
+    gridTemplateColumns: "13rem 8rem 25rem",
+    padding: "0 1rem"
+  })}
   h1 {
     color: rgba(85, 85, 85, 1);
     font-weight: 500;
     font-size: 1.6rem;
+    ${mobile({ fontSize: "1.4rem" })}
   }
 `;
 
@@ -119,10 +126,15 @@ const Column = styled.div`
   &:hover {
     background-color: rgba(0, 0, 255, 0.07);
   }
+  ${mobile({
+    gridTemplateColumns: "13rem 8rem 25rem",
+    padding: "0 1rem"
+  })}
   h1 {
     color: black;
     font-weight: 500;
     font-size: 1.4rem;
+    ${mobile({ fontSize: "1.2rem" })}
   }
 `;
 const Empty = styled.div`
@@ -264,4 +276,5 @@ const Button = styled.div`
   justify-content: center;
   border-radius: 0.4rem;
   font-size: 1.4rem;
+  ${mobile({ fontSize: "1rem", width: "5rem" })}
 `;

@@ -16,6 +16,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import { Spinner } from "../../component";
+import { mobile } from "../../../../../Utilities/responsive";
 
 export const AppointmentRequests = ({}) => {
   const [hasAppointment, setHasAppointment] = useState(false);
@@ -258,6 +259,7 @@ const ModalBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  ${mobile({ width: "100%" })}
 `;
 
 const ModalContainer = styled.div`

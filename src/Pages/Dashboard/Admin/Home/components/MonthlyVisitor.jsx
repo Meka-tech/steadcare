@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../../../../../Utilities/responsive";
 
 export const MonthlyVisitor = () => {
   return (
@@ -19,6 +20,7 @@ const Container = styled.div`
   width: 90%;
   margin: 0 auto;
   margin-bottom: 5rem;
+  ${mobile({ marginBottom: "10rem", width: "95%" })}
 `;
 
 const Title = styled.h1`

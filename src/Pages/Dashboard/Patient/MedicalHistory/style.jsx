@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../../../../Utilities/responsive";
 
 export const Main = styled.div`
   width: 90%;
@@ -11,6 +12,10 @@ export const Title = styled.h1`
   font-size: 2.2rem;
   font-weight: 600;
   margin: 5rem 0;
+  ${mobile({
+    margin: "2rem 0",
+    fontSize: "1.8rem"
+  })}
 `;
 
 export const MedicalHistoryContainer = styled.div`
@@ -41,6 +46,10 @@ export const TabHeader = styled.div`
   padding: 0 5rem;
   display: grid;
   grid-template-columns: 40rem 30rem 30rem;
+  ${mobile({
+    gridTemplateColumns: "18rem 15rem 15rem",
+    padding: "0 2rem"
+  })}
   h2 {
     font-size: 1.4rem;
     font-weight: 500;
@@ -48,6 +57,9 @@ export const TabHeader = styled.div`
     margin: auto 0;
     text-transform: uppercase;
     text-align: left;
+    ${mobile({
+      fontSize: "1rem"
+    })}
   }
 `;
 
@@ -60,6 +72,9 @@ export const TabBodyText = styled.h1`
   font-size: 1.6rem;
   font-weight: 500;
   margin: auto;
+  ${mobile({
+    fontSize: "1.3rem"
+  })}
 `;
 export const Column = styled.div`
   margin-top: 2rem;
@@ -69,12 +84,20 @@ export const Column = styled.div`
   padding: 0 2rem;
   display: grid;
   grid-template-columns: 43rem 30rem 30rem;
+  ${mobile({
+    gridTemplateColumns: "17rem 15rem 15rem",
+    height: "3rem",
+    marginTop: "2rem"
+  })}
   h4 {
     font-size: 1.6rem;
     font-weight: 500;
     text-align: left;
     text-transform: capitalize;
     margin: auto 0;
+    ${mobile({
+      fontSize: "1.2rem"
+    })}
   }
 `;
 export const NameDiv = styled.div`
@@ -87,6 +110,11 @@ export const DisplayPicture = styled.div`
   border-radius: 50%;
   background-color: #dadada;
   margin-right: 1rem;
+  ${mobile({
+    width: "2rem",
+    height: "2rem",
+    marginRight: "0.5rem"
+  })}
 `;
 
 export const Status = styled.div`
@@ -107,4 +135,8 @@ export const Status = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  ${mobile({
+    fontSize: "1.2rem",
+    width: "7rem"
+  })}
 `;

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
+import { mobile } from "../../../../Utilities/responsive";
 
 export const InputComponent = ({
   title,
@@ -29,7 +30,6 @@ export const InputComponent = ({
 };
 const Container = styled.form`
   top: 0;
-  margin-bottom: 1.5rem;
   position: relative;
   height: fit-content;
   align-items: flex-end;
@@ -37,6 +37,9 @@ const Container = styled.form`
   transition: 0.2s ease-in-out;
   margin-bottom: 5rem;
   width: ${(props) => (props.width ? props.width : "100%")};
+  ${mobile({
+    marginBottom: "2.5rem"
+  })}
 `;
 
 const Input = styled.input`
@@ -55,6 +58,10 @@ const Input = styled.input`
   font-weight: 400;
   letter-spacing: 0.03em;
   border: none;
+  ${mobile({
+    lineHeight: "1.4rem",
+    fontSize: "1.6rem"
+  })}
   &::placeholder {
     color: rgba(75, 72, 78, 0.7);
     padding: 0;
@@ -81,6 +88,10 @@ const InputField = styled.div`
       : props.inactive
       ? `rgba(196, 196, 196, 0.1) `
       : null};
+
+  ${mobile({
+    width: "60%"
+  })}
 `;
 const Title = styled.label`
   color: ${(props) => (props.focused ? "rgba(0, 0, 255, 0.9)" : "black")};
@@ -89,6 +100,10 @@ const Title = styled.label`
   font-size: 1.8rem;
   text-transform: uppercase;
   margin-right: 5rem;
+  ${mobile({
+    fontSize: "1.4rem",
+    marginRight: "2rem"
+  })}
 `;
 
 export const ComplaintInput = ({ placeHolder, value, ...rest }) => {
@@ -116,6 +131,9 @@ const ComplaintInputDiv = styled.div`
   padding: 2rem;
   box-sizing: border-box;
   margin-bottom: 5rem;
+  ${mobile({
+    padding: "1rem"
+  })}
 `;
 const ComplaintInputField = styled.textarea`
   font-family: Montserrat;
@@ -124,6 +142,9 @@ const ComplaintInputField = styled.textarea`
   border: none;
   outline: none;
   font-size: 1.4rem;
+  ${mobile({
+    fontSize: "1.2rem"
+  })}
   &::placeholder {
     color: rgba(85, 85, 85, 1);
     padding: 0;

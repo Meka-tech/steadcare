@@ -138,7 +138,7 @@ export const Status = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${mobile({ fontSize: "1rem", marginRight: "0rem" })}
+  ${mobile({ fontSize: "1rem", marginRight: "1rem", width: "6rem" })}
 `;
 
 export const ThreeDots = styled.div`

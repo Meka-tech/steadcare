@@ -23,6 +23,8 @@ import { ReactComponent as AppointmentIcon } from "../../../../Images/CardIcon/a
 import axios from "axios";
 import { BaseUrl } from "../../../../Utilities";
 import useFetch from "../../../../hooks/useFetch";
+import { mobile } from "../../../../Utilities/responsive";
+import { useIsMobile } from "../../../../hooks/useIsMobile";
 
 export const DoctorDashboard = () => {
   const user = useSelector((state) => state.reducer.doctorDetails.name);
@@ -30,6 +32,8 @@ export const DoctorDashboard = () => {
   const [sendInvite, setSendInvite] = useState(false);
   const [patientsCount, setPatientCount] = useState(0);
   const [appointmentCount, setAppointmentCount] = useState(0);
+
+  const IsMobile = useIsMobile();
 
   const navigate = useNavigate();
 
@@ -63,23 +67,38 @@ export const DoctorDashboard = () => {
             </span>
           </div>
           <div>
-            <DoctorSvg />
+            <DoctorSvg width={"27rem"} height={"27rem"} />
           </div>
         </Banner>
         <Cards>
           <DataCard
-            icon={<PatientIcon width={"4rem"} height={"4rem"} />}
+            icon={
+              <PatientIcon
+                width={IsMobile ? "3rem" : "4rem"}
+                height={IsMobile ? "3rem" : "4rem"}
+              />
+            }
             title={"Patient"}
             number={patientsCount}
           />
           <DataCard
-            icon={<Naira width={"4rem"} height={"4rem"} />}
+            icon={
+              <Naira
+                width={IsMobile ? "3rem" : "4rem"}
+                height={IsMobile ? "3rem" : "4rem"}
+              />
+            }
             title={"Income"}
             number="0"
             money={true}
           />
           <DataCard
-            icon={<AppointmentIcon width={"4rem"} height={"4rem"} />}
+            icon={
+              <AppointmentIcon
+                width={IsMobile ? "3rem" : "4rem"}
+                height={IsMobile ? "3rem" : "4rem"}
+              />
+            }
             title={"Appointments"}
             number={appointmentCount}
           />
@@ -109,18 +128,21 @@ const AppointmentHeader = styled.div`
   margin-right: auto;
   padding-left: 5rem;
   width: 45%;
+  ${mobile({ width: "80%", marginBottom: "2rem" })}
 `;
 const AppointmentTitle = styled.h1`
   font-weight: 600;
   font-size: 2rem;
   margin: 0;
   padding: 0;
+  ${mobile({ fontSize: "1.6rem" })}
 `;
 const AppointmentViewAll = styled.h1`
   cursor: pointer;
   color: blue;
   font-weight: 500;
   font-size: 1.6rem;
+  ${mobile({ fontSize: "1.2rem" })}
 `;
 
 const Cards = styled.div`
@@ -132,6 +154,10 @@ const Cards = styled.div`
   align-items: center;
   box-sizing: border-box;
   padding: 2rem 5rem;
+  ${mobile({
+    padding: "1rem 2rem",
+    margin: "4rem 0"
+  })}
 `;
 
 const Grid = styled.div`
@@ -143,4 +169,10 @@ const Grid = styled.div`
   margin-bottom: 5rem;
   padding: 0 5rem;
   grid-column-gap: 2rem;
+  ${mobile({
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: "10rem",
+    padding: "0 2rem"
+  })}
 `;

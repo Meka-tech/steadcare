@@ -25,6 +25,7 @@ import {
 import { PrescribeModal } from "../prescribeModal";
 import moment from "moment";
 import { Capitalize } from "../../../../Utilities/globalFunc";
+import { mobile } from "../../../../Utilities/responsive";
 
 export const AppointmentList = ({ data, loading }) => {
   const [activeTab, setActiveTab] = useState("UA");
@@ -241,6 +242,7 @@ const ModalBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  ${mobile({ width: "100%" })}
 `;
 
 const ModalContainer = styled.div`

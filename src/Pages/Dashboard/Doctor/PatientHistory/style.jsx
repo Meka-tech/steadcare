@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import { mobile } from "../../../../Utilities/responsive";
 
 export const Main = styled.div`
   width: 90%;
   max-width: 150rem;
+  ${mobile({ width: "95%" })}
 `;
 
 export const Title = styled.h1`
@@ -42,6 +44,7 @@ export const TabHeader = styled.div`
   padding: 0 5rem;
   display: grid;
   grid-template-columns: 40rem 30rem 30rem;
+  ${mobile({ gridTemplateColumns: "18rem 15rem 15rem" })}
   h2 {
     font-size: 1.4rem;
     font-weight: 500;
@@ -49,6 +52,7 @@ export const TabHeader = styled.div`
     margin: auto 0;
     text-transform: uppercase;
     text-align: left;
+    ${mobile({ fontSize: "1.2rem" })}
   }
 `;
 
@@ -63,6 +67,7 @@ export const TabBodyText = styled.h1`
   font-size: 1.6rem;
   font-weight: 500;
   margin: auto;
+  ${mobile({ fontSize: "1.2rem" })}
 `;
 export const Column = styled.div`
   margin-top: 2rem;
@@ -73,12 +78,14 @@ export const Column = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: 43rem 30rem 15rem;
+  ${mobile({ gridTemplateColumns: "21rem 12rem 8.5rem", padding: "0 1rem" })}
   h4 {
     font-size: 1.6rem;
     font-weight: 500;
     text-align: left;
     text-transform: capitalize;
     margin: auto 0;
+    ${mobile({ fontSize: "1.2rem" })}
   }
 `;
 export const NameDiv = styled.div`
@@ -92,30 +99,7 @@ export const DisplayPicture = styled.div`
   background-color: #dadada;
   margin-right: 1rem;
 `;
-export const StatusDiv = styled.div`
-  margin: auto 0;
-  display: flex;
-  position: relative;
-`;
-export const Status = styled.div`
-  margin: auto 0;
-  margin-right: 2.5rem;
-  font-weight: 500;
-  font-size: 1.4rem;
-  width: 9rem;
-  border-radius: 0.5rem;
-  height: 2.5rem;
-  background-color: ${(props) =>
-    props.status === "Granted"
-      ? `rgba(27, 191, 0, 1)`
-      : props.status === "Declined"
-      ? `rgba(255, 0, 0, 1)`
-      : null};
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+
 export const ThreeDots = styled.div`
   font-weight: 700;
   font-size: 2rem;
@@ -123,6 +107,7 @@ export const ThreeDots = styled.div`
   cursor: pointer;
   padding-bottom: 1rem;
   width: fit-content;
+  ${mobile({ fontSize: "1.5rem", margin: "0" })}
 `;
 export const DropdownContainer = styled.div`
   display: flex;

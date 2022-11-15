@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Button } from "../../../../Components";
+import { mobile } from "../../../../Utilities/responsive";
 
 export const BioInput = ({ placeHolder, value, title, ...rest }) => {
   const [focused, setFocused] = useState(false);
@@ -25,6 +26,7 @@ export const BioInput = ({ placeHolder, value, title, ...rest }) => {
 const BioContainer = styled.div`
   width: 90%;
   margin: auto;
+  ${mobile({ width: "100%" })}
 `;
 const H1 = styled.h1`
   margin: 0;

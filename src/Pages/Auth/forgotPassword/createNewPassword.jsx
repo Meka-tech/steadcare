@@ -8,6 +8,8 @@ import { BaseUrl } from "../../../Utilities";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { mobile } from "../../../Utilities/responsive";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const CreateNewPassword = () => {
   const navigate = useNavigate();
@@ -46,7 +48,7 @@ export const CreateNewPassword = () => {
     axios(config)
       .then(function (response) {
         setIsLoading(false);
-        alert(response.message);
+        toast.success(response.data.message);
         navigate("/login");
       })
       .catch(function (error) {
@@ -94,6 +96,7 @@ export const CreateNewPassword = () => {
                 type="submit"
                 isLoading={isLoading}
               />
+              <ToastContainer />
             </ButtonDiv>
           </Forms>
         </TabContent>
@@ -124,6 +127,7 @@ const Headers = styled.h2`
   text-align: center;
   margin: 0;
   padding: 0;
+
   ${mobile({
     textAlign: "left"
   })}

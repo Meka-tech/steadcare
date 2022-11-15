@@ -39,6 +39,8 @@ import { Initials } from "./initials";
 import { ReactComponent as UnReadNotification } from "../../Images/NotifyBell.svg";
 import { ReactComponent as Notification } from "../../Images/NotifyBell_.svg";
 import useClickOutside from "../../hooks/useClickOutside";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
   const dispatch = useDispatch();
@@ -85,6 +87,7 @@ export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
             width={"3.5rem"}
           />
           <h1 onClick={() => navigate("/")}> SteadCare</h1>
+          <ToastContainer />
         </LogoSection>
         <NavItems>
           {Navs.map((nav, index) => (
@@ -105,10 +108,13 @@ export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
           <NavItem
             active={active}
             onClick={() => {
-              dispatch(logOutPatient());
-              dispatch(updateLoggedIn(false));
-              dispatch(updateLoggedInRole(""));
-              navigate("/");
+              toast.success("Log out Successful");
+              setTimeout(() => {
+                dispatch(logOutPatient());
+                dispatch(updateLoggedIn(false));
+                dispatch(updateLoggedInRole(""));
+                navigate("/");
+              }, 1500);
             }}
           >
             <div>
@@ -167,10 +173,13 @@ export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
             <NavItem
               active={active}
               onClick={() => {
-                dispatch(logOutPatient());
-                dispatch(updateLoggedIn(false));
-                dispatch(updateLoggedInRole(""));
-                navigate("/");
+                toast.success("Log out Successful");
+                setTimeout(() => {
+                  dispatch(logOutPatient());
+                  dispatch(updateLoggedIn(false));
+                  dispatch(updateLoggedInRole(""));
+                  navigate("/");
+                }, 1500);
               }}
             >
               <div>
@@ -230,6 +239,7 @@ export const DoctorDashboardNavbar = ({
             width={"3.5rem"}
           />
           <h1 onClick={() => navigate("/")}> SteadCare</h1>
+          <ToastContainer />
         </LogoSection>
         <NavItems>
           {Navs.map((nav, index) => (
@@ -250,10 +260,13 @@ export const DoctorDashboardNavbar = ({
           <NavItem
             active={active}
             onClick={() => {
-              dispatch(LogOutDoctor());
-              dispatch(updateLoggedIn(false));
-              dispatch(updateLoggedInRole(""));
-              navigate("/");
+              toast.success("Log out successful");
+              setTimeout(() => {
+                dispatch(LogOutDoctor());
+                dispatch(updateLoggedIn(false));
+                dispatch(updateLoggedInRole(""));
+                navigate("/");
+              }, 1500);
             }}
           >
             <div>
@@ -312,10 +325,13 @@ export const DoctorDashboardNavbar = ({
             <NavItem
               active={active}
               onClick={() => {
-                dispatch(LogOutDoctor());
-                dispatch(updateLoggedIn(false));
-                dispatch(updateLoggedInRole(""));
-                navigate("/");
+                toast.success("Log out successful");
+                setTimeout(() => {
+                  dispatch(LogOutDoctor());
+                  dispatch(updateLoggedIn(false));
+                  dispatch(updateLoggedInRole(""));
+                  navigate("/");
+                }, 1500);
               }}
             >
               <div>
@@ -369,6 +385,7 @@ export const AdminDashboardNavbar = ({
             width={"3.5rem"}
           />
           <h1 onClick={() => navigate("/")}> SteadCare</h1>
+          <ToastContainer />
         </LogoSection>
         <NavItems>
           {Navs.map((nav, index) => (
@@ -389,10 +406,13 @@ export const AdminDashboardNavbar = ({
           <NavItem
             active={active}
             onClick={() => {
-              dispatch(LogOutAdmin());
-              dispatch(updateLoggedIn(false));
-              dispatch(updateLoggedInRole(""));
-              navigate("/");
+              toast.success("Log out successful");
+              setTimeout(() => {
+                dispatch(LogOutAdmin());
+                dispatch(updateLoggedIn(false));
+                dispatch(updateLoggedInRole(""));
+                navigate("/");
+              }, 1500);
             }}
           >
             <div>
@@ -451,10 +471,13 @@ export const AdminDashboardNavbar = ({
             <NavItem
               active={active}
               onClick={() => {
-                dispatch(LogOutAdmin());
-                dispatch(updateLoggedIn(false));
-                dispatch(updateLoggedInRole(""));
-                navigate("/");
+                toast.success("Log out successful");
+                setTimeout(() => {
+                  dispatch(LogOutAdmin());
+                  dispatch(updateLoggedIn(false));
+                  dispatch(updateLoggedInRole(""));
+                  navigate("/");
+                }, 1500);
               }}
             >
               <div>

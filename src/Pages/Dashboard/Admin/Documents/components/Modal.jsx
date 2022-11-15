@@ -3,6 +3,7 @@ import { useRef } from "react";
 import styled from "styled-components";
 import { Button } from "../../../../../Components";
 import useClickOutside from "../../../../../hooks/useClickOutside";
+import { mobile } from "../../../../../Utilities/responsive";
 
 export const DeleteModal = ({ setActive, data }) => {
   const ModalRef = useRef();
@@ -54,6 +55,7 @@ const ModalBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  ${mobile({ width: "100%" })}
 `;
 
 const ModalContainer = styled.div`

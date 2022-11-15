@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Button } from "../../../../../Components";
 import useClickOutside from "../../../../../hooks/useClickOutside";
 import ApproveBadge from "../../../../../Images/approveBadge.png";
+import { mobile } from "../../../../../Utilities/responsive";
 
 export const YesNoModal = ({ text, setActive, action }) => {
   const Ref = useRef();
@@ -46,6 +47,7 @@ const Shade = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  ${mobile({ width: "100%" })}
 `;
 
 const YesNoDiv = styled.div`

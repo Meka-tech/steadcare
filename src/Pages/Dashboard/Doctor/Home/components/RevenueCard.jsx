@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ReactComponent as CashMonth } from "../../../../../Images/CardIcon/cash_month.svg";
 import { ReactComponent as CashYear } from "../../../../../Images/CardIcon/cash_year.svg";
+import { mobile } from "../../../../../Utilities/responsive";
 
 export const RevenueCard = () => {
   return (
@@ -31,6 +32,7 @@ const Container = styled.div`
   border-radius: 1.2rem;
   box-sizing: border-box;
   padding: 1.5rem 2rem;
+  ${mobile({ padding: "1rem 1.5rem" })}
 `;
 
 const Header = styled.h1`

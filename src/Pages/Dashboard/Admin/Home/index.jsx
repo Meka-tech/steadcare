@@ -16,6 +16,7 @@ import { AllAppointment } from "./components/AllAppointment";
 import { MonthlyVisitor } from "./components/MonthlyVisitor";
 import { useSelector } from "react-redux";
 import useFetch from "../../../../hooks/useFetch";
+import { useIsMobile } from "../../../../hooks/useIsMobile";
 
 export const AdminDashboard = () => {
   const token = useSelector((state) => state.reducer.adminDetails.token);
@@ -35,6 +36,8 @@ export const AdminDashboard = () => {
   };
 
   useFetch(token, "/admin/dashboard-statistics", SetStats);
+
+  const IsMobile = useIsMobile();
   return (
     <Container>
       <AdminDashboardNavbar role="admin" />
@@ -42,33 +45,63 @@ export const AdminDashboard = () => {
         <TopBar role="admin" />
         <Cards>
           <DataCard
-            icon={<TotalDoctorIcon width={"4rem"} height={"4rem"} />}
+            icon={
+              <TotalDoctorIcon
+                width={IsMobile ? "3rem" : "4rem"}
+                height={IsMobile ? "3rem" : "4rem"}
+              />
+            }
             title={"Total Doctors"}
             number={totalDoctor}
           />
           <DataCard
-            icon={<PatientIcon width={"4rem"} height={"4rem"} />}
+            icon={
+              <PatientIcon
+                width={IsMobile ? "3rem" : "4rem"}
+                height={IsMobile ? "3rem" : "4rem"}
+              />
+            }
             title={"Total Patients"}
             number={totalPatients}
           />
           <DataCard
-            icon={<Naira width={"4rem"} height={"4rem"} />}
+            icon={
+              <Naira
+                width={IsMobile ? "3rem" : "4rem"}
+                height={IsMobile ? "3rem" : "4rem"}
+              />
+            }
             title={"Total Earnings"}
             number={totalEarnings}
             money={true}
           />
           <DataCard
-            icon={<TotalAppointmentIcon width={"4rem"} height={"4rem"} />}
+            icon={
+              <TotalAppointmentIcon
+                width={IsMobile ? "3rem" : "4rem"}
+                height={IsMobile ? "3rem" : "4rem"}
+              />
+            }
             title={"Total Appointments"}
             number={totalAppointments}
           />
           <DataCard
-            icon={<CancelledAppointmentIcon width={"4rem"} height={"4rem"} />}
+            icon={
+              <CancelledAppointmentIcon
+                width={IsMobile ? "3rem" : "4rem"}
+                height={IsMobile ? "3rem" : "4rem"}
+              />
+            }
             title={"Cancelled Appointments"}
             number={cancelledAppointment}
           />
           <DataCard
-            icon={<TotalVisitorsIcon width={"4rem"} height={"4rem"} />}
+            icon={
+              <TotalVisitorsIcon
+                width={IsMobile ? "3rem" : "4rem"}
+                height={IsMobile ? "3rem" : "4rem"}
+              />
+            }
             title={"Total Visitors"}
             number={totalVisitors}
           />

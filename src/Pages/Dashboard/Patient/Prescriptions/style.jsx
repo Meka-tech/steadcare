@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../../../../Utilities/responsive";
 
 export const Main = styled.div`
   padding-top: 5rem;
@@ -55,6 +56,9 @@ export const TabHeader = styled.div`
     margin: auto 0;
     text-transform: uppercase;
     text-align: center;
+    ${mobile({
+      fontSize: "1.2rem"
+    })}
   }
 `;
 
@@ -69,6 +73,9 @@ export const TabBodyText = styled.h1`
   font-size: 1.6rem;
   font-weight: 500;
   margin: auto;
+  ${mobile({
+    fontSize: "1.3rem"
+  })}
 `;
 export const Column = styled.div`
   margin-top: 2rem;
@@ -78,12 +85,22 @@ export const Column = styled.div`
   padding: 0 2rem;
   display: grid;
   grid-template-columns: 43rem 35rem 15rem;
+  ${mobile({
+    gridTemplateColumns: "15rem auto 10rem",
+    height: "3rem",
+    marginTop: "2rem",
+    padding: "0 1rem"
+  })}
   h4 {
     font-size: 1.6rem;
     font-weight: 500;
     text-align: left;
     text-transform: capitalize;
     margin: auto 0;
+    ${mobile({
+      fontSize: "1.2rem",
+      textAlign: "center"
+    })}
   }
 `;
 export const NameDiv = styled.div`
@@ -96,6 +113,11 @@ export const DisplayPicture = styled.div`
   border-radius: 50%;
   background-color: #dadada;
   margin-right: 1rem;
+  ${mobile({
+    width: "2rem",
+    height: "2rem",
+    marginRight: "0.5rem"
+  })}
 `;
 export const DateDiv = styled.div`
   margin: auto 0;
@@ -110,6 +132,7 @@ export const ThreeDots = styled.div`
   cursor: pointer;
   padding-bottom: 1rem;
   margin-left: 2rem;
+  ${mobile({ fontSize: "1.5rem", margin: "0", marginLeft: "1rem" })}
 `;
 
 export const DropdownContainer = styled.div`

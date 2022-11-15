@@ -2,6 +2,7 @@ import { useRef } from "react";
 import styled from "styled-components";
 import useClickOutside from "../../../hooks/useClickOutside";
 import moment from "moment";
+import { mobile } from "../../../Utilities/responsive";
 
 export const FormModal = ({ setActive, patient, func }) => {
   const ModalRef = useRef();
@@ -64,6 +65,7 @@ const ModalBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  ${mobile({ width: "100%" })}
 `;
 const FormContainer = styled.div`
   height: 42rem;

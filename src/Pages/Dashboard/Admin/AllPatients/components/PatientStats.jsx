@@ -14,6 +14,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { ChartHeader } from "./ChartHeader";
+import { mobile } from "../../../../../Utilities/responsive";
 
 ChartJS.register(
   CategoryScale,
@@ -88,6 +89,7 @@ const Container = styled.div`
   width: 90%;
   margin: 0 auto;
   margin-bottom: 5rem;
+  ${mobile({ width: "95%" })}
 `;
 
 const DivTitle = styled.h1`
@@ -106,6 +108,7 @@ const Body = styled.div`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
+  ${mobile({ height: "30rem" })}
 `;
 const Main = styled.div`
   display: flex;
@@ -114,6 +117,7 @@ const Main = styled.div`
   margin: 0 auto;
   height: 90%;
   align-items: center;
+  ${mobile({ width: "98%" })}
 `;
 const Chart = styled.div`
   width: 70%;
@@ -124,4 +128,5 @@ const Chart = styled.div`
   background-color: white;
   max-width: 80rem;
   box-sizing: border-box;
+  ${mobile({ width: "60%" })}
 `;

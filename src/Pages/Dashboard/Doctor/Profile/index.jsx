@@ -25,6 +25,7 @@ import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
+import { useIsMobile } from "../../../../hooks/useIsMobile";
 
 export const DoctorProfile = () => {
   const user = useSelector((state) => state.reducer.doctorDetails);
@@ -46,8 +47,6 @@ export const DoctorProfile = () => {
   };
 
   const { loading: userLoading } = useFetch(token, "/my-profile", GetUserData);
-
-  console.log(userData);
 
   const FirstName = Capitalize(userData.name.split(" ")[0]);
   const LastName = Capitalize(userData.name.split(" ")[1]);
@@ -137,8 +136,6 @@ export const DoctorProfile = () => {
       PayloadData.bio = bio;
     }
 
-    console.log(PayloadData, "Payload");
-
     const config = {
       method: "patch",
       url: `${BaseUrl}/update-profile`,
@@ -162,6 +159,7 @@ export const DoctorProfile = () => {
     onSubmit: UpdateProfile
   });
 
+  const IsMobile = useIsMobile();
   return (
     <Container>
       <DoctorDashboardNavbar active={"Profile"} />
@@ -229,14 +227,14 @@ export const DoctorProfile = () => {
                 <DropDowns>
                   <Dropdown
                     title={"Languages"}
-                    width={"80%"}
+                    width={IsMobile ? "60%" : "80%"}
                     items={Languages}
                     selectedItem={firstLanguage}
                     onSelect={setfirstLanguage}
                   />
                   <Dropdown
                     title={"Other"}
-                    width={"80%"}
+                    width={IsMobile ? "60%" : "80%"}
                     items={Languages}
                     selectedItem={otherLanguage}
                     onSelect={setOtherLanguage}

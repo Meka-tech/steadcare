@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../../../../Utilities/responsive";
 
 export const Main = styled.div`
   padding-top: 5rem;
@@ -37,6 +38,11 @@ export const DoctorGrid = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   position: relative;
+  ${mobile({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  })}
 `;
 
 export const DateAndTime = styled.div`
@@ -69,6 +75,10 @@ export const CalendarDiv = styled.div`
   width: 35rem;
   height: fit-content;
   box-sizing: border-box;
+  ${mobile({
+    margin: "1rem",
+    width: "38rem"
+  })}
 
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
@@ -98,6 +108,9 @@ export const CalendarDiv = styled.div`
     color: black;
     font-weight: 500;
     text-transform: uppercase;
+    ${mobile({
+      fontSize: "1.4rem"
+    })}
   }
   /* ~~~ button styles ~~~ */
   button {
@@ -107,8 +120,10 @@ export const CalendarDiv = styled.div`
     color: black;
     padding: 0.8rem;
     font-size: 1rem;
-
     font-family: Montserrat;
+    ${mobile({
+      fontSize: "1.4rem"
+    })}
 
     &:hover {
       /* background-color: rgba(0, 0, 255, 0.5); */
@@ -179,10 +194,17 @@ export const TimeNumber = styled.div`
     margin-right: 4rem;
     border-radius: 0.5rem;
     cursor: pointer;
+    ${mobile({
+      margin: "1rem",
+      width: "8rem"
+    })}
   }
   h2 {
     font-size: 1.6rem;
     font-weight: 600;
+    ${mobile({
+      fontSize: "1.4rem"
+    })}
   }
 `;
 export const ComplaintFormHeader = styled.div`
@@ -194,11 +216,17 @@ export const ComplaintFormHeader = styled.div`
   div {
     width: 30%;
     border-bottom: 1px solid rgba(85, 85, 85, 1);
+    ${mobile({
+      width: "20%"
+    })}
   }
   h1 {
     font-family: Montserrat;
     font-size: 2rem;
     font-weight: 500;
+    ${mobile({
+      fontSize: "1.6rem"
+    })}
   }
 `;
 export const PatientForm = styled.div`
@@ -209,6 +237,9 @@ export const PatientForm = styled.div`
   border: 1px solid rgba(85, 85, 85, 1);
   padding: 4rem 5rem;
   margin-bottom: 5rem;
+  ${mobile({
+    padding: "2rem 2.5rem"
+  })}
 `;
 
 export const SuccessDiv = styled.div`
@@ -220,6 +251,7 @@ export const SuccessDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem 0;
+
   h1 {
     width: 60%;
     font-weight: 600;
@@ -227,6 +259,11 @@ export const SuccessDiv = styled.div`
     text-align: center;
     line-height: 3rem;
     margin: 0 auto;
+    ${mobile({
+      width: "90%",
+      fontSize: "1.6rem",
+      lineHeight: "2.5rem"
+    })}
   }
   margin-bottom: 5rem;
 `;

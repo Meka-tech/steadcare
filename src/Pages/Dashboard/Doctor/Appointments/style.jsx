@@ -1,9 +1,11 @@
 import styled from "styled-components";
+import { mobile } from "../../../../Utilities/responsive";
 
 export const Main = styled.div`
   padding-top: 5rem;
   width: 90%;
   max-width: 150rem;
+  ${mobile({ width: "95%" })}
 `;
 
 export const Title = styled.h1`
@@ -30,6 +32,7 @@ export const TabContainer = styled.div`
   height: 5rem;
   padding: 0 5rem;
   border-bottom: 2px solid rgba(217, 217, 217, 1);
+  ${mobile({ padding: "0 2rem" })}
 `;
 export const Tab = styled.div`
   cursor: pointer;
@@ -44,6 +47,7 @@ export const Tab = styled.div`
     font-size: 1.6rem;
     font-weight: 500;
     margin-top: 2rem;
+    ${mobile({ fontSize: "1.4rem" })}
   }
 `;
 export const TabHeader = styled.div`
@@ -52,6 +56,10 @@ export const TabHeader = styled.div`
   padding: 0 5rem;
   display: grid;
   grid-template-columns: 40rem 20rem 15rem 18rem;
+  ${mobile({
+    gridTemplateColumns: "15rem 10rem 7.5rem 9rem",
+    padding: "0 2rem"
+  })}
   h2 {
     font-size: 1.4rem;
     font-weight: 500;
@@ -59,6 +67,7 @@ export const TabHeader = styled.div`
     margin: auto 0;
     text-transform: uppercase;
     text-align: left;
+    ${mobile({ fontSize: "1.2rem" })}
   }
 `;
 export const TabBody = styled.div`
@@ -82,12 +91,17 @@ export const Column = styled.div`
   padding: 0 2rem;
   display: grid;
   grid-template-columns: 43rem 20rem 15rem 18rem;
+  ${mobile({
+    gridTemplateColumns: "15rem 10rem 7.5rem 9rem",
+    padding: "0 1rem"
+  })}
   h4 {
     font-size: 1.6rem;
     font-weight: 500;
     text-align: left;
     text-transform: capitalize;
     margin: auto 0;
+    ${mobile({ fontSize: "1.2rem" })}
   }
 `;
 export const NameDiv = styled.div`
@@ -127,6 +141,7 @@ export const Status = styled.div`
   align-items: center;
   justify-content: center;
   text-transform: capitalize;
+  ${mobile({ fontSize: "1rem", marginRight: "1rem", width: "6rem" })}
 `;
 
 export const ThreeDots = styled.div`
@@ -135,6 +150,7 @@ export const ThreeDots = styled.div`
   color: rgba(119, 119, 119, 1);
   cursor: pointer;
   padding-bottom: 1rem;
+  ${mobile({ fontSize: "1.5rem", margin: "0" })}
 `;
 
 export const DropdownContainer = styled.div`

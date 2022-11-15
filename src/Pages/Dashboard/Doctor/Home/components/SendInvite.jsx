@@ -7,6 +7,7 @@ import { ReactComponent as Arrow } from "../../../../../Images/Directionals/arro
 import { ReactComponent as SendInviteSvg } from "../../../../../Images/InviteIcon.svg";
 import { ReactComponent as Plane } from "../../../../../Images/planeCircle.svg";
 import approveBadge from "../../../../../Images/approveBadge.png";
+import { mobile } from "../../../../../Utilities/responsive";
 export const SendInvite = ({ setActive }) => {
   return (
     <SendInviteContainer>
@@ -139,6 +140,7 @@ const Shade = styled.div`
   top: 0;
   right: 0;
   z-index: 10;
+  ${mobile({ width: "100%" })}
 `;
 const ModalContainer = styled.div`
   height: 30rem;
@@ -150,6 +152,7 @@ const ModalContainer = styled.div`
   background-color: white;
   border: 1px solid rgba(0, 0, 255, 1);
   padding: 2rem;
+  ${mobile({ width: "40rem" })}
 `;
 
 const ModalHeader = styled.h2`

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router";
-import { Button, TextForm } from "../../../Components";
+import { Button } from "../../../Components";
 import styled from "styled-components";
 import { AuthMargin, Body, Container, LogoDiv, TabContent } from "../style";
 import { ReactComponent as EmailSentIcon } from "../../../Images/EmailSent.svg";
@@ -13,7 +13,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const EmailSent = () => {
   const IsMobile = useIsMobile();
-  const navigate = useNavigate();
   const location = useLocation();
   const { email } = location.state;
 

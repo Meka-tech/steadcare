@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "../../../../Utilities/responsive";
 
 export const DocumentListContainer = styled.div`
   margin-top: 4rem;
@@ -17,6 +18,7 @@ export const TabContainer = styled.div`
   height: 5rem;
   padding: 0 5rem;
   border-bottom: 3px solid rgba(217, 217, 217, 1);
+  ${mobile({ padding: "0 2rem" })}
 `;
 export const Tab = styled.div`
   cursor: pointer;
@@ -31,6 +33,7 @@ export const Tab = styled.div`
     font-size: 1.6rem;
     font-weight: 500;
     margin-top: 2rem;
+    ${mobile({ fontSize: "1.4rem" })}
   }
 `;
 

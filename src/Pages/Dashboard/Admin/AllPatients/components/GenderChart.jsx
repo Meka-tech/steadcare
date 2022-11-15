@@ -6,6 +6,8 @@ import { AiOutlineDown } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import useFetch from "../../../../../hooks/useFetch";
+import { mobile } from "../../../../../Utilities/responsive";
+import { useIsMobile } from "../../../../../hooks/useIsMobile";
 
 export const GenderChart = () => {
   const token = useSelector((state) => state.reducer.adminDetails.token);
@@ -39,6 +41,7 @@ export const GenderChart = () => {
       return 0;
     }
   };
+  const IsMobile = useIsMobile();
   return (
     <Container>
       <HeaderDiv>
@@ -48,9 +51,9 @@ export const GenderChart = () => {
         <ChartImg>
           <Doughnut
             data={data}
-            width={140}
-            height={140}
-            options={{ maintainAspectRatio: false, cutout: 45 }}
+            width={IsMobile ? 70 : 140}
+            height={IsMobile ? 70 : 140}
+            options={{ maintainAspectRatio: false, cutout: IsMobile ? 20 : 45 }}
           />
         </ChartImg>
         <ChartText>
@@ -89,6 +92,7 @@ const Container = styled.div`
   align-items: center;
   max-height: 100%;
   box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.3);
+  ${mobile({ width: "15rem", padding: "1rem" })}
 `;
 
 const HeaderDiv = styled.div`
@@ -102,6 +106,7 @@ const Header = styled.h1`
   font-weight: 600;
   font-size: 1.8rem;
   margin-bottom: 2rem;
+  ${mobile({ fontSize: "1.2rem", marginBottom: "1rem" })}
 `;
 
 const ChartDiv = styled.div`
@@ -133,6 +138,7 @@ const ChartText = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  ${mobile({ width: "7.5rem", height: "7.5rem" })}
   h1 {
     text-align: center;
     font-size: 3rem;
@@ -140,6 +146,7 @@ const ChartText = styled.div`
     padding: 0;
     font-weight: 600;
     color: blue;
+    ${mobile({ fontSize: "2rem" })}
   }
   h2 {
     text-align: center;
@@ -149,6 +156,7 @@ const ChartText = styled.div`
     width: 50%;
     color: rgba(85, 85, 85, 1);
     font-weight: 500;
+    ${mobile({ fontSize: "1rem" })}
   }
 `;
 
@@ -166,18 +174,22 @@ const Gender = styled.div`
     font-weight: 600;
     font-size: 2rem;
     margin-bottom: 0.5rem;
+    ${mobile({ fontSize: "1.5rem" })}
   }
   h2 {
     margin: 0;
     padding: 0;
     font-weight: 500;
     font-size: 1.2rem;
+    ${mobile({ fontSize: "1rem" })}
   }
   margin-bottom: 2rem;
+  ${mobile({ marginBottom: "1rem" })}
 `;
 const GenderBall = styled.div`
   width: 2.5rem;
   height: 2.5rem;
   background-color: ${(props) => props.color};
   margin-right: 1rem;
+  ${mobile({ width: "1.5rem", height: "1.5rem", marginRight: "0.5rem" })}
 `;

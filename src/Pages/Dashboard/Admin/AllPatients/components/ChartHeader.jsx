@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { AiOutlineCalendar } from "react-icons/ai";
+import { mobile } from "../../../../../Utilities/responsive";
+import { useIsMobile } from "../../../../../hooks/useIsMobile";
 
 export const ChartHeader = ({ setFilter, filter }) => {
   return (
@@ -32,6 +34,7 @@ const Filters = styled.div`
   display: flex;
   justify-content: space-between;
   width: 40%;
+  ${mobile({ width: "50%" })}
 `;
 const Filter = styled.h1`
   cursor: pointer;
@@ -40,12 +43,17 @@ const Filter = styled.h1`
   font-weight: 600;
   color: ${(props) => (props.active ? "blue" : "rgba(85, 85, 85, 1)")};
   font-size: 2rem;
+  ${mobile({ fontSize: "1.2rem" })}
 `;
 
 const FilteredPeriod = () => {
+  const IsMobile = useIsMobile();
   return (
     <Dates>
-      <AiOutlineCalendar size={20} color="rgba(85, 85, 85, 1)" />
+      <AiOutlineCalendar
+        size={IsMobile ? 15 : 20}
+        color="rgba(85, 85, 85, 1)"
+      />
       <FilteredTimePeriod>Jan-Jun</FilteredTimePeriod>
       <FilteredYear>, 2022</FilteredYear>
     </Dates>
@@ -63,6 +71,7 @@ const FilteredTimePeriod = styled.h1`
   padding: 0;
   margin-left: 1rem;
   font-size: 1.6rem;
+  ${mobile({ fontSize: "1.4rem", marginLeft: "0.5rem" })}
 `;
 const FilteredYear = styled.h1`
   margin: 0;
@@ -71,4 +80,5 @@ const FilteredYear = styled.h1`
   color: blue;
   font-size: 1.6rem;
   color: rgba(85, 85, 85, 1);
+  ${mobile({ fontSize: "1.4rem" })}
 `;

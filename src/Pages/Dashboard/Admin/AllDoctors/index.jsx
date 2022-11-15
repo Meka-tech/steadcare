@@ -12,6 +12,7 @@ import { DoctorList } from "./components/DoctorList";
 import { useSelector } from "react-redux";
 import useFetch from "../../../../hooks/useFetch";
 import { useState } from "react";
+import { useIsMobile } from "../../../../hooks/useIsMobile";
 
 export const AdminDoctors = () => {
   const token = useSelector((state) => state.reducer.adminDetails.token);
@@ -26,6 +27,8 @@ export const AdminDoctors = () => {
   };
   useFetch(token, "/admin/doctors-dashboard", SetDoctorStats);
 
+  const IsMobile = useIsMobile();
+
   return (
     <Container>
       <AdminDashboardNavbar role="admin" active="Doctors" />
@@ -33,17 +36,32 @@ export const AdminDoctors = () => {
         <TopBar role="admin" />
         <Cards>
           <DataCard
-            icon={<TotalDoctorIcon width={"4rem"} height={"4rem"} />}
+            icon={
+              <TotalDoctorIcon
+                width={IsMobile ? "3.5rem" : "4rem"}
+                height={IsMobile ? "3.5rem" : "4rem"}
+              />
+            }
             title={"Total Doctors"}
             number={doctor}
           />
           <DataCard
-            icon={<DisabledDoctorIcon width={"4rem"} height={"4rem"} />}
+            icon={
+              <DisabledDoctorIcon
+                width={IsMobile ? "3.5rem" : "4rem"}
+                height={IsMobile ? "3.5rem" : "4rem"}
+              />
+            }
             title={"Disabled Doctors"}
             number={disabledDoctor}
           />
           <DataCard
-            icon={<PendingDoctorIcon width={"4rem"} height={"4rem"} />}
+            icon={
+              <PendingDoctorIcon
+                width={IsMobile ? "3.5rem" : "4rem"}
+                height={IsMobile ? "3.5rem" : "4rem"}
+              />
+            }
             title={"Pending Doctors"}
             number={pendingDoctor}
           />

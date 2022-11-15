@@ -11,8 +11,6 @@ import {
   DropdownItem,
   MedicalHistoryContainer,
   NameDiv,
-  Status,
-  StatusDiv,
   TabBody,
   TabBodyText,
   TabHeader,
@@ -79,7 +77,11 @@ export const MediacalHistory = ({ data }) => {
                 </NameDiv>
                 <h4>{datum[1]}</h4>
                 <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center"
+                  }}
                 >
                   <h4>{datum[2]}</h4>
                   <ThreeDots

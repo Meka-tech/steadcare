@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import useFetch from "../../../../../hooks/useFetch";
 import moment from "moment";
+import { mobile } from "../../../../../Utilities/responsive";
 
 export const AllAppointment = () => {
   const token = useSelector((state) => state.reducer.adminDetails.token);
@@ -12,7 +13,6 @@ export const AllAppointment = () => {
     setAppointmentArray(response.data.data);
   };
   useFetch(token, "/admin/dashboard-appoinments", SetAppointments);
-  console.log(appointmentArray);
   return (
     <Container>
       <Title>All Appointments</Title>
@@ -51,6 +51,7 @@ const Container = styled.div`
   width: 90%;
   margin: 0 auto;
   margin-bottom: 5rem;
+  ${mobile({ width: "95%" })}
 `;
 const Title = styled.h1`
   font-weight: 500;
@@ -76,10 +77,15 @@ const Header = styled.div`
   border-bottom: 1px solid rgba(85, 85, 85, 1);
   grid-template-columns: 22rem 22rem 20rem 17rem 17rem;
   align-items: center;
+  ${mobile({
+    gridTemplateColumns: "10rem 10rem 8rem 6rem 7rem",
+    padding: "0 1rem"
+  })}
   h1 {
     color: rgba(85, 85, 85, 1);
     font-weight: 500;
     font-size: 1.6rem;
+    ${mobile({ fontSize: "1.2rem" })}
   }
 `;
 
@@ -91,10 +97,15 @@ const Column = styled.div`
   border-bottom: 1px solid rgba(85, 85, 85, 1);
   grid-template-columns: 22rem 22rem 20rem 17rem 17rem;
   align-items: center;
+  ${mobile({
+    gridTemplateColumns: "10rem 10rem 8rem 6rem 7rem",
+    padding: "0 1rem"
+  })}
   h1 {
     color: black;
     font-weight: 500;
     font-size: 1.4rem;
+    ${mobile({ fontSize: "1.2rem" })}
   }
 `;
 const Status = styled.div`
@@ -130,6 +141,8 @@ const Status = styled.div`
         : props.status === "due"
         ? "rgba(255, 77, 0, 1)"
         : null};
+
+    ${mobile({ fontSize: "1.2rem", width: "7rem" })}
   }
 `;
 const Empty = styled.div`

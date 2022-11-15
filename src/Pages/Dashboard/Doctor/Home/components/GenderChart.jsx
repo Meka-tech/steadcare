@@ -9,8 +9,11 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 import useFetch from "../../../../../hooks/useFetch";
+import { useIsMobile } from "../../../../../hooks/useIsMobile";
+import { mobile } from "../../../../../Utilities/responsive";
 
 export const GenderChart = () => {
+  const IsMobile = useIsMobile();
   const token = useSelector((state) => state.reducer.doctorDetails.token);
   const [maleCount, setMaleCount] = useState(0);
   const [femaleCount, setFemaleCount] = useState(0);
@@ -98,6 +101,7 @@ const Header = styled.h1`
   font-weight: 600;
   font-size: 1.8rem;
   margin-bottom: 2rem;
+  ${mobile({ marginBottom: "1rem" })}
 `;
 
 const ChartDiv = styled.div`
@@ -107,6 +111,7 @@ const ChartDiv = styled.div`
   justify-content: center;
   margin-bottom: 2rem;
   position: relative;
+  ${mobile({ height: "14rem" })}
 `;
 const ChartImg = styled.div`
   position: absolute;
@@ -129,6 +134,7 @@ const ChartText = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  ${mobile({ width: "16rem", height: "16rem" })}
   h1 {
     text-align: center;
     font-size: 5rem;
