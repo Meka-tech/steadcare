@@ -26,6 +26,11 @@ import { PrescribeModal } from "../prescribeModal";
 import moment from "moment";
 import { Capitalize } from "../../../../Utilities/globalFunc";
 import { mobile } from "../../../../Utilities/responsive";
+import { BaseUrl } from "../../../../Utilities";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const AppointmentList = ({ data, loading }) => {
   const [activeTab, setActiveTab] = useState("UA");
@@ -201,10 +206,32 @@ export const AppointmentList = ({ data, loading }) => {
 };
 
 const AcceptCancelModal = ({ setActive, status, data }) => {
+  const token = useSelector((state) => state.reducer.doctorDetails.token);
   const ModalRef = useRef();
   useClickOutside(ModalRef, () => setActive(false));
+
+  const AcceptRejectAppointment = async (status, ID) => {
+    const data = { status };
+
+    const config = {
+      method: "patch",
+      url: `${BaseUrl}/approve-reject-appoinments/${ID}`,
+      headers: { Authorization: "Bearer " + token },
+      data: data
+    };
+
+    axios(config)
+      .then(function (response) {
+        toast.success(response.data.message);
+      })
+      .catch(function (error) {
+        toast.error(error.response.data.message);
+      });
+  };
+
   return (
     <ModalBackground>
+      <ToastContainer />
       <ModalContainer ref={ModalRef}>
         <Message>
           Are you sure you want to {status === "accept" ? "accept" : "cancel"}{" "}
@@ -216,6 +243,13 @@ const AcceptCancelModal = ({ setActive, status, data }) => {
             width={"5rem"}
             text="Yes"
             fontSize="1.4rem"
+            onClick={() => {
+              setActive(false);
+              AcceptRejectAppointment(
+                status === "accept" ? "accepted" : "rejected",
+                data._id
+              );
+            }}
           />
           <Button
             width={"5rem"}
@@ -223,7 +257,9 @@ const AcceptCancelModal = ({ setActive, status, data }) => {
             text="No"
             fontSize="1.4rem"
             height={"2.5rem"}
-            onClick={() => setActive(false)}
+            onClick={() => {
+              setActive(false);
+            }}
           />
         </ModalButton>
       </ModalContainer>

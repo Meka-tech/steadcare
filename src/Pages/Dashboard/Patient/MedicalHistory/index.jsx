@@ -6,8 +6,23 @@ import { useNavigate } from "react-router-dom";
 import { TopBar } from "../component";
 import { Main } from "./style";
 import { MediacalHistory, MediacalHistoryInquiry } from "./components";
+import { useSelector } from "react-redux";
+import useFetch from "../../../../hooks/useFetch";
 
 export const PatientMedicalHistory = () => {
+  const token = useSelector((state) => state.reducer.patientDetails.token);
+  const [medicalHistory, setMedicalHistory] = useState();
+
+  const CallBackFunc = (response) => {
+    setMedicalHistory(response.data.data.fetchedData);
+  };
+
+  const { loading } = useFetch(
+    token,
+    "/view-all-medication-history",
+    CallBackFunc
+  );
+
   const MockData = [
     ["Chineye Matu", "Cancer", "16-06-2022"],
     ["Luther Ope", "Cancer", "18-06-2022"],
@@ -24,7 +39,7 @@ export const PatientMedicalHistory = () => {
       <Body>
         <TopBar role={"patient"} />
         <Main>
-          <MediacalHistory />
+          <MediacalHistory data={medicalHistory} loading={loading} />
           <MediacalHistoryInquiry />
         </Main>
       </Body>

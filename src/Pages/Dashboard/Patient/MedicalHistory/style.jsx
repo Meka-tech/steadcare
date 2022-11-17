@@ -66,7 +66,9 @@ export const TabHeader = styled.div`
 export const TabBody = styled.div`
   display: flex;
   flex-direction: column;
-  height: 25rem;
+  height: 33rem;
+  overflow-y: scroll;
+  position: relative;
 `;
 export const TabBodyText = styled.h1`
   font-size: 1.6rem;

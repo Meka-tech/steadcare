@@ -21,31 +21,16 @@ import {
   ThreeDots
 } from "./style";
 import moment from "moment";
+import { useNavigate } from "react-router";
 
 export const AppointmentList = ({ data, loading, token }) => {
   const [activeTab, setActiveTab] = useState("UA");
   const [activeDropDown, setActiveDropDown] = useState(false);
   const [clickedColumn, setClickedColumn] = useState();
   const [appointmentId, setAppointmentId] = useState();
+  const navigate = useNavigate();
   const dropDownRef = useRef();
   useClickOutside(dropDownRef, () => setActiveDropDown(false));
-
-  const RescheduleAppointment = async () => {
-    const data = { time: "2022-09-15T12:59:12.918Z" };
-
-    const config = {
-      method: "patch",
-      url: `${BaseUrl}/rescheduled-doctors-appointment/${appointmentId}`,
-      headers: { Authorization: "Bearer " + token },
-      data: data
-    };
-
-    axios(config)
-      .then(function (response) {})
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
 
   const ClearAppointment = () => {
     const config = {
@@ -67,7 +52,13 @@ export const AppointmentList = ({ data, loading, token }) => {
     return (
       <DropdownContainer active={activeDropDown} ref={dropDownRef}>
         {appointment === "Upcoming" ? (
-          <DropdownItem onClick={() => RescheduleAppointment()}>
+          <DropdownItem
+            onClick={() => {
+              navigate("/patient/rescheduel-appointment", {
+                state: appointmentId
+              });
+            }}
+          >
             Re-schedule
           </DropdownItem>
         ) : (

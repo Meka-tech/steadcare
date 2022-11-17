@@ -1,3 +1,5 @@
+import moment from "moment";
+import { Spinner } from "../component";
 import {
   Column,
   DisplayPicture,
@@ -11,7 +13,7 @@ import {
   Title
 } from "./style";
 
-export const MediacalHistory = ({ data }) => {
+export const MediacalHistory = ({ data, loading }) => {
   return (
     <>
       <Title>Medical History</Title>
@@ -23,21 +25,23 @@ export const MediacalHistory = ({ data }) => {
         </TabHeader>
         <TabBody>
           {data?.map((datum, index) => {
+            const m = moment(datum.time);
             return (
-              <Column key={index + datum[0]}>
+              <Column key={index + datum._id}>
                 <NameDiv>
-                  <DisplayPicture /> <h4>{datum[0]}</h4>
+                  <DisplayPicture /> <h4>{datum.name}</h4>
                 </NameDiv>
                 <h4>{datum[1]}</h4>
-                <h4>{datum[2]}</h4>
+                <h4>{m.format("L")}</h4>
               </Column>
             );
           })}
-          {!data && (
+          {data?.length === 0 && (
             <TabBodyText>
               Records will appear here after you’ve had a session.
             </TabBodyText>
           )}
+          {loading && <Spinner />}
         </TabBody>
       </MedicalHistoryContainer>
     </>
@@ -56,13 +60,14 @@ export const MediacalHistoryInquiry = ({ data }) => {
         </TabHeader>
         <TabBody>
           {data?.map((datum, index) => {
+            const m = moment(datum.time);
             return (
               <Column key={index + datum[0]}>
                 <NameDiv>
-                  <DisplayPicture /> <h4>{datum[0]}</h4>
+                  <DisplayPicture /> <h4>{datum.name}</h4>
                 </NameDiv>
                 <Status status={`${datum[1]}`}>{datum[1]}</Status>
-                <h4>{datum[2]}</h4>
+                <h4>{m.format("L")}</h4>
               </Column>
             );
           })}

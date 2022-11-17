@@ -57,6 +57,7 @@ export const BookADoctorPage = () => {
   const [date, onChangeDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState("8:00");
   const [doctorId, setDoctorId] = useState(0);
+  const [filterLoading, setFilterLoading] = useState(false);
   const Specialties = [
     "All",
     "Allergist",
@@ -87,25 +88,27 @@ export const BookADoctorPage = () => {
 
   const { loading } = useFetch(token, "/view-all-doctors", SetAllDoctor);
 
-  useEffect(() => {
-    if (specialty !== "All" && specialty.length > 1) {
-      const FilterDoctors = () => {
-        const config = {
-          method: "get",
-          url: `${BaseUrl}/filter-doctors?pageNo=1&noOfRequests=1&specialty=${specialty.toLowerCase()}`,
-          headers: { Authorization: "Bearer " + token }
-        };
+  const FilterDoctors = () => {
+    setFilterLoading(true);
+    const config = {
+      method: "get",
+      url: `${BaseUrl}/filter-doctors?pageNo=1&noOfRequests=10&specialty=${specialty}`,
+      headers: { Authorization: "Bearer " + token }
+    };
 
-        axios(config)
-          .then(function (response) {
-            setDoctors(response.data.fetchedDoctors);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      };
-      FilterDoctors();
-    }
+    axios(config)
+      .then(function (response) {
+        setFilterLoading(false);
+        setDoctors(response.data.data.fetchedDoctors);
+      })
+      .catch(function (error) {
+        setFilterLoading(false);
+        console.log(error);
+      });
+  };
+
+  ///filter doctors///////////
+  useEffect(() => {
     if (specialty === "All") {
       const AllDoctors = () => {
         const config = {
@@ -118,9 +121,7 @@ export const BookADoctorPage = () => {
           .then(function (response) {
             setDoctors(response.data.data);
           })
-          .catch(function (error) {
-            console.log(error);
-          });
+          .catch(function (error) {});
       };
       AllDoctors();
     }
@@ -217,6 +218,8 @@ export const BookADoctorPage = () => {
                   text="Filter list"
                   fontSize="1.2rem"
                   width={"100%"}
+                  isLoading={filterLoading}
+                  onClick={() => FilterDoctors()}
                 />
               </Header>
               <DoctorGrid>

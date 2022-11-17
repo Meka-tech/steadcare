@@ -21,15 +21,6 @@ export const PatientAppointment = () => {
 
   const { loading } = useFetch(token, "/all-doctors-appointment", CallBackFunc);
 
-  const MockData = [
-    ["Chineye Matu", "16-06-2022", "10:00am", "Completed"],
-    ["Luther Ope", "18-06-2022", "10:00am", "Pending"],
-    ["Luther Ope", "20-06-2022", "10:00am", "Declined"],
-    ["Luther Ope", "20-06-2022", "10:00am", "Completed"],
-    ["Luther Ope", "20-06-2022", "10:00am", "Pending"],
-    ["Luther Ope", "20-06-2022", "10:00am", "Completed"],
-    ["Luther Ope", "20-06-2022", "10:00am", "Pending"]
-  ];
   return (
     <Container>
       <DashboardNavbar active={"Appointments"} role={"patient"} />

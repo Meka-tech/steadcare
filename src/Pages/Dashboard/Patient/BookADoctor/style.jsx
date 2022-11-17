@@ -34,10 +34,11 @@ export const Header = styled.div`
   border-radius: 0.5rem;
 `;
 export const DoctorGrid = styled.div`
-  justify-items: center;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 50% 50%;
   position: relative;
+  justify-items: center;
+  align-items: center;
   ${mobile({
     display: "flex",
     flexDirection: "column",

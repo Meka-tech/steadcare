@@ -22,15 +22,6 @@ export const DoctorAppointment = () => {
     "/get-my-appoinments?pageNo=1&noOfRequests=2",
     CallBackFunc
   );
-  const MockData = [
-    ["Chineye Matu", "16-06-2022", "10:00am", "Completed"],
-    ["Luther Ope", "18-06-2022", "10:00am", "Pending"],
-    ["Luther Ope", "20-06-2022", "10:00am", "Declined"],
-    ["Luther Ope", "20-06-2022", "10:00am", "Completed"],
-    ["Luther Ope", "20-06-2022", "10:00am", "Pending"],
-    ["Luther Ope", "20-06-2022", "10:00am", "Completed"],
-    ["Luther Ope", "20-06-2022", "10:00am", "Pending"]
-  ];
   return (
     <Container>
       <DoctorDashboardNavbar active={"Appointments"} role={"doctor"} />

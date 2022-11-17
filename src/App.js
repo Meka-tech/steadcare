@@ -29,7 +29,8 @@ import {
   AdminSettings,
   AdminDoctors,
   AdminPatients,
-  AdminDocuments
+  AdminDocuments,
+  RescheduelAppointment
 } from "./Pages/index";
 import { ScrollToTop } from "./Utilities";
 // import store from "./app/store";
@@ -79,6 +80,10 @@ function App() {
                 <Route
                   path="/patient/appointments"
                   element={<PatientAppointment />}
+                />
+                <Route
+                  path="/patient/rescheduel-appointment"
+                  element={<RescheduelAppointment />}
                 />
                 <Route
                   path="/patient/medical-history"

@@ -13,6 +13,8 @@ import useClickOutside from "../../../hooks/useClickOutside";
 import { ReactComponent as Cancel } from "../../../Images/cancelIcon.svg";
 import { DoctorCardItem, ViewProfile } from "./BookADoctor/component";
 import { useNavigate } from "react-router";
+import useFetch from "../../../hooks/useFetch";
+import { mobile } from "../../../Utilities/responsive";
 
 export const Initials = () => {
   const user = useSelector((state) => state.reducer.patientDetails.name);
@@ -85,35 +87,50 @@ export const TopBar = ({ role }) => {
           </span>
         </NavItem>
       </SearchDiv>
-      {searchValue.length > 0 && <SearchResult />}
+      {searchValue?.length > 0 && <SearchResult query={searchValue} />}
     </>
   );
 };
 
-export const SearchResult = () => {
+export const SearchResult = ({ query }) => {
   const [viewProfileActive, setViewProfileActive] = useState(false);
   const FilterList = ["Highest Rated", "Lowest Rated"];
   const [filter, setFilter] = useState("");
+  const [doctors, setDoctors] = useState();
+  const token = useSelector((state) => state.reducer.patientDetails.token);
+  const [doctorIndex, setDoctorIndex] = useState();
+  const navigate = useNavigate();
+  const Book = () => {
+    navigate("/patient/home/book-a-doctor");
+  };
+
+  const SetAllDoctor = (response) => {
+    setDoctors(response.data.data);
+  };
+
+  const { loading } = useFetch(token, "/view-all-doctors", SetAllDoctor);
   return (
     <>
       {viewProfileActive && (
         <ViewProfileModal>
           <ViewProfile
             setActive={setViewProfileActive}
-            specialty
-            language
-            location
+            specialty={doctors[doctorIndex].specialty}
+            language={doctors[doctorIndex].language}
+            location={doctors[doctorIndex].location}
             patient
-            name
-            book
-            rating
+            name={doctors[doctorIndex].name}
+            book={Book}
+            rating={doctors[doctorIndex].averageRating}
           />
         </ViewProfileModal>
       )}
 
       <SearchResultDiv>
         <SearchResultHeader>
-          <h1>4 results for “Dr Oge Amadi”</h1>
+          <h1>
+            {doctors?.length} results for “{query}”
+          </h1>
           <div>
             <h3>Filter list </h3>
             <Dropdown
@@ -126,10 +143,25 @@ export const SearchResult = () => {
           </div>
         </SearchResultHeader>
         <SearchResults>
-          <DoctorCardItem setActive={setViewProfileActive} />
-          <DoctorCardItem />
-          <DoctorCardItem />
-          <DoctorCardItem />
+          {doctors?.map((data, index) => {
+            return (
+              <DoctorCardItem
+                location={`${data.location}`}
+                bio={`${data.bio}`}
+                key={index}
+                index={index}
+                rating={`${data.averageRating}`}
+                language={`${data.languages}`}
+                name={`${data.name}`}
+                specialty={`${data.specialty}`}
+                setActive={setViewProfileActive}
+                setIndex={setDoctorIndex}
+                book={Book}
+                doctorId={data._id}
+              />
+            );
+          })}
+          {loading && <Spinner />}
         </SearchResults>
       </SearchResultDiv>
     </>
@@ -150,6 +182,12 @@ const SearchResultDiv = styled.div`
   bottom: 0;
   right: 0;
   z-index: 100;
+  ${mobile({
+    width: "100%",
+    height: "calc(100vh - 12rem)",
+    backgroundColor: "white",
+    padding: "2.5rem"
+  })}
 `;
 const ViewProfileModal = styled.div`
   width: calc(100vw - 26rem);
@@ -170,6 +208,7 @@ const SearchResultHeader = styled.div`
   align-items: center;
   margin-bottom: 5rem;
   justify-content: space-between;
+  ${mobile({ marginBottom: "2rem" })}
   h1 {
     font-weight: 600;
     font-size: 1.8rem;
@@ -184,16 +223,24 @@ const SearchResultHeader = styled.div`
       font-weight: 500;
       font-size: 1.6rem;
       margin-right: 2rem;
+      ${mobile({ fontSize: "1.2rem", marginRight: "0.5rem" })}
     }
   }
 `;
 
 const SearchResults = styled.div`
+  display: grid;
+  grid-template-columns: 50% 50%;
+  position: relative;
+  justify-items: center;
+  align-items: center;
+  height: 80%;
   overflow-y: scroll;
-  height: 40rem;
-  width: fit-content;
-  box-sizing: border-box;
-  padding: 0 1rem;
+  ${mobile({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  })}
 `;
 export const Spinner = () => {
   return (

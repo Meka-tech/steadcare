@@ -5,3 +5,4 @@ export * from "./MedicalHistory";
 export * from "./Prescriptions";
 export * from "./Setting";
 export * from "./BookADoctor";
+export * from "./RescheduleAppointment";

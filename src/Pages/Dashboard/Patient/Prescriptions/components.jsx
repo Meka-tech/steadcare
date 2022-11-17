@@ -29,17 +29,36 @@ import {
   TabHeader,
   ThreeDots
 } from "./style";
+import axios from "axios";
+import { BaseUrl } from "../../../../Utilities";
+import moment from "moment";
 
 export const PrescriptionList = ({ data, loading }) => {
   const [activeTab, setActiveTab] = useState("UA");
   const [activeDropDown, setActiveDropDown] = useState(false);
   const [clickedColumn, setClickedColumn] = useState();
+  const [prescriptionID, setPrescriptionID] = useState();
   const dropDownRef = useRef();
   useClickOutside(dropDownRef, () => setActiveDropDown(false));
 
   const [modalActive, setModalActive] = useState(false);
 
   const Dropdown = () => {
+    const ClearPrescription = () => {
+      var config = {
+        method: "delete",
+        url: `${BaseUrl}/delete-prescriptions/${prescriptionID}`,
+        headers: {}
+      };
+
+      axios(config)
+        .then(function (response) {
+          // console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    };
     return (
       <DropdownContainer active={activeDropDown} ref={dropDownRef}>
         <DropdownItem
@@ -51,7 +70,12 @@ export const PrescriptionList = ({ data, loading }) => {
           View prescription
         </DropdownItem>
 
-        <DropdownItem onClick={() => setActiveDropDown(false)}>
+        <DropdownItem
+          onClick={() => {
+            setActiveDropDown(false);
+            ClearPrescription();
+          }}
+        >
           Clear
         </DropdownItem>
       </DropdownContainer>
@@ -104,18 +128,20 @@ export const PrescriptionList = ({ data, loading }) => {
       <TabBody>
         {loading && <Spinner />}
         {data?.map((datum, index) => {
+          const m = moment(datum.time);
           return (
-            <Column key={index + datum[0]}>
+            <Column key={index + datum._id}>
               <NameDiv>
-                <DisplayPicture /> <h4>{datum[0]}</h4>
+                <DisplayPicture /> <h4>{datum.name}</h4>
               </NameDiv>
               <h4>{datum[1]}</h4>
               <DateDiv>
-                <h4>{datum[2]}</h4>
+                <h4>{m.format("L")}</h4>
                 <ThreeDots
                   onClick={() => {
                     setActiveDropDown(!activeDropDown);
                     setClickedColumn(index);
+                    setPrescriptionID(datum._id);
                   }}
                 >
                   ...
