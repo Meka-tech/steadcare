@@ -122,6 +122,7 @@ export const SearchResult = ({ query }) => {
             name={doctors[doctorIndex].name}
             book={Book}
             rating={doctors[doctorIndex].averageRating}
+            image={doctors[doctorIndex].avatar.url}
           />
         </ViewProfileModal>
       )}
@@ -158,6 +159,7 @@ export const SearchResult = ({ query }) => {
                 setIndex={setDoctorIndex}
                 book={Book}
                 doctorId={data._id}
+                image={data.avatar.url}
               />
             );
           })}

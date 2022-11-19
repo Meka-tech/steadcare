@@ -4,7 +4,8 @@ import {
   SwitchTab,
   TextForm,
   DocumentUpload,
-  Dropdown
+  Dropdown,
+  CalendarForm
 } from "../../../../Components";
 
 import {
@@ -33,6 +34,10 @@ export const DoctorSignInProfile = () => {
   const { name, phoneNumber, email, password, confirmPassword } =
     location.state;
   const [tab, setTab] = useState("General");
+  const [expDate, setExpDate] = useState();
+  const setExpDateFunc = (date) => {
+    setExpDate(date);
+  };
   const setTabFunction = (tab) => {
     setTab(tab);
   };
@@ -74,7 +79,7 @@ export const DoctorSignInProfile = () => {
   const [formTwoCompleted, setFormTwoCompleted] = useState(false);
 
   const PageOneButton = () => {
-    if (values.regNo && values.expDate && values.gradYear && specialty) {
+    if (values.regNo && values.gradYear && specialty && expDate) {
       setFormOneCompleted(true);
       setTabFunction("Documents");
     } else {
@@ -163,7 +168,7 @@ export const DoctorSignInProfile = () => {
         accountName: `${values.accountName}`,
         accountNumber: `${values.accountNumber}}`,
         regNum: `${values.regNum}`,
-        licenseExpiryDate: `${values.expDate}`,
+        licenseExpiryDate: `${expDate}`,
         gradYear: `${values.gradYear}`
       };
 
@@ -192,7 +197,6 @@ export const DoctorSignInProfile = () => {
   const { values, handleChange, handleSubmit, errors, touched } = useFormik({
     initialValues: {
       regNo: "",
-      expDate: "",
       gradYear: "",
       accountName: "",
       accountNumber: ""
@@ -231,12 +235,13 @@ export const DoctorSignInProfile = () => {
                   inputValue={values.regNo}
                   onChange={handleChange("regNo")}
                 />
-                <TextForm
+                <CalendarForm
                   title={"License Expiry Date"}
                   width={"300px"}
                   inputValue={values.expDate}
                   placeholder={"dd/mm/yyyy"}
-                  onChange={handleChange("expDate")}
+                  inputDate={expDate}
+                  setDate={setExpDateFunc}
                 />
                 <Dropdown
                   title={"Specialty"}

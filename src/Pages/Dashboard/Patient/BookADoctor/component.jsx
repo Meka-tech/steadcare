@@ -18,13 +18,14 @@ export const DoctorCardItem = ({
   index,
   setDoctorId,
   doctorId,
-  bio
+  bio,
+  image
 }) => {
   return (
     <DoctorCard>
       <CardHeader>
         <div>
-          <DisplayPic />
+          <DisplayPic img={image} />
           <NameDiv>
             <h1>{name}</h1>
             <h2>{specialty}</h2>
@@ -78,14 +79,15 @@ export const ViewProfile = ({
   book,
   language,
   location,
-  patient
+  patient,
+  image
 }) => {
   const ModalRef = useRef(null);
   useClickOutside(ModalRef, () => setActive(false));
   return (
     <ViewProfileDiv>
       <ModalContainer ref={ModalRef}>
-        <ModalDP />
+        <ModalDP img={image} />
         <ModalNameText> dr {name}</ModalNameText>
         <Role>Consultant</Role>
         <Rating>
@@ -149,6 +151,10 @@ const DisplayPic = styled.div`
   height: 5rem;
   background-color: gray;
   margin-right: 1rem;
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
 `;
 const NameDiv = styled.div`
   display: flex;
@@ -264,6 +270,10 @@ const ModalDP = styled.div`
   border-radius: 50%;
   background-color: #e7e7e7;
   border: 1px solid rgba(0, 0, 255, 0.5);
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
 `;
 
 const ModalNameText = styled.h1`

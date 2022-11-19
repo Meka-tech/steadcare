@@ -146,7 +146,8 @@ export const AppointmentList = ({ data, loading }) => {
                 return (
                   <Column key={index + Math.round(2)}>
                     <NameDiv>
-                      <DisplayPicture /> <h4>{datum.name}</h4>
+                      <DisplayPicture img={datum.patient.avatar.url} />{" "}
+                      <h4>{datum.name}</h4>
                     </NameDiv>
                     <h4>{m.format("L")} </h4>
                     <h4>{m.format("h:mma")}</h4>
@@ -172,7 +173,8 @@ export const AppointmentList = ({ data, loading }) => {
               return (
                 <Column key={index + Math.round(2)}>
                   <NameDiv>
-                    <DisplayPicture /> <h4>{datum.name}</h4>
+                    <DisplayPicture img={datum.patient.avatar.url} />{" "}
+                    <h4>{datum.name}</h4>
                   </NameDiv>
                   <h4>{m.format("L")} </h4>
                   <h4>{m.format("h:mma")}</h4>

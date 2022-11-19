@@ -188,6 +188,7 @@ export const BookADoctorPage = () => {
             name={doctors[doctorIndex].name}
             book={Book}
             rating={doctors[doctorIndex].averageRating}
+            image={doctors[doctorIndex].avatar.url}
           />
         )}
         <TopBar role={"patient"} />
@@ -238,6 +239,7 @@ export const BookADoctorPage = () => {
                       setIndex={setDoctorIndex}
                       setDoctorId={setDoctorId}
                       book={Book}
+                      image={data.avatar.url}
                       doctorId={data._id}
                     />
                   );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import {
   Button,
+  CalendarForm,
   Credentials,
   DashboardNavbar,
   DoctorDashboardNavbar,
@@ -86,6 +87,8 @@ export const DoctorProfile = () => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [bio, setBio] = useState("");
+  const [avatar, setAvatar] = useState();
+  const [ImageFile, setImageFile] = useState("");
 
   useEffect(() => {
     setfirstLanguage(userData.languages[0]);
@@ -97,6 +100,7 @@ export const DoctorProfile = () => {
     setPhone(userData.phone);
     setEmail(userData.email);
     setSpecialty(userData.specialty);
+    setAvatar(userData.avatar);
   }, [userData]);
 
   const [loading, setLoading] = useState(false);
@@ -135,6 +139,9 @@ export const DoctorProfile = () => {
     if (userData.bio !== bio) {
       PayloadData.bio = bio;
     }
+    if (userData.avatar !== avatar) {
+      PayloadData.avatar = avatar;
+    }
 
     const config = {
       method: "patch",
@@ -160,6 +167,41 @@ export const DoctorProfile = () => {
   });
 
   const IsMobile = useIsMobile();
+
+  //upload Image
+  const handleUpload = (event) => {
+    setImageFile(event.target.files[0]);
+  };
+
+  const setImage = (res) => {
+    setAvatar({
+      url: res[0].path,
+      key: res[0].publicId
+    });
+  };
+
+  useEffect(() => {
+    if (ImageFile) {
+      const MediaUpload = async () => {
+        const data = new FormData();
+        data.append(`file`, ImageFile);
+        axios({
+          method: "post",
+          url: `${BaseUrl}/media-upload`,
+          data,
+          headers: { "Content-Type": "multipart/form-data" }
+        })
+          .then(function (res) {
+            const response = res.data.data;
+            toast.success("Profile photo updated ,  Save changes to reflect");
+            setImage(response);
+          })
+          .catch(function () {});
+      };
+      MediaUpload();
+    }
+  }, [ImageFile]);
+
   return (
     <Container>
       <DoctorDashboardNavbar active={"Profile"} />
@@ -174,6 +216,8 @@ export const DoctorProfile = () => {
                 firstName={FirstName}
                 lastName={LastName}
                 email={userData.specialty}
+                onChange={handleUpload}
+                url={avatar?.url}
               />
               <Forms>
                 <TextForm
@@ -182,6 +226,7 @@ export const DoctorProfile = () => {
                   inactive={true}
                   placeholder={`${FirstName}`}
                   editable={false}
+                  readOnly
                 />
                 <TextForm
                   inactive={true}
@@ -189,15 +234,15 @@ export const DoctorProfile = () => {
                   title="Last Name"
                   placeholder={`${LastName}`}
                   editable={false}
+                  readOnly
                 />
-                <TextForm
+                <CalendarForm
                   width={"80%"}
                   inactive={true}
                   title="Date of Birth"
-                  icon={<Calendar />}
-                  placeholder={"yy/mm/dd"}
-                  inputValue={moment().format(dob).split("T")[0]}
-                  onChange={(e) => setDob(e.target.value)}
+                  placeholder={`mm/dd/yyyy`}
+                  inputDate={dob}
+                  setDate={() => {}}
                 />
                 <Dropdown
                   width={"80%"}

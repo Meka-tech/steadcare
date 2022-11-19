@@ -29,7 +29,8 @@ export const MediacalHistory = ({ data, loading }) => {
             return (
               <Column key={index + datum._id}>
                 <NameDiv>
-                  <DisplayPicture /> <h4>{datum.name}</h4>
+                  <DisplayPicture img={datum.doctor.avatar.url} />{" "}
+                  <h4>{datum.name}</h4>
                 </NameDiv>
                 <h4>{datum[1]}</h4>
                 <h4>{m.format("L")}</h4>

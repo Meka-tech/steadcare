@@ -29,6 +29,7 @@ export const AppointmentRequests = ({}) => {
 
   const SetData = async (response) => {
     setAppointmentData(response.data.data.fetchedData);
+    console.log(response.data.data.fetchedData);
   };
   useFetch(token, "/get-my-appoinments?pageNo=1&noOfRequests=3", SetData);
 
@@ -57,12 +58,13 @@ export const AppointmentRequests = ({}) => {
       });
   };
 
-  const AppointmentItem = ({ name, time, img, action, index, id }) => {
+  const AppointmentItem = ({ name, time, image, action, index, id }) => {
     const m = moment(time);
+
     return (
       <AppointmentItemContainer>
         <PictureProfile>
-          <DisplayPicture />
+          <DisplayPicture img={image} />
           <NameDiv>
             <Name>{name}</Name>
             <Time>
@@ -126,6 +128,7 @@ export const AppointmentRequests = ({}) => {
               return (
                 <AppointmentItem
                   key={index}
+                  image={appointment.patient.avatar.url}
                   name={appointment.name}
                   time={appointment.time}
                   action={setRequestStatus}
@@ -192,6 +195,10 @@ const DisplayPicture = styled.div`
   border-radius: 50%;
   background: gray;
   margin-right: 2rem;
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
 `;
 
 const NameDiv = styled.div`

@@ -1,17 +1,23 @@
+import axios from "axios";
 import styled from "styled-components";
 import { ReactComponent as EditDP } from "../../Images/EditIcon.svg";
+import { BaseUrl } from "../../Utilities";
 import { mobile } from "../../Utilities/responsive";
 
-export const Credentials = ({ firstName, lastName, email }) => {
+export const Credentials = ({ firstName, lastName, email, onChange, url }) => {
   return (
     <Container>
-      <Initials>
-        <h1>
-          {firstName[0]}
-          {lastName[0]}
-        </h1>
+      <Initials img={url}>
+        {!url && (
+          <h1>
+            {firstName[0]}
+            {lastName[0]}
+          </h1>
+        )}
+
         <Icon>
           <EditDP width={"2.5rem"} height={"2.5rem"} />
+          <FileInput type={"file"} onChange={onChange} accept="image/*" />
         </Icon>
       </Initials>
       <Text>
@@ -48,6 +54,10 @@ const Initials = styled.div`
   align-items: center;
   width: 10rem;
   height: 10rem;
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
   ${mobile({
     width: "8rem",
     height: "8rem"
@@ -90,4 +100,12 @@ const Email = styled.h2`
   ${mobile({
     fontSize: "1.2rem"
   })}
+`;
+
+const FileInput = styled.input`
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  position: absolute;
+  left: 0;
 `;

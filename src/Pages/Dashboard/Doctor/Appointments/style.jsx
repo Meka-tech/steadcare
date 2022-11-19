@@ -114,6 +114,10 @@ export const DisplayPicture = styled.div`
   border-radius: 50%;
   background-color: #dadada;
   margin-right: 1rem;
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
 `;
 export const StatusDiv = styled.div`
   margin: auto 0;

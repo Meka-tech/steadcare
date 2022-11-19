@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import {
   Button,
+  CalendarForm,
   Credentials,
   DashboardNavbar,
   Dropdown,
@@ -59,6 +60,8 @@ export const PatientProfile = () => {
   const [dob, setDob] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [avatar, setAvatar] = useState();
+  const [ImageFile, setImageFile] = useState("");
 
   useEffect(() => {
     setGender(userData.gender);
@@ -67,6 +70,7 @@ export const PatientProfile = () => {
     setDob(userData.dob);
     setPhone(userData.phone);
     setEmail(userData.email);
+    setAvatar(userData.avatar);
   }, [userData]);
 
   const [loading, setLoading] = useState(false);
@@ -92,7 +96,9 @@ export const PatientProfile = () => {
     if (userData.bloodGroup !== bloodGroup) {
       PayloadData.bloodGroup = bloodGroup;
     }
-
+    if (userData.avatar !== avatar) {
+      PayloadData.avatar = avatar;
+    }
     const config = {
       method: "patch",
       url: `${BaseUrl}/update-profile`,
@@ -116,6 +122,40 @@ export const PatientProfile = () => {
     onSubmit: UpdateProfile
   });
 
+  //upload Image
+  const handleUpload = (event) => {
+    setImageFile(event.target.files[0]);
+  };
+
+  const setImage = (res) => {
+    setAvatar({
+      url: res[0].path,
+      key: res[0].publicId
+    });
+  };
+
+  useEffect(() => {
+    if (ImageFile) {
+      const MediaUpload = async () => {
+        const data = new FormData();
+        data.append(`file`, ImageFile);
+        axios({
+          method: "post",
+          url: `${BaseUrl}/media-upload`,
+          data,
+          headers: { "Content-Type": "multipart/form-data" }
+        })
+          .then(function (res) {
+            const response = res.data.data;
+            toast.success("Profile Photo updated ,  save changes to reflec");
+            setImage(response);
+          })
+          .catch(function () {});
+      };
+      MediaUpload();
+    }
+  }, [ImageFile]);
+
   return (
     <Container>
       <DashboardNavbar active={"Profile"} role={"patient"} />
@@ -130,6 +170,8 @@ export const PatientProfile = () => {
                 firstName={FirstName}
                 lastName={LastName}
                 email={userData.email}
+                onChange={handleUpload}
+                url={avatar?.url}
               />
               <Forms>
                 <TextForm
@@ -137,21 +179,21 @@ export const PatientProfile = () => {
                   title="First Name"
                   inactive={true}
                   placeholder={`${FirstName}`}
+                  readOnly
                 />
                 <TextForm
                   inactive={true}
                   width={"80%"}
                   title="Last Name"
                   placeholder={`${LastName}`}
+                  readOnly
                 />
-                <TextForm
+                <CalendarForm
                   width={"80%"}
                   inactive={true}
                   title="Date of Birth"
-                  icon={<Calendar width={"2rem"} height={"2rem"} />}
-                  placeholder={"yy-mm-dd"}
-                  inputValue={moment().format(dob).split("T")[0]}
-                  onChange={(e) => setDob(e.target.value)}
+                  placeholder={`mm/dd/yyyy`}
+                  inputDate={dob}
                 />
                 <Dropdown
                   width={"80%"}

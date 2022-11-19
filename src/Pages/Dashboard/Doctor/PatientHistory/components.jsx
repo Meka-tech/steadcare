@@ -73,7 +73,8 @@ export const MediacalHistory = ({ data }) => {
             return (
               <Column key={index + datum[0]}>
                 <NameDiv>
-                  <DisplayPicture /> <h4>{datum[0]}</h4>
+                  <DisplayPicture img={datum.patient.avatar.url} />{" "}
+                  <h4>{datum[0]}</h4>
                 </NameDiv>
                 <h4>{datum[1]}</h4>
                 <div
