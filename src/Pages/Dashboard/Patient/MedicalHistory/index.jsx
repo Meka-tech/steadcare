@@ -11,10 +11,16 @@ import useFetch from "../../../../hooks/useFetch";
 
 export const PatientMedicalHistory = () => {
   const token = useSelector((state) => state.reducer.patientDetails.token);
-  const [medicalHistory, setMedicalHistory] = useState();
+  const [medicalHistory, setMedicalHistory] = useState([]);
+  const [medicalHistoryReq, setMedicalHistoryReq] = useState([]);
 
   const CallBackFunc = (response) => {
     setMedicalHistory(response.data.data.fetchedData);
+  };
+
+  const CallBackFuncTwo = (response) => {
+    setMedicalHistoryReq(response.data.data);
+    console.log(response);
   };
 
   const { loading } = useFetch(
@@ -23,16 +29,12 @@ export const PatientMedicalHistory = () => {
     CallBackFunc
   );
 
-  const MockData = [
-    ["Chineye Matu", "Cancer", "16-06-2022"],
-    ["Luther Ope", "Cancer", "18-06-2022"],
-    ["Luther Ope", "Cancer", "20-06-2022"]
-  ];
-  const MockData2 = [
-    ["Chineye Matu", "Granted", "16-06-2022"],
-    ["Luther Ope", "Declined", "18-06-2022"],
-    ["Luther Ope", "Declined", "20-06-2022"]
-  ];
+  const { loading: loadingTwo } = useFetch(
+    token,
+    "/fetch-medical-history-request",
+    CallBackFuncTwo
+  );
+
   return (
     <Container>
       <DashboardNavbar active={"Medical History"} role={"patient"} />
@@ -40,7 +42,10 @@ export const PatientMedicalHistory = () => {
         <TopBar role={"patient"} />
         <Main>
           <MediacalHistory data={medicalHistory} loading={loading} />
-          <MediacalHistoryInquiry />
+          <MediacalHistoryInquiry
+            data={medicalHistoryReq}
+            loading={loadingTwo}
+          />
         </Main>
       </Body>
     </Container>

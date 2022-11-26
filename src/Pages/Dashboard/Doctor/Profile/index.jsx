@@ -142,6 +142,9 @@ export const DoctorProfile = () => {
     if (userData.avatar !== avatar) {
       PayloadData.avatar = avatar;
     }
+    if (userData.dob !== dob) {
+      PayloadData.dob = dob;
+    }
 
     const config = {
       method: "patch",
@@ -238,11 +241,10 @@ export const DoctorProfile = () => {
                 />
                 <CalendarForm
                   width={"80%"}
-                  inactive={true}
                   title="Date of Birth"
                   placeholder={`mm/dd/yyyy`}
                   inputDate={dob}
-                  setDate={() => {}}
+                  setDate={setDob}
                 />
                 <Dropdown
                   width={"80%"}

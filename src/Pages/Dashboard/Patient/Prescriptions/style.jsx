@@ -196,6 +196,11 @@ export const ModalDisplayPicture = styled.div`
   width: 10rem;
   height: 10rem;
   background-color: lightgray;
+  background-image: url(${(props) => props.img});
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
 `;
 
 export const ModalNameText = styled.h4`

@@ -37,7 +37,7 @@ export const MediacalHistory = ({ data, loading }) => {
               </Column>
             );
           })}
-          {data?.length === 0 && (
+          {data?.length < 1 && loading === false && (
             <TabBodyText>
               Records will appear here after you’ve had a session.
             </TabBodyText>
@@ -49,7 +49,7 @@ export const MediacalHistory = ({ data, loading }) => {
   );
 };
 
-export const MediacalHistoryInquiry = ({ data }) => {
+export const MediacalHistoryInquiry = ({ data, loading }) => {
   return (
     <>
       <Title>Medical History Inquiry</Title>
@@ -65,18 +65,20 @@ export const MediacalHistoryInquiry = ({ data }) => {
             return (
               <Column key={index + datum[0]}>
                 <NameDiv>
-                  <DisplayPicture /> <h4>{datum.name}</h4>
+                  <DisplayPicture img={datum.doctor.avatar.url} />{" "}
+                  <h4>{datum.name}</h4>
                 </NameDiv>
                 <Status status={`${datum[1]}`}>{datum[1]}</Status>
                 <h4>{m.format("L")}</h4>
               </Column>
             );
           })}
-          {!data && (
+          {data?.length === 0 && loading === false && (
             <TabBodyText>
               Medical history inquiries will appear here when requested.{" "}
             </TabBodyText>
           )}
+          {loading && <Spinner />}
         </TabBody>
       </MedicalHistoryContainer>
     </>

@@ -21,7 +21,7 @@ export const CalendarForm = ({
   fontSize,
   backgroundColor,
   onClickIcon,
-  setDate,
+  setDate = () => {},
   ...rest
 }) => {
   const [focused, setFocused] = useState(false);

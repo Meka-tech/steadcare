@@ -5,7 +5,6 @@ import { Button } from "../../../../Components";
 import useClickOutside from "../../../../hooks/useClickOutside";
 import { Spinner } from "../component";
 import { FormModal } from "../formModal";
-import ApproveBadge from "../../../../Images/approveBadge.png";
 import {
   AppointmentListContainer,
   Column,
@@ -42,8 +41,25 @@ export const AppointmentList = ({ data, loading }) => {
   const [acceptCancelModal, setAcceptCancelModal] = useState(false);
   const [modalStatus, setModalStatus] = useState("");
   const [formModal, setFormModal] = useState(false);
-  const [requestModal, setRequestModal] = useState(false);
   const [prescribeModal, setPrescribeModal] = useState(false);
+
+  const token = useSelector((state) => state.reducer.doctorDetails.token);
+
+  const requestMedicalHistory = () => {
+    const config = {
+      method: "post",
+      url: `${BaseUrl}/medical-history-request/${data[clickedColumn].doctor}`,
+      headers: { Authorization: "Bearer " + token }
+    };
+
+    axios(config)
+      .then(function (response) {
+        toast.success(response.data.message);
+      })
+      .catch(function (error) {
+        toast.error(error.response.data.message);
+      });
+  };
 
   const Dropdown = ({ appointment }) => {
     return (
@@ -60,7 +76,8 @@ export const AppointmentList = ({ data, loading }) => {
             </DropdownItem>
             <DropdownItem
               onClick={() => {
-                setRequestModal(true);
+                // setRequestModal(true);
+                requestMedicalHistory();
                 setActiveDropDown(false);
               }}
             >
@@ -118,7 +135,6 @@ export const AppointmentList = ({ data, loading }) => {
       {formModal && (
         <FormModal setActive={setFormModal} patient={data[clickedColumn]} />
       )}
-      {requestModal && <RequestModal setActive={setRequestModal} />}
       {prescribeModal && <PrescribeModal setActive={setPrescribeModal} />}
       {/* ///////////// */}
       <TabContainer>
@@ -312,42 +328,3 @@ const ModalButton = styled.div`
   margin-top: 6rem;
   width: 70%;
 `;
-
-const RequestModal = ({ setActive, status }) => {
-  const ModalRef = useRef();
-  useClickOutside(ModalRef, () => setActive(false));
-  return (
-    <ModalBackground>
-      <RequestModalContainer ref={ModalRef}>
-        <ImageContainer src={ApproveBadge} width={"100rem"} height={"100rem"} />
-        <RequestMessage>
-          Successfully requested for patient history. You’ll get access once the
-          patient approves.
-        </RequestMessage>
-      </RequestModalContainer>
-    </ModalBackground>
-  );
-};
-
-const RequestModalContainer = styled.div`
-  height: 20rem;
-  width: 40rem;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 0px;
-  background-color: white;
-  border: 1px solid rgba(0, 0, 255, 1);
-  padding: 2rem;
-`;
-
-const RequestMessage = styled.h1`
-  margin: 0;
-  padding: 0;
-  width: 80%;
-  font-weight: 500;
-  font-size: 1.6rem;
-  margin-top: 1rem;
-  text-align: center;
-`;
-const ImageContainer = styled.img``;

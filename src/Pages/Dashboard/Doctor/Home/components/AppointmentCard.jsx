@@ -29,7 +29,6 @@ export const AppointmentRequests = ({}) => {
 
   const SetData = async (response) => {
     setAppointmentData(response.data.data.fetchedData);
-    console.log(response.data.data.fetchedData);
   };
   useFetch(token, "/get-my-appoinments?pageNo=1&noOfRequests=3", SetData);
 

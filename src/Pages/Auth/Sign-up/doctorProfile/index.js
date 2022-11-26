@@ -28,6 +28,8 @@ import approveBadge from "../../../../Images/approveBadge.png";
 import { useFormik } from "formik";
 import { mobile } from "../../../../Utilities/responsive";
 import { useIsMobile } from "../../../../hooks/useIsMobile";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const DoctorSignInProfile = () => {
   const location = useLocation();
@@ -83,7 +85,7 @@ export const DoctorSignInProfile = () => {
       setFormOneCompleted(true);
       setTabFunction("Documents");
     } else {
-      alert("Please fill all fields");
+      toast.info("Please fill all fields");
     }
   };
 
@@ -142,7 +144,7 @@ export const DoctorSignInProfile = () => {
           setUploadingMedia(false);
         });
     } else {
-      alert("Please Upload required files");
+      toast.info("Please Upload required files");
     }
   };
   /////////////////////////////////////
@@ -188,7 +190,7 @@ export const DoctorSignInProfile = () => {
           setVerifyIsLoading(false);
         });
     } else {
-      alert("Fill all fields");
+      toast.info("Fill all fields");
     }
   };
   /////////////////////
@@ -210,6 +212,7 @@ export const DoctorSignInProfile = () => {
     <Container>
       <AuthMargin />
       <Body>
+        <ToastContainer />
         <LogoDiv />
         <MarginLeft>
           {tab === "Success" ? null : (

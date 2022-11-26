@@ -88,7 +88,7 @@ export const PrescriptionList = ({ data, loading }) => {
         {modalActive && (
           <Shade onClick={() => setModalActive(false)}>
             <ModalContainer>
-              <ModalDisplayPicture />
+              <ModalDisplayPicture img />
               <ModalNameText>{data[clickedColumn][0]}</ModalNameText>
               <ModalHeader>Doctor’s Prescription</ModalHeader>
               <ModalDetails>

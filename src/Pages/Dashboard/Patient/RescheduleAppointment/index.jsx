@@ -12,6 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Body, Container } from "../../style";
 import { useLocation, useNavigate } from "react-router";
+import { Spinner, TopBar } from "../component";
 
 export const RescheduelAppointment = () => {
   const token = useSelector((state) => state.reducer.patientDetails.token);
@@ -55,6 +56,7 @@ export const RescheduelAppointment = () => {
     <Container>
       <DashboardNavbar role="patient" active="Appointments" />
       <Body>
+        <TopBar role={"patient"} />
         <DateAndTime>
           <CalendarDiv>
             <Calendar onChange={onChangeDate} value={date} />
@@ -119,9 +121,8 @@ export const RescheduelAppointment = () => {
 const DateAndTime = styled.div`
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid rgba(85, 85, 85, 1);
   border-radius: 0.5rem;
-  margin-bottom: 4rem;
+  margin: 4rem 0;
   background-color: white;
   display: flex;
   padding: 2rem;

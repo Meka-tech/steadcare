@@ -9,7 +9,7 @@ export const FormModal = ({ setActive, patient }) => {
   return (
     <ModalBackground>
       <FormContainer ref={ModalRef}>
-        <FormDisplayPic />
+        <FormDisplayPic img={patient.patient.avatar.url} />
         <FormHeader>{patient.name}</FormHeader>
         <FormSubHeader>Patient Form</FormSubHeader>
         <FormGrid>
@@ -66,9 +66,10 @@ const ModalBackground = styled.div`
   justify-content: center;
   align-items: center;
   ${mobile({ width: "100%" })}
+  flex-direction: column;
 `;
 const FormContainer = styled.div`
-  height: 42rem;
+  height: 43rem;
   width: 40rem;
   display: flex;
   align-items: center;
@@ -112,6 +113,10 @@ const FormDisplayPic = styled.img`
   border-radius: 50%;
   margin-bottom: 1rem;
   border: 1px solid rgba(0, 0, 255, 1);
+  background-image: url(${(props) => props.img});
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
 `;
 const FormHeader = styled.h1`
   margin: 0;
