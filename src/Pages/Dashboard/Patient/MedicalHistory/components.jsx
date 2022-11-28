@@ -30,7 +30,7 @@ export const MediacalHistory = ({ data, loading }) => {
               <Column key={index + datum._id}>
                 <NameDiv>
                   <DisplayPicture img={datum.doctor.avatar.url} />{" "}
-                  <h4>{datum.name}</h4>
+                  <h4>{datum.doctor.name}</h4>
                 </NameDiv>
                 <h4>{datum[1]}</h4>
                 <h4>{m.format("L")}</h4>
@@ -63,12 +63,12 @@ export const MediacalHistoryInquiry = ({ data, loading }) => {
           {data?.map((datum, index) => {
             const m = moment(datum.time);
             return (
-              <Column key={index + datum[0]}>
+              <Column key={index}>
                 <NameDiv>
                   <DisplayPicture img={datum.doctor.avatar.url} />{" "}
-                  <h4>{datum.name}</h4>
+                  <h4>{datum.doctor.name}</h4>
                 </NameDiv>
-                <Status status={`${datum[1]}`}>{datum[1]}</Status>
+                <Status status={`${datum.status}`}>{datum.status}</Status>
                 <h4>{m.format("L")}</h4>
               </Column>
             );

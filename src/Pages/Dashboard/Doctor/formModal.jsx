@@ -9,7 +9,7 @@ export const FormModal = ({ setActive, patient }) => {
   return (
     <ModalBackground>
       <FormContainer ref={ModalRef}>
-        <FormDisplayPic img={patient.patient.avatar.url} />
+        {patient.patient && <FormDisplayPic img={patient.patient.avatar.url} />}
         <FormHeader>{patient.name}</FormHeader>
         <FormSubHeader>Patient Form</FormSubHeader>
         <FormGrid>

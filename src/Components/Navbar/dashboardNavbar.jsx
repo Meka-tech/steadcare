@@ -41,6 +41,8 @@ import { ReactComponent as Notification } from "../../Images/NotifyBell_.svg";
 import useClickOutside from "../../hooks/useClickOutside";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Notifications as DoctorNotifications } from "../../Pages/Dashboard/Doctor/Notification";
+import { Notifications as PatientNotifications } from "../../Pages/Dashboard/Patient/Notification";
 
 export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
   const dispatch = useDispatch();
@@ -76,6 +78,7 @@ export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
     [<SettingsIcon />, <SettingsActiveIcon />, "Settings", `/${role}/settings`]
   ];
 
+  const [showNotif, setShowNotif] = useState(false);
   return (
     <>
       <Container>
@@ -145,8 +148,13 @@ export const DashboardNavbar = ({ active = "Dashboard", role = "Patient" }) => {
         </HamburgerDiv>
       </Container>
       <MobileBarDiv active={activeNav}>
+        {showNotif && <PatientNotifications setActive={setShowNotif} />}
         <MobileBar ref={NavRef}>
-          <Notif>
+          <Notif
+            onClick={() => {
+              setShowNotif(true);
+            }}
+          >
             {hasUnread === true ? (
               <UnReadNotification width={"3rem"} />
             ) : (
@@ -209,6 +217,7 @@ export const DoctorDashboardNavbar = ({
 
   const [hasUnread, setHasUnread] = useState(false);
   const [activeNav, setActiveNav] = useState(false);
+
   const NavRef = useRef();
   useClickOutside(NavRef, () => setActiveNav(false));
   const Navs = [
@@ -228,6 +237,7 @@ export const DoctorDashboardNavbar = ({
     ],
     [<SettingsIcon />, <SettingsActiveIcon />, "Settings", `/${role}/settings`]
   ];
+  const [showNotif, setShowNotif] = useState(false);
   return (
     <>
       <Container>
@@ -297,8 +307,13 @@ export const DoctorDashboardNavbar = ({
         </HamburgerDiv>
       </Container>
       <MobileBarDiv active={activeNav}>
+        {showNotif && <DoctorNotifications setActive={setShowNotif} />}
         <MobileBar ref={NavRef}>
-          <Notif>
+          <Notif
+            onClick={() => {
+              setShowNotif(true);
+            }}
+          >
             {hasUnread === true ? (
               <UnReadNotification width={"3rem"} />
             ) : (
@@ -508,7 +523,7 @@ const Container = styled.div`
   ${mobile({
     width: "100vw",
     backgroundColor: "rgba(246, 246, 246, 1)",
-    height: "5rem",
+    height: "5vh",
     display: "flex",
     maxHeight: "5rem",
     justifyContent: "space-between",
@@ -617,10 +632,13 @@ const HamburgerDiv = styled.div`
 const MobileBarDiv = styled.div`
   display: none;
   width: 100%;
-  height: 100vh;
+  max-height: 95vh;
+  height: 95vh;
   background-color: #ffffff42;
   z-index: 12;
   position: absolute;
+  box-sizing: border-box;
+  overflow: hidden;
   transform: ${(props) =>
     props.active ? "translateX(0)" : "translateX(-100%)"};
   transition: all 0.35s ease-in-out;
@@ -643,7 +661,7 @@ const MobileNavItems = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   padding: 2rem;
-  height: 70%;
+  height: 75%;
   border-bottom: 1px solid rgba(85, 85, 85, 0.2);
   ${mobile({
     display: "flex"
@@ -654,10 +672,11 @@ const MobileLogOutDiv = styled.div`
   box-sizing: border-box;
   display: none;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 2rem;
-  padding-top: 20%;
-  margin: auto 0;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 0 2rem;
+  height: 20%;
   ${mobile({
     display: "flex"
   })}
@@ -676,5 +695,4 @@ const CloseBarDiv = styled.div`
   width: 45%;
   height: 100%;
   z-index: 15;
-  bac
 `;

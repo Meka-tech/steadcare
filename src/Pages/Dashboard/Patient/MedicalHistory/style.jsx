@@ -68,6 +68,7 @@ export const TabBody = styled.div`
   flex-direction: column;
   height: 33rem;
   overflow-y: scroll;
+  overflow-x: hidden;
   position: relative;
 `;
 export const TabBodyText = styled.h1`
@@ -86,6 +87,7 @@ export const Column = styled.div`
   padding: 0 2rem;
   display: grid;
   grid-template-columns: 43rem 30rem 30rem;
+  box-sizing: border-box;
   ${mobile({
     gridTemplateColumns: "17rem 15rem 15rem",
     height: "3rem",
@@ -131,11 +133,14 @@ export const Status = styled.div`
   width: 9rem;
   border-radius: 0.5rem;
   height: 2.5rem;
+  text-transform: capitalize;
   background-color: ${(props) =>
-    props.status === "Granted"
+    props.status === "granted"
       ? `rgba(27, 191, 0, 1)`
-      : props.status === "Declined"
+      : props.status === "declined"
       ? `rgba(255, 0, 0, 1)`
+      : props.status === "pending"
+      ? `blue`
       : null};
   color: white;
   display: flex;
@@ -143,6 +148,7 @@ export const Status = styled.div`
   justify-content: center;
   ${mobile({
     fontSize: "1.2rem",
-    width: "7rem"
+    width: "7rem",
+    height: "2rem"
   })}
 `;

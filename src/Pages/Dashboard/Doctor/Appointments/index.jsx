@@ -19,7 +19,7 @@ export const DoctorAppointment = () => {
 
   const { loading } = useFetch(
     token,
-    "/get-my-appoinments?pageNo=1&noOfRequests=2",
+    "/get-my-appoinments?pageNo=1&noOfRequests=10",
     CallBackFunc
   );
   return (

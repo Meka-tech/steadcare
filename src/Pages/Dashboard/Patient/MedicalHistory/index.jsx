@@ -20,7 +20,7 @@ export const PatientMedicalHistory = () => {
 
   const CallBackFuncTwo = (response) => {
     setMedicalHistoryReq(response.data.data);
-    console.log(response);
+    // console.log(response);
   };
 
   const { loading } = useFetch(

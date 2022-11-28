@@ -48,7 +48,7 @@ export const AppointmentList = ({ data, loading }) => {
   const requestMedicalHistory = () => {
     const config = {
       method: "post",
-      url: `${BaseUrl}/medical-history-request/${data[clickedColumn].doctor}`,
+      url: `${BaseUrl}/medical-history-request/${data[clickedColumn].patient?._id}`,
       headers: { Authorization: "Bearer " + token }
     };
 
@@ -60,7 +60,6 @@ export const AppointmentList = ({ data, loading }) => {
         toast.error(error.response.data.message);
       });
   };
-
   const Dropdown = ({ appointment }) => {
     return (
       <DropdownContainer active={activeDropDown} ref={dropDownRef}>
@@ -162,7 +161,10 @@ export const AppointmentList = ({ data, loading }) => {
                 return (
                   <Column key={index + Math.round(2)}>
                     <NameDiv>
-                      <DisplayPicture img={datum.patient.avatar.url} />{" "}
+                      {datum.patient && (
+                        <DisplayPicture img={datum.patient.avatar.url} />
+                      )}
+
                       <h4>{datum.name}</h4>
                     </NameDiv>
                     <h4>{m.format("L")} </h4>
@@ -189,7 +191,10 @@ export const AppointmentList = ({ data, loading }) => {
               return (
                 <Column key={index + Math.round(2)}>
                   <NameDiv>
-                    <DisplayPicture img={datum.patient.avatar.url} />{" "}
+                    {datum.patient && (
+                      <DisplayPicture img={datum.patient.avatar.url} />
+                    )}
+
                     <h4>{datum.name}</h4>
                   </NameDiv>
                   <h4>{m.format("L")} </h4>

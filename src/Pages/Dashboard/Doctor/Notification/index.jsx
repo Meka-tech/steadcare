@@ -5,17 +5,18 @@ import { ReactComponent as Cancel } from "../../../../Images/cancelIcon.svg";
 import { useSelector } from "react-redux";
 import useFetch from "../../../../hooks/useFetch";
 import { useState } from "react";
+import { Spinner } from "../component";
 
 export const Notifications = ({ setActive }) => {
   const NotifRef = useRef(null);
   useClickOutside(NotifRef, () => setActive(false));
   const token = useSelector((state) => state.reducer.doctorDetails.token);
 
-  const [notifications, setNotifications] = useState();
+  const [notifications, setNotifications] = useState([]);
 
   const getNotifications = (res) => {
     setNotifications(res.data.data);
-    console.log(res);
+    // console.log(res);
   };
 
   const { loading } = useFetch(
@@ -34,13 +35,17 @@ export const Notifications = ({ setActive }) => {
           />
         </NotifHeader>
         <NotifyBody>
-          <NotificationItem
-            content={
-              "Doctor Oge Amadi accepted your request to book a session for 10th August."
-            }
-            time={"20m"}
-            type="request"
-          />
+          {notifications.map((item, index) => {
+            return (
+              <NotificationItem
+                key={index}
+                content={item.text}
+                time={"20m"}
+                type="request"
+              />
+            );
+          })}
+          {loading && <Spinner />}
         </NotifyBody>
       </NotificationDiv>
     </Shade>
@@ -102,8 +107,8 @@ const NotificationItem = ({ content, time, type }) => {
         <NotificationButtonDiv>
           {type === "request" && (
             <div style={{ display: "flex" }}>
-              <NotifButton>accept</NotifButton>
-              <NotifButton>decline</NotifButton>
+              {/* <NotifButton>accept</NotifButton>
+              <NotifButton>decline</NotifButton> */}
             </div>
           )}
           {type === "session" && (
@@ -134,6 +139,7 @@ const NotifItemBody = styled.div`
   display: flex;
   align-items: flex-start;
   position: relative;
+  cursor: pointer;
 `;
 
 const NotificationPic = styled.div`
