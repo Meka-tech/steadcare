@@ -25,7 +25,7 @@ export const Notifications = ({ setActive }) => {
 
   const { loading } = useFetch(
     token,
-    "/patients-notifications",
+    "/doctors-notification",
     getNotifications
   );
   return (
