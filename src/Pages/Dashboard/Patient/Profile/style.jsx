@@ -8,7 +8,8 @@ export const Main = styled.div`
   background-color: white;
   border-radius: 1rem;
   ${mobile({
-    margin: "2rem auto"
+    margin: "2rem auto",
+    paddingBottom: "4rem"
   })}
 `;
 

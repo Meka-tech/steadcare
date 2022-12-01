@@ -6,6 +6,10 @@ import { useSelector } from "react-redux";
 import useFetch from "../../../../hooks/useFetch";
 import { useState } from "react";
 import { Spinner } from "../component";
+import { mobile } from "../../../../Utilities/responsive";
+import { useNavigate } from "react-router";
+import moment from "moment";
+import { useEffect } from "react";
 
 export const Notifications = ({ setActive }) => {
   const NotifRef = useRef(null);
@@ -16,6 +20,7 @@ export const Notifications = ({ setActive }) => {
 
   const getNotifications = (res) => {
     setNotifications(res.data.data);
+    console.log(res.data.data);
   };
 
   const { loading } = useFetch(
@@ -39,8 +44,9 @@ export const Notifications = ({ setActive }) => {
               <NotificationItem
                 key={index}
                 content={item.text}
-                time={"20m"}
-                type="request"
+                type={item.type}
+                link={item.link}
+                time={item.updatedAt}
               />
             );
           })}
@@ -60,6 +66,10 @@ const Shade = styled.div`
   bottom: 0;
   left: 0;
   z-index: 1000 !important;
+  ${mobile({
+    display: "flex",
+    justifyContent: "center"
+  })}
 `;
 const NotificationDiv = styled.div`
   width: 40rem;
@@ -76,6 +86,11 @@ const NotificationDiv = styled.div`
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
+  ${mobile({
+    rigth: "0",
+    left: "0",
+    position: "relative"
+  })}
 `;
 const NotifHeader = styled.div`
   display: flex;
@@ -96,15 +111,27 @@ const NotifyBody = styled.div`
   margin: 1rem 0;
 `;
 
-const NotificationItem = ({ content, time, type }) => {
+const NotificationItem = ({ content, time, type, link }) => {
+  const navigate = useNavigate();
+  const timeStamp = moment(time).format();
+  const currentTime = moment(new Date());
+  const duration = moment.duration(currentTime.diff(timeStamp)).asHours();
+
   return (
-    <NotifItemBody>
+    <NotifItemBody onClick={() => navigate(`${link}`)}>
       <NotificationPic />
       <NotificationContent>
         <NotificationContentText>{content}</NotificationContentText>
-        <NotificationContentTime>{time} ago</NotificationContentTime>
+        <NotificationContentTime>
+          {duration < 1
+            ? Math.floor(duration * 60)
+            : duration > 24
+            ? Math.floor(duration / 24)
+            : Math.floor(duration)}
+          {duration < 1 ? "min" : duration > 24 ? "days" : "hr"} ago
+        </NotificationContentTime>
         <NotificationButtonDiv>
-          {type === "request" && (
+          {type === "appointment" && (
             <div style={{ display: "flex" }}>
               {/* <NotifButton>accept</NotifButton>
               <NotifButton>decline</NotifButton> */}
@@ -139,6 +166,9 @@ const NotifItemBody = styled.div`
   align-items: flex-start;
   position: relative;
   cursor: pointer;
+  ${mobile({
+    marginBottom: "1.5rem"
+  })}
 `;
 
 const NotificationPic = styled.div`

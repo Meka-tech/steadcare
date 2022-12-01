@@ -94,6 +94,7 @@ export const SearchResult = () => {
   const [viewProfileActive, setViewProfileActive] = useState(false);
   const FilterList = ["Highest Rated", "Lowest Rated"];
   const [filter, setFilter] = useState("");
+
   return (
     <>
       {viewProfileActive && (

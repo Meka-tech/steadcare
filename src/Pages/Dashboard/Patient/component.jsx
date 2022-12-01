@@ -106,10 +106,14 @@ export const SearchResult = ({ query }) => {
   };
 
   const SetAllDoctor = (response) => {
-    setDoctors(response.data.data);
+    setDoctors(response.data.data.fetchedDoctors);
   };
 
-  const { loading } = useFetch(token, "/view-all-doctors", SetAllDoctor);
+  const { loading } = useFetch(
+    token,
+    `/filter-doctors?pageNo=1&noOfRequests=10&search=${query}`,
+    SetAllDoctor
+  );
   return (
     <>
       {viewProfileActive && (
@@ -160,7 +164,7 @@ export const SearchResult = ({ query }) => {
                 setIndex={setDoctorIndex}
                 book={Book}
                 doctorId={data._id}
-                image={data.avatar.url}
+                // image={data.avatar.url}
               />
             );
           })}

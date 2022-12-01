@@ -202,6 +202,9 @@ const Link2 = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  ${mobile({
+    marginTop: "2rem"
+  })}
   h3 {
     font-size: 1.6rem;
     font-weight: 600;
