@@ -2,7 +2,7 @@
   "name": "steadcare",
   "version": "0.1.0",
   "private": true,
-  "homepage": " https://meka-tech.github.io/steadcare/",
+  "homepage": "https://steadcare.netlify.app",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^5.16.4",
