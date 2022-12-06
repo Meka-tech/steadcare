@@ -22,6 +22,7 @@ import {
 } from "./style";
 import moment from "moment";
 import { useNavigate } from "react-router";
+import { usePaystackPayment } from "react-paystack";
 
 export const AppointmentList = ({ data, loading, token }) => {
   const [activeTab, setActiveTab] = useState("UA");
@@ -47,6 +48,48 @@ export const AppointmentList = ({ data, loading, token }) => {
         console.log(error);
       });
   };
+  /////////////////Payment/////////////
+  ///////////////////////////////////////
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: "user@example.com",
+    amount: 20000,
+    publicKey: "pk_test_c2a36e4b6e9e816374002ab3d2de4d26db12fd38",
+    metadata: {
+      doctorId: "77w6w8243455",
+      appointmentId,
+      patientId: "77w6w8243455"
+    }
+  };
+
+  // you can call this function anything
+  const onSuccess = (reference) => {
+    // Implementation for whatever you want to do with reference and after success call.
+    console.log(reference);
+  };
+
+  // you can call this function anything
+  const onClose = () => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    console.log("closed");
+  };
+
+  const PaystackHookExample = () => {
+    const initializePayment = usePaystackPayment(config);
+    return (
+      <div>
+        <button
+          onClick={() => {
+            initializePayment(onSuccess, onClose);
+          }}
+        >
+          Paystack Hooks Implementation
+        </button>
+      </div>
+    );
+  };
+  ///////////////////////////////////////////
+  //////////////////////////////////////////
 
   const Dropdown = ({ appointment }) => {
     return (

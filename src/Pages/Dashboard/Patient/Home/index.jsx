@@ -18,6 +18,7 @@ import axios from "axios";
 import { BaseUrl } from "../../../../Utilities/API";
 import { updateNumberOfAppointment } from "../../../../features/userAppointments/appointmentSlice";
 import useFetch from "../../../../hooks/useFetch";
+import { usePaystackPayment } from "react-paystack";
 
 export const PatientDashboard = () => {
   const [viewAll, setViewAll] = useState(false);
@@ -40,6 +41,7 @@ export const PatientDashboard = () => {
   useFetch(token, "/all-doctors-appointment", UpdatAppointmentNo);
 
   const { loading } = useFetch(token, "/top-doctors", SetDoctor);
+
   return (
     <Container>
       <DashboardNavbar role="patient" />
